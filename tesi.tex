@@ -1,0 +1,87 @@
+\documentclass[corpo=11pt, stile=classica, tipotesi=custom,
+greek, evenboxes]{toptesi}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{hyperref}
+\hypersetup{%
+	pdfpagemode={UseOutlines},
+	bookmarksopen,
+	pdfstartview={FitH},
+	colorlinks,
+	linkcolor={blue},
+	citecolor={blue},
+	urlcolor={blue}
+}
+
+\usepackage{geometry} %for the margins
+\newcommand\fillin[1][4cm]{\makebox[#1]{\dotfill}} %for the dotted line in the frontispiace
+
+\usepackage{dcolumn}
+\newcolumntype{d}{D{.}{.}{-1} } %to vetical align numbers in tables, along the decimal dot
+
+\usepackage{amsmath}
+
+\usepackage{natbib} % for the bibliography
+\bibliographystyle{plainnat}
+
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{systeme}
+\usepackage{mathtools}
+\hypersetup{colorlinks, linkcolor=blue, citecolor=blue}
+\usepackage{natbib} % for the bibliography
+\bibliographystyle{plain}
+
+
+\numberwithin{equation}{chapter}
+\newtheorem{teo}{Theorem}[chapter] %in questo modo la numerazione ricomincia da capo ad ogni nuovo capitolo
+\newtheorem{defi}[teo]{Definition}
+\newtheorem{lem}[teo]{Lemma}
+\newtheorem{cor}[teo]{Corollary}
+\newtheorem{prop}[teo]{Proposition}
+\newtheorem{es}[teo]{Example}
+
+\newcommand{\RR}{\mathbb{R}} %scorciatoia per R
+\newcommand{\notazione}{\underline{\textbf{Remark Notazionale}}}
+\newcommand{\finire}{\fbox{\LARGE DA FINIRE}}
+
+\begin{document}
+	
+\input{./title.tex}
+
+\sommario
+
+\chapter{Introduction}
+
+\chapter{Basics of functional analysis}
+
+\chapter{Short-Time Fourier Transform}
+\section{STFT}
+\subsection{Properties of STFT}
+\section{Fock Space and Bargmann Transform}
+\section{Faber-Krahn Inequality for the STFT}
+
+
+\chapter{Localization Operators}
+\section{Definition and properties}
+\section{Eigenvalues and eigenfunctions}
+
+\chapter{Recent results from Nicola-Tilli}
+\section{Case $q=+\infty$}
+\section{Generic case}
+
+\tableofcontents
+
+
+\nocite{*}
+\bibliography{bibliografia.bib}
+
+
+	
+
+\end{document}32
