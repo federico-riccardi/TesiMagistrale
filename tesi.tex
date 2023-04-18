@@ -1,5 +1,5 @@
 \documentclass[corpo=11pt, stile=classica, tipotesi=custom,
-greek, evenboxes]{toptesi}
+greek, evenboxes, english]{toptesi}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
@@ -23,8 +23,10 @@ greek, evenboxes]{toptesi}
 
 \usepackage{amsmath}
 
-\usepackage{natbib} % for the bibliography
-\bibliographystyle{plainnat}
+
+
+
+
 
 
 \usepackage{amsmath, amssymb, amsthm}
@@ -34,8 +36,8 @@ greek, evenboxes]{toptesi}
 \usepackage{systeme}
 \usepackage{mathtools}
 \hypersetup{colorlinks, linkcolor=blue, citecolor=blue}
-\usepackage{natbib} % for the bibliography
-\bibliographystyle{plain}
+\usepackage{biblatex}
+\addbibresource{bibliografia.bib}
 
 
 \numberwithin{equation}{chapter}
@@ -46,13 +48,17 @@ greek, evenboxes]{toptesi}
 \newtheorem{prop}[teo]{Proposition}
 \newtheorem{es}[teo]{Example}
 
-\newcommand{\RR}{\mathbb{R}} %scorciatoia per R
+\newcommand{\R}{\mathbb{R}} %scorciatoia per R
+\newcommand{\V}{\mathcal{V}} %STFT
+\newcommand{\dxdo}{dxd\omega}
 \newcommand{\notazione}{\underline{\textbf{Remark Notazionale}}}
 \newcommand{\finire}{\fbox{\LARGE DA FINIRE}}
 
 \begin{document}
 	
 \input{./title.tex}
+
+\tableofcontents
 
 \sommario
 
@@ -66,6 +72,18 @@ greek, evenboxes]{toptesi}
 \section{Fock Space and Bargmann Transform}
 \section{Faber-Krahn Inequality for the STFT}
 
+Theorem from \cite{nicolatilli_fk}
+\begin{teo}\label{faberkrahn}
+	For every $f \in L^2(\R^d)$ such that $\|f\|_{L^2} = 1$ and every measurable subset $\Omega \subset \R^{2d}$ with finite measure we have
+	\begin{equation*}
+		\int_{\Omega}  |\V f(x,\omega)|^2 \dxdo \leq G(|\Omega|)
+	\end{equation*}
+	where $G(s)$ is given by
+	\begin{equation}\label{G}
+		G(s) \coloneqq \int_0^s e^{\left(-d!\tau\right)^{1/d}} d\tau
+	\end{equation}
+\end{teo}
+
 
 \chapter{Localization Operators}
 \section{Definition and properties}
@@ -74,12 +92,49 @@ greek, evenboxes]{toptesi}
 \chapter{Recent results from Nicola-Tilli}
 \section{Case $q=+\infty$}
 \section{Generic case}
+Let's now consider the case where both $p$ and $q$ are neither 1 or $+\infty$. The result presented in \cite{nicolatilli_norm} include the case ...
+\begin{equation*}
+	\| L_F\|_{L_2 \rightarrow L_2} \leq \min\{\kappa_p^{d\kappa_p}A, \, \kappa_q^{d\kappa_q}B\}
+\end{equation*}
+Suppose that the minimum is given by $\kappa_p^{d\kappa_p}A$, therefore
+\begin{equation*}
+	\kappa_p^{d\kappa_p}A \leq \kappa_q^{d\kappa_q}B \iff \dfrac{B}{A} \geq \left(\dfrac{\kappa_p^{\kappa_p}}{\kappa_q^{\kappa_q}}\right)^d
+\end{equation*}
+We can check if the solution of the problem with just the $L^p$ bound solves also the problem with both bounds, that is $F\|_{L^q} \leq B$, where $F$ is given by ...
+\begin{align*}
+	\| F \|_{L^q}^q &= \int_{\R^{2d}} |F(z)|^q dz = ... = \lambda^q \left(\dfrac{p-1}{q}\right)^d
+\end{align*}
+Since we want $F$ to satisfy the $L^q$ constraint we should have
+\begin{equation*}
+	\dfrac{B}{A} \geq \kappa_p^{d\left(\frac1q - \frac1p\right)}\left(\dfrac{p}{q}\right)^{\frac{d}{q}}
+\end{equation*}
+It would be nice if this bound was less restrictive than the first one. Unfortunately that's not the case, in fact it's always true that
+\begin{equation*}
+	\left(\dfrac{p'}{q'}\right)^{\frac1{q'}} \left(\dfrac{p}{q}\right)^{\frac1q} \geq 1
+\end{equation*}
 
-\tableofcontents
-
+Following the path in \cite{nicolatilli_norm} we obtain ...\\
+\begin{equation*}
+	G'(u(t)) = \lambda_1 t^{p-1} + \lambda_2 t^{q-1} \implies u(t) = \dfrac{1}{d!}\left[-\log\left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right)\right]^d, \ t \in (0,M)
+\end{equation*}
+Our main goal now is to show that multipliers $\lambda_1, \lambda_2$ are unique and both positive.\\
+The easiest fact to prove is that both multipliers are not 0. In fact if one, say $\lambda_2$, was 0, we would obtain that the solution of our problem is the same as the one with just the $L^p$ bound. But we already know that this function does not satisfy the $L^q$ constraint hence it is impossible that $\lambda_2=0$.\\
+Suppose now that one of the multipliers, say always $\lambda_2$, is negative. Consider an interval $[a-l, a+l]$ contained in $(0,M)$ and the variation
+\[ \eta(t) = \begin{cases*}
+	-t^{1-p}, &  $t \in (a-l,a)$  \\
+	\phantom{-}t^ {1-p}, & $t \in (a,a+l)$
+\end{cases*} \]
+$\eta$ is an admissible variation because $u$ is strictly positive in $[a-l, a+l]$, $\int_{a-l}^{a+l}t^{p-1}\eta(t)dt=0$, and $\int_{a-l}^{a+l}t^{q-1}\eta(t)dt <0$ if $q<p$ (otherwise we can take $-\eta$ instead of $\eta)$. The directional derivative of $G$ along $\eta$ is
+\begin{align*}
+	\int_{a-l}^{a+l} G'(u(t))\eta(t)dt &= \int_{a-l}^{a+l} (\lambda_1 t^{p-1} + \lambda_2 t^{q-1})\eta(t)dt = \\
+									   &= \lambda_2 \int_{a-l}^{a+l} t^{q-1} \eta(t)dt > 0
+\end{align*}
+which contradicts the fact that $u$ is a maximizer.\\
+{\Large PROOF OF CONTINUITY }\\
+Lastly we shall prove that multipliers $\lambda_1, \lambda_2$, and hence maximizer, are unique.
 
 \nocite{*}
-\bibliography{bibliografia.bib}
+\printbibliography
 
 
 	
