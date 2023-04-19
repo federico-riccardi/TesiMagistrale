@@ -52,6 +52,7 @@ greek, evenboxes, english]{toptesi}
 \newcommand{\V}{\mathcal{V}} %STFT
 \newcommand{\dxdo}{dxd\omega}
 \newcommand{\notazione}{\underline{\textbf{Remark Notazionale}}}
+\newcommand{\Log}{\ensuremath{\text{Log}_-}}
 \newcommand{\finire}{\fbox{\LARGE DA FINIRE}}
 
 \begin{document}
@@ -119,20 +120,37 @@ Following the path in \cite{nicolatilli_norm} we obtain ...\\
 \end{equation*}
 Our main goal now is to show that multipliers $\lambda_1, \lambda_2$ are unique and both positive.\\
 The easiest fact to prove is that both multipliers are not 0. In fact if one, say $\lambda_2$, was 0, we would obtain that the solution of our problem is the same as the one with just the $L^p$ bound. But we already know that this function does not satisfy the $L^q$ constraint hence it is impossible that $\lambda_2=0$.\\
-Suppose now that one of the multipliers, say always $\lambda_2$, is negative. Consider an interval $[a-l, a+l]$ contained in $(0,M)$ and the variation
-\[ \eta(t) = \begin{cases*}
-	-t^{1-p}, &  $t \in (a-l,a)$  \\
-	\phantom{-}t^ {1-p}, & $t \in (a,a+l)$
-\end{cases*} \]
-$\eta$ is an admissible variation because $u$ is strictly positive in $[a-l, a+l]$, $\int_{a-l}^{a+l}t^{p-1}\eta(t)dt=0$, and $\int_{a-l}^{a+l}t^{q-1}\eta(t)dt <0$ if $q<p$ (otherwise we can take $-\eta$ instead of $\eta)$. The directional derivative of $G$ along $\eta$ is
+Suppose now that one of the multipliers, say always $\lambda_2$, is negative. Consider an interval $[a,b] \subset (0,M)$ and a variation $\eta \in L^{\infty}(0,M)$ supported in $[a,b]$. Thanks to the Gram-Schmidt process we can construct a variation orthogonal to $t^{p-1}$. Since $\eta$ is arbitrary we can suppose that it is not orthogonal to $t^{q-1}$, in particular we can suppose that $\int_{a}^{b}t^{q-1}\eta(t)dt <0$. Therefore the directional derivative of $G$ along $\eta$ is:
 \begin{align*}
-	\int_{a-l}^{a+l} G'(u(t))\eta(t)dt &= \int_{a-l}^{a+l} (\lambda_1 t^{p-1} + \lambda_2 t^{q-1})\eta(t)dt = \\
-									   &= \lambda_2 \int_{a-l}^{a+l} t^{q-1} \eta(t)dt > 0
+	\int_{a}^{b} G'(u(t))\eta(t)dt &= \int_{a}^{b} (\lambda_1 t^{p-1} + \lambda_2 t^{q-1})\eta(t)dt = \\
+									   &= \lambda_2 \int_{a}^{b} t^{q-1} \eta(t)dt > 0
 \end{align*}
 which contradicts the fact that $u$ is a maximizer.\\
 {\Large PROOF OF CONTINUITY }\\
-Lastly we shall prove that multipliers $\lambda_1, \lambda_2$, and hence maximizer, are unique.
-
+Lastly we shall prove that multipliers $\lambda_1, \lambda_2$, and hence maximizer, are unique. For this proof it is convenient to express $u$ in a slightly different way
+\begin{equation*}
+	u(t) = \dfrac{1}{d!}\left[ \Log\left((c_1t)^{p-1} + (c_2t)^{q-1}\right) \right]^d
+\end{equation*} 
+To emphasize that $u$ is parametrized by $c_1, c_2$ we may write $u(t;c_1,c_2)$. Now we define
+\begin{equation*}
+	f(c_1,c_2) = p\ \int_0^T t^{p-1}u(t;c1,c2)dt, \quad g(c_1,c_2) = q\ \int_0^T t^{q-1}u(t;c1,c2)dt
+\end{equation*}
+We want to highlight that, even if not explicit, also $T$ depends on $c_1$ and $c_2$.
+Our maximizer $u$ satisfies the constraints only if $f(c_1,c_2)=A^p, \, g(c_1,c_2) = B^q$. Therefore to prove uniqueness of the maximizer we need to show that level sets $\{f=A^p\}$ and $\{g=B^q\}$ intersect in only a point.\\
+First of all we are studying endpoints. For example, if $c_2=0$:
+\begin{align*}
+	f(c_1,0) &= p\int_0^{1/{c_1}} t^{p-1}\dfrac{1}{d!}\left[-\log(c_1t)^{p-1}\right]^d dt \overset{\tau = c_1t}{=} \\
+			 &= \dfrac{p(p-1)^d}{c_1^p d!}\int_0^1 \tau^{p-1}\left[-\log(\tau)\right]^d d\tau = \dfrac{\kappa_p^d}{c_1^p} = A^p \implies c_{1,f} = \dfrac{\kappa_p^{d/p}}{A}
+\end{align*}
+The same can be done for $g$ and setting $c_1=0$ thus we obtain four points
+\begin{equation*}
+	c_{1,f} = \dfrac{\kappa_p^{d/p}}{A},\ c_{1,g} = \left(\dfrac{p-1}{q}\right)^{d/q}\dfrac1{B},\ c_{2,f} = \left(\dfrac{q-1}{p}\right)^{d/p}\dfrac1{A},\ c_{2,g} = \dfrac{\kappa_q^{d/q}}{B}
+\end{equation*}
+In the regime we are considering one has that $c_{1,f} < c_{1,g}$ and $c_{2,f} > c_{2,g}$, indeed
+\begin{align*}
+	&c_{1,f} < c_{1,g} \iff \dfrac{\kappa_p^{d/p}}{A} < \left(\dfrac{p-1}{q}\right)^{d/q}\dfrac1{B} \iff \dfrac{B}{A} < \kappa_p^{d\left( \frac1{q}-\frac1{p}\right)}\left(\dfrac{p}{q}\right)^{d/q}\\
+	&c_{2,f} > c_{2,g} \iff \left(\dfrac{q-1}{p}\right)^{d/p}\dfrac1{A} > \dfrac{\kappa_q^{d/q}}{B} \iff \dfrac{B}{A} > \kappa_q^{d\left( \frac1{p}-\frac1{q}\right)}\left(\dfrac{q}{p}\right)^{d/p}
+\end{align*}
 \nocite{*}
 \printbibliography
 
