@@ -30,6 +30,7 @@ greek, evenboxes, english]{toptesi}
 
 
 \usepackage{amsmath, amssymb, amsthm}
+\usepackage{esint}
 \usepackage{enumitem}
 \usepackage{tikz}
 \usepackage{hyperref}
@@ -119,16 +120,80 @@ Following the path in \cite{nicolatilli_norm} we obtain ...\\
 \begin{equation*}
 	G'(u(t)) = \lambda_1 t^{p-1} + \lambda_2 t^{q-1} \implies u(t) = \dfrac{1}{d!}\left[-\log\left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right)\right]^d, \ t \in (0,M)
 \end{equation*}
-Our main goal now is to show that multipliers $\lambda_1, \lambda_2$ are unique and both positive.\\
-The easiest fact to prove is that both multipliers are not 0. In fact if one, say $\lambda_2$, was 0, we would obtain that the solution of our problem is the same as the one with just the $L^p$ bound. But we already know that this function does not satisfy the $L^q$ constraint hence it is impossible that $\lambda_2=0$.\\
+Our main goal now is to show that multipliers $\lambda_1, \lambda_2$ are unique and both positive.
+
+The easiest fact to prove is that both multipliers are not 0. In fact if one, say $\lambda_2$, was 0, we would obtain that the solution of our problem is the same as the one with just the $L^p$ bound. But we already know that this function does not satisfy the $L^q$ constraint hence it is impossible that $\lambda_2=0$.
+
 Suppose now that one of the multipliers, say always $\lambda_2$, is negative. Consider an interval $[a,b] \subset (0,M)$ and a variation $\eta \in L^{\infty}(0,M)$ supported in $[a,b]$. Thanks to the Gram-Schmidt process we can construct a variation orthogonal to $t^{p-1}$. Since $\eta$ is arbitrary we can suppose that it is not orthogonal to $t^{q-1}$, in particular we can suppose that $\int_{a}^{b}t^{q-1}\eta(t)dt <0$. Therefore the directional derivative of $G$ along $\eta$ is:
 \begin{align*}
 	\int_{a}^{b} G'(u(t))\eta(t)dt &= \int_{a}^{b} (\lambda_1 t^{p-1} + \lambda_2 t^{q-1})\eta(t)dt = \\
 									   &= \lambda_2 \int_{a}^{b} t^{q-1} \eta(t)dt > 0
 \end{align*}
-which contradicts the fact that $u$ is a maximizer.\\
-{\Large PROOF OF CONTINUITY }\\
-Lastly we shall prove that multipliers $\lambda_1, \lambda_2$, and hence maximizer, are unique. For this proof it is convenient to express $u$ in a slightly different way
+which contradicts the fact that $u$ is a maximizer.
+
+Now that we now that both multipliers are positive we can prove that $u$ is continuous, which is equivalent to say that $M=T$, where $T$ is the unique positive number such that $\lambda_1 T^{p-1} + \lambda_2 T^{q-1} = 1$ (uniqueness of $T$ follows from the positivity of multipliers).\\
+We start supposing that $M < T$ which means that $\lim_{t \rightarrow M^-} u(t) > 0$. Consider the following variation 
+\begin{equation*}
+	\eta(t) = \left\{
+	\begin{aligned}
+		-1 + \alpha \frac{t}{M} + \beta,\quad & t \in (M-M\delta,M)\\
+		1,\quad					   & t \in (M,M+M\delta)\\
+		0,\quad				   & \text{otherwise}
+	\end{aligned}\right.
+\end{equation*}
+where $\delta>0$ is small enough so that $M-M\delta >0$ and $M+M\delta < T$ while $\alpha$ and $\beta$ are constants, depending on $\delta$, to be found. Since we want this to be an admissible variation we need to impose that $\eta$ is orthogonal to $t^{p-1}$ and $t^{q-1}$. For example, the first condition is:
+\begin{align*}
+	0 &= \int_{M-M\delta}^{M+M\delta} t^{p-1} \eta(t) dt = -\int_{M-M\delta}^M t^{p-1}dt + \int_{M-M\delta}^M t^{p-1}\left(\alpha \frac{t}{M} + \beta\right) dt + \int_M^{M+M\delta} t^{p-1}dt \overset{\tau=t/M}{=}\\
+	  &= M^p \int_{1-\delta}^1 \tau^{p-1}(\alpha \tau + \beta) d\tau - M^p \int_{1-\delta}^1 \tau^{p-1} d\tau + M^p \int_1^{1+\delta} \tau^{p-1} d\tau \overset{1/\delta}{\implies}\\
+	  &\implies \fint_{1-\delta}^1 \tau^{p-1}(\alpha \tau + \beta) d\tau = \alpha \fint_{1-\delta}^1 \tau^{p} d\tau + \beta \fint_{1-\delta}^1 \tau^{p-1} d\tau = \fint_{1-\delta}^1 \tau^{p-1} d\tau - \fint_1^{1+\delta} \tau^{p-1} d\tau 
+\end{align*}
+The equation stemming from the orthogonality with $t^{q-1}$ is analogous. Therefore we obtained a nonhomogeneous linear system for $\alpha$ and $\beta$
+\textbf{VA RESO MEGLIO}
+\begin{equation}\label{system continuity}
+	\begin{pmatrix}
+		\fint_{1-\delta}^1 \tau^{p} d\tau &  \fint_{1-\delta}^1 \tau^{p-1} d\tau\\
+		\fint_{1-\delta}^1 \tau^{q} d\tau & \fint_{1-\delta}^1 \tau^{q-1} d\tau
+	\end{pmatrix}
+	\begin{pmatrix}
+		\alpha\\
+		\beta
+	\end{pmatrix}=
+	\begin{pmatrix}
+		\fint_{1-\delta}^1 \tau^{p-1} d\tau - \fint_1^{1+\delta} \tau^{p-1} d\tau\\
+		\fint_{1-\delta}^1 \tau^{q-1} d\tau - \fint_1^{1+\delta} \tau^{q-1} d\tau
+	\end{pmatrix}
+\end{equation}
+This system has a unique solution if and only if the determinant of the matrix is not 0. If we see it as a function of $\delta$ we can expand the terms in a Taylor series:
+\begin{align*}
+	& \fint_{1-\delta}^1 \tau^{p} d\tau \fint_{1-\delta}^1 \tau^{q-1} d\tau - \fint_{1-\delta}^1 \tau^{q} d\tau \fint_{1-\delta}^1 \tau^{p-1} d\tau=\\
+	&=\left(1-\dfrac{p}{2}\delta + \dfrac{p(p-1)}{6}\delta^2 + o(\delta^2)\right) \left(1-\dfrac{q-1}{2}\delta + \dfrac{(q-1)(q-2)}{6}\delta^2 + o(\delta^2)\right) +\\
+	&-\left(1-\dfrac{q}{2}\delta + \dfrac{q(q-1)}{6}\delta^2 + o(\delta^2)\right) \left(1-\dfrac{p-1}{2}\delta + \dfrac{(p-1)(p-2)}{6}\delta^2 + o(\delta^2)\right)=\\
+	&=(1-1) + \delta \left(-\dfrac{q-1}{2} - \dfrac{p}{2} + \dfrac{p-1}{2} + \dfrac{q}{2} \right) \ldots\\
+	&=\dfrac{p-q}{12}\delta^2 + o(\delta^2)
+\end{align*}
+therefore the determinant is always non 0.\\
+The derivative of $G$ along $\eta$ is nonpositive because $u$ is supposed to be a maximizer, therefore
+\begin{align*}
+	0 &\geq \int_{M-M\delta}^{M+M\delta} G'(u(t))\eta(t)dt = -\int_{M-M\delta}^M \left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right) dt\, +\\
+	  &+ \int_{M-M\delta}^M \left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right)\left(\alpha \dfrac{t}{M}+\beta\right) dt + \int_M^{M+M\delta}dt = \\
+	  &= -\int_{M-M\delta}^M \left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right) dt + \lambda_1 M^p \int_{1-\delta}^1 t^{p-1}(\alpha t + \beta) dt +\\
+	  &+ \lambda_2 M^q \int_{1-\delta}^1 t^{q-1}(\alpha t + \beta) dt + M\delta
+\end{align*}
+Dividing by $M\delta$ and rearranging we obtain:
+\begin{equation}\label{inequality continuity}
+	\fint_{M-M\delta}^M \left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right) dt \geq  1 + \lambda_1 M^{p-1} \fint_{1-\delta}^1 t^{p-1}(\alpha t + \beta) dt\, + \lambda_2 M^{q-1} \fint_{1-\delta}^1 t^{q-1}(\alpha t + \beta) dt
+\end{equation}
+We notice that the last two terms are exactly the one that appear in the orthogonality condition, therefore to understand their behavior as $\delta$ approaches 0 we need to study the right-hand side of the system \eqref{system continuity}. If we expand the first term in its Taylor series with respect to $\delta$ we have:
+\begin{align*}
+	\left(1-\dfrac{p-1}{2}\delta + o(\delta) \right) - \left(1+\dfrac{p-1}{2}\delta + o(\delta) \right) = -(p-1)\delta + o(\delta)
+\end{align*}
+and the same is for the other term. Since they both are of order $\delta$ if we let $\delta \rightarrow 0^+$ in \eqref{inequality continuity} we obtain
+\begin{equation*}
+	\lambda_1 M^{p-1} + \lambda_2 M^{q-1} \geq 1
+\end{equation*}
+Since the function $\lambda_1 t^{p-1}  + \lambda_2 t^{q-1}$ is strictly increasing (because $\lambda_1$ and $\lambda_2$ are both positive) $M \geq T$ which is absurd because we supposed that $M<T$.
+
+Lastly we shall prove that multipliers $\lambda_1, \lambda_2$, and hence maximizer, are unique. For this proof it is convenient to express $u$ in a slightly different way:
 \begin{equation*}
 	u(t) = \dfrac{1}{d!}\left[ \Log\left((c_1t)^{p-1} + (c_2t)^{q-1}\right) \right]^d
 \end{equation*} 
@@ -153,12 +218,12 @@ In the regime we are considering one has that $c_{1,f} < c_{1,g}$ and $c_{2,f} >
 	&c_{2,f} > c_{2,g} \iff \left(\dfrac{q-1}{p}\right)^{d/p}\dfrac1{A} > \dfrac{\kappa_q^{d/q}}{B} \iff \dfrac{B}{A} > \kappa_q^{d\left( \frac1{p}-\frac1{q}\right)}\left(\dfrac{q}{p}\right)^{d/p}
 \end{align*}
 Since there is this dispositions of these points we expect there is an intersection between the level sets. Firstly we notice that, for every $c_1 \in (0,c_{1,f})$ there exist a unique value of $c_2$ for which $f(c_1,c_2) = A^p$. Indeed, from previous computations we notice that $f(c_1,0)$ is a decreasing function hence $f(c_1,0) > A^p$, while $\lim_{c_2 \rightarrow +\infty} f(c_1,c_2) = 0$. The uniqueness of this value follows from strict monotonicity of $f(c_1,\cdot)$, in fact:
-\begin{equation}\label{derivata f in c1}
+\begin{equation}\label{df/dc1}
 	\pfrac{f}{c_1}(c_1,c_2) = -\dfrac{p(p-1)}{(d-1)!}c_1^{p-2}\ \int_0^T \dfrac{t^{2(p-1)}}{(c_1t)^{p-1}+(c_2t)^{q-1}} \left[ -\log\left((c_1t)^{p-1} + (c_2t)^{q-1}\right) \right]^{d-1}dt
 \end{equation}
 is always strictly negative. We point out that the term $\frac{\partial T}{\partial c_1}(c_1,c_2)u(T;c_1,c_2)$ is zero because $u$ is 0 in $T$. The same is true for $g$, therefore on the interval $(0,c_{1,f})$ the level sets of $f$ and $g$ can be seen as the graph of two functions $\varphi, \gamma$. Since $\frac{\partial f}{\partial c_2}, \frac{\partial g}{\partial c_2} < 0$ for every $(c_1,c_2)$ from the implicit function theorem we have that $\varphi$ and  $\gamma$ are differentiable with respect to $c_1$.\\
 {\large{\textbf{Possibile disegno??}}}\\
-If we manage to prove that $(\varphi-\gamma)' < 0$ when $\{f=A^p\}$ and $\{g=B^q\}$ intersect we have uniqueness of the intersection point. Indeed, since $c_{2,f} = \varphi(0) > \gamma(0) = c_{2,g}$, if there were more intersection point for at least one of them it has to be $(\varphi-\gamma)' \geq 0$.  Still from the implicit function theorem we have
+After defining $\varphi$ and $\gamma$ we want to prove that $(\varphi-\gamma)' < 0$. Still from the implicit function theorem we have
 \begin{equation*}
 	\begin{split}
 		\dfrac{\mathrm{d}}{\mathrm{d} c_1}(\varphi - \gamma)(c_1) = -\dfrac{\pfrac{f}{c_1}(c_1,\varphi(c_1))}{\pfrac{f}{c_2}(c_1,\varphi(c_1))}  + 
@@ -166,7 +231,7 @@ If we manage to prove that $(\varphi-\gamma)' < 0$ when $\{f=A^p\}$ and $\{g=B^q
 		\pfrac{f}{c_1}(c_1,\varphi(c_1)) \pfrac{g}{c_2}(c_1,\gamma(c_1)) - \pfrac{f}{c_2}(c_1,\varphi(c_1)) \pfrac{g}{c_1}(c_1,\gamma(c_1)) > 0
 	\end{split}
 \end{equation*}
-As for \eqref{derivata f in c1} the other derivatives are computed. To simplify the notation we define $h(t;c_1,c_2) = \frac{1}{(d-1)!}\frac{1}{(c_1t)^{p-1}+(c_2t)^{q-1}}\left[ -\log\left((c_1t)^{p-1} + (c_2t)^{q-1}\right) \right]^{d-1}$. From Fubini's theorem we can write the product of the integrals as a double integral
+As for \eqref{df/dc1} the other derivatives are computed. To simplify the notation we define $h(t;c_1,c_2) = \frac{1}{(d-1)!}\frac{1}{(c_1t)^{p-1}+(c_2t)^{q-1}}\left[ -\log\left((c_1t)^{p-1} + (c_2t)^{q-1}\right) \right]^{d-1}$. From Fubini's theorem we can write the product of the integrals as a double integral
 \begin{equation*}
 	\begin{split}
 		&p(p-1)q(q-1)c_1^{p-2}\gamma(c_1)^{q-2} \iint_{[0,T]^2} h(t;c_1,\varphi(c_2)) h(s;c_1,\gamma(c_2)) t^{2(p-1)} s^{2(q-1)} dtds -\\ &p(q-1)q(p-1)c_1^{p-2}\varphi(c_1)^{q-2} \iint_{[0,T]^2} h(t;c_1,\varphi(c_2)) h(s;c_1,\gamma(c_2)) t^{p+q-2} s^{p+q-2} dtds
@@ -193,7 +258,18 @@ We can exchange $t$ with $s$ in the second integral. With this change of variabl
 	\end{split}
 \end{equation*}
 which is strictly positive.
-\nocite{*}
+
+Now we are able to prove the uniqueness of multipliers.\\
+First of all, since $(\varphi-\gamma)'<0$ whenever $\varphi(c_1) = \gamma(c_1)$, for every point of intersection there exist $\delta>0$ such that $\varphi(t) > \gamma(t)$ for $t \in (c_1 - \delta, c_1)$ while $\varphi(t) < \gamma(t)$ for $t \in (c_1, c_1 + \delta)$.\\
+Define $c_1^* \coloneqq \sup \{c_1 \in [0,c_{1,f}] : \forall t \in [0,c_1] \ \varphi(t) \geq \gamma(t)\}$. This is an intersection point between $\varphi$ and $\gamma$ (if $\varphi(c_1^*) > \gamma(c_1^*)$ due to continuity there would be $\varepsilon > 0$ such that $\varphi(c_1^*+\varepsilon) > \gamma(c_1^*+\varepsilon)$ which contradicts the definition of $c_1^*$) and it is the first one, because we saw that after every intersection point there is an interval where $\varphi < \gamma$. Lastly, since $\varphi(0) > \gamma(0)$ and $\varphi(c_{1,f}) = 0 < \gamma(c_1,f)$ we have that $0 < c_1^* < c_{1,f}$.\\
+Suppose now that there is a second point of intersection $\tilde{c}_1$ after the first one. Since immediately after $c_1^*$ we have that $\varphi$ becomes smaller than $\gamma$ this second point of intersection is given by $\tilde{c}_1 = \sup \{c_1 \in [c_1^*,c_{1,f}] : \forall t \in [c_1^*,c_1] \ \varphi(t) \leq \gamma(t)\}$. Considering that this is an intersection point, there exist an interval before $\tilde{c}_1$ where $\varphi$ is strictly grater than $\gamma$ which is absurd, hence $c_1^*$ is the only intersection point between $\varphi$ and $\gamma$.\\
+Therefore $(c_1^*, \varphi(c_1^*) = c_2^*)$ is the unique pair of multipliers for which $p\int_0^T t^{p-1} u(t;c_1^*,c_2^*)dt = A^p,\ q\int_0^T t^{q-1} u(t;c_1^*,c_2^*)dt = B^q$ and in the end $u(t;c_1^*,c_2^*)$ is the unique maximizer for \textbf{CITARE PROBLEMA VARIAZIONALE}
+
+
+
+
+
+
 \printbibliography
 
 
