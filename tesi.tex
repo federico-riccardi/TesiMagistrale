@@ -49,7 +49,8 @@ greek, evenboxes, english]{toptesi}
 \newtheorem{prop}[teo]{Proposition}
 \newtheorem{es}[teo]{Example}
 
-\newcommand{\R}{\mathbb{R}} %scorciatoia per R
+\newcommand{\R}{\mathbb{R}} %scorciatoia per R reali
+\newcommand{\N}{\mathbb{N}} %scorciatoia per N naturali
 \newcommand{\V}{\mathcal{V}} %STFT
 \newcommand{\dxdo}{dxd\omega}
 \newcommand{\notazione}{\underline{\textbf{Remark Notazionale}}}
@@ -58,23 +59,102 @@ greek, evenboxes, english]{toptesi}
 \newcommand{\pfrac}[2]{\dfrac{\partial #1}{\partial #2}}
 
 \begin{document}
+\english
 	
 \input{./title.tex}
 
 \tableofcontents
 
+\ringraziamenti
+
 \sommario
 
 \chapter{Introduction}
 
-\chapter{Basics of functional analysis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Short-Time Fourier Transform}
-\section{STFT}
+\chapter{Preliminaries}\label{chapter preliminaries}
+In this first chapter we briefly recall some basics definition and results about functional analysis and Fourier transform. In section \ref{section basics of functional analysis} basic concepts about operators between Banach spaces are presented. In section \ref{section Fourier transform and its properties} Fourier transform is defined and essential properties are given.+
+\section{Basics of Functional Analysis}\label{section basics of functional analysis}
+In this section we focus our attention on linear operator between Banach spaces. Across the section a generic Banach space will be denoted as $X$ (or $Y$) endowed with the norm $\| \cdot \|_X$. In case $X$ is an Hilbert space we will denote its inner product as $\langle \cdot, \cdot \rangle_X$.\\
+A generic linear operator between two Banach spaces $X$ and $Y$ will be denoted as $T : X \rightarrow Y$. As a standard notation, the image of $x \in X$ through $T$ will be denoted as $T(x)$ or equivalently as $Tx$.
+\begin{defi}\label{bounded operator}
+	A linear operator $T : X \rightarrow Y$ is said to be \textbf{bounded} if there exist $C>0$ such that
+	\begin{equation}\label{boundedness property}
+		\| Tx \|_Y \leq C \| x \|_X \quad \forall x \in X
+	\end{equation}
+\end{defi}
+For linear operator boundedness is strictly related to continuity as the subsequent theorem states
+\begin{teo}\label{equivalente boundedness continuity}
+	For a linear operator $T$ the following statements are equivalent:
+	\begin{itemize}
+		\item $T$ is continuous
+		\item $T$ is bounded.
+	\end{itemize}
+\end{teo}
+For the sake of completeness we mention that actually, for linear operators, boundedness is equivalent to uniform continuity.\\
+After this we define the \emph{norm} of an operator
+\begin{defi}\label{norm operator}
+	Given a linear bounded operator $T$ we define its \textbf{norm} as the following number:
+	\begin{equation*}
+		\|T\| \coloneqq \inf\{C>0 : \| Tx \|_Y \leq C \| x \|_X \  \forall x \in X\} = \sup \left\{ \dfrac{\| Tx \|_Y}{\| x \|_X} : x \in X \setminus \{0\}\right\}
+	\end{equation*}
+\end{defi}
+The proof of the equivalence between two definition is straightforward. We see that the norm of an operator is the best constant for which boundedness property \eqref{boundedness property} holds. Sometimes, in order to emphasize the spaces between which $T$ operates, we may write the norm of $T$ as $\| T \|_{X \rightarrow Y}$.\\
+In the following we will mostly deal with $X$ and $Y$ being $L^2(\R^d)$, which is an Hilbert space. For operators between Hilbert spaces we can give the norm of an operator by means of the dual norm \textbf{CONTROLLARE}:
+\begin{equation*}
+	\| T \| = \sup\{\langle Tx, y \rangle_X : x,y \in X\}
+\end{equation*}
+
+An important class of operators is the class of \emph{compact operators}.
+\begin{defi}\label{compact operator}
+	A linear bounded operator $T$ is \textbf{compact} if for every bounded sequence $\{x_n\}_{n \in \N} \subset X$ the sequence of the images $\{Tx_n\}_{n \in \N} \subset Y$ has a converging subsequence.
+\end{defi}
+The property of compactness can be stated in multiple ways \textbf{SERVE SCRIVERLE?}
+
+Now we suppose $X$ and $Y$ to be Hilbert spaces. Given a linear bounded operator $T : X \rightarrow Y$ we know that there exist a unique linear bonded operator $T^* : Y \rightarrow X$ such that:
+\begin{equation*}
+	\langle Tx, y \rangle_X = \langle x, T^* y \rangle_Y \quad \forall x \in X,\,y \in Y
+\end{equation*}
+$T^*$ is called the \textbf{adjoint} operator of $T$. In the particular case in which $T : X \rightarrow X$, if $T=T^*$ we say that $T$ is \textbf{self-adjoint}.
+\begin{defi}\label{self-adjoint}
+	A l
+\end{defi}
+\begin{itemize}
+	\item Norma operatoriale
+	\item Operatori autoaggiunti?
+	\item Operatori compatti
+	\item Operatori di classe traccia
+	\item Spettro operatori
+	\item Operatori di Hilbert-Schmidt?
+\end{itemize}
+\section{Fourier Transform and its properties}\label{section Fourier transform and its properties}
+	\begin{itemize}
+		\item Defizione trasformata
+		\item Disuguaglianza di Hausdorff-Young
+		\item Teorema di Plancherel
+		\item Formula di inversione
+		\item Proprietà di decadimento e regolarità		
+	\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Short-Time Fourier Transform}\label{chapter STFT}
+\section{STFT}\label{section STFT}
 \subsection{Properties of STFT}
-\section{Fock Space and Bargmann Transform}
-\section{Faber-Krahn Inequality for the STFT}
+\begin{itemize}
+	\item Relazione di ortogonalità
+	\item Formula di inversione
+\end{itemize}
+\section{Fock Space and Bargmann Transform}\label{section Fock Space and Bargmann transform}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Uncertainty principles}\label{chapter uncertainty principles}
+\section{Heisenberg's uncertainty principle}\label{section Heisenberg's UP}
+\section{Donoho-Stark's uncertainty principle}\label{section Donoho-Stark's UP}
+\section{Lieb's uncertainty principle}\label{section Lieb's UP}
+\section{Nicola-Tilli's uncertainty principle or Faber-Krahn Inequality for the STFT}\label{section Faber-Krahn inequality fot STFT}
 Theorem from \cite{nicolatilli_fk}
 \begin{teo}\label{faberkrahn}
 	For every $f \in L^2(\R^d)$ such that $\|f\|_{L^2} = 1$ and every measurable subset $\Omega \subset \R^{2d}$ with finite measure we have
@@ -87,13 +167,19 @@ Theorem from \cite{nicolatilli_fk}
 	\end{equation}
 \end{teo}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Localization Operators}
-\section{Definition and properties}
-\section{Eigenvalues and eigenfunctions}
+\chapter{Localization Operators}\label{chapter localization operators}
+\begin{itemize}
+	\item Definizione
+	\item Operatori di proiezione
+	\item Operatori di localizzazione di Daubechies
+	\item Proprietà di limitatezza e compattezza
+	\item Autovalori e autofunzioni
+\end{itemize}
 
-\chapter{Recent results from Nicola-Tilli}
-\section{Case $q=+\infty$}
+\chapter{Recent results}\label{chapter recent results}
+\section{Norm of localization operators: results from Nicola-Tilli}\label{section norm of localization operators}
 \section{Generic case}
 Let's now consider the case where both $p$ and $q$ are neither 1 or $+\infty$. The result presented in \cite{nicolatilli_norm} include the case ...
 \begin{equation*}
