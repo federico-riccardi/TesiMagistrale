@@ -38,6 +38,7 @@ greek, evenboxes, english]{toptesi}
 \usepackage{mathtools}
 \hypersetup{colorlinks, linkcolor=blue, citecolor=blue}
 \usepackage{biblatex}
+\usepackage{cancel}
 \addbibresource{bibliografia.bib}
 
 
@@ -52,6 +53,7 @@ greek, evenboxes, english]{toptesi}
 \newcommand{\R}{\mathbb{R}} %scorciatoia per R reali
 \newcommand{\N}{\mathbb{N}} %scorciatoia per N naturali
 \newcommand{\V}{\mathcal{V}} %STFT
+\newcommand{\F}{\mathcal{F}} %Fourier transform
 \newcommand{\dxdo}{dxd\omega}
 \newcommand{\notazione}{\underline{\textbf{Remark Notazionale}}}
 \newcommand{\Log}{\ensuremath{\text{Log}_-}}
@@ -74,7 +76,7 @@ greek, evenboxes, english]{toptesi}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Preliminaries}\label{chapter preliminaries}
-In this first chapter we briefly recall some basics definition and results about functional analysis and Fourier transform. In section \ref{section basics of functional analysis} basic concepts about operators between Banach spaces are presented. In section \ref{section Fourier transform and its properties} Fourier transform is defined and essential properties are given.+
+In this first chapter we briefly recall some basics definition and results about functional analysis and Fourier transform. In section \ref{section basics of functional analysis} basic concepts about operators between Banach spaces are presented. In section \ref{section Fourier transform and its properties} Fourier transform is defined and essential properties are given.
 \section{Basics of Functional Analysis}\label{section basics of functional analysis}
 In this section we focus our attention on linear operator between Banach spaces. Across the section a generic Banach space will be denoted as $X$ (or $Y$) endowed with the norm $\| \cdot \|_X$. In case $X$ is an Hilbert space we will denote its inner product as $\langle \cdot, \cdot \rangle_X$.\\
 A generic linear operator between two Banach spaces $X$ and $Y$ will be denoted as $T : X \rightarrow Y$. As a standard notation, the image of $x \in X$ through $T$ will be denoted as $T(x)$ or equivalently as $Tx$.
@@ -121,14 +123,23 @@ $T^*$ is called the \textbf{adjoint} operator of $T$. In the particular case in 
 	A l
 \end{defi}
 \begin{itemize}
-	\item Norma operatoriale
-	\item Operatori autoaggiunti?
-	\item Operatori compatti
+	\item Norma operatoriale (FATTO)
+	\item Operatori autoaggiunti? (FATTO)
+	\item Operatori compatti (FATTO)
 	\item Operatori di classe traccia
 	\item Spettro operatori
 	\item Operatori di Hilbert-Schmidt?
 \end{itemize}
 \section{Fourier Transform and its properties}\label{section Fourier transform and its properties}
+\begin{defi}\label{def Fourier transform}
+	Let $f \in L^1(\R^d)$. We define the \textbf{Fourier transform} of $f$ the function
+	\begin{equation}\label{Fourier transform}
+		\F f(\omega) = \hat{f}(\omega) \coloneqq \int_{\R^d} e^{-2 \pi i \omega \cdot t} f(t) dt
+	\end{equation}
+\end{defi}
+It's straightforward to see that the definition is well-posed and that $\F f \in L^{\infty}(\R^d)$ with $\|\F f\|_{\infty} \leq \| f \|_1$. Therefore $\F$ can be seen as a linear operator between $L^1(\R^d)$ and $L^{\infty}(\R^d)$ with $\| \F \| = 1$ (from the previous inequality actually we saw that $\| \F \| \leq 1$ but if we take $f \geq 0$ a.e. we have that $\hat{f}(0) = \| f \|_1$ that gives us the equality).\\
+If $f$ is in $L^2(\R^d)$, the integral in \eqref{Fourier transform} in general will not converge. Nevertheless we can define the Fourier transform of an $L^2$ function through a density argument. There are many dense subspaces in $L^2(\R^d)$ to do so. One possible choice is to use the Schwartz class $\mathcal{S}(\R^d)$. Another choice is to use $L^2(\R^d) \cap L^1(\R^d)$. On this space one can show that the Fourier transform is an isometry with respect to the $L^2$ norm and \textbf{CONTINUARE}.
+
 	\begin{itemize}
 		\item Defizione trasformata
 		\item Disuguaglianza di Hausdorff-Young
@@ -141,7 +152,55 @@ $T^*$ is called the \textbf{adjoint} operator of $T$. In the particular case in 
 
 \chapter{Short-Time Fourier Transform}\label{chapter STFT}
 \section{STFT}\label{section STFT}
+The \emph{short-time Fourier transform} or \emph{STFT} is a powerful tool, introduced by Gabor in \textbf{AGGIUNGERE CITAZIONE E CONTROLLARE CHE SIA CORRETTA}, used to study properties of a signal locally both in time and frequency. The main idea behind the STFT is the following: if we want some information of the spectrum of a signal around a specific time, say $T$, we could choose an interval $(T-\Delta T, T + \Delta T)$ and take the Fourier transform of $f \chi_{(T-\Delta T, T + \Delta T)}$. Usually multiplying by a characteristic function will not give us a regular function (not even continuous) and in light of the duality between regularity and decay, the Fourier transform of $f \chi_{(T-\Delta T, T + \Delta T)}$ will not decay rapidly. Therefore a sharp cutoff in the time domain will result in a ``bad'' localization in the frequency domain. In order to avoid this kind of problems we could think to multiply the signal $f$ by a smooth function.
+\begin{defi}\label{STFT def}
+	Fix a function $\phi \neq 0$ called \emph{window function}. The \textbf{short-time Fourier transform} of a function $f$ with window $\phi$ is defined as
+	\begin{equation}\label{STFT formula}
+		\V_{\phi}f(x,\omega) = \int_{\R^d} f(t)\overline{\phi(t-x)}e^{-2 \pi i \omega \cdot t} dt, \quad (x,\omega) \in \R^{2d}
+	\end{equation}
+\end{defi}
+In the above definition did not specify where $f$ and $phi$ are chosen. Since we are taking the Fourier transform of the function $f T_x\overline{\phi}$, the STFT is well defined whenever the Fourier transform of this function is. For example if both $f$ and $\phi$ are in $L^2(\R^d)$ then $f T_x\overline{\phi}$ is in $L^1(\R^d)$ for every $x \in \R^d$ and so the integral in \eqref{STFT formula} is defined. In this special case the STFT can be written as a scalar product:
+\begin{equation*}
+	\V_{\phi}f(x,\omega) = \int_{\R^d} f(t)\overline{\phi(t-x)}e^{-2 \pi i \omega \cdot t} dt = \langle f, M_{\omega} T_x \phi \rangle
+\end{equation*}
+In general, the STFT of $f$ with respect to $\phi$ will be defined whenever  $\langle f, M_{\omega} T_x \phi \rangle$ is an expression of some sort of duality. For example, if $f \in \mathcal{S}'(\R^d)$ and $\phi \in \mathcal{S}(\R^d)$ then $M_{\omega} T_x \overline{\phi} \in \mathcal{S}(\R^d)$, therefore $\langle f, M_{\omega} T_x \phi \rangle$ can be seen as the usual duality between tempered distributions and functions in the Schwartz space.\\
+\textbf{AGGIUNGERE ALTRE DEFINIZIONI EQUIVALENTI DELLA STFT?}
 \subsection{Properties of STFT}
+In this section we will present and prove some properties about the STFT. An excellent reference is \cite{grochenig}.
+\begin{teo}\label{orthogonality relations theorem}
+	Let $f_1,f_2,\phi_1,\phi_2 \in L^2(\R^d$). Then $\V_{\phi_i}f_i \in L^2(\R^{2d})$ and the following holds:
+	\begin{equation}\label{orthogonality relation formula}
+		\langle \V_{\phi_1} f_1, \V_{\phi_2} f_2 \rangle = \langle f_1, f_2 \rangle \overline{\langle \phi_1, \phi_2 \rangle}
+	\end{equation}
+\end{teo}
+\begin{proof}
+	\textbf{VA MESSA??}
+\end{proof}
+\begin{cor}
+	If $f, \phi \in L^2(\R^d)$ then
+	\begin{equation*}
+		\| \V_{\phi} f\|_2 = \| f \|_2 \| \phi \|_2
+	\end{equation*} 
+	In particular if $\| \phi \|_2 = 1$ we see that $\V_{\phi}$ is an isometry from $L^2(\R^d)$ into $L^2(\R^{2d})$.
+\end{cor}
+\begin{proof}
+	\textbf{VA MESSA??}
+\end{proof}
+From a direct computation one can see that the adjoint operator of the STFT operator $\V_{\phi}$ is given by the following expression:
+\begin{equation}\label{STFT adjoint}
+	\V_{\phi}^* g(t) = \int_{\R^{2d}} g(x,\omega) \phi(t-x) e^{2 \pi i \omega \cdot t} dxd\omega = \int_{\R^{2d}} g(x,\omega) M_{\omega}T_x \phi (t) dxd\omega\quad \forall g \in L^2(\R^{2d})
+\end{equation}
+This adjoint operator appears in the following nice property
+\begin{teo}\label{inversion formula theorem}
+	Let $f \in L^2(\R^d)$ and $\phi, \gamma \in L^2(\R^{2d})$ such that $\langle \phi, \gamma \rangle \neq 0$. Then:
+	\begin{equation}\label{inversion formula}
+		f(t) = \dfrac{1}{\langle \phi, \gamma \rangle} \V_{\gamma}^* \V_{\phi} f(t) = \dfrac{1}{\langle \phi, \gamma \rangle} \int_{\R^{2d}} \V_{\phi}f(x,\omega)M_{\omega}T_x \gamma (t) dxd\omega \quad \forall t \in \R^d
+	\end{equation}
+\end{teo}
+\begin{proof}
+	\textbf{VA MESSA??}
+\end{proof}
+Therefore the adjoint operator $\V_{\gamma}^*$ acts, in some sense, as an inverse operator. This will be of paramount importance in the following.
 \begin{itemize}
 	\item Relazione di ortogonalità
 	\item Formula di inversione
