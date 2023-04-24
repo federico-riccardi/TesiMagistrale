@@ -54,6 +54,7 @@ greek, evenboxes, english]{toptesi}
 \newcommand{\N}{\mathbb{N}} %scorciatoia per N naturali
 \newcommand{\V}{\mathcal{V}} %STFT
 \newcommand{\F}{\mathcal{F}} %Fourier transform
+\newcommand{\C}{\mathbb{C}} %Complex numbers
 \newcommand{\dxdo}{dxd\omega}
 \newcommand{\notazione}{\underline{\textbf{Remark Notazionale}}}
 \newcommand{\Log}{\ensuremath{\text{Log}_-}}
@@ -118,10 +119,19 @@ Now we suppose $X$ and $Y$ to be Hilbert spaces. Given a linear bounded operator
 \begin{equation*}
 	\langle Tx, y \rangle_X = \langle x, T^* y \rangle_Y \quad \forall x \in X,\,y \in Y
 \end{equation*}
-$T^*$ is called the \textbf{adjoint} operator of $T$. In the particular case in which $T : X \rightarrow X$, if $T=T^*$ we say that $T$ is \textbf{self-adjoint}.
-\begin{defi}\label{self-adjoint}
-	A l
+$T^*$ is called the \textbf{adjoint} operator of $T$. In the particular case in which $T : X \rightarrow X$, if $T=T^*$ we say that $T$ is \textbf{self-adjoint}.\\
+From now on we suppose that $X$ is over the field of complex numbers $\C$ and that $T : X \rightarrow X$.
+\begin{defi}\label{spectrum def}
+	The set $\sigma(T) = \{\lambda \in \C : T - \lambda I \text{ is not invertible}\}$ is called  the \textbf{spectrum} of $T$.
 \end{defi}
+For operators between finite-dimensional spaces (matrices) the spectrum is made up of \emph{eigenvalues}, those $\lambda \in \C$ such that $T-\lambda I$ is not injective, because in this case $T-\lambda I$ is not injective if and only if it is not surjective. On the other hand, when dealing with infinite-dimensional spaces, this is no more true. Eigenvalues are in the so called \emph{punctual spectrum}, which in general is just a part of the whole spectrum.\\
+If an operator is compact or self-adjoint its spectrum has some additional properties.
+\begin{teo}\label{Fredholm alternative}
+	Let $T : X \rightarrow X$ be a compact operator. Then
+\end{teo}
+
+
+
 \begin{itemize}
 	\item Norma operatoriale (FATTO)
 	\item Operatori autoaggiunti? (FATTO)
