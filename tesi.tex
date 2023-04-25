@@ -55,6 +55,7 @@ greek, evenboxes, english]{toptesi}
 \newcommand{\V}{\mathcal{V}} %STFT
 \newcommand{\F}{\mathcal{F}} %Fourier transform
 \newcommand{\C}{\mathbb{C}} %Complex numbers
+\newcommand{\B}{\mathcal{B}} %Bounded linear operators
 \newcommand{\dxdo}{dxd\omega}
 \newcommand{\notazione}{\underline{\textbf{Remark Notazionale}}}
 \newcommand{\Log}{\ensuremath{\text{Log}_-}}
@@ -82,12 +83,12 @@ In this first chapter we briefly recall some basics definition and results about
 In this section we focus our attention on linear operator between Banach spaces. Across the section a generic Banach space will be denoted as $X$ (or $Y$) endowed with the norm $\| \cdot \|_X$. In case $X$ is an Hilbert space we will denote its inner product as $\langle \cdot, \cdot \rangle_X$.\\
 A generic linear operator between two Banach spaces $X$ and $Y$ will be denoted as $T : X \rightarrow Y$. As a standard notation, the image of $x \in X$ through $T$ will be denoted as $T(x)$ or equivalently as $Tx$.
 \begin{defi}\label{bounded operator}
-	A linear operator $T : X \rightarrow Y$ is said to be \textbf{bounded} if there exist $C>0$ such that
+	A linear operator $T : X \rightarrow Y$ is \textbf{bounded} if there exist $C>0$ such that
 	\begin{equation}\label{boundedness property}
 		\| Tx \|_Y \leq C \| x \|_X \quad \forall x \in X
 	\end{equation}
 \end{defi}
-For linear operator boundedness is strictly related to continuity as the subsequent theorem states
+For linear operator boundedness is strictly related to continuity as the subsequent theorem states.
 \begin{teo}\label{equivalente boundedness continuity}
 	For a linear operator $T$ the following statements are equivalent:
 	\begin{itemize}
@@ -95,6 +96,7 @@ For linear operator boundedness is strictly related to continuity as the subsequ
 		\item $T$ is bounded.
 	\end{itemize}
 \end{teo}
+We denote the set of linear bounded (continuous) operators from $X$ to $Y$ as $\B(X,Y)$, while if $X=Y$ we will just write $\B(X)$.\\
 For the sake of completeness we mention that actually, for linear operators, boundedness is equivalent to uniform continuity.\\
 After this we define the \emph{norm} of an operator
 \begin{defi}\label{norm operator}
@@ -115,47 +117,148 @@ An important class of operators is the class of \emph{compact operators}.
 \end{defi}
 The property of compactness can be stated in multiple ways \textbf{SERVE SCRIVERLE?}
 
-Now we suppose $X$ and $Y$ to be Hilbert spaces. Given a linear bounded operator $T : X \rightarrow Y$ we know that there exist a unique linear bonded operator $T^* : Y \rightarrow X$ such that:
+Now we suppose $X$ and $Y$ to be Hilbert spaces. Given $T \in \B(X,Y)$ we know that there exist a unique $T^* \in \B(Y,X)$ such that:
 \begin{equation*}
 	\langle Tx, y \rangle_X = \langle x, T^* y \rangle_Y \quad \forall x \in X,\,y \in Y
 \end{equation*}
 $T^*$ is called the \textbf{adjoint} operator of $T$. In the particular case in which $T : X \rightarrow X$, if $T=T^*$ we say that $T$ is \textbf{self-adjoint}.\\
-From now on we suppose that $X$ is over the field of complex numbers $\C$ and that $T : X \rightarrow X$.
+From now on we suppose that $X$ is over the field $\C$ and that $T \in \B(X,Y)$.
 \begin{defi}\label{spectrum def}
 	The set $\sigma(T) = \{\lambda \in \C : T - \lambda I \text{ is not invertible}\}$ is called  the \textbf{spectrum} of $T$.
 \end{defi}
-For operators between finite-dimensional spaces (matrices) the spectrum is made up of \emph{eigenvalues}, those $\lambda \in \C$ such that $T-\lambda I$ is not injective, because in this case $T-\lambda I$ is not injective if and only if it is not surjective. On the other hand, when dealing with infinite-dimensional spaces, this is no more true. Eigenvalues are in the so called \emph{punctual spectrum}, which in general is just a part of the whole spectrum.\\
+For operators between finite-dimensional spaces (matrices) the spectrum is made up of \emph{eigenvalues}, those $\lambda \in \C$ such that $T-\lambda I$ is not injective, because in this case $T-\lambda I$ is not injective if and only if it is not surjective. On the other hand, when dealing with infinite-dimensional spaces, this is no more true. Eigenvalues are in the so called \emph{point spectrum}, which in general is just a part of the whole spectrum.\\
 If an operator is compact or self-adjoint its spectrum has some additional properties.
-\begin{teo}\label{Fredholm alternative}
-	Let $T : X \rightarrow X$ be a compact operator. Then
+\begin{teo}[Fredholm's alternative]\label{Fredholm alternative}
+	Let $T \in \B(X)$ be a compact operator. Then per $T-I$ one and only one of the following happens:
+	\begin{itemize}
+		\item $T$ is invertible
+		\item $T$ is not injective
+	\end{itemize}
 \end{teo}
-
-
+Therefore for compact operators, all the values in the spectrum, except at most for 0, are eigenvalues.\\
+Another fundamental result arises if we study the spectrum of compact and self-adjoint operators.
+\begin{teo}
+	Let $X$ be a separable Hilbert space and $T \in \B(X)$ a compact and self-adjoint operator. Then there exist an orthonormal basis of $X$ composed of eigenvectors of $T$
+\end{teo}
+Hence self-adjoint compact operators can always be diagonalized in some suitable basis. \textbf{CITARE BREZIS}\\
+Now we are going to consider two important classes of operators: \emph{trace class} operators and \emph{Hilbert-Schmidt} operators.\\
+The trace of an operator can be defined as it is for matrices.
+\begin{defi}\label{positive operator}
+	Let $X$ be an Hilbert space. An operator $T \in \B(X)$ is said \textbf{positive} if
+	\begin{equation*}
+		\langle T x, x \rangle \geq 0 \quad \forall x \in X
+	\end{equation*}
+\end{defi}
+\begin{defi}\label{trace def}
+	Let $X$ be a separable Hilbert space with orthonormal basis $\{e_n\}_{n \in \N}$. Given $T \in \B(X)$ a positive operator be define the \textbf{trace} of $T$ as
+	\begin{equation*}\label{trace expression}
+		\mathrm{tr}(T) = \sum_{n=1}^{\infty} \langle A e_n, e_n \rangle
+	\end{equation*}
+\end{defi}
+One can show that the definition is well defined since it is independent of the basis. \textbf{AGGIUNGERE DIM?}\\
+The definition of trace is given only for positive operators. If we want to deal with general ones it is sufficient to consider $|T|=\sqrt{T^*T}$ \textbf{LA PARTE SU RADICE QUADRATA E MODULO DI UN OPERATORE VA AGGIUNTA??}
+\begin{defi}\label{trace class def}
+	An operator $T \in \B(X)$ is called \textbf{trace class} if and only if $\mathrm{tr}|T| < \infty$
+\end{defi}
+\begin{teo}
+	For every trace class operator one has $\| T \| \leq \mathrm{tr}(T)$.
+\end{teo}
+\begin{proof}
+	contenuto...
+\end{proof}
+\begin{teo}
+	Every trace class operator is compact.
+\end{teo}
+\begin{proof}
+	contenuto...
+\end{proof}
+\begin{defi}\label{Hilbert-Schmidt operator def}
+	An operator $T \in \B(X)$ is called \textbf{Hilbert-Schmidt} if and only if $\mathrm{tr}(T^*T) < \infty$.
+\end{defi}
+\begin{teo}
+	Every Hilbert-Schmidt operator is compact.
+\end{teo}
+\begin{proof}
+	contenuto...
+\end{proof}
+The importance of Hilbert-Schmidt operator is related to the following theorem.
+\begin{teo}
+	Let $X = L^2(\R^d)$. Then $T \in \B(L^2(\R^d))$ is Hilbert-Schmidt if only if there exist a function $K \in L^2(\R^d \times \R^d)$, called integral kernel, such that
+	\begin{equation*}
+		(Tf)(x) = \int_{\R^d} K(x,y)f(y)dy \quad \forall f \in L^2(\R^d).
+	\end{equation*}
+	Moreover $\mathrm{tr}(T^*T) = \int_{\R^{2d}} |K(x,y)|^2 dxdy$.
+\end{teo}
+\begin{proof}
+	contenuto...
+\end{proof}
 
 \begin{itemize}
 	\item Norma operatoriale (FATTO)
 	\item Operatori autoaggiunti? (FATTO)
 	\item Operatori compatti (FATTO)
+	\item Spettro operatori (FATTO)
 	\item Operatori di classe traccia
-	\item Spettro operatori
 	\item Operatori di Hilbert-Schmidt?
 \end{itemize}
 \section{Fourier Transform and its properties}\label{section Fourier transform and its properties}
-\begin{defi}\label{def Fourier transform}
+\begin{defi}\label{Fourier transform def}
 	Let $f \in L^1(\R^d)$. We define the \textbf{Fourier transform} of $f$ the function
-	\begin{equation}\label{Fourier transform}
+	\begin{equation}\label{Fourier transform formula}
 		\F f(\omega) = \hat{f}(\omega) \coloneqq \int_{\R^d} e^{-2 \pi i \omega \cdot t} f(t) dt
 	\end{equation}
 \end{defi}
 It's straightforward to see that the definition is well-posed and that $\F f \in L^{\infty}(\R^d)$ with $\|\F f\|_{\infty} \leq \| f \|_1$. Therefore $\F$ can be seen as a linear operator between $L^1(\R^d)$ and $L^{\infty}(\R^d)$ with $\| \F \| = 1$ (from the previous inequality actually we saw that $\| \F \| \leq 1$ but if we take $f \geq 0$ a.e. we have that $\hat{f}(0) = \| f \|_1$ that gives us the equality).\\
-If $f$ is in $L^2(\R^d)$, the integral in \eqref{Fourier transform} in general will not converge. Nevertheless we can define the Fourier transform of an $L^2$ function through a density argument. There are many dense subspaces in $L^2(\R^d)$ to do so. One possible choice is to use the Schwartz class $\mathcal{S}(\R^d)$. Another choice is to use $L^2(\R^d) \cap L^1(\R^d)$. On this space one can show that the Fourier transform is an isometry with respect to the $L^2$ norm and \textbf{CONTINUARE}.
+The Fourier transform of an $L^1(\R^d)$ is not only bounded as stated by the \emph{Riemann-Lebesgue lemma}.
+\begin{teo}[Riemann-Lebesgue lemma]\label{Riemann-Lebesgue lemma}
+	Let $f \in L^1(\R^d)$. Therefore $\hat{f} \in C_0(\R^d) = \{f : \R^d \rightarrow \C \text{ continuous such that } \lim_{|t| \rightarrow \infty} |f(t)|=0\}$.
+\end{teo}
+\begin{defi}\label{inverse Fourier transform def}
+	Let $f \in L^1(\R^d)$. We define the \textbf{inverse Fourier transform} of the function $f$
+	\begin{equation}\label{inverse Fourier transform formula}
+		\F^{-1} f(t) = \check{f}(t) \coloneqq \int_{\R^d} e^{2 \pi i \omega \cdot t} f(\omega) d\omega
+	\end{equation}
+\end{defi}
+The inverse Fourier transform is denoted with $\F^{-1}$ because it is actually the inverse operator of the Fourier transform as stated by the \emph{inversion theorem}.
+\begin{teo}[Inversion theorem]\label{inversion theorem}
+	Let $f \in L^1(\R^d)$ and suppose that also $\hat{f} \in L^1(\R^d)$. Then
+	\begin{equation*}
+		f(t) = \F^{-1} \circ \F f(t) = \int_{\R^d} \hat{f}(\omega) e^{2 \pi i \omega \cdot t}d\omega
+	\end{equation*}
+\end{teo}
+
+The Fourier transform is intimately related to regularity and decay properties. The duality between these two is stated in the following theorems.
+\begin{teo}\label{duality decay-regularity theorem}
+	Let $f \in L^1(\R^d)$. If $|t|^k f \in L^1(\R^d)$ for some $k \in \N$ then $\hat{f} \in C_0^k(\R^d)$ and the following holds for every $\alpha \in \N^d$ with $|\alpha| \leq k$:
+	\begin{equation*}
+		\F \left((-2 \pi i t)^{\alpha} f \right) (\omega) = \partial^{\alpha} \F f(\omega).
+	\end{equation*}
+\end{teo}
+\begin{teo}\label{duality regularity-decay theorem}
+	Let $f \in C^k(\R^d)$ for some $k \in \N$. If $f, \partial^{\alpha}f \in L^1(\R^d)$ for every $\alpha \in \N^d$ with $|\alpha| \leq k$ then
+	\begin{equation*}
+		\F \left(\partial^{\alpha} f\right) (\omega) = \left(2 \pi i \omega\right)^{\alpha} \F f(\omega)
+	\end{equation*}
+	In particular this implies that $\hat{f}(\omega) = o\left(|\omega|^{-k} \right) $ as $| \omega | \rightarrow \infty$.
+\end{teo}
+To sum up, previous theorems state a duality between regularity and decay: if a function is smooth then it decays rapidly and vice versa.
+
+
+If $f$ is in $L^2(\R^d)$, the integral in \eqref{Fourier transform formula} in general will not converge. Nevertheless we can define the Fourier transform of an $L^2$ function through a density argument. There are many dense subspaces in $L^2(\R^d)$ to do so. One possible choice is to use the Schwartz class $\mathcal{S}(\R^d)$. Another choice is to use $L^2(\R^d) \cap L^1(\R^d)$. On this space one can show that the Fourier transform is an isometry with respect to the $L^2$ norm and therefore it extends to an isometry on the whole $L^2(\R^d)$. This is stated by the \emph{Plancherel theorem}.
+\begin{teo}[Plancherel theorem]\label{Plancherel theorem}
+	The Fourier transform $\F$ is an isometry of $L^2(\R^d)$ onto $L^2(\R^d)$.
+\end{teo}
+Thanks to the polarization identity this implies that $\F$ preserves the inner product in $L^2(\R^d)$:
+\begin{equation*}
+	\langle f,g \rangle_{L^2(\R^d)} = \langle \hat{f}, \hat{g} \rangle_{L^2(\R^d)} \quad \forall f,g \in L^2(\R^d)
+\end{equation*}
 
 	\begin{itemize}
-		\item Defizione trasformata
-		\item Disuguaglianza di Hausdorff-Young
-		\item Teorema di Plancherel
-		\item Formula di inversione
-		\item Proprietà di decadimento e regolarità		
+		\item Defizione trasformata (FATTO)
+		\item Disuguaglianza di Hausdorff-Young ??
+		\item Teorema di Plancherel (FATTO)
+		\item Formula di inversione(FATTO)
+		\item Proprietà di decadimento e regolarità (FATTO)
 	\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
