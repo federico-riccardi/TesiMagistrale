@@ -37,9 +37,13 @@ greek, evenboxes, english]{toptesi}
 \usepackage{systeme}
 \usepackage{mathtools}
 \hypersetup{colorlinks, linkcolor=blue, citecolor=blue}
-\usepackage{biblatex}
 \usepackage{cancel}
-\addbibresource{bibliografia.bib}
+\usepackage[backend=biber,
+style=numeric,
+sorting=nty
+]{biblatex}
+
+\addbibresource{refs.bib}
 
 
 \numberwithin{equation}{chapter}
@@ -61,6 +65,7 @@ greek, evenboxes, english]{toptesi}
 \newcommand{\Log}{\ensuremath{\text{Log}_-}}
 \newcommand{\finire}{\fbox{\LARGE DA FINIRE}}
 \newcommand{\pfrac}[2]{\dfrac{\partial #1}{\partial #2}}
+\DeclareMathOperator*{\esssup}{ess\,sup}
 
 \begin{document}
 \english
@@ -244,21 +249,32 @@ The Fourier transform is intimately related to regularity and decay properties. 
 To sum up, previous theorems state a duality between regularity and decay: if a function is smooth then it decays rapidly and vice versa.
 
 
-If $f$ is in $L^2(\R^d)$, the integral in \eqref{Fourier transform formula} in general will not converge. Nevertheless we can define the Fourier transform of an $L^2$ function through a density argument. There are many dense subspaces in $L^2(\R^d)$ to do so. One possible choice is to use the Schwartz class $\mathcal{S}(\R^d)$. Another choice is to use $L^2(\R^d) \cap L^1(\R^d)$. On this space one can show that the Fourier transform is an isometry with respect to the $L^2$ norm and therefore it extends to an isometry on the whole $L^2(\R^d)$. This is stated by the \emph{Plancherel theorem}.
+If $f$ is in $L^2(\R^d)$, the integral in \eqref{Fourier transform formula} in general will not converge. Nevertheless we can define the Fourier transform of an $L^2$ function through a density argument. For example, $L^2(\R^d) \cap L^1(\R^d)$ is a dense subspace of $L^2(\R^d)$. On this space one can show that the Fourier transform is an isometry with respect to the $L^2$ norm and therefore it extends to an isometry on the whole $L^2(\R^d)$. This is stated by the \emph{Plancherel theorem}.
 \begin{teo}[Plancherel theorem]\label{Plancherel theorem}
-	The Fourier transform $\F$ is an isometry of $L^2(\R^d)$ onto $L^2(\R^d)$.
+	If $f \in L^1(\R^d) \cap L^2(\R^d)$ then $\| f \|_2 = \| \hat{f} \|_2$.
 \end{teo}
 Thanks to the polarization identity this implies that $\F$ preserves the inner product in $L^2(\R^d)$:
-\begin{equation*}
+\begin{equation}\label{Parseval formula}
 	\langle f,g \rangle_{L^2(\R^d)} = \langle \hat{f}, \hat{g} \rangle_{L^2(\R^d)} \quad \forall f,g \in L^2(\R^d)
-\end{equation*}
+\end{equation}
+therefore the Fourier transform $F$ is a unitary operator on $L^2(\R^d)$. Result \eqref{Parseval formula} is called \emph{Parseval formula}.
+
+Lastly we introduce two fundamental operators in Fourier analysis. Given $x,\omega \in \R^d$ we define the \emph{time-shift} (or translation) operator $T_x$
+\begin{equation}\label{time-shift operator def}
+	T_x f(t) = f(t-x)
+\end{equation}
+and the \emph{modulation} operator $M_{\omega}$
+\begin{equation}\label{modulation operator def}
+	M_{\omega} f(t) = e^{2 \pi i \omega \cdot t} f(t)
+\end{equation}
 
 	\begin{itemize}
 		\item Defizione trasformata (FATTO)
-		\item Disuguaglianza di Hausdorff-Young ??
 		\item Teorema di Plancherel (FATTO)
 		\item Formula di inversione(FATTO)
 		\item Proprietà di decadimento e regolarità (FATTO)
+		\item Proprietà operatori di traslazione e modulazione??
+		\item Disuguaglianza di Hausdorff-Young ??
 	\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -320,26 +336,7 @@ Therefore the adjoint operator $\V_{\gamma}^*$ acts, in some sense, as an invers
 \end{itemize}
 \section{Fock Space and Bargmann Transform}\label{section Fock Space and Bargmann transform}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\chapter{Uncertainty principles}\label{chapter uncertainty principles}
-\section{Heisenberg's uncertainty principle}\label{section Heisenberg's UP}
-\section{Donoho-Stark's uncertainty principle}\label{section Donoho-Stark's UP}
-\section{Lieb's uncertainty principle}\label{section Lieb's UP}
-\section{Nicola-Tilli's uncertainty principle or Faber-Krahn Inequality for the STFT}\label{section Faber-Krahn inequality fot STFT}
-Theorem from \cite{nicolatilli_fk}
-\begin{teo}\label{faberkrahn}
-	For every $f \in L^2(\R^d)$ such that $\|f\|_{L^2} = 1$ and every measurable subset $\Omega \subset \R^{2d}$ with finite measure we have
-	\begin{equation*}
-		\int_{\Omega}  |\V f(x,\omega)|^2 \dxdo \leq G(|\Omega|)
-	\end{equation*}
-	where $G(s)$ is given by
-	\begin{equation}\label{G}
-		G(s) \coloneqq \int_0^s e^{\left(-d!\tau\right)^{1/d}} d\tau
-	\end{equation}
-\end{teo}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Localization Operators}\label{chapter localization operators}
 \begin{itemize}
@@ -350,9 +347,86 @@ Theorem from \cite{nicolatilli_fk}
 	\item Autovalori e autofunzioni
 \end{itemize}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Uncertainty principles}\label{chapter uncertainty principles}
+\section{Heisenberg's uncertainty principle}\label{section Heisenberg's UP}
+\section{Donoho-Stark's uncertainty principle}\label{section Donoho-Stark's UP}
+\section{Lieb's uncertainty principle}\label{section Lieb's UP}
+\section{Nicola-Tilli's uncertainty principle or Faber-Krahn Inequality for the STFT}\label{section Faber-Krahn inequality fot STFT}
+Theorem from \cite{nicolatilli_fk}
+\begin{teo}\label{faberkrahn theorem}
+	For every $f \in L^2(\R^d)$ such that $\|f\|_{L^2} = 1$ and every measurable subset $\Omega \subset \R^{2d}$ with finite measure we have
+	\begin{equation*}
+		\int_{\Omega}  |\V f(x,\omega)|^2 \dxdo \leq G(|\Omega|)
+	\end{equation*}
+	where $G(s)$ is given by
+	\begin{equation}\label{G}
+		G(s) \coloneqq \int_0^s e^{\left(-d!\tau\right)^{1/d}} d\tau
+	\end{equation}
+	Moreover, equality occurs if and only if $f$ is a Gaussian \textbf{METTERE A POSTO} and $\Omega$ is equivalent, in measure, to a ball of centre $(x_0,\omega_0)$.
+\end{teo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Recent results}\label{chapter recent results}
 \section{Norm of localization operators: results from Nicola-Tilli}\label{section norm of localization operators}
 \section{Generic case}
+\begin{teo}\label{norm limitation}
+	Assume $F \in L^p(\R^{2d})$ for some $p \in [1,+\infty)$ and let $\mu(t) = |\{|F|>t\}|$ be the distribution function of $|F|$. Then
+	\begin{equation}\label{norm limitation formula}
+		\| L_F \| \leq \int_0^{\infty} G(\mu(t))dt
+	\end{equation}
+	Equality occurs if and only if $F(z)=e^{i\theta}\rho(|z-z_0|)$ for some $\theta \in \R$, $z_0 \in \R^{2d}$ and some nonincreasing function $\rho : [0,+\infty) \rightarrow [0,+\infty)$
+\end{teo}
+\begin{proof}
+	For the sake of brevity we denote the variable $(x,\omega) \in R^{2d}$ as $z$ and therefore $dxd\omega$ as $dz$. Let $f,g \in L^2(\R^d)$ such that $\| f \|_2 = \| g \|_2 = 1$.
+	Since we are in a Hilbert space $\| L_F \|$ can be computed as the supremum of $|\langle L_F f,g \rangle|$ over all normalized $f$ and $g$. Therefore we are interested in estimating the previous scalar product
+	\begin{align}\label{first inequality}
+		| \langle L_F f, g \rangle |  &= | \langle \V^* F \V f, g \rangle | = | \langle F \V f, \V g \rangle | \leq \int_{\R^{2d}} |F(z)| \cdot |\V f(z)| \cdot | \V g(z) | dz \overset{\text{C-S}}{\leq} \\
+									  &\leq \left( \int_{\R^{2d}} |F(z)| \cdot |\V f(z)|^2 dz \right)^{1/2} \left( \int_{\R^{2d}} |F(z)| \cdot |\V g(z)|^2 dz \right)^{1/2} 
+	\end{align}
+	Since the result is symmetric in $f$ and $g$ we can study just one of the terms. Letting $m = \esssup |F(z)|$ and assuming $m>0$ (otherwise every result is trivial) we can use the ``layer cake'' representation \textbf{CITARE CON PAGINA}
+	\begin{equation*}
+		|F(z)| = \int_0^m \chi_{|F|>t}(z)dt 
+	\end{equation*}
+	we have
+	\begin{align*}
+		\int_{\R^{2d}} |F(z)| \cdot |\V f(z)|^2 dz &= \int_{\R^{2d}} \left( \int_0^m \chi_{|F|>t}(z)dt \right) |\V f(z)|^2 dz \overset{\text{Fubini}}{=}\\
+											 &= \int_0^m \left( \int_{\R^{2d}} \chi_{|F|>t}(z) |\V f(z)|^2 dz \right)dt = \int_0^m \left( \int_{\{|F|>t\}} |\V f(z)|^2 dz \right)dt
+	\end{align*}
+	We notice that the quantity in the inner integral is exactly the one in the theorem \ref{faberkrahn theorem}, hence
+	\begin{equation}\label{limitation with G}
+		\int_{\R^{2d}} |F(z)| \cdot |\V f(z)|^2 dz \leq \int_0^m G(\mu(t)) dt
+	\end{equation}
+	We point out that since $\mu(t) = 0$ and $G(0)=0$ the previous expression is equivalent to \eqref{norm limitation formula}.\\
+	Because $p<\infty$, $L_F$ is a compact operator on $L_2$ therefore there exist normalized $f$ and $g$ which achieve equality in the supremum of the norm: $\langle L_F f, g \rangle = \| L_F \|$. Therefore equality in \eqref{norm limitation formula} occurs if and only if all the previous inequalities become equalities. Equality in \eqref{limitation with G} occurs if and only if
+	\begin{equation}\label{first equality}
+		\int_{\{|F|>t\}} |\V f(z)|^2 dz = G(\mu(t))
+	\end{equation}
+	for a.e. $t \in (0,m)$. Thanks to Theorem \ref{faberkrahn theorem} for just one $t_0 \in (0,m)$ infer that $f$ is a Gaussian \textbf{METTERE A POSTO} and that $\{|F|>t\}$ is a ball centred in $z_0 = (x_0,\omega_0)$. Then, still by theorem \ref{faberkrahn theorem}, since \eqref{first equality} holds a.e in $(0,m)$ and that $f$ is always the same we have that also the other levels sets $\{\|F|>t\}$ are equivalent to balls centred at the same $z_0$. Finally, we can extend the result to every $t \in (0,m)$ because ${|F|>t} = \bigcup_{s > t} \{|F|>s\}$. Since theorem \ref{faberkrahn theorem} is a ``if and only if'', these conditions on $F$ and $f$ are also sufficient to guarantee equality in \eqref{limitation with G}. Clearly the same result holds for $g$ which can be a Gaussian with different coefficient but the same centre \textbf{METTERE A POSTO}.\\
+	In the end it turns that $|F|$ is spherically symmetric and radially decreasing as claimed in theorem's statement.\\
+	Conditions for $f$ and $g$ imply that $\V g  = e^{i \alpha} \V f$ for some $\alpha \in \R$. This provides equality in using Cauchy-Schwartz inequality in \eqref{first inequality}. Lastly we shall prove that also the first inequality in \eqref{first inequality}, that is
+	\begin{equation*}
+		\left\vert \int_{\R^{2d}} F(z) \V f(z) \overline{\V g(z)} dz \right\vert \leq \int_{\R^{2d}} |F(z)| \cdot | \V f(z)| \cdot |\V g(z)| dz
+	\end{equation*}
+	becomes an equality, which is true if and only if
+	\begin{equation*}
+		e^{-i\theta}  \int_{\R^{2d}} F(z) \cdot |\V f(z)|^2 dz = \int_{\R^{2d}} |F(z)| \cdot | \V f(z)|^2 dz
+	\end{equation*}
+	for some $\theta \in \R$. This, in turn, is equivalent to the condition
+	\begin{equation*}
+		e^{-i \theta}F(z) \cdot |\V f(z)|^2 = |F(z)| \cdot |\V f(z)|^2 \quad \text{for a.e. } z \in \R^{2d}
+	\end{equation*}
+	but since $|\V f(z)|^2 > 0$, equality in \ref{first inequality} with $f$ and $g$ as \textbf{METTERE A POSTO} occurs if and only if $F(z) = e^{i \theta} |F(z)|$.
+\end{proof}
+
+
+
+
+
+
+
 Let's now consider the case where both $p$ and $q$ are neither 1 or $+\infty$. The result presented in \cite{nicolatilli_norm} include the case ...
 \begin{equation*}
 	\| L_F\|_{L_2 \rightarrow L_2} \leq \min\{\kappa_p^{d\kappa_p}A, \, \kappa_q^{d\kappa_q}B\}
@@ -421,15 +495,30 @@ The equation stemming from the orthogonality with $t^{q-1}$ is analogous. Theref
 		\fint_{1-\delta}^1 \tau^{q-1} d\tau - \fint_1^{1+\delta} \tau^{q-1} d\tau
 	\end{pmatrix}
 \end{equation}
-This system has a unique solution if and only if the determinant of the matrix is not 0. If we see it as a function of $\delta$ we can expand the terms in a Taylor series:
+This system has a unique solution if and only if the determinant of the matrix is not 0. We can show this directly:
 \begin{align*}
 	& \fint_{1-\delta}^1 \tau^{p} d\tau \fint_{1-\delta}^1 \tau^{q-1} d\tau - \fint_{1-\delta}^1 \tau^{q} d\tau \fint_{1-\delta}^1 \tau^{p-1} d\tau=\\
-	&=\left(1-\dfrac{p}{2}\delta + \dfrac{p(p-1)}{6}\delta^2 + o(\delta^2)\right) \left(1-\dfrac{q-1}{2}\delta + \dfrac{(q-1)(q-2)}{6}\delta^2 + o(\delta^2)\right) +\\
-	&-\left(1-\dfrac{q}{2}\delta + \dfrac{q(q-1)}{6}\delta^2 + o(\delta^2)\right) \left(1-\dfrac{p-1}{2}\delta + \dfrac{(p-1)(p-2)}{6}\delta^2 + o(\delta^2)\right)=\\
-	&=(1-1) + \delta \left(-\dfrac{q-1}{2} - \dfrac{p}{2} + \dfrac{p-1}{2} + \dfrac{q}{2} \right) \ldots\\
-	&=\dfrac{p-q}{12}\delta^2 + o(\delta^2)
+	&= \dfrac{1}{\delta^2} \int_{(1-\delta,1)^2} \left(\tau^p \sigma^{q-1} - \tau^{p-1}\sigma^q\right) d\tau d\sigma = \dfrac{1}{\delta^2} \int_{(1-\delta,1)^2} \tau^{p-1} \sigma^{q-1} \left( \tau - \sigma \right) d\tau d\sigma = \\
+	&= \dfrac{1}{\delta^2} \left( \int_{Q_1} \tau^{p-1} \sigma^{q-1} \left( \tau - \sigma \right) d\tau d\sigma + \int_{Q_2} \tau^{p-1} \sigma^{q-1} \left( \tau - \sigma \right) d\tau d\sigma \right)=
 \end{align*}
-therefore the determinant is always non 0.\\
+where $Q_1=(1-\delta,1)^2 \cap \{\tau > \sigma\}$ and $Q_2=(1-\delta,1)^2 \cap \{\tau < \sigma\}$. In the second integral we can consider the change of variable that swaps $\tau$ and $\sigma$. In this case the new domain is $Q_1$, hence:
+\begin{align*}
+	= \dfrac{1}{\delta^2} \int_{Q_1} \left(\tau^{p-1}\sigma^{q-1} - \tau^{q-1}\sigma^{p-1}\right) \left(\tau - \sigma\right) d\tau d\sigma
+\end{align*}
+In $Q_1$ $\tau - \sigma > 0$ and the sign of $\tau^{p-1}\sigma^{q-1} - \tau^{q-1}\sigma^{p-1}$ is constant, in fact:
+\begin{equation*}
+	\tau^{p-1}\sigma^{q-1} - \tau^{q-1}\sigma^{p-1} > 0 \iff \left(\dfrac{\tau}{\sigma}\right)^{p-q} > 1 \overset{\tau > \sigma}{\iff} p>q
+\end{equation*}
+Therefore the determinant of the matrix is always non 0.\\
+%If we see it as a function of $\delta$ we can expand the terms in a Taylor series:
+%\begin{align*}
+%	& \fint_{1-\delta}^1 \tau^{p} d\tau \fint_{1-\delta}^1 \tau^{q-1} d\tau - \fint_{1-\delta}^1 \tau^{q} d\tau \fint_{1-\delta}^1 \tau^{p-1} d\tau=\\
+%	&=\left(1-\dfrac{p}{2}\delta + \dfrac{p(p-1)}{6}\delta^2 + o(\delta^2)\right) \left(1-\dfrac{q-1}{2}\delta + \dfrac{(q-1)(q-2)}{6}\delta^2 + o(\delta^2)\right) +\\
+%	&-\left(1-\dfrac{q}{2}\delta + \dfrac{q(q-1)}{6}\delta^2 + o(\delta^2)\right) \left(1-\dfrac{p-1}{2}\delta + \dfrac{(p-1)(p-2)}{6}\delta^2 + o(\delta^2)\right)=\\
+%	&=(1-1) + \delta \left(-\dfrac{q-1}{2} - \dfrac{p}{2} + \dfrac{p-1}{2} + \dfrac{q}{2} \right) \ldots\\
+%	&=\dfrac{p-q}{12}\delta^2 + o(\delta^2)
+%\end{align*}
+%therefore the determinant is always non 0.\\
 The derivative of $G$ along $\eta$ is nonpositive because $u$ is supposed to be a maximizer, therefore
 \begin{align*}
 	0 &\geq \int_{M-M\delta}^{M+M\delta} G'(u(t))\eta(t)dt = -\int_{M-M\delta}^M \left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right) dt\, +\\
@@ -522,9 +611,6 @@ First of all, since $(\varphi-\gamma)'<0$ whenever $\varphi(c_1) = \gamma(c_1)$,
 Define $c_1^* \coloneqq \sup \{c_1 \in [0,c_{1,f}] : \forall t \in [0,c_1] \ \varphi(t) \geq \gamma(t)\}$. This is an intersection point between $\varphi$ and $\gamma$ (if $\varphi(c_1^*) > \gamma(c_1^*)$ due to continuity there would be $\varepsilon > 0$ such that $\varphi(c_1^*+\varepsilon) > \gamma(c_1^*+\varepsilon)$ which contradicts the definition of $c_1^*$) and it is the first one, because we saw that after every intersection point there is an interval where $\varphi < \gamma$. Lastly, since $\varphi(0) > \gamma(0)$ and $\varphi(c_{1,f}) = 0 < \gamma(c_1,f)$ we have that $0 < c_1^* < c_{1,f}$.\\
 Suppose now that there is a second point of intersection $\tilde{c}_1$ after the first one. Since immediately after $c_1^*$ we have that $\varphi$ becomes smaller than $\gamma$ this second point of intersection is given by $\tilde{c}_1 = \sup \{c_1 \in [c_1^*,c_{1,f}] : \forall t \in [c_1^*,c_1] \ \varphi(t) \leq \gamma(t)\}$. Considering that this is an intersection point, there exist an interval before $\tilde{c}_1$ where $\varphi$ is strictly grater than $\gamma$ which is absurd, hence $c_1^*$ is the only intersection point between $\varphi$ and $\gamma$.\\
 Therefore $(c_1^*, \varphi(c_1^*) = c_2^*)$ is the unique pair of multipliers for which $p\int_0^T t^{p-1} u(t;c_1^*,c_2^*)dt = A^p,\ q\int_0^T t^{q-1} u(t;c_1^*,c_2^*)dt = B^q$ and in the end $u(t;c_1^*,c_2^*)$ is the unique maximizer for \textbf{CITARE PROBLEMA VARIAZIONALE}
-
-
-
 
 
 
