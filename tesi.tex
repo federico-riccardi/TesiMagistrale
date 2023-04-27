@@ -198,6 +198,8 @@ The importance of Hilbert-Schmidt operator is related to the following theorem.
 	contenuto...
 \end{proof}
 
+{\Large\textbf{AGGIUNGERE AGGIUNTO OPERATORE DI HILBERT-SCHMIDT}}
+
 \begin{itemize}
 	\item Norma operatoriale (FATTO)
 	\item Operatori autoaggiunti? (FATTO)
@@ -339,6 +341,37 @@ Therefore the adjoint operator $\V_{\gamma}^*$ acts, in some sense, as an invers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Localization Operators}\label{chapter localization operators}
+One of the main problems in signal analysis or, in general, time-frequency analysis is to extract some informations about signal in order to analyse it. We saw that STFT can be a tool for this purpose, however it has some practical problems: it doubles the dimension of the output and it is highly redundant \textbf{METTERE A POSTO E CITARE FONII}.\\
+In this chapter we see two possible ways to deal with the problem of creating operators able to localize a signal both in time and frequency.
+\section{Localization with projections}
+The most straightforward way to localize a signal, say in the time domain, is to use a sharp cut-off, which means a characteristic function. If we suppose to have a signal $f \in L^2(\R^d)$ and we want to localize it in a measurable subset $T \subseteq \R^d$ of the time domain we can consider a natural projection operator
+\begin{equation}\label{time projection operator}
+	\pi_T : L^2(\R^d) \rightarrow L^2(\R^d) \quad \pi_T f(t) = \chi_T(t) f(t)
+\end{equation}
+This is clearly a projection operator, which means that $\pi_T^2 = \pi_T = \pi_T^*$.\\
+In the same fashion we can define an operator able to localize on a measurable subset $\Omega \subseteq \R^d$ in the frequency domain. Their definition it is not as direct as the one for time projections but it is still easy to understand
+\begin{equation}\label{frequency projection operator}
+	Q_{\Omega} : L^2(\R^d) \rightarrow L^2(\R^d) \quad Q_{\Omega} f(t) = \F^{-1} \left(\chi_{\Omega} \F f \right)(t) = \int_{\Omega} \hat{f}(\omega) e^{2 \pi i \omega \cdot t} d\omega
+\end{equation}
+It is also quite simple to show that this is a projection operator
+\begin{align*}
+	&Q_{\Omega}^2 = \F^{-1} \chi_{\Omega} \F \F^{-1} \chi_{\Omega} \F = \F^{-1} \chi_{\Omega} \chi_{\Omega} \F = \F^{-1} \chi_{\Omega} \F = Q_{\Omega}\\
+	&Q_{\Omega}^* = \left( \F^{-1} \chi_{\Omega} \F\right)^* = \F^* \chi_{\Omega}^* \left(F^{-1}\right)^* = \F^{-1} \chi_{\Omega} \F = Q_{\Omega}
+\end{align*}
+where we used the fact that the Fourier transform is a unitary operator on $L^2(\R^d)$ therefore $\F^* = \F^{-1}$.\\
+After defining these projection operators we may think to combine them into a single operator
+\begin{equation*}\label{composition of projections}
+	Q_{\Omega} \pi_T, \; \pi_T Q_{\Omega} : L^2(\R^d) \rightarrow L^2(\R^d)
+\end{equation*}
+which hopefully is able to localize a signal both in time and frequency ``near'' to $T$ in time domain and to $\Omega$ in the frequency one.\\
+It is also clear that these operators are linear and bounded and that their norms are less or equal than 1, independently of $T$ and $\Omega$:
+\begin{align*}
+	stima norma operatori
+\end{align*}
+Moreover, if both $T$ and $\Omega$ have finite measure $\pi_T$ and $Q_{\Omega}$ are Hilbert-Schmidt operators
+\begin{prop}\label{projection operators are Hilbert-Schmidt}
+	dim che operatori di proiezione sono di Hilbert-Schmidt
+\end{prop}
 \begin{itemize}
 	\item Definizione
 	\item Operatori di proiezione
@@ -371,6 +404,7 @@ Theorem from \cite{nicolatilli_fk}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Recent results}\label{chapter recent results}
 \section{Norm of localization operators: results from Nicola-Tilli}\label{section norm of localization operators}
+T
 \section{Generic case}
 \begin{teo}\label{norm limitation}
 	Assume $F \in L^p(\R^{2d})$ for some $p \in [1,+\infty)$ and let $\mu(t) = |\{|F|>t\}|$ be the distribution function of $|F|$. Then
@@ -382,10 +416,12 @@ Theorem from \cite{nicolatilli_fk}
 \begin{proof}
 	For the sake of brevity we denote the variable $(x,\omega) \in R^{2d}$ as $z$ and therefore $dxd\omega$ as $dz$. Let $f,g \in L^2(\R^d)$ such that $\| f \|_2 = \| g \|_2 = 1$.
 	Since we are in a Hilbert space $\| L_F \|$ can be computed as the supremum of $|\langle L_F f,g \rangle|$ over all normalized $f$ and $g$. Therefore we are interested in estimating the previous scalar product
-	\begin{align}\label{first inequality}
+	\begin{equation}\label{first inequality}
+	\begin{aligned}
 		| \langle L_F f, g \rangle |  &= | \langle \V^* F \V f, g \rangle | = | \langle F \V f, \V g \rangle | \leq \int_{\R^{2d}} |F(z)| \cdot |\V f(z)| \cdot | \V g(z) | dz \overset{\text{C-S}}{\leq} \\
 									  &\leq \left( \int_{\R^{2d}} |F(z)| \cdot |\V f(z)|^2 dz \right)^{1/2} \left( \int_{\R^{2d}} |F(z)| \cdot |\V g(z)|^2 dz \right)^{1/2} 
-	\end{align}
+	\end{aligned}
+	\end{equation}
 	Since the result is symmetric in $f$ and $g$ we can study just one of the terms. Letting $m = \esssup |F(z)|$ and assuming $m>0$ (otherwise every result is trivial) we can use the ``layer cake'' representation \textbf{CITARE CON PAGINA}
 	\begin{equation*}
 		|F(z)| = \int_0^m \chi_{|F|>t}(z)dt 
@@ -404,7 +440,7 @@ Theorem from \cite{nicolatilli_fk}
 	\begin{equation}\label{first equality}
 		\int_{\{|F|>t\}} |\V f(z)|^2 dz = G(\mu(t))
 	\end{equation}
-	for a.e. $t \in (0,m)$. Thanks to Theorem \ref{faberkrahn theorem} for just one $t_0 \in (0,m)$ infer that $f$ is a Gaussian \textbf{METTERE A POSTO} and that $\{|F|>t\}$ is a ball centred in $z_0 = (x_0,\omega_0)$. Then, still by theorem \ref{faberkrahn theorem}, since \eqref{first equality} holds a.e in $(0,m)$ and that $f$ is always the same we have that also the other levels sets $\{\|F|>t\}$ are equivalent to balls centred at the same $z_0$. Finally, we can extend the result to every $t \in (0,m)$ because ${|F|>t} = \bigcup_{s > t} \{|F|>s\}$. Since theorem \ref{faberkrahn theorem} is a ``if and only if'', these conditions on $F$ and $f$ are also sufficient to guarantee equality in \eqref{limitation with G}. Clearly the same result holds for $g$ which can be a Gaussian with different coefficient but the same centre \textbf{METTERE A POSTO}.\\
+	for a.e. $t \in (0,m)$. Thanks to Theorem \ref{faberkrahn theorem} for just one $t_0 \in (0,m)$ infer that $f$ is a Gaussian \textbf{METTERE A POSTO} and that $\{|F|>t\}$ is a ball centred in $z_0 = (x_0,\omega_0)$. Then, still by theorem \ref{faberkrahn theorem}, since \eqref{first equality} holds a.e in $(0,m)$ and that $f$ is always the same we have that also the other levels sets $\{|F|>t\}$ are equivalent to balls centred at the same $z_0$. Finally, we can extend the result to every $t \in (0,m)$ because ${|F|>t} = \bigcup_{s > t} \{|F|>s\}$. Since theorem \ref{faberkrahn theorem} is a ``if and only if'', these conditions on $F$ and $f$ are also sufficient to guarantee equality in \eqref{limitation with G}. Clearly the same result holds for $g$ which can be a Gaussian with different coefficient but the same centre \textbf{METTERE A POSTO}.\\
 	In the end it turns that $|F|$ is spherically symmetric and radially decreasing as claimed in theorem's statement.\\
 	Conditions for $f$ and $g$ imply that $\V g  = e^{i \alpha} \V f$ for some $\alpha \in \R$. This provides equality in using Cauchy-Schwartz inequality in \eqref{first inequality}. Lastly we shall prove that also the first inequality in \eqref{first inequality}, that is
 	\begin{equation*}
