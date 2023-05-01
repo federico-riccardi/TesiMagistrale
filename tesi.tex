@@ -21,15 +21,8 @@ greek, evenboxes, english]{toptesi}
 \usepackage{dcolumn}
 \newcolumntype{d}{D{.}{.}{-1} } %to vetical align numbers in tables, along the decimal dot
 
-\usepackage{amsmath}
-
-
-
-
-
-
-
 \usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
 \usepackage{esint}
 \usepackage{enumitem}
 \usepackage{tikz}
@@ -38,12 +31,13 @@ greek, evenboxes, english]{toptesi}
 \usepackage{mathtools}
 \hypersetup{colorlinks, linkcolor=blue, citecolor=blue}
 \usepackage{cancel}
-\usepackage[backend=biber,
+\usepackage{color}
+\usepackage[
+backend=bibtex,
 style=numeric,
-sorting=nty
+sorting=nyt
 ]{biblatex}
-
-\addbibresource{refs.bib}
+\addbibresource{bibliografia.bib}
 
 
 \numberwithin{equation}{chapter}
@@ -60,6 +54,7 @@ sorting=nty
 \newcommand{\F}{\mathcal{F}} %Fourier transform
 \newcommand{\C}{\mathbb{C}} %Complex numbers
 \newcommand{\B}{\mathcal{B}} %Bounded linear operators
+\renewcommand{\L}{\mathscr{L}} %sesquilinear form localization operator
 \newcommand{\dxdo}{dxd\omega}
 \newcommand{\notazione}{\underline{\textbf{Remark Notazionale}}}
 \newcommand{\Log}{\ensuremath{\text{Log}_-}}
@@ -79,14 +74,18 @@ sorting=nty
 \sommario
 
 \chapter{Introduction}
+{\color{blue} Con il blu indico frasi da mettere a posto o dove manca una citazione.}\\
+{\color{red} Con il rosso indico frasi da controllare se sono corrette.}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Preliminaries}\label{chapter preliminaries}
 In this first chapter we briefly recall some basics definition and results about functional analysis and Fourier transform. In section \ref{section basics of functional analysis} basic concepts about operators between Banach spaces are presented. In section \ref{section Fourier transform and its properties} Fourier transform is defined and essential properties are given.
 \section{Basics of Functional Analysis}\label{section basics of functional analysis}
-In this section we focus our attention on linear operator between Banach spaces. Across the section a generic Banach space will be denoted as $X$ (or $Y$) endowed with the norm $\| \cdot \|_X$. In case $X$ is an Hilbert space we will denote its inner product as $\langle \cdot, \cdot \rangle_X$.\\
-A generic linear operator between two Banach spaces $X$ and $Y$ will be denoted as $T : X \rightarrow Y$. As a standard notation, the image of $x \in X$ through $T$ will be denoted as $T(x)$ or equivalently as $Tx$.
+In this section we focus our attention on linear operators between Banach spaces. Across the section a generic Banach space will be denoted as $X$ (or $Y$) endowed with the norm $\| \cdot \|_X$. In case $X$ is an Hilbert space we will denote its inner product as $\langle \cdot, \cdot \rangle_X$.\\
+A generic linear operator between two Banach spaces $X$ and $Y$ will be denoted as $T : X \rightarrow Y$. As a standard notation, the image of $x \in X$ through $T$ will be indicated as $T(x)$, or equivalently as $Tx$.
 \begin{defi}\label{bounded operator}
 	A linear operator $T : X \rightarrow Y$ is \textbf{bounded} if there exist $C>0$ such that
 	\begin{equation}\label{boundedness property}
@@ -102,7 +101,8 @@ For linear operator boundedness is strictly related to continuity as the subsequ
 	\end{itemize}
 \end{teo}
 We denote the set of linear bounded (continuous) operators from $X$ to $Y$ as $\B(X,Y)$, while if $X=Y$ we will just write $\B(X)$.\\
-For the sake of completeness we mention that actually, for linear operators, boundedness is equivalent to uniform continuity.\\
+For the sake of completeness we mention that actually, for linear operators, boundedness is equivalent to uniform continuity.
+
 After this we define the \emph{norm} of an operator
 \begin{defi}\label{norm operator}
 	Given a linear bounded operator $T$ we define its \textbf{norm} as the following number:
@@ -110,8 +110,8 @@ After this we define the \emph{norm} of an operator
 		\|T\| \coloneqq \inf\{C>0 : \| Tx \|_Y \leq C \| x \|_X \  \forall x \in X\} = \sup \left\{ \dfrac{\| Tx \|_Y}{\| x \|_X} : x \in X \setminus \{0\}\right\}
 	\end{equation*}
 \end{defi}
-The proof of the equivalence between two definition is straightforward. We see that the norm of an operator is the best constant for which boundedness property \eqref{boundedness property} holds. Sometimes, in order to emphasize the spaces between which $T$ operates, we may write the norm of $T$ as $\| T \|_{X \rightarrow Y}$.\\
-In the following we will mostly deal with $X$ and $Y$ being $L^2(\R^d)$, which is an Hilbert space. For operators between Hilbert spaces we can give the norm of an operator by means of the dual norm \textbf{CONTROLLARE}:
+The proof of the equivalence between two definition is straightforward. We see that the norm of an operator is the best constant for which boundedness property \eqref{boundedness property} holds. {\color{blue} Sometimes, in order to emphasize the spaces between which $T$ operates, we may write the norm of $T$ as $\| T \|_{X \rightarrow Y}$.}\\
+In the following we will mostly deal with $X$ and $Y$ being $L^2(\R^d)$, which is an Hilbert space. {\color{red} For operators between Hilbert spaces we can give the norm of an operator by means of the dual norm}:
 \begin{equation*}
 	\| T \| = \sup\{\langle Tx, y \rangle_X : x,y \in X\}
 \end{equation*}
@@ -120,21 +120,23 @@ An important class of operators is the class of \emph{compact operators}.
 \begin{defi}\label{compact operator}
 	A linear bounded operator $T$ is \textbf{compact} if for every bounded sequence $\{x_n\}_{n \in \N} \subset X$ the sequence of the images $\{Tx_n\}_{n \in \N} \subset Y$ has a converging subsequence.
 \end{defi}
-The property of compactness can be stated in multiple ways \textbf{SERVE SCRIVERLE?}
+The property of compactness can be stated in multiple ways \textbf{SERVE SCRIVERLE?}.
 
-Now we suppose $X$ and $Y$ to be Hilbert spaces. Given $T \in \B(X,Y)$ we know that there exist a unique $T^* \in \B(Y,X)$ such that:
+Now we suppose $X$ and $Y$ to be Hilbert spaces. Given $T \in \B(X,Y)$ there exist a unique $T^* \in \B(Y,X)$ such that:
 \begin{equation*}
 	\langle Tx, y \rangle_X = \langle x, T^* y \rangle_Y \quad \forall x \in X,\,y \in Y
 \end{equation*}
-$T^*$ is called the \textbf{adjoint} operator of $T$. In the particular case in which $T : X \rightarrow X$, if $T=T^*$ we say that $T$ is \textbf{self-adjoint}.\\
-From now on we suppose that $X$ is over the field $\C$ and that $T \in \B(X,Y)$.
+$T^*$ is called the \textbf{adjoint} operator of $T$. In the particular case in which $T : X \rightarrow X$, if $T=T^*$, we say that $T$ is \textbf{self-adjoint}.
+
+From now on we suppose that $X$ is over the field $\C$ and that $T \in \B(X)$.
 \begin{defi}\label{spectrum def}
 	The set $\sigma(T) = \{\lambda \in \C : T - \lambda I \text{ is not invertible}\}$ is called  the \textbf{spectrum} of $T$.
 \end{defi}
-For operators between finite-dimensional spaces (matrices) the spectrum is made up of \emph{eigenvalues}, those $\lambda \in \C$ such that $T-\lambda I$ is not injective, because in this case $T-\lambda I$ is not injective if and only if it is not surjective. On the other hand, when dealing with infinite-dimensional spaces, this is no more true. Eigenvalues are in the so called \emph{point spectrum}, which in general is just a part of the whole spectrum.\\
+For operators between finite-dimensional spaces (matrices) the spectrum is made up of \emph{eigenvalues}, those $\lambda \in \C$ such that $T-\lambda I$ is not injective. On the other hand, when dealing with infinite-dimensional spaces, this is no more true. Eigenvalues are in the so called \emph{point spectrum}, which in general is just a part of the whole spectrum.
+
 If an operator is compact or self-adjoint its spectrum has some additional properties.
 \begin{teo}[Fredholm's alternative]\label{Fredholm alternative}
-	Let $T \in \B(X)$ be a compact operator. Then per $T-I$ one and only one of the following happens:
+	Let $T \in \B(X)$ be a compact operator. Then for $T-I$ one and only one of the following happens:
 	\begin{itemize}
 		\item $T$ is invertible
 		\item $T$ is not injective
@@ -142,10 +144,11 @@ If an operator is compact or self-adjoint its spectrum has some additional prope
 \end{teo}
 Therefore for compact operators, all the values in the spectrum, except at most for 0, are eigenvalues.\\
 Another fundamental result arises if we study the spectrum of compact and self-adjoint operators.
-\begin{teo}
+\begin{teo}\label{self-adjoint compact operators are diagonalizable}
 	Let $X$ be a separable Hilbert space and $T \in \B(X)$ a compact and self-adjoint operator. Then there exist an orthonormal basis of $X$ composed of eigenvectors of $T$
 \end{teo}
-Hence self-adjoint compact operators can always be diagonalized in some suitable basis. \textbf{CITARE BREZIS}\\
+Hence self-adjoint compact operators can always be diagonalized in some suitable basis (\cite{brezis}).
+
 Now we are going to consider two important classes of operators: \emph{trace class} operators and \emph{Hilbert-Schmidt} operators.\\
 The trace of an operator can be defined as it is for matrices.
 \begin{defi}\label{positive operator}
@@ -155,13 +158,20 @@ The trace of an operator can be defined as it is for matrices.
 	\end{equation*}
 \end{defi}
 \begin{defi}\label{trace def}
-	Let $X$ be a separable Hilbert space with orthonormal basis $\{e_n\}_{n \in \N}$. Given $T \in \B(X)$ a positive operator be define the \textbf{trace} of $T$ as
+	Let $X$ be a separable Hilbert space with orthonormal basis $\{e_n\}_{n \in \N}$. Given $T \in \B(X)$ a positive operator we define the \textbf{trace} of $T$ as
 	\begin{equation*}\label{trace expression}
 		\mathrm{tr}(T) = \sum_{n=1}^{\infty} \langle A e_n, e_n \rangle
 	\end{equation*}
 \end{defi}
-One can show that the definition is well defined since it is independent of the basis. \textbf{AGGIUNGERE DIM?}\\
-The definition of trace is given only for positive operators. If we want to deal with general ones it is sufficient to consider $|T|=\sqrt{T^*T}$ \textbf{LA PARTE SU RADICE QUADRATA E MODULO DI UN OPERATORE VA AGGIUNTA??}
+Actually one should show that the definition is well posed, namely that is independent of the basis.
+\begin{prop}\label{trace is well-deefined}
+	The definition of $\mathrm{tr}$ given by \eqref{trace expression} is independent of the basis.
+\end{prop}
+\begin{proof}
+	contenuto...
+\end{proof}
+
+{\color{red}The definition of trace is given only for positive operators. If we want to deal with general ones it is sufficient to consider $|T|=\sqrt{T^*T}$ \textbf{LA PARTE SU RADICE QUADRATA E MODULO DI UN OPERATORE VA AGGIUNTA??}}
 \begin{defi}\label{trace class def}
 	An operator $T \in \B(X)$ is called \textbf{trace class} if and only if $\mathrm{tr}|T| < \infty$
 \end{defi}
@@ -180,7 +190,7 @@ The definition of trace is given only for positive operators. If we want to deal
 \begin{defi}\label{Hilbert-Schmidt operator def}
 	An operator $T \in \B(X)$ is called \textbf{Hilbert-Schmidt} if and only if $\mathrm{tr}(T^*T) < \infty$.
 \end{defi}
-\begin{teo}
+\begin{teo}\label{Hilbert-Schmidt operators are compact}
 	Every Hilbert-Schmidt operator is compact.
 \end{teo}
 \begin{proof}
@@ -189,16 +199,23 @@ The definition of trace is given only for positive operators. If we want to deal
 The importance of Hilbert-Schmidt operator is related to the following theorem.
 \begin{teo}
 	Let $X = L^2(\R^d)$. Then $T \in \B(L^2(\R^d))$ is Hilbert-Schmidt if only if there exist a function $K \in L^2(\R^d \times \R^d)$, called integral kernel, such that
-	\begin{equation*}
+	\begin{equation}\label{Hilbert-Schmidt integral operator}
 		(Tf)(x) = \int_{\R^d} K(x,y)f(y)dy \quad \forall f \in L^2(\R^d).
-	\end{equation*}
+	\end{equation}
 	Moreover $\mathrm{tr}(T^*T) = \int_{\R^{2d}} |K(x,y)|^2 dxdy$.
 \end{teo}
 \begin{proof}
 	contenuto...
 \end{proof}
+In light of this theorem, operators defined by \eqref{Hilbert-Schmidt integral operator} are called \emph{Hilbert-Schmidt integral operators}.
 
-{\Large\textbf{AGGIUNGERE AGGIUNTO OPERATORE DI HILBERT-SCHMIDT}}
+\begin{prop}\label{condition integral operator self-adjoint}
+	An Hilbert-Schmidt integral operator with kernel $K$ is self-adjoint if and only if $K(x,y) = \overline{K(y,x)}$.
+\end{prop}
+\begin{proof}
+	contenuto...
+\end{proof}
+
 
 \begin{itemize}
 	\item Norma operatoriale (FATTO)
@@ -215,8 +232,8 @@ The importance of Hilbert-Schmidt operator is related to the following theorem.
 		\F f(\omega) = \hat{f}(\omega) \coloneqq \int_{\R^d} e^{-2 \pi i \omega \cdot t} f(t) dt
 	\end{equation}
 \end{defi}
-It's straightforward to see that the definition is well-posed and that $\F f \in L^{\infty}(\R^d)$ with $\|\F f\|_{\infty} \leq \| f \|_1$. Therefore $\F$ can be seen as a linear operator between $L^1(\R^d)$ and $L^{\infty}(\R^d)$ with $\| \F \| = 1$ (from the previous inequality actually we saw that $\| \F \| \leq 1$ but if we take $f \geq 0$ a.e. we have that $\hat{f}(0) = \| f \|_1$ that gives us the equality).\\
-The Fourier transform of an $L^1(\R^d)$ is not only bounded as stated by the \emph{Riemann-Lebesgue lemma}.
+It is straightforward to see that the definition is well-posed and that $\F f \in L^{\infty}(\R^d)$ with $\|\F f\|_{\infty} \leq \| f \|_1$. Therefore $\F$ can be seen as a linear operator between $L^1(\R^d)$ and $L^{\infty}(\R^d)$ with $\| \F \| = 1$ (from the previous inequality actually we saw that $\| \F \| \leq 1$ but if we take $f \geq 0$ a.e. we have that $\hat{f}(0) = \| f \|_1$ that gives us the equality).\\
+The Fourier transform of an $L^1(\R^d)$ is not only bounded, as stated by the \emph{Riemann-Lebesgue lemma}.
 \begin{teo}[Riemann-Lebesgue lemma]\label{Riemann-Lebesgue lemma}
 	Let $f \in L^1(\R^d)$. Therefore $\hat{f} \in C_0(\R^d) = \{f : \R^d \rightarrow \C \text{ continuous such that } \lim_{|t| \rightarrow \infty} |f(t)|=0\}$.
 \end{teo}
@@ -248,10 +265,10 @@ The Fourier transform is intimately related to regularity and decay properties. 
 	\end{equation*}
 	In particular this implies that $\hat{f}(\omega) = o\left(|\omega|^{-k} \right) $ as $| \omega | \rightarrow \infty$.
 \end{teo}
-To sum up, previous theorems state a duality between regularity and decay: if a function is smooth then it decays rapidly and vice versa.
+{\color{blue}To sum up, previous theorems state a duality between regularity and decay: if a function is smooth then its Fourier transform decays rapidly and vice versa.}
 
 
-If $f$ is in $L^2(\R^d)$, the integral in \eqref{Fourier transform formula} in general will not converge. Nevertheless we can define the Fourier transform of an $L^2$ function through a density argument. For example, $L^2(\R^d) \cap L^1(\R^d)$ is a dense subspace of $L^2(\R^d)$. On this space one can show that the Fourier transform is an isometry with respect to the $L^2$ norm and therefore it extends to an isometry on the whole $L^2(\R^d)$. This is stated by the \emph{Plancherel theorem}.
+If $f$ is in $L^2(\R^d)$, the integral in \eqref{Fourier transform formula} in general will not converge. Nevertheless we can define the Fourier transform of an $L^2$ function through a density argument. For example, one can use $L^2(\R^d) \cap L^1(\R^d)$, which is a dense subspace of $L^2(\R^d)$. On this space one can show that the Fourier transform is an isometry with respect to the $L^2$ norm and therefore it extends to an isometry on the whole $L^2(\R^d)$. This is stated by the \emph{Plancherel theorem}.
 \begin{teo}[Plancherel theorem]\label{Plancherel theorem}
 	If $f \in L^1(\R^d) \cap L^2(\R^d)$ then $\| f \|_2 = \| \hat{f} \|_2$.
 \end{teo}
@@ -259,9 +276,9 @@ Thanks to the polarization identity this implies that $\F$ preserves the inner p
 \begin{equation}\label{Parseval formula}
 	\langle f,g \rangle_{L^2(\R^d)} = \langle \hat{f}, \hat{g} \rangle_{L^2(\R^d)} \quad \forall f,g \in L^2(\R^d)
 \end{equation}
-therefore the Fourier transform $F$ is a unitary operator on $L^2(\R^d)$. Result \eqref{Parseval formula} is called \emph{Parseval formula}.
+therefore the Fourier transform $\F$ is a unitary operator on $L^2(\R^d)$. Result \eqref{Parseval formula} is called \emph{Parseval formula}.
 
-Lastly we introduce two fundamental operators in Fourier analysis. Given $x,\omega \in \R^d$ we define the \emph{time-shift} (or translation) operator $T_x$
+Lastly, we introduce two fundamental operators in Fourier analysis. Given $x,\omega \in \R^d$ we define the \emph{time-shift} (or translation) operator $T_x$
 \begin{equation}\label{time-shift operator def}
 	T_x f(t) = f(t-x)
 \end{equation}
@@ -269,6 +286,11 @@ and the \emph{modulation} operator $M_{\omega}$
 \begin{equation}\label{modulation operator def}
 	M_{\omega} f(t) = e^{2 \pi i \omega \cdot t} f(t)
 \end{equation}
+{\color{blue} Va aggiunta anche la composizione e le loro proprietà?}
+
+{\color{blue}\begin{teo}[Hausdorff-Young]
+	Let $1 \leq p \leq 2$ and let $p'$ such that $\frac{1}{p} + \frac{1}{p'} = 1$. Then $\F : L^p(\R^d) \rightarrow L^{p'}(\R^d)$ and $\| \hat{f }\|_{p'} \leq \| f \|_p$.
+\end{teo}}
 
 	\begin{itemize}
 		\item Defizione trasformata (FATTO)
@@ -283,19 +305,19 @@ and the \emph{modulation} operator $M_{\omega}$
 
 \chapter{Short-Time Fourier Transform}\label{chapter STFT}
 \section{STFT}\label{section STFT}
-The \emph{short-time Fourier transform} or \emph{STFT} is a powerful tool, introduced by Gabor in \textbf{AGGIUNGERE CITAZIONE E CONTROLLARE CHE SIA CORRETTA}, used to study properties of a signal locally both in time and frequency. The main idea behind the STFT is the following: if we want some information of the spectrum of a signal around a specific time, say $T$, we could choose an interval $(T-\Delta T, T + \Delta T)$ and take the Fourier transform of $f \chi_{(T-\Delta T, T + \Delta T)}$. Usually multiplying by a characteristic function will not give us a regular function (not even continuous) and in light of the duality between regularity and decay, the Fourier transform of $f \chi_{(T-\Delta T, T + \Delta T)}$ will not decay rapidly. Therefore a sharp cutoff in the time domain will result in a ``bad'' localization in the frequency domain. In order to avoid this kind of problems we could think to multiply the signal $f$ by a smooth function.
+{\color{red}The \emph{short-time Fourier transform} or \emph{STFT} is a powerful tool, introduced by Gabor in \cite{gabor}, used to study properties of a signal locally both in time and frequency. The main idea behind the STFT is the following: if we want some information of the spectrum of a signal around a specific time, say $T$, we could choose an interval $(T-\Delta T, T + \Delta T)$ and take the Fourier transform of $f \chi_{(T-\Delta T, T + \Delta T)}$. Usually multiplying by a characteristic function will not give us a regular function (not even continuous) and in light of the duality between regularity and decay, the Fourier transform of $f \chi_{(T-\Delta T, T + \Delta T)}$ will not decay rapidly. Therefore a sharp cutoff in the time domain will result in a ``bad'' localization in the frequency domain. In order to avoid this kind of problems we could think to multiply the signal $f$ by a smooth function.}
 \begin{defi}\label{STFT def}
 	Fix a function $\phi \neq 0$ called \emph{window function}. The \textbf{short-time Fourier transform} of a function $f$ with window $\phi$ is defined as
 	\begin{equation}\label{STFT formula}
 		\V_{\phi}f(x,\omega) = \int_{\R^d} f(t)\overline{\phi(t-x)}e^{-2 \pi i \omega \cdot t} dt, \quad (x,\omega) \in \R^{2d}
 	\end{equation}
 \end{defi}
-In the above definition did not specify where $f$ and $phi$ are chosen. Since we are taking the Fourier transform of the function $f T_x\overline{\phi}$, the STFT is well defined whenever the Fourier transform of this function is. For example if both $f$ and $\phi$ are in $L^2(\R^d)$ then $f T_x\overline{\phi}$ is in $L^1(\R^d)$ for every $x \in \R^d$ and so the integral in \eqref{STFT formula} is defined. In this special case the STFT can be written as a scalar product:
+In the above definition we did not specify where $f$ and $\phi$ are chosen. Since we are taking the Fourier transform of the function $f T_x\overline{\phi}$, the STFT is well defined whenever the Fourier transform of this function is. For example if both $f$ and $\phi$ are in $L^2(\R^d)$ then $f T_x\overline{\phi}$ is in $L^1(\R^d)$ for every $x \in \R^d$ and so the integral in \eqref{STFT formula} is defined. In this special case the STFT can be written as a scalar product in $L^2(\R^d)$:
 \begin{equation*}
-	\V_{\phi}f(x,\omega) = \int_{\R^d} f(t)\overline{\phi(t-x)}e^{-2 \pi i \omega \cdot t} dt = \langle f, M_{\omega} T_x \phi \rangle
+	\V_{\phi}f(x,\omega) = \langle f, M_{\omega} T_x \phi \rangle
 \end{equation*}
 In general, the STFT of $f$ with respect to $\phi$ will be defined whenever  $\langle f, M_{\omega} T_x \phi \rangle$ is an expression of some sort of duality. For example, if $f \in \mathcal{S}'(\R^d)$ and $\phi \in \mathcal{S}(\R^d)$ then $M_{\omega} T_x \overline{\phi} \in \mathcal{S}(\R^d)$, therefore $\langle f, M_{\omega} T_x \phi \rangle$ can be seen as the usual duality between tempered distributions and functions in the Schwartz space.\\
-\textbf{AGGIUNGERE ALTRE DEFINIZIONI EQUIVALENTI DELLA STFT?}
+{\color{blue} Aggiungere scritture equivalenti della STFT}
 \subsection{Properties of STFT}
 In this section we will present and prove some properties about the STFT. An excellent reference is \cite{grochenig}.
 \begin{teo}\label{orthogonality relations theorem}
@@ -305,7 +327,7 @@ In this section we will present and prove some properties about the STFT. An exc
 	\end{equation}
 \end{teo}
 \begin{proof}
-	\textbf{VA MESSA??}
+	contenuto...
 \end{proof}
 \begin{cor}
 	If $f, \phi \in L^2(\R^d)$ then
@@ -315,7 +337,7 @@ In this section we will present and prove some properties about the STFT. An exc
 	In particular if $\| \phi \|_2 = 1$ we see that $\V_{\phi}$ is an isometry from $L^2(\R^d)$ into $L^2(\R^{2d})$.
 \end{cor}
 \begin{proof}
-	\textbf{VA MESSA??}
+	contenuto...
 \end{proof}
 From a direct computation one can see that the adjoint operator of the STFT operator $\V_{\phi}$ is given by the following expression:
 \begin{equation}\label{STFT adjoint}
@@ -341,10 +363,10 @@ Therefore the adjoint operator $\V_{\gamma}^*$ acts, in some sense, as an invers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Localization Operators}\label{chapter localization operators}
-One of the main problems in signal analysis or, in general, time-frequency analysis is to extract some informations about signal in order to analyse it. We saw that STFT can be a tool for this purpose, however it has some practical problems: it doubles the dimension of the output and it is highly redundant \textbf{METTERE A POSTO E CITARE FONII}.\\
+{\color{red}One of the main problems in signal analysis or, in general, time-frequency analysis is to extract some informations about signal in order to analyse it. We saw that STFT can be a tool for this purpose, however it has some practical problems: it doubles the dimension of the output and it is highly redundant (AGGIUNGERE CITAZIONE).}\\
 In this chapter we see two possible ways to deal with the problem of creating operators able to localize a signal both in time and frequency.
 \section{Localization with projections}
-The most straightforward way to localize a signal, say in the time domain, is to use a sharp cut-off, which means a characteristic function. If we suppose to have a signal $f \in L^2(\R^d)$ and we want to localize it in a measurable subset $T \subseteq \R^d$ of the time domain we can consider a natural projection operator
+The most straightforward way to localize a signal, say in the time domain, is to use a sharp cut-off, which means a characteristic function. If we suppose to have a signal $f \in L^2(\R^d)$ and we want to localize it in a measurable subset $T \subseteq \R^d$ of the time domain we can consider the natural projection operator
 \begin{equation}\label{time projection operator}
 	\pi_T : L^2(\R^d) \rightarrow L^2(\R^d) \quad \pi_T f(t) = \chi_T(t) f(t)
 \end{equation}
@@ -358,20 +380,82 @@ It is also quite simple to show that this is a projection operator
 	&Q_{\Omega}^2 = \F^{-1} \chi_{\Omega} \F \F^{-1} \chi_{\Omega} \F = \F^{-1} \chi_{\Omega} \chi_{\Omega} \F = \F^{-1} \chi_{\Omega} \F = Q_{\Omega}\\
 	&Q_{\Omega}^* = \left( \F^{-1} \chi_{\Omega} \F\right)^* = \F^* \chi_{\Omega}^* \left(F^{-1}\right)^* = \F^{-1} \chi_{\Omega} \F = Q_{\Omega}
 \end{align*}
-where we used the fact that the Fourier transform is a unitary operator on $L^2(\R^d)$ therefore $\F^* = \F^{-1}$.\\
+where we used the fact that the Fourier transform is a unitary operator on $L^2(\R^d)$, namely that $\F^* = \F^{-1}$.\\
+Moreover, both operators have norm less or equal than 1, independently of $T$ and $\Omega$:
+\begin{align*}
+	&\| \pi_T f \|_{L^2(\R^d)} = \| f \|_{L^2(T)} \leq \| f \|_{L^2(\R^d)} \\
+	&\| Q_{\Omega} f \|_{L^2(\R^d)} = \| \F^{-1} \chi_{\Omega} \F f\|_{L^2(\R^d)} \overset{\text{Plancherel}}{=} \| \F f\|_{L^2(\Omega)} \leq \| \F f \|_{L^2(\R^d)} \overset{\text{Plancherel}}{=} \| f \|_{L^2(\R^d)}
+\end{align*}
+
 After defining these projection operators we may think to combine them into a single operator
 \begin{equation*}\label{composition of projections}
 	Q_{\Omega} \pi_T, \; \pi_T Q_{\Omega} : L^2(\R^d) \rightarrow L^2(\R^d)
 \end{equation*}
-which hopefully is able to localize a signal both in time and frequency ``near'' to $T$ in time domain and to $\Omega$ in the frequency one.\\
-It is also clear that these operators are linear and bounded and that their norms are less or equal than 1, independently of $T$ and $\Omega$:
-\begin{align*}
-	stima norma operatori
-\end{align*}
-Moreover, if both $T$ and $\Omega$ have finite measure $\pi_T$ and $Q_{\Omega}$ are Hilbert-Schmidt operators
+which hopefully is able to localize a signal both in time and frequency ``near'' to the set $T \times \Omega$.\\
+It is clear that these operators are linear and bounded, in particular their norms are less or equal than 1.
+
+Up to now the only (essential) hypothesis on $T$ and $\Omega$ is that they are measurable. Clearly, by adding some requirements on $T$ and $\Omega$ we expect $Q_{\Omega} \pi_T$ and $\pi_T Q_{\Omega}$ to gain some properties.
 \begin{prop}\label{projection operators are Hilbert-Schmidt}
-	dim che operatori di proiezione sono di Hilbert-Schmidt
+	Let $T,\Omega \subset \R^d$ with finite measure. Then $Q_{\Omega}\pi_T$ and $\pi_T Q_{\Omega}$ are Hilbert-Schmidt integral operators of the form
+	\begin{align}
+		Q_{\Omega} \pi_T f(x) &= \int_{\R^d} K(x,t) f(t) dt \\
+		\pi_T Q_{\Omega} f(x) &= \int_{\R^d} \overline{K(t,x)}f(t)dt
+	\end{align}
+	where
+	\begin{equation}\label{integral kernel projection operators}
+		K(x,t) = \chi_T(t) \int_{\Omega} e^{2 \pi i \omega \cdot (x-t)}d\omega
+	\end{equation}
+	which has $\| K \|_{L^2(\R^{2d})} = \sqrt{|T||\Omega|}$.
 \end{prop}
+\begin{proof}
+	contenuto...
+\end{proof}
+If we compare the integral kernels of $Q_{\Omega}\pi_T$ and $\pi_T Q_{\Omega}$ we see that $K(x,t) \neq \overline{K(t,x)}$, hence, by proposition \ref{condition integral operator self-adjoint}, we immediately conclude that both operator are not self-adjoint. {\color{red} Since it is better to deal with self-adjoint operators when it comes to spectral properties, it would be nice if we could construct those starting from $Q_{\Omega}\pi_T$ and $\pi_T Q_{\Omega}$.} This is easily done by considering
+\begin{align}
+	(Q_{\Omega}\pi_T)^* Q_{\Omega}\pi_T &= \pi_T^* Q_{\Omega}^* Q_{\Omega} \pi_T= \pi_T Q_{\Omega} \pi_T\\
+	(\pi_T Q_{\Omega})^* \pi_T Q_{\Omega} &= Q_{\Omega}^* \pi_T^* \pi^T Q_{\Omega} = Q_{\Omega} \pi_T Q_{\Omega}
+\end{align} 
+These are, by construction, self-adjoint operators, and since both $Q_{\Omega}\pi_T$ and $\pi_T Q_{\Omega}$ are compact operators (thanks to Proposition \ref{projection operators are Hilbert-Schmidt} and Theorem \ref{Hilbert-Schmidt operators are compact}) they are also compact (we recall that composition between a general operator and a compact one is compact). Hence, by Theorem \ref{self-adjoint compact operators are diagonalizable} they can be diagonalized.\\
+{\color{red} Aggiungere qualcosa sulle prolate spheroidal wave functions?}
+
+
+\section{Daubechies' localization operators}
+{\color{red} Projection operators considered in the previous section are powerful tools in signal analysis and quantum mechanics}. Nevertheless they treat time and frequency in a separate way. We already saw that a good tool to simultaneously study a signal in time and frequency is the STFT but we also pointed out its limits. {\color{red} However we can think to construct localization operators using the STFT instead of the Fourier transform}. This is exactly what was done by Ingrid Daubechies in 1988 in \cite{daubechies}. From Theorem \ref{inversion formula theorem} we know that the adjoint operator of $\V_{\phi}$ acts as inverse operator. If we choose a window $\phi \in L^2(\R^{2d})$ normalized, \ref{inversion formula} becomes
+\begin{equation*}
+	f(t) = \V_{\phi}^* \V_{\phi}f(t)
+\end{equation*}
+The key idea is to multiply $\V_{\phi} f$ by a \emph{weight function} $F(\omega,t)$, which logically should highlight some features of $\V_{\phi}f$ :
+\begin{equation}\label{Daubechies' localization operator def}
+	L_{F,\phi} : L^2(\R^d) \rightarrow L^2(\R^d) \quad L_{F,\phi}f(t) = \V_{\phi}^* F \V_{\phi} f(t)
+\end{equation}
+Related to this localization operator is the sesquilinear form $\L_{F,\phi} : L^2(\R^d) \times L^2(\R^d) \rightarrow \R$ defined by the expression
+\begin{equation}\label{sesquilinear form localization operator}
+	\L_{F,\phi}(f,g) = \int_{\R^{2d}} F(x,\omega) \V_{\phi}f(x,\omega) \overline{\V_{\phi}g(x,\omega)} dxd\omega
+\end{equation}
+Indeed, assuming $\L_{F,\phi}$ is bounded, we could define $ L_{F,\phi} f$ through Riesz' representation theorem as the only element of $L^2(\R^d)$ such that
+\begin{equation}\label{L_F through duality}
+	\L_{F,\phi}(f,g) = \langle L_{F,\phi}f,g \rangle  = \int_{\R^d} L_{F,\phi}f(t) \overline{g(t)}\quad \forall g \in L^2(\R^d)
+\end{equation}
+and therefore $L_{F,\phi}$ as the function which maps $f$ into its representation.\\
+{\color{blue} QUESTA PARTE VA MESSA A POSTO IN MODO DA UNIFORMARE I RISULTATI}
+\begin{prop}\label{F bounded L_F bounded}
+	If $F \in L^{\infty}(\R^{2d})$ then $\| L_{F,\phi}\| \leq \| F \|_{\infty}$.
+\end{prop}
+\begin{proof}
+	contenuto...
+\end{proof}
+\begin{prop}\label{F integrable L_F bounded}
+	If $F \in L^1(\R^{2d})$ then $\| L_{F,\phi}\| \leq \| F \|_1$.
+\end{prop}
+\begin{proof}
+	contenuto...
+\end{proof}
+Thanks to these result and an interpolation argument one can show that $\L_{F,\phi}$, and hence $L_{F,\phi}$, is bounded also when $F \in L^p(\R^{2d})$ for $1 < p < \infty$. A proof can be found in \cite{wong}, Proposition 12.3.
+\begin{prop}\label{F in Lp L_F bounded}
+	Let $F \in L^p(\R^{2d})$ for $1 < p < \infty$. Then there exist a unique bounded linear operator $L_{F,\phi} : L^2(\R^d) \rightarrow L^2(\R^d)$ such that $L_{F,\phi} f$ is given by \eqref{L_F through duality} for all $f \in L^2(\R^d)$ and all simple functions $F$ for which $|\{F(x) \neq 0\}| < \infty$.
+\end{prop}
+
+If $F$ meets both pro
 \begin{itemize}
 	\item Definizione
 	\item Operatori di proiezione
@@ -648,8 +732,7 @@ Define $c_1^* \coloneqq \sup \{c_1 \in [0,c_{1,f}] : \forall t \in [0,c_1] \ \va
 Suppose now that there is a second point of intersection $\tilde{c}_1$ after the first one. Since immediately after $c_1^*$ we have that $\varphi$ becomes smaller than $\gamma$ this second point of intersection is given by $\tilde{c}_1 = \sup \{c_1 \in [c_1^*,c_{1,f}] : \forall t \in [c_1^*,c_1] \ \varphi(t) \leq \gamma(t)\}$. Considering that this is an intersection point, there exist an interval before $\tilde{c}_1$ where $\varphi$ is strictly grater than $\gamma$ which is absurd, hence $c_1^*$ is the only intersection point between $\varphi$ and $\gamma$.\\
 Therefore $(c_1^*, \varphi(c_1^*) = c_2^*)$ is the unique pair of multipliers for which $p\int_0^T t^{p-1} u(t;c_1^*,c_2^*)dt = A^p,\ q\int_0^T t^{q-1} u(t;c_1^*,c_2^*)dt = B^q$ and in the end $u(t;c_1^*,c_2^*)$ is the unique maximizer for \textbf{CITARE PROBLEMA VARIAZIONALE}
 
-
-
+\nocite{*}
 \printbibliography
 
 
