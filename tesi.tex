@@ -287,7 +287,10 @@ and the \emph{modulation} operator $M_{\omega}$
 	M_{\omega} f(t) = e^{2 \pi i \omega \cdot t} f(t)
 \end{equation}
 {\color{blue} Va aggiunta anche la composizione e le loro proprietà?}
-
+These can be combined into a \emph{time-frequency shift} operator
+\begin{equation}\label{time-frequency shift def}
+	\pi(x,\omega) f(t) = M_{\omega} T_x f(t)
+\end{equation}
 {\color{blue}\begin{teo}[Hausdorff-Young]
 	Let $1 \leq p \leq 2$ and let $p'$ such that $\frac{1}{p} + \frac{1}{p'} = 1$. Then $\F : L^p(\R^d) \rightarrow L^{p'}(\R^d)$ and $\| \hat{f }\|_{p'} \leq \| f \|_p$.
 \end{teo}}
@@ -317,7 +320,7 @@ In the above definition we did not specify where $f$ and $\phi$ are chosen. Sinc
 	\V_{\phi}f(x,\omega) = \langle f, M_{\omega} T_x \phi \rangle
 \end{equation*}
 In general, the STFT of $f$ with respect to $\phi$ will be defined whenever  $\langle f, M_{\omega} T_x \phi \rangle$ is an expression of some sort of duality. For example, if $f \in \mathcal{S}'(\R^d)$ and $\phi \in \mathcal{S}(\R^d)$ then $M_{\omega} T_x \overline{\phi} \in \mathcal{S}(\R^d)$, therefore $\langle f, M_{\omega} T_x \phi \rangle$ can be seen as the usual duality between tempered distributions and functions in the Schwartz space.\\
-{\color{blue} Aggiungere scritture equivalenti della STFT}
+{\color{blue} Aggiungere scritture equivalenti della STFT??}
 \subsection{Properties of STFT}
 In this section we will present and prove some properties about the STFT. An excellent reference is \cite{grochenig}.
 \begin{teo}\label{orthogonality relations theorem}
@@ -363,14 +366,14 @@ Therefore the adjoint operator $\V_{\gamma}^*$ acts, in some sense, as an invers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Localization Operators}\label{chapter localization operators}
-{\color{red}One of the main problems in signal analysis or, in general, time-frequency analysis is to extract some informations about signal in order to analyse it. We saw that STFT can be a tool for this purpose, however it has some practical problems: it doubles the dimension of the output and it is highly redundant (AGGIUNGERE CITAZIONE).}\\
+{\color{red}One of the main problems in signal analysis or, in general, time-frequency analysis is to extract some informations about signal in order to analyse it. We saw that STFT can be a tool for this purpose, however it has some practical problems: it doubles the dimension of the output and it is highly redundant.}\\
 In this chapter we see two possible ways to deal with the problem of creating operators able to localize a signal both in time and frequency.
 \section{Localization with projections}
 The most straightforward way to localize a signal, say in the time domain, is to use a sharp cut-off, which means a characteristic function. If we suppose to have a signal $f \in L^2(\R^d)$ and we want to localize it in a measurable subset $T \subseteq \R^d$ of the time domain we can consider the natural projection operator
 \begin{equation}\label{time projection operator}
-	\pi_T : L^2(\R^d) \rightarrow L^2(\R^d) \quad \pi_T f(t) = \chi_T(t) f(t)
+	P_T : L^2(\R^d) \rightarrow L^2(\R^d) \quad P_T f(t) = \chi_T(t) f(t)
 \end{equation}
-This is clearly a projection operator, which means that $\pi_T^2 = \pi_T = \pi_T^*$.\\
+This is clearly a projection operator, which means that $P_T^2 = P_T = P_T^*$.\\
 In the same fashion we can define an operator able to localize on a measurable subset $\Omega \subseteq \R^d$ in the frequency domain. Their definition it is not as direct as the one for time projections but it is still easy to understand
 \begin{equation}\label{frequency projection operator}
 	Q_{\Omega} : L^2(\R^d) \rightarrow L^2(\R^d) \quad Q_{\Omega} f(t) = \F^{-1} \left(\chi_{\Omega} \F f \right)(t) = \int_{\Omega} \hat{f}(\omega) e^{2 \pi i \omega \cdot t} d\omega
@@ -383,23 +386,23 @@ It is also quite simple to show that this is a projection operator
 where we used the fact that the Fourier transform is a unitary operator on $L^2(\R^d)$, namely that $\F^* = \F^{-1}$.\\
 Moreover, both operators have norm less or equal than 1, independently of $T$ and $\Omega$:
 \begin{align*}
-	&\| \pi_T f \|_{L^2(\R^d)} = \| f \|_{L^2(T)} \leq \| f \|_{L^2(\R^d)} \\
+	&\| P_T f \|_{L^2(\R^d)} = \| f \|_{L^2(T)} \leq \| f \|_{L^2(\R^d)} \\
 	&\| Q_{\Omega} f \|_{L^2(\R^d)} = \| \F^{-1} \chi_{\Omega} \F f\|_{L^2(\R^d)} \overset{\text{Plancherel}}{=} \| \F f\|_{L^2(\Omega)} \leq \| \F f \|_{L^2(\R^d)} \overset{\text{Plancherel}}{=} \| f \|_{L^2(\R^d)}
 \end{align*}
 
 After defining these projection operators we may think to combine them into a single operator
 \begin{equation*}\label{composition of projections}
-	Q_{\Omega} \pi_T, \; \pi_T Q_{\Omega} : L^2(\R^d) \rightarrow L^2(\R^d)
+	Q_{\Omega} P_T, \; P_T Q_{\Omega} : L^2(\R^d) \rightarrow L^2(\R^d)
 \end{equation*}
 which hopefully is able to localize a signal both in time and frequency ``near'' to the set $T \times \Omega$.\\
 It is clear that these operators are linear and bounded, in particular their norms are less or equal than 1.
 
-Up to now the only (essential) hypothesis on $T$ and $\Omega$ is that they are measurable. Clearly, by adding some requirements on $T$ and $\Omega$ we expect $Q_{\Omega} \pi_T$ and $\pi_T Q_{\Omega}$ to gain some properties.
+Up to now the only (essential) hypothesis on $T$ and $\Omega$ is that they are measurable. Clearly, by adding some requirements on $T$ and $\Omega$ we expect $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$ to gain some properties.
 \begin{prop}\label{projection operators are Hilbert-Schmidt}
-	Let $T,\Omega \subset \R^d$ with finite measure. Then $Q_{\Omega}\pi_T$ and $\pi_T Q_{\Omega}$ are Hilbert-Schmidt integral operators of the form
+	Let $T,\Omega \subset \R^d$ with finite measure. Then $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$ are Hilbert-Schmidt integral operators of the form
 	\begin{align}
-		Q_{\Omega} \pi_T f(x) &= \int_{\R^d} K(x,t) f(t) dt \\
-		\pi_T Q_{\Omega} f(x) &= \int_{\R^d} \overline{K(t,x)}f(t)dt
+		Q_{\Omega} P_T f(x) &= \int_{\R^d} K(x,t) f(t) dt \\
+		P_T Q_{\Omega} f(x) &= \int_{\R^d} \overline{K(t,x)}f(t)dt
 	\end{align}
 	where
 	\begin{equation}\label{integral kernel projection operators}
@@ -410,12 +413,12 @@ Up to now the only (essential) hypothesis on $T$ and $\Omega$ is that they are m
 \begin{proof}
 	contenuto...
 \end{proof}
-If we compare the integral kernels of $Q_{\Omega}\pi_T$ and $\pi_T Q_{\Omega}$ we see that $K(x,t) \neq \overline{K(t,x)}$, hence, by proposition \ref{condition integral operator self-adjoint}, we immediately conclude that both operator are not self-adjoint. {\color{red} Since it is better to deal with self-adjoint operators when it comes to spectral properties, it would be nice if we could construct those starting from $Q_{\Omega}\pi_T$ and $\pi_T Q_{\Omega}$.} This is easily done by considering
+If we compare the integral kernels of $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$ we see that $K(x,t) \neq \overline{K(t,x)}$, hence, by proposition \ref{condition integral operator self-adjoint}, we immediately conclude that both operator are not self-adjoint. {\color{red} Since it is better to deal with self-adjoint operators when it comes to spectral properties, it would be nice if we could construct those starting from $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$.} This is easily done by considering
 \begin{align}
-	(Q_{\Omega}\pi_T)^* Q_{\Omega}\pi_T &= \pi_T^* Q_{\Omega}^* Q_{\Omega} \pi_T= \pi_T Q_{\Omega} \pi_T\\
-	(\pi_T Q_{\Omega})^* \pi_T Q_{\Omega} &= Q_{\Omega}^* \pi_T^* \pi^T Q_{\Omega} = Q_{\Omega} \pi_T Q_{\Omega}
+	(Q_{\Omega} P_T)^* Q_{\Omega} P_T &= P_T^* Q_{\Omega}^* Q_{\Omega} P_T= P_T Q_{\Omega} P_T\\
+	(P_T Q_{\Omega})^* P_T Q_{\Omega} &= Q_{\Omega}^* P_T^* P_T Q_{\Omega} = Q_{\Omega} P_T Q_{\Omega}
 \end{align} 
-These are, by construction, self-adjoint operators, and since both $Q_{\Omega}\pi_T$ and $\pi_T Q_{\Omega}$ are compact operators (thanks to Proposition \ref{projection operators are Hilbert-Schmidt} and Theorem \ref{Hilbert-Schmidt operators are compact}) they are also compact (we recall that composition between a general operator and a compact one is compact). Hence, by Theorem \ref{self-adjoint compact operators are diagonalizable} they can be diagonalized.\\
+These are, by construction, self-adjoint operators, and since both $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$ are compact operators (thanks to Proposition \ref{projection operators are Hilbert-Schmidt} and Theorem \ref{Hilbert-Schmidt operators are compact}) they are also compact (we recall that composition between a general operator and a compact one is compact). Hence, by Theorem \ref{self-adjoint compact operators are diagonalizable} they can be diagonalized.\\
 {\color{red} Aggiungere qualcosa sulle prolate spheroidal wave functions?}
 
 
@@ -452,10 +455,9 @@ and therefore $L_{F,\phi}$ as the function which maps $f$ into its representatio
 \end{proof}
 Thanks to these result and an interpolation argument one can show that $\L_{F,\phi}$, and hence $L_{F,\phi}$, is bounded also when $F \in L^p(\R^{2d})$ for $1 < p < \infty$. A proof can be found in \cite{wong}, Proposition 12.3.
 \begin{prop}\label{F in Lp L_F bounded}
-	Let $F \in L^p(\R^{2d})$ for $1 < p < \infty$. Then there exist a unique bounded linear operator $L_{F,\phi} : L^2(\R^d) \rightarrow L^2(\R^d)$ such that $L_{F,\phi} f$ is given by \eqref{L_F through duality} for all $f \in L^2(\R^d)$ and all simple functions $F$ for which $|\{F(x) \neq 0\}| < \infty$.
+	Let $F \in L^p(\R^{2d})$ for $1 < p < \infty$. Then there exist a unique bounded linear operator $L_{F,\phi} : L^2(\R^d) \rightarrow L^2(\R^d)$ such that $L_{F,\phi} f$ is given by \eqref{L_F through duality} for all $f \in L^2(\R^d)$ and all simple functions $F$ for which $|\{F(x) \neq 0\}| < \infty$. Moreover, the application that maps $F$ into $L_{F,\phi}$ is bounded.
 \end{prop}
-
-If $F$ meets both pro
+{\color{blue} Since simple functions supported on a set of finite measure are dense in $L^p(\R^{2d})$, through dominated convergence we can conclude that \eqref{sesquilinear form localization operator} holds for every $F \in L^p(\R^{2d})$.}
 \begin{itemize}
 	\item Definizione
 	\item Operatori di proiezione
@@ -468,8 +470,56 @@ If $F$ meets both pro
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Uncertainty principles}\label{chapter uncertainty principles}
+In previous chapters sometimes we wrote about ``good'' and ``bad'' localization of a signal. Although intuitively this can be understood in these sloppy terms, we can specify and quantify the localization of a function. The notion of localization can be stated in multiple ways and in various contexts. {\color{blue} Here we present some \emph{uncertainty principles}.}
 \section{Heisenberg's uncertainty principle}\label{section Heisenberg's UP}
+\begin{lem}\label{uncertainty principle for operators lemma}
+	Let $A$ and $B$ be two linear self-adjoint (possibly unbounded) operators on a Hilbert space. Then, for every $a,b \in \R$ and for every $f$ in the domain of $AB$ and $BA$
+	\begin{equation}\label{uncertainty principle for operators formula}
+		\| (A-a)f \| \cdot \| (B-b) f\| \geq \dfrac12\lvert\langle [A,B]f,f \rangle \rvert
+	\end{equation}
+	where $[A,B] = AB-BA$ is the commutator of $A$ and $B$. Equality holds if and only if $(A-a)f = i c(B-b)f$ for some $c \in \R$.
+\end{lem}
+\begin{proof}
+	contenuto...
+\end{proof}
+
+\begin{teo}[Heisenberg's uncertainty principle]\label{Heisenberg's uncertainty principle theorem}
+	If $f \in L^2(\R^d)$, for every $a,b \in \R^d$
+	\begin{equation}\label{Heisenberg's uncertainty principle formula}
+		\left(\int_{\R^d}|t-a|^2 |f(t)|^2 dt\right)^{1/2} \left(\int_{\R^d} |\omega-b|^2 |\hat{f}(\omega)|^2 d\omega\right)^{1/2} \geq \dfrac{d}{4\pi}\| f \|_2^2
+	\end{equation}
+\end{teo}
+\begin{proof}
+	contenuto...
+\end{proof}
+For a generic function $f \in L^2(\R^d)$ the left-hand side of \eqref{Heisenberg's uncertainty principle formula} may be infinite, in which case the statement is trivially satisfied. {\color{blue}We shall comment a mathematical interpretation of Heisenberg's uncertainty principle. This can be written in the following form
+\begin{equation*}
+	\left(\int_{\R^d}|t-a|^2 \dfrac{|f(t)|^2}{\|f\|_2^2} dt\right)^{1/2} \left(\int_{\R^d} |\omega-b|^2 \dfrac{|\hat{f}(\omega)|^2}{\|\hat{f}\|_2^2}d\omega\right)^{1/2} \geq \dfrac{d}{4\pi}
+\end{equation*}
+so we may directly assume that $f$ is normalized. In such a case $|f|^2$ can be seen as a probability distribution. If these integrals are finite for some $a$ and $b$ are always finite and their minimum is achieved when
+\begin{equation*}
+	a = \bar{t} = \int_{\R^d} t |f(t)|^2 dt, \quad b = \bar{\omega} = \int_{\R^d} \omega |\hat{f}(\omega)|^2 d\omega
+\end{equation*}
+which are the mean of $|f|^2$ and $|\hat{f}|^2$, respectively. In this case previous integrals represent the standard deviation of $|f|^2$ and $|\hat{f}|^2$, which we indicate with $\Delta_x f$ and $\Delta_{\omega} f$. It is fair to believe that a function $|f|^2$ is mostly concentrated around its mean and that its standard deviation is a measure of how spread it is. In light of these arguments, Heisenberg's uncertainty principle can written as
+\begin{equation*}
+	\Delta_x f \cdot \Delta_{\omega} f \geq \dfrac{d}{4\pi}
+\end{equation*}
+In this form the uncertainty principle has a heuristic yet meaningful interpretation:\\
+\emph{a function and its Fourier transform can not be simultaneously too concentrated}.\\
+\textbf{AGGIUNGERE INTERPRETAZIONI IN MECCANICA QUANTISTICA E ANALISI DEI SEGNALI}.}
 \section{Donoho-Stark's uncertainty principle}\label{section Donoho-Stark's UP}
+\begin{defi}\label{epsilon-concetrated def}
+	A function $f \in L^2(\R^d)$ is $\mathbf{\varepsilon}$-\textbf{concetrated} on a measurable set $T \subseteqq \R^d$ if
+	\begin{equation*}
+		\left(\int_{\R^d \setminus T} |f(t)|^2 dt \right) \leq \varepsilon \| f \|_2
+	\end{equation*}
+\end{defi}
+\begin{teo}[Donoho-Stark's uncertainty principle]
+	contenuto...
+\end{teo}
+\begin{proof}
+	contenuto...
+\end{proof}
 \section{Lieb's uncertainty principle}\label{section Lieb's UP}
 \section{Nicola-Tilli's uncertainty principle or Faber-Krahn Inequality for the STFT}\label{section Faber-Krahn inequality fot STFT}
 Theorem from \cite{nicolatilli_fk}
@@ -488,7 +538,6 @@ Theorem from \cite{nicolatilli_fk}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Recent results}\label{chapter recent results}
 \section{Norm of localization operators: results from Nicola-Tilli}\label{section norm of localization operators}
-T
 \section{Generic case}
 \begin{teo}\label{norm limitation}
 	Assume $F \in L^p(\R^{2d})$ for some $p \in [1,+\infty)$ and let $\mu(t) = |\{|F|>t\}|$ be the distribution function of $|F|$. Then
