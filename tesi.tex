@@ -514,13 +514,47 @@ In this form the uncertainty principle has a heuristic yet meaningful interpreta
 		\left(\int_{\R^d \setminus T} |f(t)|^2 dt \right) \leq \varepsilon \| f \|_2
 	\end{equation*}
 \end{defi}
-\begin{teo}[Donoho-Stark's uncertainty principle]
-	contenuto...
+\begin{teo}[Donoho-Stark's uncertainty principle]\label{Donoho-Stark's uncertainty principle theorem}
+	Let $f \in L^2(\R^d) \setminus \{0\}$, suppose that $f$ is $\varepsilon_T$-concentrated on $T \subseteqq \R^d$ while $\hat{f}$ is $\varepsilon_{\Omega}$-concentrated on $\Omega \subseteqq \R^d$. Then
+	\begin{equation}\label{Donoho-Stark's uncertainty principle formula}
+		|T| \cdot |\Omega| \geq (1 - \varepsilon_T - \varepsilon_{\Omega})^2
+	\end{equation}
 \end{teo}
 \begin{proof}
 	contenuto...
 \end{proof}
 \section{Lieb's uncertainty principle}\label{section Lieb's UP}
+\begin{prop}\label{weak uncertainty principle fot STFT}
+	Let $f,\phi \in L^2(\R^d)$ normalized, $U \subseteqq \R^{2d}$ and $\varepsilon \geq 0$. Suppose that
+	\begin{equation*}
+		\int_U |\V_{\phi}f(x,\omega)|^2 dxd\omega \geq 1- \varepsilon.
+	\end{equation*}
+	Then $|U| \geq 1- \varepsilon$.
+\end{prop}
+\begin{proof}
+	contenuto...
+\end{proof}
+\begin{teo}
+	If $f,\phi \in L^2(\R^d)$ and $2 \leq p \leq \infty$, then
+	\begin{equation}\label{norm Lp STFT}
+		\int_{\R^{2d}} |\V_{\phi}(x,\omega)|^p dxd\omega \leq \left(\dfrac{2}{p}\right)^d \|f\|_2^p \cdot \|g\|_2^p
+	\end{equation}
+\end{teo}
+\begin{proof}
+	contenuto...
+\end{proof}
+\begin{teo}[Lieb's uncertainty principle]\label{Lieb's uncertainty principle}
+	Suppose that $\|f\|_2 = \|\phi\|_2 = 1$. If $U \subseteqq \R^{2d}$ and $\varepsilon \geq 0$ are such that
+	\begin{equation*}
+		\int_U |\V_{\phi}f(x,\omega)|^2 dxd\omega \geq 1- \varepsilon.
+	\end{equation*}
+	Then
+	\begin{equation*}\label{Lieb's uncertainty principle formula}
+		|U| \geq (1-\varepsilon)^{\frac{p}{p-2}} \left(\dfrac{p}{2}\right)^{\frac{2d}{p-1}} \quad \text{for every } p>2.
+	\end{equation*}
+\end{teo}
+
+
 \section{Nicola-Tilli's uncertainty principle or Faber-Krahn Inequality for the STFT}\label{section Faber-Krahn inequality fot STFT}
 Theorem from \cite{nicolatilli_fk}
 \begin{teo}\label{faberkrahn theorem}
