@@ -23,6 +23,12 @@ greek, evenboxes, english]{toptesi}
 
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{mathrsfs}
+%\usepackage{dutchcal}
+
+\DeclareMathAlphabet{\mathdutchcal}{U}{dutchcal}{m}{n}
+\SetMathAlphabet{\mathdutchcal}{bold}{U}{dutchcal}{b}{n}
+\DeclareMathAlphabet{\mathdutchbcal}{U}{dutchcal}{b}{n}
+
 \usepackage{esint}
 \usepackage{enumitem}
 \usepackage{tikz}
@@ -51,9 +57,11 @@ sorting=nyt
 \newcommand{\R}{\mathbb{R}} %scorciatoia per R reali
 \newcommand{\N}{\mathbb{N}} %scorciatoia per N naturali
 \newcommand{\V}{\mathcal{V}} %STFT
-\newcommand{\F}{\mathcal{F}} %Fourier transform
+\newcommand{\F}{\mathscr{F}} %Fourier transform
+\newcommand{\Fock}{\mathcal{F}} %Fock space
 \newcommand{\C}{\mathbb{C}} %Complex numbers
-\newcommand{\B}{\mathcal{B}} %Bounded linear operators
+\newcommand{\B}{\mathscr{B}} %Bounded linear operators
+\newcommand{\Barg}{\mathcal{B}} %Bargmann transform
 \renewcommand{\L}{\mathscr{L}} %sesquilinear form localization operator
 \newcommand{\dxdo}{dxd\omega}
 \newcommand{\notazione}{\underline{\textbf{Remark Notazionale}}}
@@ -317,7 +325,7 @@ These can be combined into a \emph{time-frequency shift} operator
 \end{defi}
 In the above definition we did not specify where $f$ and $\phi$ are chosen. Since we are taking the Fourier transform of the function $f T_x\overline{\phi}$, the STFT is well defined whenever the Fourier transform of this function is. For example if both $f$ and $\phi$ are in $L^2(\R^d)$ then $f T_x\overline{\phi}$ is in $L^1(\R^d)$ for every $x \in \R^d$ and so the integral in \eqref{STFT formula} is defined. In this special case the STFT can be written as a scalar product in $L^2(\R^d)$:
 \begin{equation*}
-	\V_{\phi}f(x,\omega) = \langle f, M_{\omega} T_x \phi \rangle
+	\V_{\phi}f(x,\omega) = \langle f, M_{\omega} T_x \phi \rangle = \langle f, \pi(x,\omega) \phi \rangle
 \end{equation*}
 In general, the STFT of $f$ with respect to $\phi$ will be defined whenever  $\langle f, M_{\omega} T_x \phi \rangle$ is an expression of some sort of duality. For example, if $f \in \mathcal{S}'(\R^d)$ and $\phi \in \mathcal{S}(\R^d)$ then $M_{\omega} T_x \overline{\phi} \in \mathcal{S}(\R^d)$, therefore $\langle f, M_{\omega} T_x \phi \rangle$ can be seen as the usual duality between tempered distributions and functions in the Schwartz space.\\
 {\color{blue} Aggiungere scritture equivalenti della STFT??}
@@ -361,8 +369,56 @@ Therefore the adjoint operator $\V_{\gamma}^*$ acts, in some sense, as an invers
 	\item Relazione di ortogonalità
 	\item Formula di inversione
 \end{itemize}
-\section{Fock Space and Bargmann Transform}\label{section Fock Space and Bargmann transform}
-
+\section{Bargmann Transform and Fock Space}\label{section Fock Space and Bargmann transform}
+{\color{blue} Throughout this section we will consider the STFT with Gaussian window.} We choose
+\begin{equation}\label{gaussian normalized}
+	\varphi(x) = 2^{d/4} e^{-\pi |x|^2}
+\end{equation}
+where $|x|^2 = \sum_k^d x_k^2$ is the Euclidean norm of $x$ in $\R^d$. The factor $2^{d/4}$ is chosen so that $\|\varphi\|_2=1$. The STFT with Gaussian window becomes
+\begin{equation}
+	\V_{\varphi}f(x,\omega) = 2^{d/4} \int_{\R^d} f(t) e^{-\pi |t-x|^2} e^{-2 \pi i \omega \cdot t} dt
+\end{equation}
+{\color{red} Our aim now is to rearrange the terms in the above expression in order to make $z=x+i\omega \in \C^d$ appear. We want to highlight the fact that when talking about complex quantities $|z|^2 = z \overline{z} = |x|^2 + |\omega|^2$}.
+\begin{align*}
+	\V_{\varphi}f(x,\omega) &= 2^{d/4} \int_{\R^d} f(t) e^{-\pi |t|^2 + 2 \pi x \cdot t - \pi |\omega|^2} e^{ - 2 \pi i \omega \cdot t} dt\\
+							&= 2^{d/4} \int_{\R^d} f(t) e^{-\pi |t|^2} e^{2 \pi (x - i \omega) \cdot t} e^{-\frac{\pi}{2}\left(|x|^2 - 2 i x \cdot \omega - |\omega|^2\right)} e^{-\frac{\pi}{2}\left(|x|^2 + |\omega|^2 + 2 i x \cdot \omega\right)}dt\\
+							&= 2^{d/4} e^{-\pi i x \cdot \omega} e^{-\frac{\pi}{2}\left(|x|^2 + |\omega|^2\right)} \int_{\R^d} f(t) e^{-\pi |t|^2} e^{2 \pi (x-i\omega) \cdot t}e^{-\frac{\pi}{2}(x-i\omega)^2}dt
+\end{align*}
+The rearrangement may seem arbitrary but actually is done is such a way that inside the integral $x$ and $\omega$ enter only via $\overline{z}$.
+\begin{defi}\label{Bargmann transform}
+	The \textbf{Bargmann transform} of a function $f$ on $\R^d$ is the function $\Barg f$ on $\C^d$ given by
+	\begin{equation}\label{Bargmann transform formula}
+		\Barg f(z) = 2^{d/4} \int_{\R^d} f(t) e^{2 \pi t \cdot z - \pi |t|^2 - \frac{\pi}{2}z^2}dt
+	\end{equation}
+\end{defi}
+We recall that a function defined over $C^d$ is \emph{entire} if it is holomorphic over all $\C^d$.
+\begin{defi}\label{Fock space}
+	The \textbf{Fock space} $\Fock^2(\C^d)$ is the Hilbert space of all entire functions $F$ on $\C^d$ for which the norm
+	\begin{equation}\label{Fock space norm}
+		\|F\|^2_{\Fock} = \int_{\C^d} |F(z)|^2 e^{-\pi |z|^2}dz
+	\end{equation}
+	is finite.
+\end{defi}
+Clearly the norm of the Fock space is induced by the following scalar product
+\begin{equation}\label{Fock space scalar product}
+	\langle F,G \rangle_{\Fock} \int_{\C^d} F(z) \overline{G(z)} e^{-\pi |z|^2}dz
+\end{equation}
+\begin{prop}
+	If $f$ is a function on $\R^d$ with polynomial growth then its Bargmann transform $\Barg f$ is an entire function on $\C^d$. Moreover, letting $z = x + i\omega$, the Bargmann transform of $f$ is related to its STFT through the following
+	\begin{equation}\label{connection between Bargmann transform and STFT}
+		\V_{\varphi} f(x,-\omega) = e^{\pi i x \cdot \omega} \Barg f(z) e^{-\pi |z|^2/2}
+	\end{equation}
+\end{prop}
+\begin{proof}
+	contenuto...
+\end{proof}
+\begin{prop}
+	If $f \in L^2(\R^d)$ then
+	\begin{equation}
+		\|f\|_2 = \left(\int_{\C^d} |\Barg f(z)|^2 e^{-\pi |z|^2}dz\right)^{1/2} = \|\Barg f\|_{\Fock}.
+	\end{equation}
+	Thus $\Barg$ is an isometry from $L^2(\R^d)$ into $\Fock^2(\C^d)$.
+\end{prop}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Localization Operators}\label{chapter localization operators}
@@ -422,7 +478,7 @@ These are, by construction, self-adjoint operators, and since both $Q_{\Omega} P
 {\color{red} Aggiungere qualcosa sulle prolate spheroidal wave functions?}
 
 
-\section{Daubechies' localization operators}
+\section{Daubechies' localization operators}\label{Daubechies' localization operators section}
 {\color{red} Projection operators considered in the previous section are powerful tools in signal analysis and quantum mechanics}. Nevertheless they treat time and frequency in a separate way. We already saw that a good tool to simultaneously study a signal in time and frequency is the STFT but we also pointed out its limits. {\color{red} However we can think to construct localization operators using the STFT instead of the Fourier transform}. This is exactly what was done by Ingrid Daubechies in 1988 in \cite{daubechies}. From Theorem \ref{inversion formula theorem} we know that the adjoint operator of $\V_{\phi}$ acts as inverse operator. If we choose a window $\phi \in L^2(\R^{2d})$ normalized, \ref{inversion formula} becomes
 \begin{equation*}
 	f(t) = \V_{\phi}^* \V_{\phi}f(t)
@@ -555,7 +611,7 @@ In this form the uncertainty principle has a heuristic yet meaningful interpreta
 \end{teo}
 
 
-\section{Nicola-Tilli's uncertainty principle or Faber-Krahn Inequality for the STFT}\label{section Faber-Krahn inequality fot STFT}
+section Faber-Krahn inequality fot STFT\section{Nicola-Tilli's uncertainty principle or Faber-Krahn Inequality for the STFT}\label{section Faber-Krahn inequality fot STFT}
 Theorem from \cite{nicolatilli_fk}
 \begin{teo}\label{faberkrahn theorem}
 	For every $f \in L^2(\R^d)$ such that $\|f\|_{L^2} = 1$ and every measurable subset $\Omega \subset \R^{2d}$ with finite measure we have
@@ -566,13 +622,79 @@ Theorem from \cite{nicolatilli_fk}
 	\begin{equation}\label{G}
 		G(s) \coloneqq \int_0^s e^{\left(-d!\tau\right)^{1/d}} d\tau
 	\end{equation}
-	Moreover, equality occurs if and only if $f$ is a Gaussian \textbf{METTERE A POSTO} and $\Omega$ is equivalent, in measure, to a ball of centre $(x_0,\omega_0)$.
+	Moreover, equality occurs if and only if $f$ is a Gaussian of the kind
+	\begin{equation}\label{translated Gaussian}
+		f(x) = c e^{2 \pi x \cdot \omega_0} \varphi(x-x_0) \quad x \in \R^d
+	\end{equation}
+	for some unimodular $c \in \C$ and some $(x_0,\omega_0) \in  \R^{2d}$ and $\Omega$ is equivalent, in measure, to a ball of centre $(x_0,\omega_0)$.
 \end{teo}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Recent results}\label{chapter recent results}
 \section{Norm of localization operators: results from Nicola-Tilli}\label{section norm of localization operators}
+{\color{blue}In Section \ref{Daubechies' localization operators section} we obtained some basic results for the norm of Daubechies' localization operators, independently of the choice of the window $\phi$ for the STFT. It is reasonable to think that, for specific windows those estimates can be improved and, hopefully, find some sharp bounds. Thanks to \ref{faberkrahn theorem} Nicola and Tilli accomplished this task in the case the window of the STFT is a normalized Gaussian. As done previously, since the windows is fixed one for all we will drop the pedex $\phi$.}
+
+As for the results in Section \ref{Daubechies' localization operators section}, assumptions on the weight function $F$ are related to its integrability and boundedness. The problem we are consider is, in fact, finding an optimal estimate of the type
+\begin{equation}\label{sharp estimate Nicola-Tilli}
+	\|L_F\|_{L^2(\R^d) \rightarrow L^2(\R^d)} \leq C
+\end{equation}
+where $F$ satisfies the following constraints:
+\begin{equation}\label{constraints Nicola-Tilli}
+	\|F\|_p \leq A \quad \text{and} \quad \|F\|_{\infty} \leq B.
+\end{equation}
+Clearly the constant $C$ will depend on $p$, $A$ and $B$. In \cite{nicolatilli_norm} this problem is completely solved: the constant $C$ is computed (explicitly in some cases), weight functions $F$ which achieve this bound are explicitly found and also function $f$ and $g$ such that $|\langle L_f f, g \rangle| = \|L_F\| = C$ are found. Before reporting the main Theorem in \cite{nicolatilli_norm}, we define the following number which will appear many times in the following
+\begin{equation}\label{kappa_p}
+	\kappa_p \coloneqq \dfrac{p-1}{p}.
+\end{equation}
+\begin{teo}\label{Nicola Tilli norm theorem}
+	Assume $p \in [1,\infty)$, $A \in (0, \infty]$ and $B \in (0,\infty)$ with the additional condition that $A < \infty$ when $p=1$. Let $F$ satisfy the constraints in \eqref{constraints Nicola-Tilli}.
+	\begin{enumerate}[label=(\roman*)]
+		\item If $p=1$, then
+		\begin{equation}\label{Nicola-Tilli bound p=1}
+			\|L_F\| \leq A\;G(B/A)
+		\end{equation}
+		and equality occurs if and only if, for some $\theta \in \R$ and some $z_0 \in \R^{2d}$
+		\begin{equation}\label{Nicola-Tilli maximal function p=1}
+			F(z) = A e^{i\theta} \chi_{\mathdutchcal{B}} (z-z_0) \quad \forall z \in \R^{2d}
+		\end{equation}
+		where $\mathdutchcal{B} \subset \R^{2d}$ is the ball of measure $B/A$ centred at the origin.
+		
+		\item If $p>1$ and $\frac{B}{A} \leq \kappa_p^{d/p}$, then
+		\begin{equation}\label{Nicola-Tilli bound p>1 first regime}
+			\|L_F\| \leq \kappa_p^{d \kappa_p}B,
+		\end{equation}
+		with equality if and only if, for some $\theta \in \R$ and some $z_0 \in \R^{2d}$,
+		\begin{equation}\label{Nicola-Tilli maximal function p>1 first regime}
+			F(z) = e^{i \theta} \lambda e^{\frac{\pi}{p-1}|z-z_0|^2} \quad \forall z \in \R^{2d}
+		\end{equation}
+		where $\lambda = \kappa_p^{-d/p}B$.
+	
+		\item If $p>1$ and $\frac{B}{A} > \kappa_p^{d/p}$, then
+		\begin{equation}\label{Nicola-Tilli bound p>1 second regime}
+			\|L_F\| \leq \int_{0}^{A} G(u_{\lambda}(t))dt,
+		\end{equation}
+		where $u_{\lambda}(t) = \left[-\log\left(\left(\frac{t}{\lambda}\right)^{p-1}\right) \right]^d$ and $\lambda>A$ is uniquely determined by the condition $p\int_{0}^{A} t^{p-1}u_{\lambda}(t)dt = B^p$. Equality in \eqref{Nicola-Tilli bound p>1 second regime} if and only if, for some $\theta \in \R$ and some $z_0 \in \R^{2d}$,
+		\begin{equation}\label{Nicola-Tilli maximal function p>1 second regime}
+			F(z) = e^{i\theta} \min \{ \lambda e^{-\frac{\pi}{p-1}|z-z_0|^2}, A \}
+		\end{equation}
+	\end{enumerate}
+	Finally, in all the cases, condition $|\langle L_F f,g \rangle| = \|L_F\|$ holds for some, $f,g \in L^2(\R^d)$ such that $\|f\|_2 = \|g\|_2 = 1$, if and only if both $f$ and $g$ are of the kind \eqref{translated Gaussian}, possibly with different $c$'s, but with the same $(x_0,\omega_0) \in \R^{2d}$ which coincides with the centre of $F$.
+\end{teo}
+
+
+
 \section{Generic case}
+In this Section we will deal with a generalized version of the problem considered in \cite{nicolatilli_norm}. We want to find the optimal constant $C$ such that
+\begin{equation*}
+	\| L_F \|_{L^2(\R^d) \rightarrow L^2(\R^d)} \leq C
+\end{equation*}
+under the following constraints on $F$:
+\begin{equation}\label{constraints generic case}
+	\|F \|_p \leq A \quad \text{and} \quad \|F\|_q \leq B.
+\end{equation}
+where $p,q \in (1,\infty)$ and $A,B \in (0,\infty)$. In this setting it is no more possible to find an explicit expression for $C$ and $F$, {\color{red} although they can be easily computed numerically.}
+
+Before tackling the problem, we prove a Theorem from \cite{nicolatilli_norm} which gives a bound for $\| L_F \|$ in terms of the distribution function of $|F|$.
 \begin{teo}\label{norm limitation}
 	Assume $F \in L^p(\R^{2d})$ for some $p \in [1,+\infty)$ and let $\mu(t) = |\{|F|>t\}|$ be the distribution function of $|F|$. Then
 	\begin{equation}\label{norm limitation formula}
@@ -582,34 +704,37 @@ Theorem from \cite{nicolatilli_fk}
 \end{teo}
 \begin{proof}
 	For the sake of brevity we denote the variable $(x,\omega) \in R^{2d}$ as $z$ and therefore $dxd\omega$ as $dz$. Let $f,g \in L^2(\R^d)$ such that $\| f \|_2 = \| g \|_2 = 1$.
-	Since we are in a Hilbert space $\| L_F \|$ can be computed as the supremum of $|\langle L_F f,g \rangle|$ over all normalized $f$ and $g$. Therefore we are interested in estimating the previous scalar product
+	{\color{blue} Since we are in a Hilbert space $\| L_F \|$ can be computed as the supremum of $|\langle L_F f,g \rangle|$ over all normalized $f$ and $g$. Therefore we are interested in estimating the previous scalar product}
 	\begin{equation}\label{first inequality}
 	\begin{aligned}
-		| \langle L_F f, g \rangle |  &= | \langle \V^* F \V f, g \rangle | = | \langle F \V f, \V g \rangle | \leq \int_{\R^{2d}} |F(z)| \cdot |\V f(z)| \cdot | \V g(z) | dz \overset{\text{C-S}}{\leq} \\
+		| \langle L_F f, g \rangle |  &= | \L_{F}(f,g) | \leq \int_{\R^{2d}} |F(z)| \cdot |\V f(z)| \cdot | \V g(z) | dz \overset{\text{C-S}}{\leq} \\
 									  &\leq \left( \int_{\R^{2d}} |F(z)| \cdot |\V f(z)|^2 dz \right)^{1/2} \left( \int_{\R^{2d}} |F(z)| \cdot |\V g(z)|^2 dz \right)^{1/2} 
 	\end{aligned}
 	\end{equation}
-	Since the result is symmetric in $f$ and $g$ we can study just one of the terms. Letting $m = \esssup |F(z)|$ and assuming $m>0$ (otherwise every result is trivial) we can use the ``layer cake'' representation \textbf{CITARE CON PAGINA}
+	Since the result is symmetric in $f$ and $g$ we can study just one of the terms. Letting $m = \esssup |F(z)|$ and assuming $m>0$ (otherwise every result is trivial) we can use the ``layer cake'' representation \cite[][Theorem 1.13]{liebloss}:
 	\begin{equation*}
-		|F(z)| = \int_0^m \chi_{|F|>t}(z)dt 
+		|F(z)| = \int_0^m \chi_{\{|F|>t\}}(z)dt 
 	\end{equation*}
-	we have
+	in order to find
 	\begin{align*}
-		\int_{\R^{2d}} |F(z)| \cdot |\V f(z)|^2 dz &= \int_{\R^{2d}} \left( \int_0^m \chi_{|F|>t}(z)dt \right) |\V f(z)|^2 dz \overset{\text{Fubini}}{=}\\
-											 &= \int_0^m \left( \int_{\R^{2d}} \chi_{|F|>t}(z) |\V f(z)|^2 dz \right)dt = \int_0^m \left( \int_{\{|F|>t\}} |\V f(z)|^2 dz \right)dt
+		\int_{\R^{2d}} |F(z)| \cdot |\V f(z)|^2 dz &= \int_{\R^{2d}} \left( \int_0^m \chi_{\{|F|>t\}}(z)dt \right) |\V f(z)|^2 dz \overset{\text{Tonelli}}{=}\\
+											 &= \int_0^m \left( \int_{\R^{2d}} \chi_{\{|F|>t\}}(z) |\V f(z)|^2 dz \right)dt = \int_0^m \left( \int_{\{|F|>t\}} |\V f(z)|^2 dz \right)dt
 	\end{align*}
 	We notice that the quantity in the inner integral is exactly the one in the theorem \ref{faberkrahn theorem}, hence
 	\begin{equation}\label{limitation with G}
-		\int_{\R^{2d}} |F(z)| \cdot |\V f(z)|^2 dz \leq \int_0^m G(\mu(t)) dt
+		\int_{\R^{2d}} |F(z)| \cdot |\V f(z)|^2 dz \leq \int_0^m G\left(|\{|F|>t\}|\right)dt = \int_0^m G(\mu(t)) dt
 	\end{equation}
-	We point out that since $\mu(t) = 0$ and $G(0)=0$ the previous expression is equivalent to \eqref{norm limitation formula}.\\
-	Because $p<\infty$, $L_F$ is a compact operator on $L_2$ therefore there exist normalized $f$ and $g$ which achieve equality in the supremum of the norm: $\langle L_F f, g \rangle = \| L_F \|$. Therefore equality in \eqref{norm limitation formula} occurs if and only if all the previous inequalities become equalities. Equality in \eqref{limitation with G} occurs if and only if
+	We point out that since $\mu(t) = 0$ for $t > m$ and that $G(0)=0$, the previous expression is equivalent to \eqref{norm limitation formula}.
+	
+	{\color{red} Because $p<\infty$, $L_F$ is a compact operator}, there exist normalized $f$ and $g$ which achieve equality in the supremum of the norm, namely $\langle L_F f, g \rangle = \| L_F \|$. Therefore equality in \eqref{norm limitation formula} occurs if and only if all the previous inequalities become equalities. Equality in \eqref{limitation with G} occurs if and only if
 	\begin{equation}\label{first equality}
 		\int_{\{|F|>t\}} |\V f(z)|^2 dz = G(\mu(t))
 	\end{equation}
-	for a.e. $t \in (0,m)$. Thanks to Theorem \ref{faberkrahn theorem} for just one $t_0 \in (0,m)$ infer that $f$ is a Gaussian \textbf{METTERE A POSTO} and that $\{|F|>t\}$ is a ball centred in $z_0 = (x_0,\omega_0)$. Then, still by theorem \ref{faberkrahn theorem}, since \eqref{first equality} holds a.e in $(0,m)$ and that $f$ is always the same we have that also the other levels sets $\{|F|>t\}$ are equivalent to balls centred at the same $z_0$. Finally, we can extend the result to every $t \in (0,m)$ because ${|F|>t} = \bigcup_{s > t} \{|F|>s\}$. Since theorem \ref{faberkrahn theorem} is a ``if and only if'', these conditions on $F$ and $f$ are also sufficient to guarantee equality in \eqref{limitation with G}. Clearly the same result holds for $g$ which can be a Gaussian with different coefficient but the same centre \textbf{METTERE A POSTO}.\\
-	In the end it turns that $|F|$ is spherically symmetric and radially decreasing as claimed in theorem's statement.\\
-	Conditions for $f$ and $g$ imply that $\V g  = e^{i \alpha} \V f$ for some $\alpha \in \R$. This provides equality in using Cauchy-Schwartz inequality in \eqref{first inequality}. Lastly we shall prove that also the first inequality in \eqref{first inequality}, that is
+	for a.e. $t \in (0,m)$. Thanks to Theorem \ref{faberkrahn theorem}, for just one $t_0 \in (0,m)$ we can infer that $\{|F|>t_0\}$ is (equivalent to) a ball centred in $z_0 = (x_0,\omega_0)$ and that $f$ is a Gaussian of the kind \eqref{translated Gaussian} with the same centre $z_0$. Then, still by theorem \ref{faberkrahn theorem}, since \eqref{first equality} holds a.e in $(0,m)$ and that $f$ is always the same we have that also the other levels sets $\{|F|>t\}$ are equivalent to balls centred at the same $z_0$. Finally, we can extend the result to every $t \in (0,m)$ because $\{|F|>t\} = \bigcup_{s > t} \{|F|>s\}$. Since Theorem \ref{faberkrahn theorem} is a ``if and only if'', these conditions on $F$ and $f$ are also sufficient to guarantee equality in \eqref{limitation with G}. Clearly the same result holds for $g$ which has to be a Gaussian, possibly with different coefficient $c$ but the same centre.
+	
+	In the end it turns that $|F|$ is spherically symmetric and radially decreasing as claimed in theorem's statement.
+	
+	Conditions for $f$ and $g$ imply that $\V g  = e^{i \alpha} \V f$ for some $\alpha \in \R$. This provides equality in \eqref{first inequality} when using Cauchy-Schwartz inequality. Lastly we shall prove that also the first inequality in \eqref{first inequality}, that is
 	\begin{equation*}
 		\left\vert \int_{\R^{2d}} F(z) \V f(z) \overline{\V g(z)} dz \right\vert \leq \int_{\R^{2d}} |F(z)| \cdot | \V f(z)| \cdot |\V g(z)| dz
 	\end{equation*}
