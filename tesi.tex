@@ -65,9 +65,10 @@ sorting=nyt
 \renewcommand{\L}{\mathscr{L}} %sesquilinear form localization operator
 \newcommand{\dxdo}{dxd\omega}
 \newcommand{\notazione}{\underline{\textbf{Remark Notazionale}}}
-\newcommand{\Log}{\ensuremath{\text{Log}_-}}
+\newcommand{\Log}{\ensuremath{\mathrm{Log}_-}}
 \newcommand{\finire}{\fbox{\LARGE DA FINIRE}}
-\newcommand{\pfrac}[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand{\pdfrac}[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
 \DeclareMathOperator*{\esssup}{ess\,sup}
 
 \begin{document}
@@ -119,9 +120,9 @@ After this we define the \emph{norm} of an operator
 	\end{equation*}
 \end{defi}
 The proof of the equivalence between two definition is straightforward. We see that the norm of an operator is the best constant for which boundedness property \eqref{boundedness property} holds. {\color{blue} Sometimes, in order to emphasize the spaces between which $T$ operates, we may write the norm of $T$ as $\| T \|_{X \rightarrow Y}$.}\\
-In the following we will mostly deal with $X$ and $Y$ being $L^2(\R^d)$, which is an Hilbert space. {\color{red} For operators between Hilbert spaces we can give the norm of an operator by means of the dual norm}:
+In the following we will mostly deal with $X$ and $Y$ being $L^2(\R^d)$, which is an Hilbert space. For operators between Hilbert spaces we can give the norm of an operator by means of the dual norm:
 \begin{equation*}
-	\| T \| = \sup\{\langle Tx, y \rangle_X : x,y \in X\}
+	\| T \| = \sup\{|\langle Tx, y \rangle_X| : x,y \in X,\,\ \|x\|_X = \|y\|_X = 1 \}
 \end{equation*}
 
 An important class of operators is the class of \emph{compact operators}.
@@ -378,7 +379,7 @@ where $|x|^2 = \sum_k^d x_k^2$ is the Euclidean norm of $x$ in $\R^d$. The facto
 \begin{equation}
 	\V_{\varphi}f(x,\omega) = 2^{d/4} \int_{\R^d} f(t) e^{-\pi |t-x|^2} e^{-2 \pi i \omega \cdot t} dt
 \end{equation}
-{\color{red} Our aim now is to rearrange the terms in the above expression in order to make $z=x+i\omega \in \C^d$ appear. We want to highlight the fact that when talking about complex quantities $|z|^2 = z \overline{z} = |x|^2 + |\omega|^2$}.
+Our aim now is to rearrange the terms in the above expression in order to make $z=x+i\omega \in \C^d$ appear. We want to highlight the fact that when talking about complex quantities $|z|^2 = z \overline{z} = |x|^2 + |\omega|^2$. {\color{blue}  Aggiungere remark sulla notazione usata}.
 \begin{align*}
 	\V_{\varphi}f(x,\omega) &= 2^{d/4} \int_{\R^d} f(t) e^{-\pi |t|^2 + 2 \pi x \cdot t - \pi |\omega|^2} e^{ - 2 \pi i \omega \cdot t} dt\\
 							&= 2^{d/4} \int_{\R^d} f(t) e^{-\pi |t|^2} e^{2 \pi (x - i \omega) \cdot t} e^{-\frac{\pi}{2}\left(|x|^2 - 2 i x \cdot \omega - |\omega|^2\right)} e^{-\frac{\pi}{2}\left(|x|^2 + |\omega|^2 + 2 i x \cdot \omega\right)}dt\\
@@ -422,7 +423,7 @@ Clearly the norm of the Fock space is induced by the following scalar product
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Localization Operators}\label{chapter localization operators}
-{\color{red}One of the main problems in signal analysis or, in general, time-frequency analysis is to extract some informations about signal in order to analyse it. We saw that STFT can be a tool for this purpose, however it has some practical problems: it doubles the dimension of the output and it is highly redundant.}\\
+One of the main problems in signal analysis or, in general, time-frequency analysis is to extract some informations about signal in order to analyse it. {\color{red}We saw that STFT can be a tool for this purpose, however it has some practical problems: it doubles the dimension of the output and it is highly redundant (SE AVANZA TEMPO).}\\
 In this chapter we see two possible ways to deal with the problem of creating operators able to localize a signal both in time and frequency.
 \section{Localization with projections}
 The most straightforward way to localize a signal, say in the time domain, is to use a sharp cut-off, which means a characteristic function. If we suppose to have a signal $f \in L^2(\R^d)$ and we want to localize it in a measurable subset $T \subseteq \R^d$ of the time domain we can consider the natural projection operator
@@ -640,7 +641,7 @@ As for the results in Section \ref{Daubechies' localization operators section}, 
 \end{equation}
 where $F$ satisfies the following constraints:
 \begin{equation}\label{constraints Nicola-Tilli}
-	\|F\|_p \leq A \quad \text{and} \quad \|F\|_{\infty} \leq B.
+	\|F\|_{\infty} \leq A \quad \text{and} \quad \|F\|_p \leq B.
 \end{equation}
 Clearly the constant $C$ will depend on $p$, $A$ and $B$. In \cite{nicolatilli_norm} this problem is completely solved: the constant $C$ is computed (explicitly in some cases), weight functions $F$ which achieve this bound are explicitly found and also function $f$ and $g$ such that $|\langle L_f f, g \rangle| = \|L_F\| = C$ are found. Before reporting the main Theorem in \cite{nicolatilli_norm}, we define the following number which will appear many times in the following
 \begin{equation}\label{kappa_p}
@@ -667,8 +668,7 @@ Clearly the constant $C$ will depend on $p$, $A$ and $B$. In \cite{nicolatilli_n
 		\begin{equation}\label{Nicola-Tilli maximal function p>1 first regime}
 			F(z) = e^{i \theta} \lambda e^{\frac{\pi}{p-1}|z-z_0|^2} \quad \forall z \in \R^{2d}
 		\end{equation}
-		where $\lambda = \kappa_p^{-d/p}B$.
-	
+		where $\lambda = \kappa_p^{-d/p}B$.\label{Nicola-Tilli norm theorem case 2}	
 		\item If $p>1$ and $\frac{B}{A} > \kappa_p^{d/p}$, then
 		\begin{equation}\label{Nicola-Tilli bound p>1 second regime}
 			\|L_F\| \leq \int_{0}^{A} G(u_{\lambda}(t))dt,
@@ -680,8 +680,8 @@ Clearly the constant $C$ will depend on $p$, $A$ and $B$. In \cite{nicolatilli_n
 	\end{enumerate}
 	Finally, in all the cases, condition $|\langle L_F f,g \rangle| = \|L_F\|$ holds for some, $f,g \in L^2(\R^d)$ such that $\|f\|_2 = \|g\|_2 = 1$, if and only if both $f$ and $g$ are of the kind \eqref{translated Gaussian}, possibly with different $c$'s, but with the same $(x_0,\omega_0) \in \R^{2d}$ which coincides with the centre of $F$.
 \end{teo}
-
-
+We will not give the proof of these results since some of its parts are similar to the one we will see in the following Section. Moreover, we point out that the case $A=
+\infty$ means we are dropping the $L^{\infty}$ constraint.
 
 \section{Generic case}
 In this Section we will deal with a generalized version of the problem considered in \cite{nicolatilli_norm}. We want to find the optimal constant $C$ such that
@@ -694,7 +694,60 @@ under the following constraints on $F$:
 \end{equation}
 where $p,q \in (1,\infty)$ and $A,B \in (0,\infty)$. In this setting it is no more possible to find an explicit expression for $C$ and $F$, {\color{red} although they can be easily computed numerically.}
 
-Before tackling the problem, we prove a Theorem from \cite{nicolatilli_norm} which gives a bound for $\| L_F \|$ in terms of the distribution function of $|F|$.
+Theorem \ref{Nicola-Tilli norm theorem case 2} includes the case when $F$ satisfies just an $L^p$ constraint by taking $A$ ($L^{\infty}$ constraint). In the current setting we have an $L^p$ and an $L^q$ bound, hence, thanks to \ref{Nicola-Tilli bound p>1 first regime}, it is straightforward to see that
+\begin{equation*}
+	\| L_F\|_{L_2 \rightarrow L_2} \leq \min\{\kappa_p^{d\kappa_p}A, \, \kappa_q^{d\kappa_q}B\}
+\end{equation*}
+Suppose that the first term is less than the second, which means:
+\begin{equation}\label{condition B/A first}
+	\kappa_p^{d\kappa_p}A \leq \kappa_q^{d\kappa_q}B \iff \dfrac{B}{A} \geq \left(\dfrac{\kappa_p^{\kappa_p}}{\kappa_q^{\kappa_q}}\right)^d
+\end{equation}
+Clearly, for $B$ sufficiently large we expect that the solution of current problem is the same as the one with just an $L^p$ constraint, namely the one given by \eqref{Nicola-Tilli maximal function p>1 first regime}. Therefore, we want to compare its $L^q$ norm with the bound given by $B$:
+\begin{align*}
+	\| F \|_q^q &= \int_{\R^{2d}} |F(z)|^q dz = \lambda^q \int_{\R^{2d}} e^{-\frac{q\pi}{p-1}|z-z_0|^2} dz \overset{z' = \left(\frac{q\pi}{p-1}\right)^{1/2}(z-z_0)}{=}\\
+	&= \lambda^q \left(\dfrac{p-1}{q\pi}\right)^d \int_{\R^{2d}} e^{-|z'|^2}dz' = \lambda^q \left(\dfrac{p-1}{q\pi}\right)^d \pi^d = \lambda^q \left(\dfrac{p-1}{q}\right)^d.
+\end{align*}
+Since we want $F$ to satisfy the $L^q$ constraint we should have
+\begin{equation*}
+	\lambda \left(\dfrac{p-1}{q}\right)^{d/q} \leq B \overset{\lambda = \kappa_p^{-d/p}A}{\implies} \left(\dfrac{p}{p-1}\right)^{d/p} \left(\dfrac{p-1}{q}\right)^{d/q}A \leq B
+\end{equation*}
+which is equivalent to
+\begin{equation*}\label{condition B/A second}
+	\dfrac{B}{A} \geq \kappa_p^{d\left(\frac1q - \frac1p\right)}\left(\dfrac{p}{q}\right)^{\frac{d}{q}}
+\end{equation*}
+If this condition were less restrictive than the one given by \eqref{condition B/A first} we would have solved the problem. Unfortunately, this is not the case. Indeed it is always true, regardless of $p$ and $q$, that
+\begin{equation*}
+	\kappa_p^{d\left(\frac1q - \frac1p\right)}\left(\dfrac{p}{q}\right)^{\frac{d}{q}} \geq \left(\dfrac{\kappa_p^{\kappa_p}}{\kappa_q^{\kappa_q}}\right)^d
+\end{equation*}
+Recalling that $\kappa_p =\frac{1}{p'}$, where $p'$ is the conjugate exponent of $p$, this inequality can be stated in a different way:
+\begin{align*}
+	\left(\dfrac{1}{p'}\right)^{\frac{1}{q}-\frac{1}{p}}\left(\dfrac{p}{q}\right)^{\frac{1}{q}} \geq \left(\dfrac{1}{p'}\right)^{\frac{1}{p'}} \left(\dfrac{1}{q'}\right)^{-\frac{1}{q'}}\iff \left(\dfrac{1}{p'}\right)^{\frac{1}{q}-\frac{1}{p} - \frac{1}{p'}}\left(\dfrac{1}{q'}\right)^{\frac{1}{q'}} \left(\dfrac{p}{q}\right)^{\frac{1}{q}} \geq 1
+\end{align*}
+but, since $\frac{1}{p}+\frac{1}{p'}=1$ and $\frac{1}{q} - 1 = \frac{1}{q'}$, in conclusion we have:
+\begin{equation*}
+	\left(\dfrac{p'}{q'}\right)^{\frac1{q'}} \left(\dfrac{p}{q}\right)^{\frac{1}{q}} \geq 1
+\end{equation*}
+{\color{red}It is quite easy that this inequality holds for every pair of $p,q>1$. Letting $x=\frac{1}{p}$ and $y=\frac{1}{q}$ we can take the $\log$ of the right-hand side and study it as a function of $x$ and $y$:
+	\begin{equation*}
+		f(x,y) = (1-y)\left[\log(1-x) - \log(1-y)\right] + y\left[\log(x) - \log(y)\right]
+	\end{equation*}
+	Taking the partial derivative with respect to $x$ we have
+	\begin{equation*}
+		\pdfrac{f}{x}(x,y) = -\dfrac{1-y}{1-x} + \dfrac{y}{x} = \dfrac{y-x}{x(1-x)}
+	\end{equation*}
+	Since $x \in (0,1)$, $\pfrac{f}{x}(x,y)$ is positive for $x<y$. SCRIVERE IN APPENDICE?}
+
+Despite this fact, at least we can say that, if $B/A \geq \kappa_p^{d\left(\frac{1}{q}-\frac{1}{p}\right)}\left(\frac{p}{q}\right)^{\frac{d}{q}}$ or $A/B \geq \kappa_q^{d\left(\frac{1}{p}-\frac{1}{q}\right)}\left(\frac{q}{p}\right)^{\frac{d}{p}}$, the problem is already solved and the solution is given by Theorem \ref{Nicola Tilli norm theorem}. Therefore, from now on, we will suppose to be in the intermediate case, that is
+\begin{equation}\label{intermediate regime}
+	\kappa_q^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{p}} < \dfrac{B}{A} < \kappa_p^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{p}}
+\end{equation}
+We notice that the condition is well-posed, since it is actually true that
+\begin{align*}
+	\kappa_q^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{p}} < \kappa_p^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{p}}
+\end{align*}
+whenever $p \neq q$. {\color{red} Aggiungere dimostrazione in appendice?}
+
+Before tackling the problem in this intermediate regime, we prove a Theorem from \cite{nicolatilli_norm} which gives a bound for $\| L_F \|$ in terms of the distribution function of $|F|$.
 \begin{teo}\label{norm limitation}
 	Assume $F \in L^p(\R^{2d})$ for some $p \in [1,+\infty)$ and let $\mu(t) = |\{|F|>t\}|$ be the distribution function of $|F|$. Then
 	\begin{equation}\label{norm limitation formula}
@@ -746,36 +799,57 @@ Before tackling the problem, we prove a Theorem from \cite{nicolatilli_norm} whi
 	\begin{equation*}
 		e^{-i \theta}F(z) \cdot |\V f(z)|^2 = |F(z)| \cdot |\V f(z)|^2 \quad \text{for a.e. } z \in \R^{2d}
 	\end{equation*}
-	but since $|\V f(z)|^2 > 0$, equality in \ref{first inequality} with $f$ and $g$ as \textbf{METTERE A POSTO} occurs if and only if $F(z) = e^{i \theta} |F(z)|$.
+	but since $|\V f(z)|^2 > 0$, equality in \ref{first inequality} with $f$ and $g$ as \eqref{translated Gaussian} occurs if and only if $F(z) = e^{i \theta} |F(z)|$.
 \end{proof}
 
-
-
-
-
-
-
-Let's now consider the case where both $p$ and $q$ are neither 1 or $+\infty$. The result presented in \cite{nicolatilli_norm} include the case ...
+In light of the previous Theorem it is natural to seek for sharp upper bound for the right-hand side of \eqref{norm limitation formula}. Since this involves the distribution function $|F|$ we shall search this bound between all the possible distribution functions. In order to do so we need to rephrase constraints \eqref{constraints generic case} in terms of $\mu$. This can be easily done one more time thanks to a more general version of the ``layer cake'' representation (see \cite[][Theorem 1.13]{liebloss} or \cite[][Proposition 1.1.4]{grafakos}):
 \begin{equation*}
-	\| L_F\|_{L_2 \rightarrow L_2} \leq \min\{\kappa_p^{d\kappa_p}A, \, \kappa_q^{d\kappa_q}B\}
+	\|F\|_p^p = p \int_0^{\infty} t^{p-1}|\{|F|>t\}|dt.
 \end{equation*}
-Suppose that the minimum is given by $\kappa_p^{d\kappa_p}A$, therefore
-\begin{equation*}
-	\kappa_p^{d\kappa_p}A \leq \kappa_q^{d\kappa_q}B \iff \dfrac{B}{A} \geq \left(\dfrac{\kappa_p^{\kappa_p}}{\kappa_q^{\kappa_q}}\right)^d
+Hence, constraints \eqref{constraints generic case} become
+\begin{equation}\label{constraints generic case distribution function}
+	p \int_0^{\infty} t^{p-1} u(t)dt \leq A^p \quad \text{and} \quad q \int_0^{\infty} t^{q-1} u(t)dt \leq B^q
+\end{equation}
+and we can define the proper space of possible distribution functions
+\begin{equation}\label{distribution function space}
+	\mathcal{C} = \{u : (0,+\infty) \rightarrow [0,+\infty) \text{ such that } u \text{ is decreasing and satisfies } \eqref{constraints generic case distribution function}\}.
+\end{equation}
+Up to now we have rephrased our original question in terms of the following variational problem:
+\begin{equation}\label{nonstandard variational problem formulation}
+	\sup_{v \in \mathcal{C}} I(v) \quad \text{where} \quad I(v) \coloneqq \int_0^{+\infty} G(v(t))dt
+\end{equation}
+Firstly, we shall prove existence of maximizers.
+\begin{prop}\label{existence of maximizer}
+	The supremum in \eqref{nonstandard variational problem formulation} is attained by at least one function $u \in \mathcal{C}$. Moreover, every extremal function $u$ achieves equality in at least one of the constraints \eqref{constraints generic case distribution function}.
+\end{prop}
+\begin{proof}
+	contenuto...
+\end{proof}
+Then we shall prove that, if we remove the monotonicity assumption, the supremum is unchanged since maximal functions have to be monotonic.
+\begin{prop}\label{monotonicity of maximizer}
+	Let $\mathcal{C}' = \{u : (0,+\infty) \rightarrow [0,+\infty) \text{ such that } u \text{ is measurable and satisfies } \eqref{constraints generic case distribution function}\}$. Then
+	\begin{equation}
+		\sup_{v \in \mathcal{C}} I(v) = \sup_{v \in \mathcal{C}'} I(v).
+	\end{equation}
+	In particular, any function $u \in \mathcal{C}$ achieving the supremum on the left-hand side also achieves it on the right-hand side.
+\end{prop}
+\begin{proof}
+	contenuto...
+\end{proof}
+Before stating and proving the theorem that gives the only maximal function of \eqref{nonstandard variational problem formulation}, we introduce the following notation:
+\begin{equation*}\label{Log- def}
+	\Log(x) = \max\{-\log(x),\;0\}, \quad x>0.
 \end{equation*}
-We can check if the solution of the problem with just the $L^p$ bound solves also the problem with both bounds, that is $F\|_{L^q} \leq B$, where $F$ is given by ...
-\begin{align*}
-	\| F \|_{L^q}^q &= \int_{\R^{2d}} |F(z)|^q dz = ... = \lambda^q \left(\dfrac{p-1}{q}\right)^d
-\end{align*}
-Since we want $F$ to satisfy the $L^q$ constraint we should have
-\begin{equation*}
-	\dfrac{B}{A} \geq \kappa_p^{d\left(\frac1q - \frac1p\right)}\left(\dfrac{p}{q}\right)^{\frac{d}{q}}
-\end{equation*}
-It would be nice if this bound was less restrictive than the first one. Unfortunately that's not the case, in fact it's always true that
-\begin{equation*}
-	\left(\dfrac{p'}{q'}\right)^{\frac1{q'}} \left(\dfrac{p}{q}\right)^{\frac1q} \geq 1
-\end{equation*}
-
+\begin{teo}\label{nonstandard variational problem solution theorem}
+	There exist a unique function $u \in \mathcal{C}$ achieving the supremum in \eqref{nonstandard variational problem formulation} that is:
+	\begin{equation}\label{nonstandard variational problem solution formula}
+		u(t) = \dfrac{1}{d!} \left[\Log\left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right)\right]^d, \quad t>0
+	\end{equation}
+	where $\lambda_1, \lambda_2$ are both positive and uniquely determined by
+	\begin{equation*}
+		p\int_0^{+\infty} t^{p-1}u(t)dt = A^p, \quad q\int_0^{+\infty} t^{q-1}u(t)dt = B^q
+	\end{equation*}
+\end{teo}
 Following the path in \cite{nicolatilli_norm} we obtain ...\\
 \begin{equation*}
 	G'(u(t)) = \lambda_1 t^{p-1} + \lambda_2 t^{q-1} \implies u(t) = \dfrac{1}{d!}\left[-\log\left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right)\right]^d, \ t \in (0,M)
