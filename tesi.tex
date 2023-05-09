@@ -537,7 +537,20 @@ In previous chapters sometimes we wrote about ``good'' and ``bad'' localization 
 	where $[A,B] = AB-BA$ is the commutator of $A$ and $B$. Equality holds if and only if $(A-a)f = i c(B-b)f$ for some $c \in \R$.
 \end{lem}
 \begin{proof}
-	contenuto...
+	By Cauchy-Schwartz inequality we have
+	\begin{equation}\label{Cauchy Schwartz lemma uncertainty principle}
+		\| (A-a)f \| \cdot \| (B-b) f\| \geq |\langle (A-a)f, (B-b)f \rangle|
+	\end{equation}
+	The right-hand side is the modulus of a complex number. For every $z \in \C$ we have
+	\begin{equation*}
+		|z|^2 = \mathrm{Re}(z)^2 + \mathrm{Im}(z)^2 \geq \mathrm{Im}(z)^2 \implies |z| \geq \left| \dfrac{z-\overline{z}}{2i}\right| = \dfrac{1}{2} |z-\overline{z}|.
+	\end{equation*}
+	Using this inequality we have
+	\begin{align*}
+		|\langle (A-a)f, (B-b)f \rangle| &\geq \frac{1}{2}\left| \langle (A-a)f, (B-b)f \rangle - \langle (B-b)f, (A-a)f \rangle \right| =\\
+										 &=| \langle Af,Bf \rangle - \langle Af,bf \rangle - \langle af,Bf \rangle + \langle af,bf \rangle +\\
+										 &\phantom{|} - \langle Bf,Af \rangle + \langle Bf,af \rangle + \langle bf,Af \rangle - \langle bf,af \rangle |
+	\end{align*}
 \end{proof}
 
 \begin{teo}[Heisenberg's uncertainty principle]\label{Heisenberg's uncertainty principle theorem}
@@ -612,7 +625,7 @@ In this form the uncertainty principle has a heuristic yet meaningful interpreta
 \end{teo}
 
 
-section Faber-Krahn inequality fot STFT\section{Nicola-Tilli's uncertainty principle or Faber-Krahn Inequality for the STFT}\label{section Faber-Krahn inequality fot STFT}
+\section{Nicola-Tilli's uncertainty principle or Faber-Krahn Inequality for the STFT}\label{section Faber-Krahn inequality fot STFT}
 Theorem from \cite{nicolatilli_fk}
 \begin{teo}\label{faberkrahn theorem}
 	For every $f \in L^2(\R^d)$ such that $\|f\|_{L^2} = 1$ and every measurable subset $\Omega \subset \R^{2d}$ with finite measure we have
@@ -727,7 +740,7 @@ but, since $\frac{1}{p}+\frac{1}{p'}=1$ and $\frac{1}{q} - 1 = \frac{1}{q'}$, in
 \begin{equation*}
 	\left(\dfrac{p'}{q'}\right)^{\frac1{q'}} \left(\dfrac{p}{q}\right)^{\frac{1}{q}} \geq 1
 \end{equation*}
-{\color{red}It is quite easy that this inequality holds for every pair of $p,q>1$. Letting $x=\frac{1}{p}$ and $y=\frac{1}{q}$ we can take the $\log$ of the right-hand side and study it as a function of $x$ and $y$:
+{\color{blue}It is quite easy that this inequality holds for every pair of $p,q>1$. Letting $x=\frac{1}{p}$ and $y=\frac{1}{q}$ we can take the $\log$ of the right-hand side and study it as a function of $x$ and $y$:
 	\begin{equation*}
 		f(x,y) = (1-y)\left[\log(1-x) - \log(1-y)\right] + y\left[\log(x) - \log(y)\right]
 	\end{equation*}
@@ -737,15 +750,15 @@ but, since $\frac{1}{p}+\frac{1}{p'}=1$ and $\frac{1}{q} - 1 = \frac{1}{q'}$, in
 	\end{equation*}
 	Since $x \in (0,1)$, $\pfrac{f}{x}(x,y)$ is positive for $x<y$. SCRIVERE IN APPENDICE?}
 
-Despite this fact, at least we can say that, if $B/A \geq \kappa_p^{d\left(\frac{1}{q}-\frac{1}{p}\right)}\left(\frac{p}{q}\right)^{\frac{d}{q}}$ or $A/B \geq \kappa_q^{d\left(\frac{1}{p}-\frac{1}{q}\right)}\left(\frac{q}{p}\right)^{\frac{d}{p}}$, the problem is already solved and the solution is given by Theorem \ref{Nicola Tilli norm theorem}. Therefore, from now on, we will suppose to be in the intermediate case, that is
+Despite this fact, at least we can say that, if $B/A \geq \kappa_p^{d\left(\frac{1}{q}-\frac{1}{p}\right)}\left(\frac{p}{q}\right)^{\frac{d}{q}}$ or $B/A \leq \kappa_q^{d\left(\frac{1}{q}-\frac{1}{p}\right)}\left(\frac{p}{q}\right)^{\frac{d}{p}}$, the problem is already solved and the solution is given by Theorem \ref{Nicola Tilli norm theorem}. Therefore, from now on, we will suppose to be in the intermediate case, that is
 \begin{equation}\label{intermediate regime}
-	\kappa_q^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{p}} < \dfrac{B}{A} < \kappa_p^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{p}}
+	\kappa_q^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{p}} < \dfrac{B}{A} < \kappa_p^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{q}}
 \end{equation}
 We notice that the condition is well-posed, since it is actually true that
 \begin{align*}
-	\kappa_q^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{p}} < \kappa_p^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{p}}
+	\kappa_q^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{p}} < \kappa_p^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{q}}
 \end{align*}
-whenever $p \neq q$. {\color{red} Aggiungere dimostrazione in appendice?}
+whenever $p \neq q$. {\color{blue} Aggiungere dimostrazione in appendice?}
 
 Before tackling the problem in this intermediate regime, we prove a Theorem from \cite{nicolatilli_norm} which gives a bound for $\| L_F \|$ in terms of the distribution function of $|F|$.
 \begin{teo}\label{norm limitation}
@@ -820,21 +833,50 @@ Up to now we have rephrased our original question in terms of the following vari
 \end{equation}
 Firstly, we shall prove existence of maximizers.
 \begin{prop}\label{existence of maximizer}
-	The supremum in \eqref{nonstandard variational problem formulation} is attained by at least one function $u \in \mathcal{C}$. Moreover, every extremal function $u$ achieves equality in at least one of the constraints \eqref{constraints generic case distribution function}.
+	The supremum in \eqref{nonstandard variational problem formulation} is finite and it is attained by at least one function $u \in \mathcal{C}$. Moreover, every extremal function $u$ achieves equality in at least one of the constraints \eqref{constraints generic case distribution function}.
 \end{prop}
 \begin{proof}
-	contenuto...
+	Considering, for example, the first constraint in \eqref{constraints generic case distribution function}, we see that
+	\begin{equation*}
+		t^p u(t) = p \int_0^t \tau^{p-1} u(t) d\tau \overset{u \text{ decreasing}}{\leq} p \int_0^t \tau^{p-1} u(\tau) d\tau \leq A^p
+	\end{equation*}
+	hence functions in $\mathcal{C}$ are pointwise bounded by $A^p/t^p$. It is straightforward to verify that $G$ in \eqref{G} is increasing, that $G(s) \leq s$ and that $G(s) \leq 1$. Using these properties we have:
+	\begin{align*}
+		I(u) &= \int_0^{+\infty} G(u(t))dt = \int_0^1 G(u(t))dt + \int_1^{+\infty} G(u(t))dt \overset{G(s) \leq 1}{\leq} 1 + \int_1^{+\infty} G(u(t))dt \overset{G \text{ increasing}}{\leq}\\ &\leq 1 + \int_1^{+\infty} G(A^p/t^p)dt \overset{G(s) \leq s}{\leq} 1 + \int_1^{+\infty} \dfrac{A^p}{t^p}dt < \infty
+	\end{align*}
+	therefore the supremum in \eqref{nonstandard variational problem formulation} is finite.
+	
+	Let $\{u_n\}_{n \in \N} \subset \mathcal{C}$ be a maximizing sequence. Since every $u_n$ is pointwise bounded by $A^p/t^p$, thanks to {\color{red}Helly's selection theorem} we can say that, up to a subsequence, $u_n$ converges pointwise to a decreasing function $u$, which is still in $\mathcal{C}$, indeed:
+	\begin{equation*}
+		\int_0^{+\infty} t^{p-1} u(t) = \int_0^{+\infty} \lim_{n \rightarrow \infty} t^{p-1} u_n(t) dt \overset{\text{Fatou's lemma}}{\leq} \liminf_{n \rightarrow \infty} \int_0^{+\infty} t^{p-1} u_n(t) dt \leq \dfrac{A^p}{p}
+	\end{equation*}
+	and the same holds for $q$ instead of $p$.
+	
+	Now we have to prove that $u$ is actually achieving the supremum. We already saw that the following holds:
+	\begin{equation*}
+		|G(u_n(t))| \leq \chi_{(0,1)}(t) + \dfrac{A^p}{t^p} \chi_{(1,+\infty)}
+	\end{equation*}
+	and that the left-hand side is a function in $L^1(0,+\infty)$. This allows us to use dominated convergence theorem to conclude that 
+	\begin{equation*}
+		I(u) = \int_0^{+\infty} G(u(t)) = \lim_{n \rightarrow \infty} \int_0^{\infty} G(u_n(t))dt = \lim_{n \rightarrow \infty} I(u_n) = \sup_{v \in \mathcal{C}} I(v)
+	\end{equation*}
+
+	Lastly we need to show that $u$ achieves equality at least in one of the constraints \eqref{constraints generic case distribution function}. Suppose that this is not true. If we let $u_{\varepsilon}(t) = (1+\varepsilon) u(t)$, then for $\varepsilon > 0$ sufficiently small constraints are still satisfied and since $G$ is strictly increasing $I(u_{\varepsilon}) > I(u)$, which contradicts the hypothesis that $u$ is a maximizer.
 \end{proof}
-Then we shall prove that, if we remove the monotonicity assumption, the supremum is unchanged since maximal functions have to be monotonic.
+{\color{blue} In order to do some ``meaningful'' calculus of variations over $I$ we need to enlarge $\mathcal{C}$, because the monotonicity assumption is quite strict. We will show that removing this hypothesis leaves the supremum unchanged and that maximizers are indeed monotonic.}
 \begin{prop}\label{monotonicity of maximizer}
-	Let $\mathcal{C}' = \{u : (0,+\infty) \rightarrow [0,+\infty) \text{ such that } u \text{ is measurable and satisfies } \eqref{constraints generic case distribution function}\}$. Then
+	{\color{blue}Let $\mathcal{C}' = \{u : (0,+\infty) \rightarrow [0,+\infty) \text{ such that } u \text{ is measurable and satisfies } \eqref{constraints generic case distribution function}\}$}. Then
 	\begin{equation}
 		\sup_{v \in \mathcal{C}} I(v) = \sup_{v \in \mathcal{C}'} I(v).
 	\end{equation}
 	In particular, any function $u \in \mathcal{C}$ achieving the supremum on the left-hand side also achieves it on the right-hand side.
 \end{prop}
 \begin{proof}
-	contenuto...
+	Let $u \in \mathcal{C}'$. We define its \emph{decreasing rearrangement} as
+	\begin{equation}
+		u^*(s) = \sup\{t \geq 0 : |\{u>t\}|>s\}
+	\end{equation}
+	{\color{blue} AGGIUNGERE DIMOSTRAZIONE IN APPENDICE?? }
 \end{proof}
 Before stating and proving the theorem that gives the only maximal function of \eqref{nonstandard variational problem formulation}, we introduce the following notation:
 \begin{equation*}\label{Log- def}
@@ -850,23 +892,53 @@ Before stating and proving the theorem that gives the only maximal function of \
 		p\int_0^{+\infty} t^{p-1}u(t)dt = A^p, \quad q\int_0^{+\infty} t^{q-1}u(t)dt = B^q
 	\end{equation*}
 \end{teo}
-Following the path in \cite{nicolatilli_norm} we obtain ...\\
+\begin{proof}
+{\color{blue} We will split the proof in several parts. Firstly we will show that maximizers are given by \eqref{nonstandard variational problem solution formula}. Then we will show that multipliers $\lambda_1$ and $\lambda_2$ are both strictly positive and unique.}
+
+Let $M = \sup\{t \in (0,+\infty)\ : u(t) > 0\}$. From Proposition \ref{existence of maximizer} we know that $u$ has to achieve at least one of the constraints, therefore $M>0$. Consider now a closed interval $[a,b] \subset (0,M)$ and a function $\eta \in L^{\infty}(0,M)$ supported in $[a,b]$. Without loss of generality we can suppose that $\eta$ is orthogonal, in the $L^2$ sense, to $t^{p-1}$ and $t^{q-1}$, explicitly
+\begin{equation}\label{variations are orthogonal to constraints}
+	\int_a^b t^{p-1} \eta(t) dt=0, \quad \int_a^b t^{q-1} \eta(t) dt=0.
+\end{equation}
+On $[a,b]$ we have that $u(t) \geq u(b) > 0$, hence, for $|\varepsilon|$ sufficiently small, $u+\varepsilon\eta$ is still a nonnegative function which satisfies \eqref{constraints generic case distribution function}, therefore $u+\varepsilon\eta \in \mathcal{C}'$. Since we are supposing that $u$ is a maximizer, the function $\varepsilon \mapsto I(u+\varepsilon\eta)$ has a maximum for $\varepsilon = 0$. Since $\eta$ is supported in a compact interval we can differentiate under the integral sign and obtain
 \begin{equation*}
-	G'(u(t)) = \lambda_1 t^{p-1} + \lambda_2 t^{q-1} \implies u(t) = \dfrac{1}{d!}\left[-\log\left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right)\right]^d, \ t \in (0,M)
+	0 = \dfrac{d}{d\varepsilon}I(u+\varepsilon\eta) \lvert_{\varepsilon=0} = \int_a^b G'(u(t))\eta(t)dt.
 \end{equation*}
-Our main goal now is to show that multipliers $\lambda_1, \lambda_2$ are unique and both positive.
+We would like to extend this result to every $\eta$ in $L^2(a,b)$ satisfying \eqref{variations are orthogonal to constraints}. {\color{blue}Since $L^{\infty}(a,b)$ is dense in $L^2(a,b)$, there exist a sequence $\{\eta_k\}_{k \in \N} \subset L^{\infty}(a,b)$ such that $\eta_k \rightarrow \eta$ in $L^2(a,b)$. We can consider the projection operator $P$ such that, given $\psi \in L^2(a,b)$, $P\psi$ is the orthogonal projection of $\psi$ onto $ X = \mathrm{span}\{t^{p-1},t^{q-1}\}^{\perp} \subset L^2(a,b)$. Since $P$ is continuous we have that $P\eta_k \rightarrow P\eta = \eta$, hence
+\begin{gather}
+	0 = \int_a^b G'(u(t)) P\eta_k(t) dt = \langle G'(u), P\eta_n \rangle_{L^2(a,b)} \rightarrow \langle G'(u), \eta \rangle_{L^2(a,b)} = \int_a^b G'(u(t)) \eta(t) dt \implies \nonumber\\
+	\implies \int_a^b G'(u(t)) \eta(t) dt = 0. \label{orthogonality of G'}
+\end{gather}}
+Since \eqref{orthogonality of G'} holds for every $\eta \in X$ it must be that 
+\begin{equation*}
+	G'(u) \in X^{\perp} = \left(\mathrm{span}\{t^{p-1},t^{q-1}\}^{\perp}\right)^{\perp} = \mathrm{span}\{t^{p-1},t^{q-1}\} \quad \text{in } (a,b).
+\end{equation*}
+By letting $a \rightarrow 0^+$ and $b \rightarrow M^-$ we then obtain
+\begin{equation}\label{expression G'(u)}
+	G'(u(t)) = \lambda_1 t^{p-1} + \lambda_2 t^{q-1} \quad \text{for a.e. } t \in (0,M)
+\end{equation}
+for some $\lambda_1,\lambda_2 \in \R$. Since $u$ is decreasing actually \eqref{expression G'(u)} holds for every $t \in (0,M)$. {\color{red} We point out that this argument enables us to say that maximizers have to achieve equality in both constraints in \eqref{constraints generic case distribution function}. Indeed, if, for example, we had that $q \int_0^{\infty} t^{q-1}u(t)dt < B^q$, the second condition of orthogonality in \eqref{variations are orthogonal to constraints} could be removed (since, for sufficiently small $\varepsilon$, a variation non-orthogonal to $t^{q-1}$ would be admissible), providing us with the solution of the same variational problem but without the $L^q$ constraint. Since we already know that actually this solution does not satisfy the $L^q$ constraint we conclude that $u$ has to achieve equality in both constraints. With the very same thinking we can say that neither $\lambda_1$ nor $\lambda_2$ can be 0.}
 
-The easiest fact to prove is that both multipliers are not 0. In fact if one, say $\lambda_2$, was 0, we would obtain that the solution of our problem is the same as the one with just the $L^p$ bound. But we already know that this function does not satisfy the $L^q$ constraint hence it is impossible that $\lambda_2=0$.
 
-Suppose now that one of the multipliers, say always $\lambda_2$, is negative. Consider an interval $[a,b] \subset (0,M)$ and a variation $\eta \in L^{\infty}(0,M)$ supported in $[a,b]$. Thanks to the Gram-Schmidt process we can construct a variation orthogonal to $t^{p-1}$. Since $\eta$ is arbitrary we can suppose that it is not orthogonal to $t^{q-1}$, in particular we can suppose that $\int_{a}^{b}t^{q-1}\eta(t)dt <0$. Therefore the directional derivative of $G$ along $\eta$ is:
-\begin{align*}
-	\int_{a}^{b} G'(u(t))\eta(t)dt &= \int_{a}^{b} (\lambda_1 t^{p-1} + \lambda_2 t^{q-1})\eta(t)dt = \\
-									   &= \lambda_2 \int_{a}^{b} t^{q-1} \eta(t)dt > 0
-\end{align*}
+ Recalling the expression of \eqref{G} we see that $G'(s) = e^{-(d!s)^{1/d}}$ and {\color{blue} easily invert \eqref{expression G'(u)}}, thus obtaining
+\begin{equation}\label{expression u}
+	u(t) = \begin{cases}
+		\dfrac{1}{d!} \left[-\log\left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right) \right]^d & t \in (0,M)\\
+		0 & t \in (M,+\infty)
+	\end{cases}
+\end{equation}
+We remark that a priori it was possible that $M=+\infty$, but from the explicit expression of maximizers we see that this is not possible since $u$ has to be nonnegative.
+
+Our main goal now is to show that multipliers $\lambda_1, \lambda_2$ are both positive and unique since this will give us uniqueness for the maximizer.
+
+We start by proving that both multipliers are positive. Suppose that one of them, for example $\lambda_2$, is negative. Consider an interval $[a,b] \subset (0,M)$ and a variation $\eta \in L^{\infty}(0,M)$ supported in $[a,b]$. Thanks to the Gram-Schmidt process we can construct a variation orthogonal to $t^{p-1}$. Since $\eta$ is arbitrary we can also suppose that it is not orthogonal to $t^{q-1}$, in particular we can ask that $\int_{a}^{b}t^{q-1}\eta(t)dt <0$. Therefore, the directional derivative of $G$ along $\eta$ is:
+\begin{equation*}
+	\int_{a}^{b} G'(u(t))\eta(t)dt = \int_{a}^{b} (\lambda_1 t^{p-1} + \lambda_2 t^{q-1})\eta(t)dt = \lambda_2 \int_{a}^{b} t^{q-1} \eta(t)dt > 0
+\end{equation*}
 which contradicts the fact that $u$ is a maximizer.
 
-Now that we now that both multipliers are positive we can prove that $u$ is continuous, which is equivalent to say that $M=T$, where $T$ is the unique positive number such that $\lambda_1 T^{p-1} + \lambda_2 T^{q-1} = 1$ (uniqueness of $T$ follows from the positivity of multipliers).\\
-We start supposing that $M < T$ which means that $\lim_{t \rightarrow M^-} u(t) > 0$. Consider the following variation 
+Now that we now that both multipliers are positive we can prove that $u$ is continuous, which is equivalent to say that $M=T$, where $T$ is the unique positive number such that $\lambda_1 T^{p-1} + \lambda_2 T^{q-1} = 1$ (uniqueness of $T$ follows from the positivity of multipliers).
+
+We start supposing that $M < T$, which means that $\lim_{t \rightarrow M^-} u(t) > 0$. Consider the following variation 
 \begin{equation*}
 	\eta(t) = \left\{
 	\begin{aligned}
@@ -875,7 +947,7 @@ We start supposing that $M < T$ which means that $\lim_{t \rightarrow M^-} u(t) 
 		0,\quad				   & \text{otherwise}
 	\end{aligned}\right.
 \end{equation*}
-where $\delta>0$ is small enough so that $M-M\delta >0$ and $M+M\delta < T$ while $\alpha$ and $\beta$ are constants, depending on $\delta$, to be found. Since we want this to be an admissible variation we need to impose that $\eta$ is orthogonal to $t^{p-1}$ and $t^{q-1}$. For example, the first condition is:
+where $\delta>0$ is small enough so that $M-M\delta >0$ and $M+M\delta < T$, while $\alpha$ and $\beta$ are constants, depending on $\delta$, to be determined. Since we want this to be an admissible variation we need to impose that $\eta$ is orthogonal to $t^{p-1}$ and $t^{q-1}$. For example, the first condition is:
 \begin{align*}
 	0 &= \int_{M-M\delta}^{M+M\delta} t^{p-1} \eta(t) dt = -\int_{M-M\delta}^M t^{p-1}dt + \int_{M-M\delta}^M t^{p-1}\left(\alpha \frac{t}{M} + \beta\right) dt + \int_M^{M+M\delta} t^{p-1}dt \overset{\tau=t/M}{=}\\
 	  &= M^p \int_{1-\delta}^1 \tau^{p-1}(\alpha \tau + \beta) d\tau - M^p \int_{1-\delta}^1 \tau^{p-1} d\tau + M^p \int_1^{1+\delta} \tau^{p-1} d\tau \overset{1/\delta}{\implies}\\
@@ -885,11 +957,13 @@ The equation stemming from the orthogonality with $t^{q-1}$ is analogous. Theref
 \textbf{VA RESO MEGLIO}
 \begin{equation}\label{system continuity}
 	\begin{pmatrix}
-		\fint_{1-\delta}^1 \tau^{p} d\tau &  \fint_{1-\delta}^1 \tau^{p-1} d\tau\\
-		\fint_{1-\delta}^1 \tau^{q} d\tau & \fint_{1-\delta}^1 \tau^{q-1} d\tau
+		 \fint_{1-\delta}^1 \tau^{p} d\tau &   \fint_{1-\delta}^1 \tau^{p-1} d\tau\\
+		 \fint_{1-\delta}^1 \tau^{q} d\tau &   \fint_{1-\delta}^1 \tau^{q-1} d\tau
 	\end{pmatrix}
 	\begin{pmatrix}
 		\alpha\\
+		%\phantom{a} \\
+		%\phantom{a} \\
 		\beta
 	\end{pmatrix}=
 	\begin{pmatrix}
@@ -897,7 +971,7 @@ The equation stemming from the orthogonality with $t^{q-1}$ is analogous. Theref
 		\fint_{1-\delta}^1 \tau^{q-1} d\tau - \fint_1^{1+\delta} \tau^{q-1} d\tau
 	\end{pmatrix}
 \end{equation}
-This system has a unique solution if and only if the determinant of the matrix is not 0. We can show this directly:
+{\color{blue}This system has a unique solution if and only if the determinant of the matrix is not 0. We can show this directly:
 \begin{align*}
 	& \fint_{1-\delta}^1 \tau^{p} d\tau \fint_{1-\delta}^1 \tau^{q-1} d\tau - \fint_{1-\delta}^1 \tau^{q} d\tau \fint_{1-\delta}^1 \tau^{p-1} d\tau=\\
 	&= \dfrac{1}{\delta^2} \int_{(1-\delta,1)^2} \left(\tau^p \sigma^{q-1} - \tau^{p-1}\sigma^q\right) d\tau d\sigma = \dfrac{1}{\delta^2} \int_{(1-\delta,1)^2} \tau^{p-1} \sigma^{q-1} \left( \tau - \sigma \right) d\tau d\sigma = \\
@@ -911,7 +985,7 @@ In $Q_1$ $\tau - \sigma > 0$ and the sign of $\tau^{p-1}\sigma^{q-1} - \tau^{q-1
 \begin{equation*}
 	\tau^{p-1}\sigma^{q-1} - \tau^{q-1}\sigma^{p-1} > 0 \iff \left(\dfrac{\tau}{\sigma}\right)^{p-q} > 1 \overset{\tau > \sigma}{\iff} p>q
 \end{equation*}
-Therefore the determinant of the matrix is always non 0.\\
+Therefore the determinant of the matrix is always not 0.}\\
 %If we see it as a function of $\delta$ we can expand the terms in a Taylor series:
 %\begin{align*}
 %	& \fint_{1-\delta}^1 \tau^{p} d\tau \fint_{1-\delta}^1 \tau^{q-1} d\tau - \fint_{1-\delta}^1 \tau^{q} d\tau \fint_{1-\delta}^1 \tau^{p-1} d\tau=\\
@@ -930,17 +1004,19 @@ The derivative of $G$ along $\eta$ is nonpositive because $u$ is supposed to be 
 \end{align*}
 Dividing by $M\delta$ and rearranging we obtain:
 \begin{equation}\label{inequality continuity}
-	\fint_{M-M\delta}^M \left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right) dt \geq  1 + \lambda_1 M^{p-1} \fint_{1-\delta}^1 t^{p-1}(\alpha t + \beta) dt\, + \lambda_2 M^{q-1} \fint_{1-\delta}^1 t^{q-1}(\alpha t + \beta) dt
+	\begin{aligned}
+		\fint_{M-M\delta}^M \left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right) dt \geq  1 &+ \lambda_1 M^{p-1} \fint_{1-\delta}^1 t^{p-1}(\alpha t + \beta) dt\\ &+ \lambda_2 M^{q-1} \fint_{1-\delta}^1 t^{q-1}(\alpha t + \beta) dt
+	\end{aligned}
 \end{equation}
-We notice that the last two terms are exactly the one that appear in the orthogonality condition, therefore to understand their behavior as $\delta$ approaches 0 we need to study the right-hand side of the system \eqref{system continuity}. If we expand the first term in its Taylor series with respect to $\delta$ we have:
+We notice that the last two terms are exactly the one that appear in the orthogonality condition, therefore, to understand their behavior as $\delta$ approaches 0, we need to study the right-hand side of the system \eqref{system continuity}. If we expand the first term in its Taylor series with respect to $\delta$ we have:
 \begin{align*}
 	\left(1-\dfrac{p-1}{2}\delta + o(\delta) \right) - \left(1+\dfrac{p-1}{2}\delta + o(\delta) \right) = -(p-1)\delta + o(\delta)
 \end{align*}
-and the same is for the other term. Since they both are of order $\delta$ if we let $\delta \rightarrow 0^+$ in \eqref{inequality continuity} we obtain
+and the same is for the other term. Since they both are of order $\delta$, if we let $\delta \rightarrow 0^+$ in \eqref{inequality continuity} we obtain
 \begin{equation*}
 	\lambda_1 M^{p-1} + \lambda_2 M^{q-1} \geq 1
 \end{equation*}
-Since the function $\lambda_1 t^{p-1}  + \lambda_2 t^{q-1}$ is strictly increasing (because $\lambda_1$ and $\lambda_2$ are both positive) $M \geq T$ which is absurd because we supposed that $M<T$.
+Since the function $\lambda_1 t^{p-1}  + \lambda_2 t^{q-1}$ is strictly increasing (because $\lambda_1$ and $\lambda_2$ are both positive) $M \geq T$ which is absurd because we supposed that $M<T$. This allows us to write $u$ as in \eqref{nonstandard variational problem solution formula}.
 
 Lastly we shall prove that multipliers $\lambda_1, \lambda_2$, and hence maximizer, are unique. For this proof it is convenient to express $u$ in a slightly different way:
 \begin{equation*}
@@ -950,7 +1026,7 @@ To emphasize that $u$ is parametrized by $c_1, c_2$ we may write $u(t;c_1,c_2)$.
 \begin{equation*}
 	f(c_1,c_2) = p\ \int_0^T t^{p-1}u(t;c1,c2)dt, \quad g(c_1,c_2) = q\ \int_0^T t^{q-1}u(t;c1,c2)dt
 \end{equation*}
-We want to highlight that, even if not explicit, also $T$ depends on $c_1$ and $c_2$. Nevertheless these functions are differentiable since both $T$ and $u$ are differentiable with respect to $(c_1,c_2)$, functions $t^{p-1}u$ and $t^{q-1}u$ and their derivatives are bounded in $(0,T)$. 
+We want to highlight that, even if it is not explicit, also $T$ depends on $c_1$ and $c_2$. Nevertheless these functions are differentiable since both $T$ and $u$ are differentiable with respect to $(c_1,c_2)$, functions $t^{p-1}u$ and $t^{q-1}u$ and their derivatives are bounded in $(0,T)$. 
 Our maximizer $u$ satisfies the constraints only if $f(c_1,c_2)=A^p, \, g(c_1,c_2) = B^q$. Therefore to prove uniqueness of the maximizer we need to show that level sets $\{f=A^p\}$ and $\{g=B^q\}$ intersect in only a point.\\
 First of all we are studying endpoints. For example, if $c_2=0$:
 \begin{align*}
@@ -964,46 +1040,46 @@ The same can be done for $g$ and setting $c_1=0$ thus we obtain four points
 In the regime we are considering one has that $c_{1,f} < c_{1,g}$ and $c_{2,f} > c_{2,g}$, indeed
 \begin{align*}
 	&c_{1,f} < c_{1,g} \iff \dfrac{\kappa_p^{d/p}}{A} < \left(\dfrac{p-1}{q}\right)^{d/q}\dfrac1{B} \iff \dfrac{B}{A} < \kappa_p^{d\left( \frac1{q}-\frac1{p}\right)}\left(\dfrac{p}{q}\right)^{d/q}\\
-	&c_{2,f} > c_{2,g} \iff \left(\dfrac{q-1}{p}\right)^{d/p}\dfrac1{A} > \dfrac{\kappa_q^{d/q}}{B} \iff \dfrac{B}{A} > \kappa_q^{d\left( \frac1{p}-\frac1{q}\right)}\left(\dfrac{q}{p}\right)^{d/p}
+	&c_{2,f} > c_{2,g} \iff \left(\dfrac{q-1}{p}\right)^{d/p}\dfrac1{A} > \dfrac{\kappa_q^{d/q}}{B} \iff \dfrac{B}{A} > \kappa_q^{d\left( \frac1{q}-\frac1{p}\right)}\left(\dfrac{p}{q}\right)^{d/p}
 \end{align*}
-Since there is this dispositions of these points we expect there is an intersection between the level sets. Firstly we notice that, for every $c_1 \in (0,c_{1,f})$ there exist a unique value of $c_2$ for which $f(c_1,c_2) = A^p$. Indeed, from previous computations we notice that $f(c_1,0)$ is a decreasing function hence $f(c_1,0) > A^p$, while $\lim_{c_2 \rightarrow +\infty} f(c_1,c_2) = 0$. The uniqueness of this value follows from strict monotonicity of $f(c_1,\cdot)$, in fact:
+which are exactly conditions in \eqref{intermediate regime}.
+Since there is this dispositions of these points we expect there is an intersection between level sets. Firstly we notice that, for every $c_1 \in (0,c_{1,f})$, there exist a unique value of $c_2$ for which $f(c_1,c_2) = A^p$. Indeed, from previous computations we notice that $f(c_1,0)$ is a decreasing function hence $f(c_1,0) > A^p$, while $\lim_{c_2 \rightarrow +\infty} f(c_1,c_2) = 0$. The uniqueness of this value follows from strict monotonicity of $f(c_1,\cdot)$, in fact:
 \begin{equation}\label{df/dc1}
 	\pfrac{f}{c_1}(c_1,c_2) = -\dfrac{p(p-1)}{(d-1)!}c_1^{p-2}\ \int_0^T \dfrac{t^{2(p-1)}}{(c_1t)^{p-1}+(c_2t)^{q-1}} \left[ -\log\left((c_1t)^{p-1} + (c_2t)^{q-1}\right) \right]^{d-1}dt
 \end{equation}
-is always strictly negative. We point out that the term $\frac{\partial T}{\partial c_1}(c_1,c_2)u(T;c_1,c_2)$ is zero because $u$ is 0 in $T$. The same is true for $g$, therefore on the interval $(0,c_{1,f})$ the level sets of $f$ and $g$ can be seen as the graph of two functions $\varphi, \gamma$. Since $\frac{\partial f}{\partial c_2}, \frac{\partial g}{\partial c_2} < 0$ for every $(c_1,c_2)$ from the implicit function theorem we have that $\varphi$ and  $\gamma$ are differentiable with respect to $c_1$.\\
-{\large{\textbf{Possibile disegno??}}}\\
+is always strictly negative. We point out that the term $\frac{\partial T}{\partial c_1}(c_1,c_2)u(T;c_1,c_2)$, that should appear since $T$ depends on $c_1$, is zero because $u$ is 0 in $T$. The same is true for $g$, therefore on the interval $(0,c_{1,f})$ the level sets of $f$ and $g$ can be seen as the graph of two functions $\varphi, \gamma$. Since $\frac{\partial f}{\partial c_2}, \frac{\partial g}{\partial c_2} < 0$ for every $(c_1,c_2)$, from the implicit function theorem we have that $\varphi$ and  $\gamma$ are differentiable with respect to $c_1$.\\
 After defining $\varphi$ and $\gamma$ we want to prove that $(\varphi-\gamma)' < 0$. Still from the implicit function theorem we have
 \begin{equation*}
 	\begin{split}
-		\dfrac{\mathrm{d}}{\mathrm{d} c_1}(\varphi - \gamma)(c_1) = -\dfrac{\pfrac{f}{c_1}(c_1,\varphi(c_1))}{\pfrac{f}{c_2}(c_1,\varphi(c_1))}  + 
+		\dfrac{d}{d c_1}(\varphi - \gamma)(c_1) = -\dfrac{\pfrac{f}{c_1}(c_1,\varphi(c_1))}{\pfrac{f}{c_2}(c_1,\varphi(c_1))}  + 
 		\dfrac{\pfrac{g}{c_1}(c_1,\gamma(c_1))}{\pfrac{g}{c_2}(c_1,\gamma(c_1))} < 0 \iff \\
-		\pfrac{f}{c_1}(c_1,\varphi(c_1)) \pfrac{g}{c_2}(c_1,\gamma(c_1)) - \pfrac{f}{c_2}(c_1,\varphi(c_1)) \pfrac{g}{c_1}(c_1,\gamma(c_1)) > 0
+		\mathcal{I}(c_1) = \pfrac{f}{c_1}(c_1,\varphi(c_1)) \pfrac{g}{c_2}(c_1,\gamma(c_1)) - \pfrac{f}{c_2}(c_1,\varphi(c_1)) \pfrac{g}{c_1}(c_1,\gamma(c_1)) > 0
 	\end{split}
 \end{equation*}
 As for \eqref{df/dc1} the other derivatives are computed. To simplify the notation we define $h(t;c_1,c_2) = \frac{1}{(d-1)!}\frac{1}{(c_1t)^{p-1}+(c_2t)^{q-1}}\left[ -\log\left((c_1t)^{p-1} + (c_2t)^{q-1}\right) \right]^{d-1}$. From Fubini's theorem we can write the product of the integrals as a double integral
 \begin{equation*}
 	\begin{split}
-		&p(p-1)q(q-1)c_1^{p-2}\gamma(c_1)^{q-2} \iint_{[0,T]^2} h(t;c_1,\varphi(c_2)) h(s;c_1,\gamma(c_2)) t^{2(p-1)} s^{2(q-1)} dtds -\\ &p(q-1)q(p-1)c_1^{p-2}\varphi(c_1)^{q-2} \iint_{[0,T]^2} h(t;c_1,\varphi(c_2)) h(s;c_1,\gamma(c_2)) t^{p+q-2} s^{p+q-2} dtds
+		\mathcal{I}(c_1) &=p(p-1)q(q-1)c_1^{p-2}\gamma(c_1)^{q-2} \int_{[0,T]^2} h(t;c_1,\varphi(c_2)) h(s;c_1,\gamma(c_2)) t^{2(p-1)} s^{2(q-1)} dtds +\\ &-p(q-1)q(p-1)c_1^{p-2}\varphi(c_1)^{q-2} \int_{[0,T]^2} h(t;c_1,\varphi(c_2)) h(s;c_1,\gamma(c_2)) t^{p+q-2} s^{p+q-2} dtds
 	\end{split}
 \end{equation*}
-At the intersection point $\varphi(c_1)=\gamma(c_1)$ hence the sign of the previous expression depends only on the sign of
+When level sets intersect we have $\varphi(c_1)=\gamma(c_1)$. In this situation we can factorize the terms outside the integral and notice that the sign of $\mathcal{I}$ depends on the sign of:
 \begin{equation*}
 	\begin{split}
-		&\iint_{[0,T]^2} h(t;c_1,\varphi(c_1)) h(s;c_1,\gamma(c_1))\left( t^{2(p-1)} s^{2(q-1)} - t^{p+q-2} s^{p+q-2} \right)dtds=\\
-		&=\iint_{[0,T]^2} h(t;c_1,\varphi(c_1)) h(s;c_1,\gamma(c_1)) t^{p-2}s^{q-2}\left( t^p s^q - t^q s^p \right)dtds\\
+		&\int_{[0,T]^2} h(t;c_1,\varphi(c_1)) h(s;c_1,\gamma(c_1))\left( t^{2(p-1)} s^{2(q-1)} - t^{p+q-2} s^{p+q-2} \right)dtds=\\
+		=&\int_{[0,T]^2} h(t;c_1,\varphi(c_1)) h(s;c_1,\gamma(c_1)) t^{p-2}s^{q-2}\left( t^p s^q - t^q s^p \right)dtds\\
 	\end{split}
 \end{equation*}
-In order to simplify the notation once again we set $H(t,s;c_1) = h(t;c_1,\varphi(c_1)) h(s;c_1,\gamma(c_1))$. Let $T_1 = [0,T]^2 \cap \{t>s\}$ and $T_2 = [0,T]^2 \cap \{t<s\}$. We can split the above integral in two parts
+In order to simplify the notation once again we set $H(t,s;c_1) = h(t;c_1,\varphi(c_1)) h(s;c_1,\gamma(c_1))$. Let $T_1 = [0,T]^2 \cap \{t>s\}$ and $T_2 = [0,T]^2 \cap \{t<s\}$. We can split the above integral in two parts:
 \begin{equation*}
 	\begin{split}
-		\iint_{T_1} H(t,s;c_1)t^{p-2}s^{q-2}\left( t^p s^q - t^q s^p \right)dtds + \iint_{T_2} H(t,s;c_1)t^{p-2}s^{q-2}\left( t^p s^q - t^q s^p \right)dtds
+		\int_{T_1} H(t,s;c_1)t^{p-2}s^{q-2}\left( t^p s^q - t^q s^p \right)dtds + \int_{T_2} H(t,s;c_1)t^{p-2}s^{q-2}\left( t^p s^q - t^q s^p \right)dtds
 	\end{split}
 \end{equation*}
-We can exchange $t$ with $s$ in the second integral. With this change of variables the domain of integration becomes $T_1$ and since $H$ is symmetric in $t$ and $s$ we have that the previous quantity is equal to
+Then, considering the change of variables that swaps $t$ and $s$, the domain of integration becomes $T_1$ and since $H$ is symmetric in $t$ and $s$ we have that the previous quantity is equal to
 \begin{equation*}
 	\begin{split}
-		&\iint_{T_1} H(t,s;c_1)\left( t^{p-2} s^{q-2} - t^{q-2} s^{p-2} \right) \left( t^p s^q - t^q s^p \right)dtds =\\
-		&\iint_{T_1} H(t,s;c_1)\dfrac{1}{t^2 s^2}\left( t^p s^q - t^q s^p \right)^2 dtds
+		&\int_{T_1} H(t,s;c_1)\left( t^{p-2} s^{q-2} - t^{q-2} s^{p-2} \right) \left( t^p s^q - t^q s^p \right)dtds =\\
+		=& \int_{T_1} H(t,s;c_1)\dfrac{1}{t^2 s^2}\left( t^p s^q - t^q s^p \right)^2 dtds
 	\end{split}
 \end{equation*}
 which is strictly positive.
@@ -1011,8 +1087,13 @@ which is strictly positive.
 Now we are able to prove the uniqueness of multipliers.\\
 First of all, since $(\varphi-\gamma)'<0$ whenever $\varphi(c_1) = \gamma(c_1)$, for every point of intersection there exist $\delta>0$ such that $\varphi(t) > \gamma(t)$ for $t \in (c_1 - \delta, c_1)$ while $\varphi(t) < \gamma(t)$ for $t \in (c_1, c_1 + \delta)$.\\
 Define $c_1^* \coloneqq \sup \{c_1 \in [0,c_{1,f}] : \forall t \in [0,c_1] \ \varphi(t) \geq \gamma(t)\}$. This is an intersection point between $\varphi$ and $\gamma$ (if $\varphi(c_1^*) > \gamma(c_1^*)$ due to continuity there would be $\varepsilon > 0$ such that $\varphi(c_1^*+\varepsilon) > \gamma(c_1^*+\varepsilon)$ which contradicts the definition of $c_1^*$) and it is the first one, because we saw that after every intersection point there is an interval where $\varphi < \gamma$. Lastly, since $\varphi(0) > \gamma(0)$ and $\varphi(c_{1,f}) = 0 < \gamma(c_1,f)$ we have that $0 < c_1^* < c_{1,f}$.\\
-Suppose now that there is a second point of intersection $\tilde{c}_1$ after the first one. Since immediately after $c_1^*$ we have that $\varphi$ becomes smaller than $\gamma$ this second point of intersection is given by $\tilde{c}_1 = \sup \{c_1 \in [c_1^*,c_{1,f}] : \forall t \in [c_1^*,c_1] \ \varphi(t) \leq \gamma(t)\}$. Considering that this is an intersection point, there exist an interval before $\tilde{c}_1$ where $\varphi$ is strictly grater than $\gamma$ which is absurd, hence $c_1^*$ is the only intersection point between $\varphi$ and $\gamma$.\\
-Therefore $(c_1^*, \varphi(c_1^*) = c_2^*)$ is the unique pair of multipliers for which $p\int_0^T t^{p-1} u(t;c_1^*,c_2^*)dt = A^p,\ q\int_0^T t^{q-1} u(t;c_1^*,c_2^*)dt = B^q$ and in the end $u(t;c_1^*,c_2^*)$ is the unique maximizer for \textbf{CITARE PROBLEMA VARIAZIONALE}
+Suppose now that there is a second point of intersection $\tilde{c}_1$ after the first one. Since immediately after $c_1^*$ we have that $\varphi$ becomes smaller than $\gamma$, this second point of intersection is given by $\tilde{c}_1 = \sup \{c_1 \in [c_1^*,c_{1,f}] : \forall t \in [c_1^*,c_1] \ \varphi(t) \leq \gamma(t)\}$. Considering that this is an intersection point, there exist an interval before $\tilde{c}_1$ where $\varphi$ is strictly greater than $\gamma$ which is absurd, hence $c_1^*$ is the only intersection point between $\varphi$ and $\gamma$.\\
+Therefore $(c_1^*, \varphi(c_1^*) = c_2^*)$ is the unique pair of multipliers for which 
+\begin{equation*}
+	p\int_0^T t^{p-1} u(t;c_1^*,c_2^*)dt = A^p, \quad q\int_0^T t^{q-1} u(t;c_1^*,c_2^*)dt = B^q
+\end{equation*}
+and, in the end, $u(t;c_1^*,c_2^*)$ is the unique maximizer for \eqref{nonstandard variational problem formulation}.
+\end{proof}
 
 \nocite{*}
 \printbibliography
