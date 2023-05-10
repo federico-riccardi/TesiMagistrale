@@ -537,8 +537,8 @@ In previous chapters sometimes we wrote about ``good'' and ``bad'' localization 
 	where $[A,B] = AB-BA$ is the commutator of $A$ and $B$. Equality holds if and only if $(A-a)f = i c(B-b)f$ for some $c \in \R$.
 \end{lem}
 \begin{proof}
-	By Cauchy-Schwartz inequality we have
-	\begin{equation}\label{Cauchy Schwartz lemma uncertainty principle}
+	By Cauchy-Schwarz inequality we have
+	\begin{equation}\label{Cauchy Schwarz lemma uncertainty principle}
 		\| (A-a)f \| \cdot \| (B-b) f\| \geq |\langle (A-a)f, (B-b)f \rangle|
 	\end{equation}
 	The right-hand side is the modulus of a complex number. For every $z \in \C$ we have
@@ -546,11 +546,13 @@ In previous chapters sometimes we wrote about ``good'' and ``bad'' localization 
 		|z|^2 = \mathrm{Re}(z)^2 + \mathrm{Im}(z)^2 \geq \mathrm{Im}(z)^2 \implies |z| \geq \left| \dfrac{z-\overline{z}}{2i}\right| = \dfrac{1}{2} |z-\overline{z}|.
 	\end{equation*}
 	Using this inequality we have
-	\begin{align*}
-		|\langle (A-a)f, (B-b)f \rangle| &\geq \frac{1}{2}\left| \langle (A-a)f, (B-b)f \rangle - \langle (B-b)f, (A-a)f \rangle \right| =\\
-										 &=| \langle Af,Bf \rangle - \langle Af,bf \rangle - \langle af,Bf \rangle + \langle af,bf \rangle +\\
-										 &\phantom{|} - \langle Bf,Af \rangle + \langle Bf,af \rangle + \langle bf,Af \rangle - \langle bf,af \rangle |
-	\end{align*}
+	\begin{align}
+		|\langle (A-a)f, (B-b)f \rangle| &\geq \frac{1}{2}\left| \langle (A-a)f, (B-b)f \rangle - \langle (B-b)f, (A-a)f \rangle \right| = \label{second inequality lemma uncertainty principle}\\
+										 &=\dfrac{1}{2}| \langle Af,Bf \rangle - \langle Af,bf \rangle - \langle af,Bf \rangle + \langle af,bf \rangle +\nonumber\\
+										 &\phantom{\dfrac{1}{2}|} - \langle Bf,Af \rangle + \langle Bf,af \rangle + \langle bf,Af \rangle - \langle bf,af \rangle | =\nonumber\\
+										 &=\dfrac{1}{2}|\langle (AB - BA)f,f \rangle| = \dfrac{1}{2}|\langle [A,B]f,f \rangle| \nonumber
+	\end{align}
+	When using Cauchy-Schwarz in \eqref{Cauchy Schwarz lemma uncertainty principle}, we have equality if and only if $(A-a)f = \lambda (B-b)f$ for some $\lambda \in \C$, while in \eqref{second inequality lemma uncertainty principle} we have equality if and only if $\langle (A-a)f,(B-b)f\rangle = \lambda \|(B-b)f\|^2$ is purely imaginary, which means that $\lambda = ic$ for some $c \in \R$.
 \end{proof}
 
 \begin{teo}[Heisenberg's uncertainty principle]\label{Heisenberg's uncertainty principle theorem}
@@ -558,9 +560,46 @@ In previous chapters sometimes we wrote about ``good'' and ``bad'' localization 
 	\begin{equation}\label{Heisenberg's uncertainty principle formula}
 		\left(\int_{\R^d}|t-a|^2 |f(t)|^2 dt\right)^{1/2} \left(\int_{\R^d} |\omega-b|^2 |\hat{f}(\omega)|^2 d\omega\right)^{1/2} \geq \dfrac{d}{4\pi}\| f \|_2^2
 	\end{equation}
+	Equality holds if and only if $f$ is a multiple of a Gaussian, i.e. $e^{2 \pi i b \cdot(x-a)}e^{-\pi |x-a|^2/c}$ for some $c > 0$.
 \end{teo}
 \begin{proof}
-	contenuto...
+	We will first consider $f$ is a function in the Schwartz class $\mathcal{S}(\R^d)$, in which case both integrals in \eqref{Heisenberg's uncertainty principle formula} are finite. Since $|t-a|^2 = \sum_1^d (t_j-i_j)^2$ (and the same holds for $|\omega-b|^2$), we will start considering
+	\begin{equation*}
+		\left(\int_{\R^d}(t_j-a_j)^2 |f(t)|^2 dt\right)^{1/2} \left(\int_{\R^d} (\omega_k-b_k)^2 |\hat{f}(\omega)|^2 d\omega\right)^{1/2} = \| (t_j-a_j)f\|_2 \cdot \| (\omega_k-b_k)\hat{f}\|_2.
+	\end{equation*}
+	for $1 \leq j,k \leq d$. The first term is exactly as the first one appearing in \eqref{uncertainty principle for operators formula}, where the operator $A$ is now the multiplication operator $f \in \mathcal{S}(\R^d) \mapsto Af = t_j f \in \mathcal{S}(\R^d)$, which is {\color{red} (formally)} self-adjoint over $\mathcal{S}(\R^d)$. So, in order to apply \ref{uncertainty principle for operators lemma}, we have to work on the second term:
+	\begin{align*}
+		(\omega_k - b) \hat{f}(\omega) &= \omega_k \hat{f}(\omega) - \F(b_k f)(\omega) \overset{\ref{duality regularity-decay theorem}}{=} \F \left(\dfrac{1}{2\pi i}\pdfrac{f}{t_k}\right) - \F(b_k f)(\omega) =\\
+									   &= \F \left( \left(\dfrac{1}{2\pi i}\pdfrac{}{t_k} - b_k\right)f\right)(\omega)
+	\end{align*}
+	and thanks to Plancherel's theorem we have that $\|(\omega_k-b_k)\hat{f}\|_2 = \left\| \left(\frac{1}{2\pi i}\pfrac{}{t_k} - b_k\right)f\right\|_2$, so that now the operator $B$ appearing in \eqref{uncertainty principle for operators formula} is $f \in \mathcal{S}(\R^d) \mapsto Bf = \frac{1}{2\pi i}\pfrac{f}{t_k} \in \mathcal{S}(\R^d)$. Again, this is {\color{red} (formally)} self-adjoint over $\mathcal{S}(\R^d)$, so we can apply Lemma \ref{uncertainty principle for operators lemma}:
+	\begin{equation*}
+		\left(\int_{\R^d}(t_j-a_j)^2 |f(t)|^2 dt\right)^{1/2} \left(\int_{\R^d} (\omega_k-b_k)^2 |\hat{f}(\omega)|^2 d\omega\right)^{1/2} \geq \dfrac12\lvert\langle [A,B]f,f \rangle \rvert
+	\end{equation*}
+	Now we just need to compute the commutator of $A$ and $B$. Let $f \in \mathcal{S}(\R^d)$:
+	\begin{align*}
+		[A,B]f(t) &= BAf(t)-ABf(t) = \dfrac{1}{2\pi i}\pdfrac{}{t_k}(t_jf(t)) - t_j \dfrac{1}{2\pi i}\pdfrac{f}{t_k}(t) =\\
+				  &= \dfrac{1}{2\pi i}\delta_{jk} f(t) + \dfrac{1}{2\pi i} t_j \pdfrac{f}{t_k}(t) - t_j \dfrac{1}{2\pi i}\pdfrac{f}{t_k}(t) = \dfrac{1}{2\pi i}\delta_{jk} f(t)
+	\end{align*}
+	therefore $[A,B] = \frac{1}{2\pi i}\delta_{jk}$, where $\delta_{jk}$ has to be intended as a function identically equal to 1 if $j=k$ or identically equal to 0 if $j \neq k$. Since $A$ and $B$ commute when $j \neq k$ from now on we will only consider the case $j=k$, in which Lemma \ref{uncertainty principle for operators lemma} allows us to conclude that
+	\begin{equation}\label{Heisenberg's uncertainty principle formula componentwise}
+		\left(\int_{\R^d}(t_j-a_j)^2 |f(t)|^2 dt\right)^{1/2} \left(\int_{\R^d} (\omega_j-b_j)^2 |\hat{f}(\omega)|^2 d\omega\right)^{1/2} \geq \dfrac{\|f\|_2^2}{4\pi}
+	\end{equation}
+	If we sum over $j$ we can see the left-hand side as a scalar product in $\R^n$ and use Cauchy-Schwarz inequality:
+	\begin{align}
+		\dfrac{d \|f\|_2^2}{4\pi} &\leq \sum_{j=1}^{d}\left(\int_{\R^d}(t_j-a_j)^2 |f(t)|^2 dt\right)^{1/2} \left(\int_{\R^d} (\omega_j-b_j)^2 |\hat{f}(\omega)|^2 d\omega\right)^{1/2} \leq\label{Heisenberg's uncertainty principle Cauchy Schwarz in Rd}\\
+								  &\leq \left(\sum_{j=1}^{d} \int_{\R^d}(t_j-a_j)^2 |f(t)|^2 dt \right)^{1/2} \left(\sum_{j=1}^{d} \int_{\R^d} (\omega_j-b_j)^2 |\hat{f}(\omega)|^2 d\omega \right)^{1/2}=\nonumber\\
+								  &= \left(\int_{\R^d}|t-a|^2 |f(t)|^2 dt\right)^{1/2} \left(\int_{\R^d} |\omega-b|^2 |\hat{f}(\omega)|^2 d\omega\right)^{1/2}\nonumber
+	\end{align}
+	which is the desired result.
+	
+	{\color{red} From Lemma \ref{uncertainty principle for operators lemma} we also know that in \eqref{Heisenberg's uncertainty principle formula componentwise} equality holds if and only if
+	\begin{equation}\label{Heisenberg's uncertainty principle differential equation}
+		\left(\dfrac{1}{2\pi i}\pdfrac{}{t_k} - b_k\right)f = ic_j (t_j-a_j)f
+	\end{equation}
+	for some $c_j \in \R$. In principle $c_j$ could be different but equality in \eqref{Heisenberg's uncertainty principle Cauchy Schwarz in Rd} is achieved if and only if $|c_j|=c \geq$, that is all $c_j$ have the same modulus (but possibly different sign). 	PERCHé C NON PUò ESSERE 0???.\\
+	We need 
+	}
 \end{proof}
 For a generic function $f \in L^2(\R^d)$ the left-hand side of \eqref{Heisenberg's uncertainty principle formula} may be infinite, in which case the statement is trivially satisfied. {\color{blue}We shall comment a mathematical interpretation of Heisenberg's uncertainty principle. This can be written in the following form
 \begin{equation*}
@@ -800,7 +839,7 @@ Before tackling the problem in this intermediate regime, we prove a Theorem from
 	
 	In the end it turns that $|F|$ is spherically symmetric and radially decreasing as claimed in theorem's statement.
 	
-	Conditions for $f$ and $g$ imply that $\V g  = e^{i \alpha} \V f$ for some $\alpha \in \R$. This provides equality in \eqref{first inequality} when using Cauchy-Schwartz inequality. Lastly we shall prove that also the first inequality in \eqref{first inequality}, that is
+	Conditions for $f$ and $g$ imply that $\V g  = e^{i \alpha} \V f$ for some $\alpha \in \R$. This provides equality in \eqref{first inequality} when using Cauchy-Schwarz inequality. Lastly we shall prove that also the first inequality in \eqref{first inequality}, that is
 	\begin{equation*}
 		\left\vert \int_{\R^{2d}} F(z) \V f(z) \overline{\V g(z)} dz \right\vert \leq \int_{\R^{2d}} |F(z)| \cdot | \V f(z)| \cdot |\V g(z)| dz
 	\end{equation*}
