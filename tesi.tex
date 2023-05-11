@@ -185,7 +185,7 @@ Actually one should show that the definition is well posed, namely that is indep
 	An operator $T \in \B(X)$ is called \textbf{trace class} if and only if $\mathrm{tr}|T| < \infty$
 \end{defi}
 \begin{teo}
-	For every trace class operator one has $\| T \| \leq \mathrm{tr}(T)$.
+	For every trace class operator $\| T \| \leq \mathrm{tr}(T)$.
 \end{teo}
 \begin{proof}
 	contenuto...
@@ -197,8 +197,11 @@ Actually one should show that the definition is well posed, namely that is indep
 	contenuto...
 \end{proof}
 \begin{defi}\label{Hilbert-Schmidt operator def}
-	An operator $T \in \B(X)$ is called \textbf{Hilbert-Schmidt} if and only if $\mathrm{tr}(T^*T) < \infty$.
+	An operator $T \in \B(X)$ is called \textbf{Hilbert-Schmidt} if and only if $\mathrm{tr}(T^*T) < \infty$. We define the \textbf{Hilbert-Schmidt norm} of an operator as $\|T\|_{\mathrm{HS}} = \sqrt{\mathrm{tr}(T^*T)}$.
 \end{defi}
+\begin{teo}\label{Hilbert-Schmidt operator norm}
+	For every Hilbert-Schmidt operator $\| T \| \leq \| T \|_{\mathrm{HS}}$.
+\end{teo}
 \begin{teo}\label{Hilbert-Schmidt operators are compact}
 	Every Hilbert-Schmidt operator is compact.
 \end{teo}
@@ -303,6 +306,19 @@ These can be combined into a \emph{time-frequency shift} operator
 {\color{blue}\begin{teo}[Hausdorff-Young]
 	Let $1 \leq p \leq 2$ and let $p'$ such that $\frac{1}{p} + \frac{1}{p'} = 1$. Then $\F : L^p(\R^d) \rightarrow L^{p'}(\R^d)$ and $\| \hat{f }\|_{p'} \leq \| f \|_p$.
 \end{teo}}
+In the following we will need the sharp version of the Hausdorff-Young inequality: 
+\begin{equation}\label{Hausdorff-Yound inequality}
+	\| \hat{f} \|_{p'} \leq \left(\dfrac{p^{1/p}}{p'^{1/p'}}\right)^{d/2} \|f\|_p = A_p^d \|f\|_p
+\end{equation}
+where $A_p$ is the so-called Babenko-Bechner constant. This constant appears also in the sharp version of Young's theorem
+\begin{teo}[Young]\label{Young theorem}
+	Given $f \in L^p(\R^d)$ and $g \in L^q(\R^d)$, suppose that $\frac{1}{p}+\frac{1}{q}=1+\frac{1}{r}$ with $r \geq 1$. Then $f * g \in L^r(\R^d)$ and $\|f * g\|_r \leq \|f\|_p \|g\|_q$.
+\end{teo}
+Just like the Hausdorff-Young inequality, Young's inequality holds in a sharp version:
+\begin{equation}\label{Young inequality sharp}
+	\|f * g\|_r \leq (A_p A_q A_{r'})^d \|f\|_p \|g\|_q.
+\end{equation}
+
 
 	\begin{itemize}
 		\item Defizione trasformata (FATTO)
@@ -343,14 +359,53 @@ In this section we will present and prove some properties about the STFT. An exc
 \end{proof}
 \begin{cor}
 	If $f, \phi \in L^2(\R^d)$ then
-	\begin{equation*}
+	\begin{equation}\label{STFT is an isometry formula}
 		\| \V_{\phi} f\|_2 = \| f \|_2 \| \phi \|_2
-	\end{equation*} 
+	\end{equation} 
 	In particular if $\| \phi \|_2 = 1$ we see that $\V_{\phi}$ is an isometry from $L^2(\R^d)$ into $L^2(\R^{2d})$.
 \end{cor}
 \begin{proof}
 	contenuto...
 \end{proof}
+From the Cauchy-Schwarz inequality we immediately see that $\V_{\phi} f$ is in $L^{\infty}(\R^{2d})$:
+\begin{equation}\label{STFT is bounded}
+	|\V_{\phi} f(x,\omega)| = |\langle f, M_{\omega} T_x \phi\rangle| \overset{\mathrm{C-S}}{\leq} \|f\|_2 \|M_{\omega}T_x \phi\|_2 = \|f\|_2 \|\phi\|_2.
+\end{equation}
+Combing this with \eqref{STFT is an isometry formula} and using a simple interpolation argument we see that $\V_{\phi}f \in L^p(\R^{2d})$ for every $p \in [2,\infty)$ and that $\|\V_{\phi}f\|_p \leq \|f\|_2 \|\phi\|_2$. This result is improved by the following theorem due to Lieb.
+\begin{teo}\label{Lieb's inequality}
+	If $f,\phi \in L^2(\R^d)$ and $2 \leq p \leq \infty$, then
+	\begin{equation}\label{norm Lp STFT}
+		\int_{\R^{2d}} |\V_{\phi}(x,\omega)|^p dxd\omega \leq \left(\dfrac{2}{p}\right)^d \|f\|_2^p \cdot \|g\|_2^p
+	\end{equation}
+\end{teo}
+\begin{proof}
+	For this proof we will need to use an alternative form of the STFT:
+	\begin{equation*}
+		\V_{\phi} f(x,\omega) = \int_{\R^d} f(t) e^{-2\pi i \omega \cdot t} \overline{\phi(t-x)}dt = \F(f T_x \overline{\phi})(\omega)
+	\end{equation*}
+	Using Cauchy-Schwarz inequality it is immediate to see that $f T_x \overline{\phi} \in L^1(\R^d)$ for every $x \in \R^d$. In addition to that, since $\V_{\phi} f = \F(f T_x \overline{\phi}) \in L^2(\R^{2d})$, from Fubini's theorem we can say that $ \F(f T_x \overline{\phi}) \in L^2(\R^d) $ for almost every $x \in R^d$ and therefore also $f T_x \overline{\phi} \in L^2(\R^d)$ for a.e. $x \in \R^d$. Through an interpolation argument we obtain that $f T_x \overline{\phi} \in L^q(\R^d)$ for every $q \in [1,2]$.
+	
+	We start considering the $L^p$ norm of $\V_{\phi} f$:
+	\begin{align}
+		\|\V_{\phi} f\|_p &= \left(\int_{\R^{2d}} |\V_{\phi}f(x,\omega)|^p dxd\omega\right)^{1/p} \overset{\mathrm{Tonelli}}{=} \left[\int_{\R^d} \left(\int_{\R^d} |\V_{\phi} f (x,\omega)|^p d\omega\right)dx\right]^{1/p} =\nonumber \\
+						  &= \left[\int_{\R^d} \left(\int_{\R^d} |\F(f T_x \overline{\phi})(\omega)|^p d\omega\right)dx\right]^{1/p} \overset{\eqref{Young inequality sharp}}{\leq} \nonumber\\
+						  &\leq A_{p'}^d\left[\int_{\R^d} \left(\int_{\R^d} |f(t) \overline{\phi(t-x)}|^{p'}dt\right)^{p/p'}dx\right]^{1/p} \label{Lieb's inequality intermediate}
+	\end{align}
+	where the use of Young's inequality \eqref{Young inequality sharp} is justified since we noticed that $fT_x \overline{\phi}$ is in $L^q(\R^d)$ for every $q \in [1,2]$, so in particular it is in $L^{p'}(\R^d)$. Letting $\phi^*(t) = \overline{\phi(-t)}$ and considering the inner integral we have
+	\begin{align*}
+		\int_{\R^d} |f(t) \overline{\phi(t-x)}|^{p'}dt = \int_{\R^d} |f(t)|^{p'} |\phi^*(x-t)|^{p'}dt = \left(|f|^{p'} * |\phi^*|^{p'}\right)(x),
+	\end{align*}
+	so the expression in \eqref{Lieb's inequality intermediate} is the $L^{p/p'}(\R^d)$ norm of $|f|^{p'} * |\phi^*|^{p'}$. Since both $f$ and $\phi$ are in $L^2(\R^d)$ and $p' \leq 2$ we have that $|f|^{p'},|\phi^*|^{p'} \in L^{2/p'}(\R^d)$. Thanks to Young's theorem \ref{Young theorem} $|f|^{p'} * |\phi^*|^{p'}$ belongs to $L^r(\R^d)$, where $r$ is given by:
+	\begin{equation*}
+		\dfrac{1}{(2/p')} + \dfrac{1}{(2/p')} = 1 + \dfrac{1}{r} \implies r = \dfrac{1}{p'-1} = \dfrac{1}{\frac{p}{p-1}-1} = p-1 = \dfrac{p}{p'}
+	\end{equation*}
+	therefore, using the sharp version of Young's inequality \eqref{Young inequality sharp} in \eqref{Lieb's inequality intermediate} we obtain:
+	\begin{align*}
+		\|\V_{\phi} f\|_p &\leq A_{p'}^d \left(A_{2/p'}^d A_{2/p'}^d A_{(p/p')'}^d \| \,|f|^{p'} \|_{2/p'} \|\,|\phi^*|^{p'}\|_{2/p'} \right)^{1/p'}.
+	\end{align*}
+	However $\| \,|f|^{p'} \|_{2/p'} = (\int_{\R^d} (|f(x)|^{p'})^{2/p'}dx)^{p'/2} = \|f\|_2^{p'}$ and from a direct calculation {\color{blue} QUALE??} one can see that $A_{p'}^d A_{2/p'}^{2d/p'}A_{(p/p')'}^{d/p'}=(2/p)^d$, which corresponds to the desired result.
+\end{proof}
+
 From a direct computation one can see that the adjoint operator of the STFT operator $\V_{\phi}$ is given by the following expression:
 \begin{equation}\label{STFT adjoint}
 	\V_{\phi}^* g(t) = \int_{\R^{2d}} g(x,\omega) \phi(t-x) e^{2 \pi i \omega \cdot t} dxd\omega = \int_{\R^{2d}} g(x,\omega) M_{\omega}T_x \phi (t) dxd\omega\quad \forall g \in L^2(\R^{2d})
@@ -375,7 +430,7 @@ Therefore the adjoint operator $\V_{\gamma}^*$ acts, in some sense, as an invers
 \begin{equation}\label{gaussian normalized}
 	\varphi(x) = 2^{d/4} e^{-\pi |x|^2}
 \end{equation}
-where $|x|^2 = \sum_k^d x_k^2$ is the Euclidean norm of $x$ in $\R^d$. The factor $2^{d/4}$ is chosen so that $\|\varphi\|_2=1$. The STFT with Gaussian window becomes
+where $|x|^2 = \sum_{k=1}^d x_k^2$ is the Euclidean norm of $x$ in $\R^d$. The factor $2^{d/4}$ is chosen so that $\|\varphi\|_2=1$. The STFT with Gaussian window becomes
 \begin{equation}
 	\V_{\varphi}f(x,\omega) = 2^{d/4} \int_{\R^d} f(t) e^{-\pi |t-x|^2} e^{-2 \pi i \omega \cdot t} dt
 \end{equation}
@@ -425,7 +480,7 @@ Clearly the norm of the Fock space is induced by the following scalar product
 \chapter{Localization Operators}\label{chapter localization operators}
 One of the main problems in signal analysis or, in general, time-frequency analysis is to extract some informations about signal in order to analyse it. {\color{red}We saw that STFT can be a tool for this purpose, however it has some practical problems: it doubles the dimension of the output and it is highly redundant (SE AVANZA TEMPO).}\\
 In this chapter we see two possible ways to deal with the problem of creating operators able to localize a signal both in time and frequency.
-\section{Localization with projections}
+\section{Localization with projections}\label{Localization with projections section}
 The most straightforward way to localize a signal, say in the time domain, is to use a sharp cut-off, which means a characteristic function. If we suppose to have a signal $f \in L^2(\R^d)$ and we want to localize it in a measurable subset $T \subseteq \R^d$ of the time domain we can consider the natural projection operator
 \begin{equation}\label{time projection operator}
 	P_T : L^2(\R^d) \rightarrow L^2(\R^d) \quad P_T f(t) = \chi_T(t) f(t)
@@ -560,28 +615,28 @@ In previous chapters sometimes we wrote about ``good'' and ``bad'' localization 
 	\begin{equation}\label{Heisenberg's uncertainty principle formula}
 		\left(\int_{\R^d}|t-a|^2 |f(t)|^2 dt\right)^{1/2} \left(\int_{\R^d} |\omega-b|^2 |\hat{f}(\omega)|^2 d\omega\right)^{1/2} \geq \dfrac{d}{4\pi}\| f \|_2^2
 	\end{equation}
-	Equality holds if and only if $f$ is a multiple of a Gaussian, i.e. $e^{2 \pi i b \cdot(x-a)}e^{-\pi |x-a|^2/c}$ for some $c > 0$.
+	Equality holds if and only if $f$ is a multiple of a Gaussian, i.e. $e^{2 \pi i b \cdot t}e^{-\pi c |x-a|^2}$ for some $c > 0$.
 \end{teo}
 \begin{proof}
 	We will first consider $f$ is a function in the Schwartz class $\mathcal{S}(\R^d)$, in which case both integrals in \eqref{Heisenberg's uncertainty principle formula} are finite. Since $|t-a|^2 = \sum_1^d (t_j-i_j)^2$ (and the same holds for $|\omega-b|^2$), we will start considering
 	\begin{equation*}
 		\left(\int_{\R^d}(t_j-a_j)^2 |f(t)|^2 dt\right)^{1/2} \left(\int_{\R^d} (\omega_k-b_k)^2 |\hat{f}(\omega)|^2 d\omega\right)^{1/2} = \| (t_j-a_j)f\|_2 \cdot \| (\omega_k-b_k)\hat{f}\|_2.
 	\end{equation*}
-	for $1 \leq j,k \leq d$. The first term is exactly as the first one appearing in \eqref{uncertainty principle for operators formula}, where the operator $A$ is now the multiplication operator $f \in \mathcal{S}(\R^d) \mapsto Af = t_j f \in \mathcal{S}(\R^d)$, which is {\color{red} (formally)} self-adjoint over $\mathcal{S}(\R^d)$. So, in order to apply \ref{uncertainty principle for operators lemma}, we have to work on the second term:
+	for $1 \leq j,k \leq d$. The first term is exactly as the first one appearing in \eqref{uncertainty principle for operators formula}, where the operator $A=A_j$ is now the multiplication operator $f \in \mathcal{S}(\R^d) \mapsto A_jf = t_j f \in \mathcal{S}(\R^d)$, which is {\color{red} (formally)} self-adjoint over $\mathcal{S}(\R^d)$. So, in order to apply \ref{uncertainty principle for operators lemma}, we have to work on the second term:
 	\begin{align*}
 		(\omega_k - b) \hat{f}(\omega) &= \omega_k \hat{f}(\omega) - \F(b_k f)(\omega) \overset{\ref{duality regularity-decay theorem}}{=} \F \left(\dfrac{1}{2\pi i}\pdfrac{f}{t_k}\right) - \F(b_k f)(\omega) =\\
 									   &= \F \left( \left(\dfrac{1}{2\pi i}\pdfrac{}{t_k} - b_k\right)f\right)(\omega)
 	\end{align*}
-	and thanks to Plancherel's theorem we have that $\|(\omega_k-b_k)\hat{f}\|_2 = \left\| \left(\frac{1}{2\pi i}\pfrac{}{t_k} - b_k\right)f\right\|_2$, so that now the operator $B$ appearing in \eqref{uncertainty principle for operators formula} is $f \in \mathcal{S}(\R^d) \mapsto Bf = \frac{1}{2\pi i}\pfrac{f}{t_k} \in \mathcal{S}(\R^d)$. Again, this is {\color{red} (formally)} self-adjoint over $\mathcal{S}(\R^d)$, so we can apply Lemma \ref{uncertainty principle for operators lemma}:
+	and thanks to Plancherel's theorem we have that $\|(\omega_k-b_k)\hat{f}\|_2 = \left\| \left(\frac{1}{2\pi i}\pfrac{}{t_k} - b_k\right)f\right\|_2$, so that now the operator $B=B_k$ appearing in \eqref{uncertainty principle for operators formula} is $f \in \mathcal{S}(\R^d) \mapsto B_kf = \frac{1}{2\pi i}\pfrac{f}{t_k} \in \mathcal{S}(\R^d)$. Again, this is {\color{red} (formally)} self-adjoint over $\mathcal{S}(\R^d)$, so we can apply Lemma \ref{uncertainty principle for operators lemma}:
 	\begin{equation*}
-		\left(\int_{\R^d}(t_j-a_j)^2 |f(t)|^2 dt\right)^{1/2} \left(\int_{\R^d} (\omega_k-b_k)^2 |\hat{f}(\omega)|^2 d\omega\right)^{1/2} \geq \dfrac12\lvert\langle [A,B]f,f \rangle \rvert
+		\left(\int_{\R^d}(t_j-a_j)^2 |f(t)|^2 dt\right)^{1/2} \left(\int_{\R^d} (\omega_k-b_k)^2 |\hat{f}(\omega)|^2 d\omega\right)^{1/2} \geq \dfrac12\lvert\langle [A_j,B_k]f,f \rangle \rvert
 	\end{equation*}
-	Now we just need to compute the commutator of $A$ and $B$. Let $f \in \mathcal{S}(\R^d)$:
+	Now we just need to compute the commutator of $A_j$ and $B_k$. Let $f \in \mathcal{S}(\R^d)$:
 	\begin{align*}
-		[A,B]f(t) &= BAf(t)-ABf(t) = \dfrac{1}{2\pi i}\pdfrac{}{t_k}(t_jf(t)) - t_j \dfrac{1}{2\pi i}\pdfrac{f}{t_k}(t) =\\
+		[A_j,B_k]f(t) &= B_kA_jf(t)-A_jB_kf(t) = \dfrac{1}{2\pi i}\pdfrac{}{t_k}(t_jf(t)) - t_j \dfrac{1}{2\pi i}\pdfrac{f}{t_k}(t) =\\
 				  &= \dfrac{1}{2\pi i}\delta_{jk} f(t) + \dfrac{1}{2\pi i} t_j \pdfrac{f}{t_k}(t) - t_j \dfrac{1}{2\pi i}\pdfrac{f}{t_k}(t) = \dfrac{1}{2\pi i}\delta_{jk} f(t)
 	\end{align*}
-	therefore $[A,B] = \frac{1}{2\pi i}\delta_{jk}$, where $\delta_{jk}$ has to be intended as a function identically equal to 1 if $j=k$ or identically equal to 0 if $j \neq k$. Since $A$ and $B$ commute when $j \neq k$ from now on we will only consider the case $j=k$, in which Lemma \ref{uncertainty principle for operators lemma} allows us to conclude that
+	therefore $[A_j,B_k] = \frac{1}{2\pi i}\delta_{jk}$, where $\delta_{jk}$ has to be intended as a function identically equal to 1 if $j=k$ or identically equal to 0 if $j \neq k$. Since $A_j$ and $B_k$ commute when $j \neq k$ from now on we will only consider the case $j=k$, in which Lemma \ref{uncertainty principle for operators lemma} allows us to conclude that
 	\begin{equation}\label{Heisenberg's uncertainty principle formula componentwise}
 		\left(\int_{\R^d}(t_j-a_j)^2 |f(t)|^2 dt\right)^{1/2} \left(\int_{\R^d} (\omega_j-b_j)^2 |\hat{f}(\omega)|^2 d\omega\right)^{1/2} \geq \dfrac{\|f\|_2^2}{4\pi}
 	\end{equation}
@@ -595,10 +650,35 @@ In previous chapters sometimes we wrote about ``good'' and ``bad'' localization 
 	
 	{\color{red} From Lemma \ref{uncertainty principle for operators lemma} we also know that in \eqref{Heisenberg's uncertainty principle formula componentwise} equality holds if and only if
 	\begin{equation}\label{Heisenberg's uncertainty principle differential equation}
-		\left(\dfrac{1}{2\pi i}\pdfrac{}{t_k} - b_k\right)f = ic_j (t_j-a_j)f
+		\left(\dfrac{1}{2\pi i}\pdfrac{}{t_j} - b_j\right)f = ic_j (t_j-a_j)f
 	\end{equation}
-	for some $c_j \in \R$. In principle $c_j$ could be different but equality in \eqref{Heisenberg's uncertainty principle Cauchy Schwarz in Rd} is achieved if and only if $|c_j|=c \geq$, that is all $c_j$ have the same modulus (but possibly different sign). 	PERCHé C NON PUò ESSERE 0???.\\
-	We need 
+	for some $c_j \in \R$. In principle $c_j$ could be different but the second inequality in \eqref{Heisenberg's uncertainty principle Cauchy Schwarz in Rd} becomes an equality if and only if $|c_j|=c \geq 0$, that is all $c_j$ have the same modulus (but possibly different sign). 	PERCHé C NON PUò ESSERE 0???.\\
+	We start by considering the case when $a=b=0$.
+	\begin{align}\label{Heisenberg's uncertainty principle differential equation centered}
+		\dfrac{1}{2\pi i}\pdfrac{f}{t_j}(t) = ic_j t_j f(t) \quad j=1,\ldots,d.
+	\end{align}
+	We notice that if $f$ is a solution it cannot become 0, because in this case there would be some $t_0 \in \R^d$ such that $f(t_0)=0, \nabla f(t_0)=0$ which means that $f$ is identically 0 (\textbf{Perché??}) . Moreover, if $f$ is a solution also $-f$ is, hence we can suppose that $f$ is always strictly positive and divide by $f$:
+	\begin{align*}
+		\dfrac{1}{2\pi i} \dfrac{1}{f} \pdfrac{f}{t_j}(t) = ic_j t_j f(t) \implies \pdfrac{}{t_j}\left[\log(f(t))\right] = -2\pi c_j t_j
+	\end{align*}
+	Letting $g(t)=\log(f(t))$ and considering the equation for $j=1$ we get
+	\begin{align*}
+		\pdfrac{g}{t_1}(t) = -2\pi c_1 t_1 \implies g(t) = - \pi c_1 t_1^2 + g_1(t_2,\ldots,t_d).
+	\end{align*}
+	The equation for $j=2$ becomes
+	\begin{align*}
+		\pdfrac{g}{t_2}(t) = \pdfrac{g_1}{t_2}(t) = -\pi c_2 t_2^2 \implies g_1(t_2,\ldots,t_d) = -\pi c_2 t_2^2 + g_2(t_3,\ldots,t_d).
+	\end{align*}
+	At the end we will have
+	\begin{align*}
+		g(t) = -\sum_{j=1}^{d}\pi c_j t_j^2 + K \implies f(t) = e^K e^{-\pi \sum_{j=1}^{d} c_j t_j^2} = C e^{-\pi \sum_{j=1}^{d} c_j t_j^2}
+	\end{align*}
+	for some $K \in \R$. We already noticed that all $c_j$ have same modulus. Now that we have the explicit expression of $f$ we can see that they are all positive, otherwise $f$ would not belong to $L^2(\R^d)$. Thanks to this observation we can finally write $f(t) = C e^{-\pi c |t|^2}$.\\
+	Suppose now that $a$ and $b$ are not 0. We define $\tilde{f}(t) = M_b T_a f(t)$ and we will show that $\tilde{f}$ solves \eqref{Heisenberg's uncertainty principle differential equation}:
+	\begin{align*}
+		\left(\dfrac{1}{2\pi i}\pdfrac{}{t_j} - b_j\right)\tilde{f}(t) &= \dfrac{1}{2\pi i} e^{2 \pi i b \cdot t} \left(2\pi i b_j f(t-a) + \pdfrac{f}{t_j}(t-a)\right) - b_j e^{2 \pi i b \cdot t}f(t-a) =\\
+		&=e^{2 \pi i b \cdot t}\dfrac{1}{2 \pi i}f(t-a) \overset{\eqref{Heisenberg's uncertainty principle differential equation centered}}{=} e^{2 \pi i b \cdot t} i c (t_j-a_j) f(t-a) = i c (t_j-a_j) \tilde{f}(t).
+	\end{align*}
 	}
 \end{proof}
 For a generic function $f \in L^2(\R^d)$ the left-hand side of \eqref{Heisenberg's uncertainty principle formula} may be infinite, in which case the statement is trivially satisfied. {\color{blue}We shall comment a mathematical interpretation of Heisenberg's uncertainty principle. This can be written in the following form
@@ -618,42 +698,60 @@ In this form the uncertainty principle has a heuristic yet meaningful interpreta
 \textbf{AGGIUNGERE INTERPRETAZIONI IN MECCANICA QUANTISTICA E ANALISI DEI SEGNALI}.}
 \section{Donoho-Stark's uncertainty principle}\label{section Donoho-Stark's UP}
 \begin{defi}\label{epsilon-concetrated def}
-	A function $f \in L^2(\R^d)$ is $\mathbf{\varepsilon}$-\textbf{concetrated} on a measurable set $T \subseteqq \R^d$ if
+	A function $f \in L^2(\R^d)$ is $\mathbf{\varepsilon}$-\textbf{concetrated} on a measurable set $T \subseteq \R^d$ if
 	\begin{equation*}
-		\left(\int_{\R^d \setminus T} |f(t)|^2 dt \right) \leq \varepsilon \| f \|_2
+		\left(\int_{T^c} |f(t)|^2 dt \right)^{1/2} \leq \varepsilon \| f \|_2
 	\end{equation*}
+	where $T^c = \R^d \setminus T$ denotes the complement set of $T$.
 \end{defi}
 \begin{teo}[Donoho-Stark's uncertainty principle]\label{Donoho-Stark's uncertainty principle theorem}
-	Let $f \in L^2(\R^d) \setminus \{0\}$, suppose that $f$ is $\varepsilon_T$-concentrated on $T \subseteqq \R^d$ while $\hat{f}$ is $\varepsilon_{\Omega}$-concentrated on $\Omega \subseteqq \R^d$. Then
+	Let $f \in L^2(\R^d) \setminus \{0\}$, suppose that $f$ is $\varepsilon_T$-concentrated on $T \subseteq \R^d$ while $\hat{f}$ is $\varepsilon_{\Omega}$-concentrated on $\Omega \subseteq \R^d$. Then
 	\begin{equation}\label{Donoho-Stark's uncertainty principle formula}
-		|T| \cdot |\Omega| \geq (1 - \varepsilon_T - \varepsilon_{\Omega})^2
+		|T| \, |\Omega| \geq (1 - \varepsilon_T - \varepsilon_{\Omega})^2
 	\end{equation}
 \end{teo}
 \begin{proof}
-	contenuto...
+	The result is trivial if $T$ or $\Omega$ have infinite measure. Hence we will suppose that they both have finite measure.\\
+	Concentration can be stated in an equivalent way through projection operators introduced in section \ref{Localization with projections section}, indeed:
+	\begin{align*}
+		&\left( \int_{T^c} |f(t)|^2 dt\right)^{1/2} = \|f - \chi_T f\|_2  = \|f - P_T f\|_2 \leq \varepsilon_{T} \|f\|_2\\
+		&\left( \int_{\Omega^c} |\hat{f}(\omega)|^2 d\omega\right)^{1/2} = \|\hat{f} - \chi_{\Omega} \hat{f} \|_2 = \|f - \F^{-1} (\chi_{\Omega} \hat{f}) \|_2 = \|f - Q_{\Omega}f \|_2 \leq \varepsilon_{\Omega} \|f\|_2
+	\end{align*}
+	In section \ref{Localization with projections section} we also noticed that $\|Q_{\Omega}\| \leq 1$, hence
+	\begin{align*}
+		\|f - Q_{\Omega}P_Tf \|_2 &= \|f - Q_{\Omega}f + Q_{\Omega}f - Q_{\Omega}P_T f \|_2 \leq \|f-Q_{\Omega}f \|_2 + \|Q_{\Omega}(f - P_T f) \|_2 \leq \\
+								  &\leq \|f-Q_{\Omega}f \|_2 + \|(f - P_T f) \|_2 \leq (\varepsilon_{\Omega} + \varepsilon_T)\|f\|_2.
+	\end{align*}
+	and consequently
+	\begin{align*}
+		&\|f\|_2 = \|f - Q_{\Omega}P_T f + Q_{\Omega}P_T f \|_2 \leq \|f - Q_{\Omega}P_T f\|_2 + \| Q_{\Omega}P_T f  \|_2 \implies\\
+		\implies &\|Q_{\Omega}P_T f \|_2 \geq \|f\|_2 - \|f - Q_{\Omega}P_T f\|_2 \geq (1-\varepsilon_{\Omega} - \varepsilon_T)\|f\|_2
+	\end{align*}
+	Thanks to Proposition \ref{projection operators are Hilbert-Schmidt} we know that $\| Q_{\Omega}P_T\|_{\mathrm{HS}} = \sqrt{|T| \, |\Omega|}$ and from Theorem \ref{Hilbert-Schmidt operators are compact} we know that $\|Q_{\Omega}P_T\| \leq \| Q_{\Omega}P_T\|_{\mathrm{HS}}$, therefore
+	\begin{equation*}
+		(1-\varepsilon_{\Omega} - \varepsilon_T)\|f\|_2 \leq \|Q_{\Omega}P_T f \|_2 \leq \sqrt{|T| \, |\Omega|} \|f\|_2.
+	\end{equation*}
 \end{proof}
 \section{Lieb's uncertainty principle}\label{section Lieb's UP}
-\begin{prop}\label{weak uncertainty principle fot STFT}
-	Let $f,\phi \in L^2(\R^d)$ normalized, $U \subseteqq \R^{2d}$ and $\varepsilon \geq 0$. Suppose that
+{\color{blue} Up to now we presented two uncertainty principles related to the Fourier transform}. {\color{red}However uncertainty principles can be stated for every time of time-frequency analysis}. {\color{blue}In this and in the following section we present some uncertainty principles for the STFT.}
+
+We start considering a simple form uncertainty principle for the STFT. After this we will see how to turn Lieb's inequality \ref{Lieb's inequality} into an uncertainty principle.
+\begin{prop}\label{weak uncertainty principle for STFT}
+	Let $f,\phi \in L^2(\R^d)$ normalized, $U \subseteq \R^{2d}$ and $\varepsilon \geq 0$. Suppose that
 	\begin{equation*}
 		\int_U |\V_{\phi}f(x,\omega)|^2 dxd\omega \geq 1- \varepsilon.
 	\end{equation*}
 	Then $|U| \geq 1- \varepsilon$.
 \end{prop}
 \begin{proof}
-	contenuto...
-\end{proof}
-\begin{teo}
-	If $f,\phi \in L^2(\R^d)$ and $2 \leq p \leq \infty$, then
-	\begin{equation}\label{norm Lp STFT}
-		\int_{\R^{2d}} |\V_{\phi}(x,\omega)|^p dxd\omega \leq \left(\dfrac{2}{p}\right)^d \|f\|_2^p \cdot \|g\|_2^p
+	From \eqref{STFT is bounded} we see that $|\V_{\phi}f(x,\omega)| \leq 1$ for all $(x,\omega) \in \R^{2d}$, therefore
+	\begin{equation}\label{weak uncertainty principle for STFT formula}
+		1-\varepsilon \leq \int_U |\V_{\phi}f(x,\omega)|^2 dxd\omega \leq \|\V_{\phi}f\|_{\infty}^2 |U| \leq |U|.
 	\end{equation}
-\end{teo}
-\begin{proof}
-	contenuto...
 \end{proof}
+
 \begin{teo}[Lieb's uncertainty principle]\label{Lieb's uncertainty principle}
-	Suppose that $\|f\|_2 = \|\phi\|_2 = 1$. If $U \subseteqq \R^{2d}$ and $\varepsilon \geq 0$ are such that
+	Suppose that $\|f\|_2 = \|\phi\|_2 = 1$. If $U \subseteq \R^{2d}$ and $\varepsilon \geq 0$ are such that
 	\begin{equation*}
 		\int_U |\V_{\phi}f(x,\omega)|^2 dxd\omega \geq 1- \varepsilon.
 	\end{equation*}
@@ -662,6 +760,9 @@ In this form the uncertainty principle has a heuristic yet meaningful interpreta
 		|U| \geq (1-\varepsilon)^{\frac{p}{p-2}} \left(\dfrac{p}{2}\right)^{\frac{2d}{p-1}} \quad \text{for every } p>2.
 	\end{equation*}
 \end{teo}
+\begin{proof}
+	If $|U| = \infty$ the result is trivial hence we can suppose that $U$ has finite measure.
+\end{proof}
 
 
 \section{Nicola-Tilli's uncertainty principle or Faber-Krahn Inequality for the STFT}\label{section Faber-Krahn inequality fot STFT}
