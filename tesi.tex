@@ -374,7 +374,7 @@ From the Cauchy-Schwarz inequality we immediately see that $\V_{\phi} f$ is in $
 Combing this with \eqref{STFT is an isometry formula} and using a simple interpolation argument we see that $\V_{\phi}f \in L^p(\R^{2d})$ for every $p \in [2,\infty)$ and that $\|\V_{\phi}f\|_p \leq \|f\|_2 \|\phi\|_2$. This result is improved by the following theorem due to Lieb.
 \begin{teo}\label{Lieb's inequality}
 	If $f,\phi \in L^2(\R^d)$ and $2 \leq p \leq \infty$, then
-	\begin{equation}\label{norm Lp STFT}
+	\begin{equation}\label{Lieb's inequality formula}
 		\int_{\R^{2d}} |\V_{\phi}(x,\omega)|^p dxd\omega \leq \left(\dfrac{2}{p}\right)^d \|f\|_2^p \cdot \|g\|_2^p
 	\end{equation}
 \end{teo}
@@ -577,6 +577,7 @@ Thanks to these result and an interpolation argument one can show that $\L_{F,\p
 	\item Proprietà di limitatezza e compattezza
 	\item Autovalori e autofunzioni
 \end{itemize}
+\subsection{Spherically Symmetric Weights}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -584,13 +585,13 @@ Thanks to these result and an interpolation argument one can show that $\L_{F,\p
 \chapter{Uncertainty principles}\label{chapter uncertainty principles}
 In previous chapters sometimes we wrote about ``good'' and ``bad'' localization of a signal. Although intuitively this can be understood in these sloppy terms, we can specify and quantify the localization of a function. The notion of localization can be stated in multiple ways and in various contexts. {\color{blue} Here we present some \emph{uncertainty principles}.}
 \section{Heisenberg's uncertainty principle}\label{section Heisenberg's UP}
-\begin{lem}\label{uncertainty principle for operators lemma}
-	Let $A$ and $B$ be two linear self-adjoint (possibly unbounded) operators on a Hilbert space. Then, for every $a,b \in \R$ and for every $f$ in the domain of $AB$ and $BA$
+{\color{red}\begin{lem}\label{uncertainty principle for operators lemma}
+	Let $A,B: D \subset X \rightarrow X$ be two linear symmetric (i.e. formally self-adjoint) operators defined on an invariant subspace $D$ (i.e. $A(D),B(D) \subset D$) of an Hilbert space $X$. Then, for every $a,b \in \R$ and for every $f$ in $D$
 	\begin{equation}\label{uncertainty principle for operators formula}
 		\| (A-a)f \| \cdot \| (B-b) f\| \geq \dfrac12\lvert\langle [A,B]f,f \rangle \rvert
 	\end{equation}
 	where $[A,B] = AB-BA$ is the commutator of $A$ and $B$. Equality holds if and only if $(A-a)f = i c(B-b)f$ for some $c \in \R$.
-\end{lem}
+\end{lem}}
 \begin{proof}
 	By Cauchy-Schwarz inequality we have
 	\begin{equation}\label{Cauchy Schwarz lemma uncertainty principle}
@@ -607,7 +608,12 @@ In previous chapters sometimes we wrote about ``good'' and ``bad'' localization 
 										 &\phantom{\dfrac{1}{2}|} - \langle Bf,Af \rangle + \langle Bf,af \rangle + \langle bf,Af \rangle - \langle bf,af \rangle | =\nonumber\\
 										 &=\dfrac{1}{2}|\langle (AB - BA)f,f \rangle| = \dfrac{1}{2}|\langle [A,B]f,f \rangle| \nonumber
 	\end{align}
-	When using Cauchy-Schwarz in \eqref{Cauchy Schwarz lemma uncertainty principle}, we have equality if and only if $(A-a)f = \lambda (B-b)f$ for some $\lambda \in \C$, while in \eqref{second inequality lemma uncertainty principle} we have equality if and only if $\langle (A-a)f,(B-b)f\rangle = \lambda \|(B-b)f\|^2$ is purely imaginary, which means that $\lambda = ic$ for some $c \in \R$.
+	When using Cauchy-Schwarz in \eqref{Cauchy Schwarz lemma uncertainty principle}, we have equality if and only if
+	\begin{enumerate}[label=(\roman*)]
+		\item $(A-a)f = \lambda (B-b)f$ for some $\lambda \in \C$;
+		\item $(B-b)f=0$.
+	\end{enumerate}
+	In the latter case we have equality also in \eqref{second inequality lemma uncertainty principle}, while in the former equality occurs if and only if $|\langle (A-a)f,(B-b)f\rangle| = \lambda \|(B-b)f\|^2$ is purely imaginary, which means that $\lambda = ic$ for some $c \in \R$.
 \end{proof}
 
 \begin{teo}[Heisenberg's uncertainty principle]\label{Heisenberg's uncertainty principle theorem}
@@ -761,7 +767,13 @@ We start considering a simple form uncertainty principle for the STFT. After thi
 	\end{equation*}
 \end{teo}
 \begin{proof}
-	If $|U| = \infty$ the result is trivial hence we can suppose that $U$ has finite measure.
+	If $|U| = \infty$ the result is trivial hence we can suppose that $U$ has finite measure. We start using H\"older's inequality with exponents $p/2$ and $(p/2)' = p/(p-2)$
+	\begin{align*}
+		1-\varepsilon &\leq \int_U |\V_{\phi}f(x,\omega)|^2 dxd\omega= \int_{\R^{2d}} |\V_{\phi}f(x,\omega)|^2 \chi_U(x,\omega)dxd\omega \overset{\mathrm{H\"older}}{\leq} \\
+					  &\leq \left(\int_{\R^{2d}} |\V_{\phi}f(x,\omega)|^{2 \frac{p}{2}} dxd\omega\right)^{\frac{2}{p}} \left(\int_{\R^{2d}} \chi_U(x,\omega)^{\frac{p}{p-2}}dxd\omega\right)^{\frac{p-2}{p}} \overset{\eqref{Lieb's inequality formula}}{\leq}\\
+					  &\leq \left(\dfrac{2}{p}\right)^{\frac{2d}{p}} \| f \|_2^2\, \|g\|_2^2\, |U|^{\frac{p-2}{p}} = \left(\dfrac{2}{p}\right)^{\frac{2d}{p}} |U|^{\frac{p-2}{p}}.
+	\end{align*}
+	We point out that the use of H\"older's inequality is justified because $U$ has finite measure and, since $\V_{\phi}f \in L^q(\R^{2d})$ for every $q \geq 2$, $|\V_{\phi}f|^2 \in L^q(\R^{2d})$ for every $q \geq 1$. 
 \end{proof}
 
 
