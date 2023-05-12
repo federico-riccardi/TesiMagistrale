@@ -578,6 +578,40 @@ Thanks to these result and an interpolation argument one can show that $\L_{F,\p
 	\item Autovalori e autofunzioni
 \end{itemize}
 \subsection{Spherically Symmetric Weights}
+In this section we will consider the special case in which the window for the STFT is a Gaussian \eqref{gaussian normalized} and the weight $F$ is spherically symmetric. Letting $r_j^2 = x_j^2 + \omega_j^2$ for $j=1,\ldots,d$ and $r^2=(r_1^2\ldots,r_d^2) \in \R^d$, the hypothesis about $F$ can be rephrased in the following way
+\begin{equation}\label{sperically symmetric weight}
+	F(x,\omega) = \mathdutchcal{F}(r^2).
+\end{equation}
+{\color{blue} In order to highlight the dependence of $F$ through $\mathdutchcal{F}$ the corresponding localization operator will be denoted as $L_{\mathdutchcal{F},\varphi}$}.
+For this operators a complete characterization of the spectrum and eigenspaces is given in \cite{daubechies}. Before stating and proving the theorem we need to introduce some special function, namely \emph{Hermite functions}. In dimension $d=1$ Hermite functions are given by
+\begin{equation}\label{Hermite function 1-dimensional}
+	H_k(t) = \dfrac{2^{1/4}}{\sqrt{k!}}\left(-\dfrac{1}{2\sqrt{\pi}}\right)^k e^{\pi t^2} \dfrac{d^k}{dt^k}\left(e^{-2\pi t^2}\right)
+\end{equation}
+where $k \in \N$ ($\N$ is supposed to contain also 0). Hermite functions have lots of interesting and useful properties which can be found in \cite[][Section 1.7]{folland_harmonic}. We cite some of them which will be useful in the following.
+\begin{enumerate}[label=(\roman*)]
+	\item $\{H_k\}_{k \in \N}$ is an orthonormal basis of $L^2(\R)$;
+	\item $H_0(t) = \varphi(t)$ where $\varphi$ is the normalized Gaussian given by \eqref{gaussian normalized};
+	\item Setting $H_{-1} = 0$, the following recursive relation holds
+	\begin{equation}\label{Hermite functions recursion}
+		2\sqrt{\pi}t H_k = \sqrt{k+1}H_{k+1} + \sqrt{k}H_{k-1} \quad \text{for } k=0,1,\ldots;
+	\end{equation}
+	\item Hermite functions are eigenfunctions of $\F$, specifically
+	\begin{equation}\label{Hermite functions are eigenfunctions of Fourier transform}
+		\F H_k =(-i)^k H_k.
+	\end{equation}
+\end{enumerate}
+Hermite functions in generic dimension are given through multiplication of 1-dimensional Hermite functions. Explicitly, given a multi-index $k = (k_1,\ldots,k_d) \in \N^d$ the corresponding Hermite function is given by
+\begin{equation}\label{Hermite function d-dimensional}
+	H_k(t) = \prod_{j=1}^d H_{k_j}(t_j).
+\end{equation}
+It is still true that $d$-dimensional Hermite functions (now ranging between all possible multi-indices) form an orthonormal basis of $L^2(\R^d)$ and using \eqref{Hermite functions are eigenfunctions of Fourier transform} it is easy to see that $d$-dimensional Hermite functions are still eigenfunction of the Fourier transform, namely
+\begin{equation}\label{d-dimensional Hermite functions are eigenfunctions of Fourier transform}
+	\F H_k = (-i)^{|k|}H_k
+\end{equation}
+where $|k|=k_1 + \cdots k_d$ is the length of the multi-index.
+\begin{teo}\label{eigenvalues and eigenvectors localization operator spherically symmetric weight}
+	Eigenfuctions of $L_{\mathdutchcal{F},\varphi}$ are the $d$-dimensional Hermite functions
+\end{teo}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
