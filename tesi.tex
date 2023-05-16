@@ -53,6 +53,8 @@ sorting=nyt
 \newtheorem{cor}[teo]{Corollary}
 \newtheorem{prop}[teo]{Proposition}
 \newtheorem{es}[teo]{Example}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
 
 \newcommand{\R}{\mathbb{R}} %scorciatoia per R reali
 \newcommand{\N}{\mathbb{N}} %scorciatoia per N naturali
@@ -266,15 +268,15 @@ The inverse Fourier transform is denoted with $\F^{-1}$ because it is actually t
 The Fourier transform is intimately related to regularity and decay properties. The duality between these two is stated in the following theorems.
 \begin{teo}\label{duality decay-regularity theorem}
 	Let $f \in L^1(\R^d)$. If $|t|^k f \in L^1(\R^d)$ for some $k \in \N$ then $\hat{f} \in C_0^k(\R^d)$ and the following holds for every $\alpha \in \N^d$ with $|\alpha| \leq k$:
-	\begin{equation*}
+	\begin{equation}\label{derivative of transform}
 		\F \left((-2 \pi i t)^{\alpha} f \right) (\omega) = \partial^{\alpha} \F f(\omega).
-	\end{equation*}
+	\end{equation}
 \end{teo}
 \begin{teo}\label{duality regularity-decay theorem}
 	Let $f \in C^k(\R^d)$ for some $k \in \N$. If $f, \partial^{\alpha}f \in L^1(\R^d)$ for every $\alpha \in \N^d$ with $|\alpha| \leq k$ then
-	\begin{equation*}
+	\begin{equation}\label{transform of derivative}
 		\F \left(\partial^{\alpha} f\right) (\omega) = \left(2 \pi i \omega\right)^{\alpha} \F f(\omega)
-	\end{equation*}
+	\end{equation}
 	In particular this implies that $\hat{f}(\omega) = o\left(|\omega|^{-k} \right) $ as $| \omega | \rightarrow \infty$.
 \end{teo}
 {\color{blue}To sum up, previous theorems state a duality between regularity and decay: if a function is smooth then its Fourier transform decays rapidly and vice versa.}
@@ -290,19 +292,81 @@ Thanks to the polarization identity this implies that $\F$ preserves the inner p
 \end{equation}
 therefore the Fourier transform $\F$ is a unitary operator on $L^2(\R^d)$. Result \eqref{Parseval formula} is called \emph{Parseval formula}.
 
-Lastly, we introduce two fundamental operators in Fourier analysis. Given $x,\omega \in \R^d$ we define the \emph{time-shift} (or translation) operator $T_x$
+Lastly, we introduce some fundamental operators in Fourier analysis. Given $x,\xi \in \R^d$ and $\lambda > 0$ we define the \emph{time-shift} (or translation) operator $T_x$
 \begin{equation}\label{time-shift operator def}
-	T_x f(t) = f(t-x)
+	T_x f(t) = f(t-x) \quad \forall\, t \in \R^d,
 \end{equation}
-and the \emph{modulation} operator $M_{\omega}$
+the \emph{modulation} operator $M_{\xi}$
 \begin{equation}\label{modulation operator def}
-	M_{\omega} f(t) = e^{2 \pi i \omega \cdot t} f(t)
+	M_{\xi} f(t) = e^{2 \pi i \xi \cdot t} f(t) \quad \forall\, t \in \R^d
 \end{equation}
-{\color{blue} Va aggiunta anche la composizione e le loro proprietà?}
-These can be combined into a \emph{time-frequency shift} operator
+and the \emph{dilation} operator $D_{\lambda}$
+\begin{equation}\label{dilation operator def}
+	D_{\lambda}f(t) = \lambda^d f(\lambda t) \quad \forall\, t \in \R^d.
+\end{equation}
+Moreover, time-shift and modulation operators can be combined into a \emph{time-frequency shift} operator
 \begin{equation}\label{time-frequency shift def}
-	\pi(x,\omega) f(t) = M_{\omega} T_x f(t)
+	\pi(x,\xi) f(t) = M_{\xi} T_x f(t) \quad \forall\, t \in \R^d.
 \end{equation}
+It is easy to check that all these operator are isometric (with respect to the $L^1$ norm) isomorphism. We show how these operator act under the Fourier transform.
+\begin{prop}\label{properties of translation modulation and dilation operators}
+	Let $f \in L^1(\R^d)$. Then the following holds:
+	\begin{enumerate}[label=(\roman*)]
+		\item $\displaystyle \F(T_xf)(\omega) = M_{-x}\hat{f}(\omega)$;\label{Fourier transform of translation}
+		\item $\displaystyle \F(M_{\xi} f)(\omega) = T_{\xi} \hat{f}(\omega)$;\label{Fourier transform of modulation}
+		\item $\displaystyle \F(D_{\lambda}f)(\omega) = \hat{f}\left(\frac{\omega}{\lambda}\right)$.\label{Fourier transform of dilation}
+	\end{enumerate}
+\end{prop}
+\begin{proof}
+	\phantom{a}\\
+	\begin{enumerate}[label=(\roman*)]
+		\item $\begin{aligned}[t]
+			 \F(T_xf)(\omega) &= \int_{\R^d} f(t-x) e^{-2\pi i \omega \cdot t}dt \overset{s = t-x}{=} \int_{\R^d} f(s) e^{-2\pi i \omega \cdot (s+x)}ds = \\
+			                  &= e^{-2\pi i \omega \cdot x} \int_{\R^d} f(s) e^{-2\pi i \omega \cdot s}ds = M_{-x}\hat{f}(\omega) 
+		\end{aligned}$
+		\item $\begin{aligned}
+			\F(M_\xi f)(\omega) = \int_{\R^d} e^{2 \pi i \xi \cdot t} f(t) e^{-2 \pi i \omega \cdot t}dt = \int_{\R^d} f(t) e^{-2\pi i (\omega - \xi) \cdot t} dt = T_{\xi}\hat{f}(\omega)
+		\end{aligned}$
+	\item $\begin{aligned}
+		\F(D_{\lambda}f)(\omega) = \int_{\R^d} \lambda^d f(\lambda t) e^{-2\pi i \omega \cdot t}dt \overset{s=\lambda t}{=} \int_{\R^d} f(s) e^{-2 \pi i \omega \cdot \frac{s}{\lambda}}ds = \hat{f}\left(\frac{\omega}{\lambda}\right)
+	\end{aligned}$
+	\end{enumerate}	
+\end{proof}
+We point out that the second property, namely that $\F(M_{\xi}f) = T_{\xi}\hat{f}$, is shedding light on the role of modulation operator:\\
+while $T_x$ acts as a translation in the time domain, $M_{\xi}$ is a translation in the frequency domain. Therefore the time-frequency shift operator $\pi(x,\xi)$ is indeed a shift operator because it acts as a translation in the joint time-frequency domain.
+
+Thanks to these properties and Theorems \ref{duality decay-regularity theorem} and \ref{duality regularity-decay theorem} we can state compute the Fourier transform of Gaussians.
+\begin{prop}\label{Fourier transform of Gaussian proposition}
+	The Fourier transform maps Gaussian into Gaussians. More precisely, for $\lambda > 0$, we have:
+	\begin{equation}\label{Fourier transform of Gaussian formula}
+		\F(e^{-\lambda \pi |\cdot|^2})(\omega) = \dfrac{1}{\lambda^{d/2}} e^{-\frac{1}{\lambda}}\pi |\omega|^2 \quad \forall\,\omega \in \R^d.
+	\end{equation}
+\end{prop}
+\begin{proof}
+	We start considering the 1-dimensional case and for the ease of notation we let $\varphi_{\lambda}(t) = e^{-\lambda \pi t^2}$ for $t \in \R$.
+	
+	First of all we consider $\varphi = \varphi_1$, for which we have:
+	\begin{equation*}
+		\frac{d \varphi}{dt}(t) = -2 \pi t \varphi(t)
+	\end{equation*}
+	If we take the Fourier transform of both members, using \eqref{transform of derivative} in the former and \eqref{derivative of transform} in the latter we obtain:
+	\begin{equation*}
+		2 \pi i \omega \hat{\varphi}(\omega) = -i \dfrac{d\hat{\varphi}}{d\omega}(\omega) \implies \dfrac{d\hat{\varphi}}{d\omega}(\omega) = - 2 \pi \omega \hat{\varphi}(\omega)
+	\end{equation*}
+	which is exactly the same equation satisfied by $\varphi$, therefore $\hat{\varphi}(\omega) = C e^{-\pi \omega^2}$ for some $C \in \R$. Since $\hat{\varphi}(0) = \int_\R \varphi(t)dt = \|\varphi\|_1=1$ we obtain that $C=1$.
+	
+	The general case can be proved using the dilatation operator:
+	\begin{align*}
+		&\varphi_{\lambda}(t) = e^{-\lambda \pi t^2} = e^{-\pi \left(\sqrt{\lambda} t\right)^2} = \dfrac{1}{\sqrt{\lambda}} D_{\sqrt{\lambda}}\varphi(t) \implies\\
+		                     &\implies \hat{\varphi}_{\lambda}(\omega) = \dfrac{1}{\sqrt{\lambda}} \F ( D_{\sqrt{\lambda}}\varphi )(\omega) = \dfrac{1}{\sqrt{\lambda}} \hat{\varphi}\left(\frac{\omega}{\sqrt{\lambda}}\right) = \dfrac{1}{\sqrt{\lambda}} e^{-\frac{1}{\lambda}\pi\omega^2}
+	\end{align*}
+	The passage to the multidimensional case is almost straightforward since $e^{-\lambda|t|^2} = \prod_{j=1}^d e^{-\lambda t_j^2}$, therefore:
+	\begin{align*}
+		\F(e^{-\lambda\pi|\cdot|^2})(\omega) &= \int_{\R^d} e^{-\lambda \pi |t|^2} e^{-2\pi i \omega \cdot t}dt = \prod_{j=1}^d \int_{\R} e^{-\lambda \pi t_j^2} e^{-2\pi i \omega_j t_j} dt_j = \\
+										  &= \prod_{j=1}^d \dfrac{1}{\sqrt{\lambda}}e^{-\frac{1}{\lambda}\pi \omega_j^2} = \dfrac{1}{\lambda^{d/2}} e^{-\frac{1}{\lambda}\pi|\omega|^2}.
+	\end{align*}
+\end{proof}
+
 {\color{blue}\begin{teo}[Hausdorff-Young]
 	Let $1 \leq p \leq 2$ and let $p'$ such that $\frac{1}{p} + \frac{1}{p'} = 1$. Then $\F : L^p(\R^d) \rightarrow L^{p'}(\R^d)$ and $\| \hat{f }\|_{p'} \leq \| f \|_p$.
 \end{teo}}
@@ -610,8 +674,67 @@ It is still true that $d$-dimensional Hermite functions (now ranging between all
 \end{equation}
 where $|k|=k_1 + \cdots k_d$ is the length of the multi-index.
 \begin{teo}\label{eigenvalues and eigenvectors localization operator spherically symmetric weight}
-	Eigenfuctions of $L_{\mathdutchcal{F},\varphi}$ are the $d$-dimensional Hermite functions
+	Eigenfuctions of $L_{\mathdutchcal{F},\varphi}$ are the $d$-dimensional Hermite functions $H_k$, with corresponding eigenvalues
+	\begin{equation}\label{eigenvalues of localization operators with radial weight}
+		\lambda_k = \dfrac{\pi^{|k|}}{k!}\int_0^{+\infty} {\cdots} \int_0^{+\infty} \mathdutchcal{F}\left(\frac{s_1}{\pi},\ldots,\frac{s_d}{\pi}\right) \left(\prod_{j=1}^{d} s^{k_j} \right) e^{-(s_1 + \cdots + s_d)} ds_1 \cdots ds_d
+	\end{equation}
 \end{teo}
+Before proving the theorem we need the following lemma:
+\begin{lem}\label{integral of translated Gaussian lemma}
+	Given $z \in \C$ we have
+	\begin{equation}\label{integral of translated Gaussian formula}
+		\int_{\R} e^{-2\pi(t^2 + zt)}dt = \dfrac{1}{2^{1/2}} e^{\pi z^2/2}
+	\end{equation}
+\end{lem}
+\begin{proof}
+	Letting $z = \mathrm{Re}z + i\mathrm{Im}z = u + iv$ we have:
+	\begin{align*}
+		\int_{\R} e^{-2\pi(t^2 + zt)}dt &= \int_{\R} e^{-2\pi(t^2 + ut)} e^{-2\pi i v t}dt = e^{\pi u^2/2} e^{-2\pi(t^2 + ut + u^2/4)}e^{-2\pi i v t}dt\\
+										&= e^{\pi u^2/2} \int_{\R} e^{-2\pi(t + u/2)^2} e^{-2\pi i v t}dt = e^{\pi u^2/2} \F(T_{-u/2}e^{-2\pi(\cdot)^2})(v) \overset{\ref{properties of translation modulation and dilation operators}\ref{Fourier transform of translation} + \ref{Fourier transform of Gaussian proposition}}{=}\\
+										&= e^{\pi u^2/2} e^{2 \pi i (u/2)v}\dfrac{1}{2^{1/2}}e^{-\pi v^2/2} = \dfrac{1}{2^{1/2}} e^{\pi (u^2 + 2iuv - v^2)/2} = \dfrac{1}{2^{1/2}} e^{\pi z^2/2}
+		\end{align*}
+\end{proof}
+\begin{proof}[Proof of Theorem \ref{eigenvalues and eigenvectors localization operator spherically symmetric weight}]
+	Since Hermite functions are an orthonormal basis of $L^2(\R^n)$ it is sufficient to prove that $\langle  L_{\mathdutchcal{F},\varphi}H_k,H_l\rangle = \langle \mathdutchcal{F} \V_{\varphi}H_k, \V_{\varphi}H_l \rangle =  \lambda_k \prod_{j=1}^d \delta_{k_j,l_j}$, which means that the scalar product is different from zero if and only if $k=l$. We start by computing the STFT of an Hermite function
+	{\allowdisplaybreaks[1]
+	\begin{align*}
+		\V_{\varphi}H_k(x,\omega) &= \int_{\R^d} H_k(t) e^{-2\pi i \omega \cdot t}\, 2^{d/4} e^{-\pi|t-x|^2}dt = \int_{\R^d} \prod_{j=1}^d H_{k_j}(t_j) e^{-2\pi i \omega \cdot t}\, 2^{d/4} e^{-\pi|t-x|^2}dt =\\
+		&= \prod_{j=1}^{d} 2^{1/4}\int_{\R} H_{k_j}(t_j) e^{-2\pi i \omega_j t_j} e^{-\pi(t_j-x_j)^2}dt_j =\\
+		&= \prod_{j=1}^{d} 2^{1/4}\int_{\R} \dfrac{2^{1/4}}{\sqrt{k_j!}}\left(-\dfrac{1}{2\sqrt{\pi}}\right)^{k_j} e^{\pi t_j^2} \dfrac{d^{k_j}}{dt^{k_j}}\left(e^{-2\pi t_j^2}\right) e^{-2\pi i \omega_j t_j} e^{-\pi(t_j-x_j)^2}dt_j = \\
+		&= \prod_{j=1}^d \dfrac{2^{1/2}}{\sqrt{k_j!}} \left(-\dfrac{1}{2\sqrt{\pi}}\right)^{k_j} \int_{\R} \dfrac{d^{k_j}}{dt^{k_j}}\left(e^{-2\pi t_j^2}\right) e^{\pi(t_j^2 - 2i\omega_j t_j -t_j^2 + 2t_j x_j - x_j^2)}dt_j = \\
+		&= \prod_{j=1}^d \dfrac{2^{1/2}}{\sqrt{k_j!}} \left(-\dfrac{1}{2\sqrt{\pi}}\right)^{k_j} e^{-\pi x_j^2}\int_{\R} \dfrac{d^{k_j}}{dt^{k_j}}\left(e^{-2\pi t_j^2}\right) e^{2\pi(x_j - i\omega_j)t_j}dt_j \overset{\mathrm{integration\ by\  parts}}{=} \\
+		&= \prod_{j=1}^d \dfrac{2^{1/2}}{\sqrt{k_j!}} \left(-\dfrac{1}{2\sqrt{\pi}}\right)^{k_j} e^{-\pi x_j^2} [2\pi(x_j - i\omega_j)]^{k_j} (-1)^{k_j}\int_{\R}  e^{-2\pi[t_j^2 - (x_j - i \omega_j)t_j]} dt_j =\\
+		&=\prod_{j=1}^d \sqrt{\dfrac{\pi^{k_j}}{k_j!}}2^{1/2}( x_j - i\omega_j)^{k_j} e^{-\pi x_j^2} \dfrac{1}{2^{1/2}} e^{\pi (x_j - i \omega_j)^2/2} = \\
+		&= \prod_{j=1}^d \sqrt{\dfrac{\pi^{k_j}}{k_j!}} (x_j - i \omega_j)^{k_j} e^{-\pi i \omega_j x_j} e^{-\pi(x_j^2 + \omega_j^2)/2} =\\
+		&= \left(\prod_{j=1}^d \sqrt{\dfrac{\pi^{k_j}}{k_j!}} (x_j - i \omega_j)^{k_j} \right) e^{-\pi i \omega \cdot x} e^{-\pi(r_1^2 + \cdots + r_d^2)/2}
+	\end{align*}}
+	Before computing the scalar product between $L_{\mathdutchcal{F},\varphi} H_k$ and $H_l$, we introduce the angular coordinate $\theta_j$ such that $x_j + i \omega_j = r_j e^{i\theta_j}$. Therefore we have:
+	\begin{align}
+		\langle  L_{\mathdutchcal{F},\varphi}H_k,H_l\rangle &= \int_{\R^{2d}} F(x,\omega) \left(\prod_{j=1}^d \sqrt{\dfrac{\pi^{k_j}}{k_j!}} r_j^{k_j}e^{-i k_j \theta_j}\right)e^{-\pi i \omega \cdot x} e^{-\pi(r_1^2 + \cdots + r_d^2)/2} \cdot \nonumber\\
+															&\hphantom{=\int_{\R^{2d}} F(x,\omega)} \,\overline{\left(\prod_{m=1}^d \sqrt{\dfrac{\pi^{l_m}}{l_m!}} r_m^{l_m}e^{-i l_m \theta_m}\right)e^{-\pi i \omega \cdot x} e^{-\pi(r_1^2 + \cdots + r_d^2)/2}}dxd\omega= \nonumber\\
+															&=\int_{\R^{2d}} F(x,\omega) \left(\prod_{j=1}^d \sqrt{\dfrac{\pi^{k_j + l_j}}{k_j!l_j!}} r_j^{k_j + l_j} e^{i(l_j - k_j)\theta_j} \right) e^{-\pi(r_1^2 + \cdots + r_d^2)}dxd\omega. \label{scalar product Hermite functions}
+	\end{align}
+	For every pair of coordinated $(x_j,\omega_j)$ we can switch to polar coordinates $(r_j,\theta_j)$. Since $F(x,\omega) = \mathdutchcal{F}(r^2)$ is independent of angular coordinates, only functions depending on those are $e^{i(l_j - k_j)\theta_j}$, for which:
+	\begin{equation*}
+		\int_0^{2\pi} e^{i(l_j - k_j)\theta_j}d\theta_j = \begin{cases}
+			\displaystyle \frac{e^{i(l_j - k_j)\theta_j}}{i(l_j - k_j)} \bigg\rvert_0^{2\pi}=0 \quad & \mathrm{if\ } k_j \neq l_j\\
+			\phantom{a}\\
+			\displaystyle \int_0^{2\pi} d\theta_j = 2\pi \quad &\mathrm{if\ } k_j=l_j
+		\end{cases}
+	\end{equation*}
+	Therefore, if $k \neq l$, the whole integral is 0, otherwise, letting $k_j = l_j$ in \eqref{scalar product Hermite functions}:
+	\begin{align*}
+		\langle  L_{\mathdutchcal{F},\varphi}H_k,H_k\rangle &= (2\pi)^d \dfrac{\pi^{|k|}}{k!}\int_0^{+\infty} {\cdots} \int_0^{+\infty} \mathdutchcal{F}(r_1^2,\ldots,r_d^2) e^{-\pi(r_1^2 + \cdots + r_d^2)}\left(\prod_{j=1}^{d} r_j^{2k_j + 1} \right) dr_1 \cdots dr_d=\\
+															&= \dfrac{1}{k!} \int_0^{+\infty} \cdots \int_0^{+\infty} \mathdutchcal{F}(r_1^2,\ldots,r_d^2) e^{-\pi(r_1^2 + \cdots + r_d^2)} \left(\prod_{j=1}^{d} (\pi r_j^2)^{k_j} \right) \pi r_1 dr_1 \cdots \pi r_d dr_d
+	\end{align*}
+	where $k! = k_1! \cdots k_d!$. With the change of variable $s_j = \pi r_j^2$, we finally obtain:
+	\begin{equation*}
+		\langle  L_{\mathdutchcal{F},\varphi}H_k,H_k\rangle = \dfrac{1}{k!} \int_0^{+\infty} \cdots \int_0^{+\infty} \mathdutchcal{F}\left(\frac{s_1}{\pi},\ldots,\frac{s_d}{\pi}\right) \left(\prod_{j=1}^{d} s^{k_j} \right) e^{-(s_1 + \cdots + s_d)} ds_1 \cdots ds_d
+	\end{equation*}
+	which is exactly the expression \eqref{eigenvalues of localization operators with radial weight}.
+\end{proof}
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
