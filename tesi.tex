@@ -95,7 +95,7 @@ sorting=nyt
 \chapter{Preliminaries}\label{chapter preliminaries}
 In this first chapter we briefly recall some basics definition and results about functional analysis and Fourier transform. In section \ref{section basics of functional analysis} basic concepts about operators between Banach spaces are presented. In section \ref{section Fourier transform and its properties} Fourier transform is defined and essential properties are given.
 \section{Basics of Functional Analysis}\label{section basics of functional analysis}
-In this section we focus our attention on linear operators between Banach spaces. Across the section a generic Banach space will be denoted as $X$ (or $Y$) endowed with the norm $\| \cdot \|_X$. In case $X$ is an Hilbert space we will denote its inner product as $\langle \cdot, \cdot \rangle_X$.\\
+In this section we focus our attention on linear operators between Banach spaces. Across the section a generic Banach space will be denoted as $X$ (or $Y$) endowed with the norm $\| \cdot \|_X$. In case we will deal with an Hilbert space we will denote it with $H$ (or $K$) and its inner product as $\langle \cdot, \cdot \rangle_H$. {\color{red}Pedex in the norm and in the scalar product may be dropped in case there is no ambiguity}.\\
 A generic linear operator between two Banach spaces $X$ and $Y$ will be denoted as $T : X \rightarrow Y$. As a standard notation, the image of $x \in X$ through $T$ will be indicated as $T(x)$, or equivalently as $Tx$.
 \begin{defi}\label{bounded operator}
 	A linear operator $T : X \rightarrow Y$ is \textbf{bounded} if there exist $C>0$ such that
@@ -124,7 +124,7 @@ After this we define the \emph{norm} of an operator
 The proof of the equivalence between two definition is straightforward. We see that the norm of an operator is the best constant for which boundedness property \eqref{boundedness property} holds. {\color{blue} Sometimes, in order to emphasize the spaces between which $T$ operates, we may write the norm of $T$ as $\| T \|_{X \rightarrow Y}$.}\\
 In the following we will mostly deal with $X$ and $Y$ being $L^2(\R^d)$, which is an Hilbert space. For operators between Hilbert spaces we can give the norm of an operator by means of the dual norm:
 \begin{equation*}
-	\| T \| = \sup\{|\langle Tx, y \rangle_X| : x,y \in X,\,\ \|x\|_X = \|y\|_X = 1 \}
+	\| T \|_H = \sup\{|\langle Tx, y \rangle_H| : x,y \in H,\,\ \|x\|_H = \|y\|_H = 1 \}
 \end{equation*}
 
 An important class of operators is the class of \emph{compact operators}.
@@ -133,11 +133,11 @@ An important class of operators is the class of \emph{compact operators}.
 \end{defi}
 The property of compactness can be stated in multiple ways \textbf{SERVE SCRIVERLE?}.
 
-Now we suppose $X$ and $Y$ to be Hilbert spaces. Given $T \in \B(X,Y)$ there exist a unique $T^* \in \B(Y,X)$ such that:
+Now we suppose $H$ and $K$ to be Hilbert spaces. Given $T \in \B(H,K)$ there exist a unique $T^* \in \B(K,H)$ such that:
 \begin{equation*}
-	\langle Tx, y \rangle_X = \langle x, T^* y \rangle_Y \quad \forall x \in X,\,y \in Y
+	\langle Tx, y \rangle_H = \langle x, T^* y \rangle_K \quad \forall x \in H,\,y \in K
 \end{equation*}
-$T^*$ is called the \textbf{adjoint} operator of $T$. In the particular case in which $T : X \rightarrow X$, if $T=T^*$, we say that $T$ is \textbf{self-adjoint}.
+$T^*$ is called the \textbf{adjoint} operator of $T$. In the particular case in which $T : H \rightarrow H$, if $T=T^*$, we say that $T$ is \textbf{self-adjoint}.
 
 From now on we suppose that $X$ is over the field $\C$ and that $T \in \B(X)$.
 \begin{defi}\label{spectrum def}
@@ -156,25 +156,126 @@ If an operator is compact or self-adjoint its spectrum has some additional prope
 Therefore for compact operators, all the values in the spectrum, except at most for 0, are eigenvalues.\\
 Another fundamental result arises if we study the spectrum of compact and self-adjoint operators.
 \begin{teo}\label{self-adjoint compact operators are diagonalizable}
-	Let $X$ be a separable Hilbert space and $T \in \B(X)$ a compact and self-adjoint operator. Then there exist an orthonormal basis of $X$ composed of eigenvectors of $T$
+	Let $H$ be a separable Hilbert space and $T \in \B(H)$ a compact and self-adjoint operator. Then there exist an orthonormal basis of $H$ composed of eigenvectors of $T$
 \end{teo}
 Hence self-adjoint compact operators can always be diagonalized in some suitable basis (\cite{brezis}).
 
 Now we are going to consider two important classes of operators: \emph{trace class} operators and \emph{Hilbert-Schmidt} operators.\\
 The trace of an operator can be defined as it is for matrices.
-\begin{defi}\label{positive operator}
-	Let $X$ be an Hilbert space. An operator $T \in \B(X)$ is said \textbf{positive} if
+\begin{defi}\label{non-negative operator}
+	Let $H$ be an Hilbert space. An operator $T \in \B(H)$ is said \textbf{non-negative} if
 	\begin{equation*}
-		\langle T x, x \rangle \geq 0 \quad \forall x \in X
+		\langle T x, x \rangle \geq 0 \quad \forall x \in H
 	\end{equation*}
 \end{defi}
+\begin{lem}\label{power series of square root lemma}
+	The power series of $\sqrt{1-z}$ about zero converges absolutely for all complex numbers such that $|z| \leq 1$.
+\end{lem}
+\begin{proof}
+	The power series of $\sqrt{1-z}$ about the origin is given by
+	\begin{equation*}
+		\sqrt{1-z} = \sum_{n=0}^{+\infty}c_n z^n = 1 + \sum_{n=1}^{+\infty} (-1)^n\binom{1/2}{n} z^n
+	\end{equation*}
+	where the binomial $\binom{r}{n}$ is given by $\frac{r(r-1)\cdots(r-n+1)}{n!}$ for every $r \in \R$ and every $n \in \N$, while $\binom{r}{0}=1$. Since $\sqrt{1-z}$ is analytic for $|z|<1$ the series here converges absolutely, so now we have to consider the case $|z|=1$. We notice that $c_n < 0$ for every $n \geq 1$ because when $n$ is even $\binom{1/2}{n}$ is negative while if $n$ is odd $\binom{1/2}{n}$ is positive, therefore
+	\begin{align*}
+		1-\sqrt{1-x} = \sum_{n=1}^{+\infty} (-c_n) x^n
+	\end{align*}
+	is a positive series. Using this fact, given $N \in \N$, we have
+	\begin{align*}
+		\sum_{n=0}^{N} |c_n| &= 1 + \sum_{n=1}^{N} (-c_n) = 1 + \lim_{x \rightarrow 1^-} \sum_{n=1}^{N} (-c_n)x^n \overset{\mathrm{positive series}}{\leq} \\
+							 &\leq 1 + \lim_{x \rightarrow 1^-} \sum_{n=1}^{+\infty} (-c_n)x^n = 1 + \lim_{x \rightarrow 1^-}(1-\sqrt{1-x}) = 2.
+	\end{align*}
+	Since this holds for every $N$, taking the limit $N \rightarrow +\infty$ we obtain $\sum_{n=1}^{+\infty} |c_n| < \infty$, which means exactly that the power series is absolutely convergent.
+\end{proof}
+\begin{teo}\label{existence of square root}
+	Let $T \in \B(X)$ be a non-negative operator. Then, there exist a unique non-negative operator $S \in \B(X)$ such that $S^2 = T$. {\color{blue} Moreover $S$ commutes with all operators commuting with $T$}.
+	
+	We call $S$ the \textbf{square root} of $T$ and we denote it by $S = \sqrt{T}$.
+\end{teo}
+\begin{proof}
+	If $T=0$ we let $\sqrt{T}=0$, otherwise we define $B = I - \|T\|^{-1}T$, where $I$ is the identity operator.
+	Since $T$ is non-negative, for every $x \in X$ such that $\|x\|_X = 1$ we have
+	\begin{align*}
+		\langle Bx,x \rangle = \langle (I-\|T\|^{-1}T)x, x\rangle = \|x\|_X^2 - \|T\|^{-1}\langle Tx,x \rangle \leq \|x\|_X^2 = 1
+	\end{align*}
+	therefore, taking the supremum above all possible $x$, we obtain that $\|B\| \leq 1$. Thanks to previous Lemma \ref{power series of square root lemma} this implies that the series $\sum_{n=0}^{+\infty}c_n B^n$ is absolutely convergent, therefore convergent, in $\B(X)$ to an operator we indicate with $B_{1/2}$. We define
+	\begin{equation}\label{square root of an operator}
+		S = \|T\|^{1/2} B_{1/2}
+	\end{equation}
+	and we want to show that $S$ is non-negative, {\color{blue} self-adjoint} and that $S^2 = T$. We start proving that $B_{1/2}$, hence $S$, is non-negative. Taking $x \in X$, we have
+	\begin{align*}
+		\langle B_{1/2}x,x \rangle &= \langle (I + \sum_{n=1}^{+\infty} c_n B^n),x \rangle = \|x\|_X^2 + \sum_{n=1}^{+\infty} c_n\langle B^n x,x \rangle \geq \|x\|_X^2 + \sum_{n=1}^{+\infty} c_n \|B\|^n \|x\|_X^2 \geq\\
+								   &\geq \|x\|_X^2 + \sum_{n=1}^{+\infty} c_n \|x\|_X^2 = 0
+	\end{align*}
+	where we used the fact that $c_n$ are negative, $\|B\| \leq 1$ and that $1 + \sum_{n=1}^{\infty}c_n = \sqrt{1-x}\rvert_{x=1} = 0$.
+	
+	{\color{blue} Se serve aggiungere parte su autoaggiunto}
+	
+	Now we shall prove that $S^2 = T$, which means $\|T\|(B_{1/2})^2 = T$:
+	\begin{align*}
+		(B_{1/2})^2 = \left(\sum_{n=0}^{+\infty}c_n B^n\right) \left(\sum_{m=0}^{+\infty}c_m B^m\right) = \sum_{n=0}^{+\infty} \left(\sum_{m=0}^{n} c_m c_{n-m}\right) B^n = \sum_{n=0}^{+\infty} d_n B^n
+	\end{align*}
+	where the rearrangement is justified since all series are absolutely converging. In order to compute $d_n = \sum_{m=0}^{n} c_m c_{n-m}$ we notice the following:
+	\begin{align*}
+			1-x &= \sqrt{1-x} \sqrt{1-x} = \left(\sum_{n=0}^{+\infty}c_n x^n\right) \left(\sum_{m=0}^{+\infty}c_m x^m\right) = \sum_{n=0}^{+\infty} \left(\sum_{m=0}^{n} c_m c_{n-m}\right) x^n 
+	\end{align*}
+	which implies that $d_0=1$, $d_1 = -1$ and $d_n = 0$ for $n \geq 2$, therefore $B_{1/2} = I - B$ and, in the end
+	\begin{align*}
+		S^2 = \|T\|(B_{1/2})^2 = \|T\|(I - B) = \|T\|(I - I + \|T\|^{-1}T) = T.
+	\end{align*}
+	
+
+	Up to now we only proved the existence of a square root for $T$, in particular the one given by the expression \eqref{square root of an operator}. To prove uniqueness of the square root we start supposing $S_0$ is another self-adjoint non-negative operator in $\B(X)$ such that $S_0^2 = T$
+	
+	{\color{blue} concludere dim}
+\end{proof}
+From formula \eqref{square root of an operator} it is clear that if $T$ is self-adjoint also $\sqrt{T}$ is and the same is true if $T$ is compact.
+\begin{defi}\label{absolute value of an operator definition}
+	Given an operator $T \in \B(X)$ we define its \textbf{absolute value} as
+	\begin{equation}\label{absolute value of an operator formula}
+		|T| \coloneqq \sqrt{T^*T}
+	\end{equation}
+\end{defi}
+\begin{defi}\label{partial isometry}
+	A linear operator $U \in \B(X)$ is a \textbf{partial isometry} if it is an isometry over $(\mathrm{Ker}\,U)^{\perp}$, i.e. $\|Ux\|_X = \|x\|_X$ for every $x \in (\mathrm{Ker}\,U)^{\perp}$
+\end{defi}
+\begin{teo}\label{polar decomposition theorem}
+	Given $T \in \B(X)$ there exist unique a partial isometry $U$ such that
+	\begin{equation}\label{polar decomposition formula}
+		T = U|T|
+	\end{equation}
+	which is uniquely determined by the condition $\mathrm{Ker}\,U = \mathrm{Ker}\,T$.
+\end{teo}
+\begin{proof}
+	contenuto...
+\end{proof}
+
+We can now define the class of \emph{Hilbert-Schmidt} operators.
+\begin{defi}\label{Hilbert-Schmidt operator definition}
+	Let $T \in \B(H)$ be a linear operator. $T$ is a \textbf{Hilbert-Schmidt} operator if, given an orthonormal basis $\{\varphi_n\}_{n \in \N}$ of $H$, it holds that:
+	\begin{equation}\label{Hilbert-Schmidt operator condition}
+		\sum_{n=0}^{+\infty} \|T \varphi_n \|^2 < \infty
+	\end{equation}
+	The square root of the previous expression is the \textbf{Hilbert-Schmidt norm} of the operator $T$:
+	\begin{equation}\label{Hilbert-Schmidt norm formula}
+		\|T\|_{\mathrm{HS}} = \left( \sum_{n=0}^{+\infty} \|T \varphi_n \|^2 \right)^{1/2}
+	\end{equation}
+\end{defi}
+In principle, the definition of the Hilbert-Schmidt norm could depend upon the choice of the basis. However, with the following proposition we state that the definition is well-posed since it actually does not depend on the basis.
+\begin{prop}\label{Hilbert-Schmidt norm is well-defined}
+	The sum of the series in \eqref{Hilbert-Schmidt norm formula} is independent of the basis.
+\end{prop}
+\begin{proof}
+	contenuto...
+\end{proof}
+
 \begin{defi}\label{trace def}
 	Let $X$ be a separable Hilbert space with orthonormal basis $\{e_n\}_{n \in \N}$. Given $T \in \B(X)$ a positive operator we define the \textbf{trace} of $T$ as
 	\begin{equation*}\label{trace expression}
 		\mathrm{tr}(T) = \sum_{n=1}^{\infty} \langle A e_n, e_n \rangle
 	\end{equation*}
 \end{defi}
-Actually one should show that the definition is well posed, namely that is independent of the basis.
+In principle the expression $\sum_{n=1}^{\infty} \langle A e_n, e_n \rangle$ could depend upon the basis $\{e_n\}_{n \in \N}$. The following theorem states that actually the definition is well posed, i.e. the trace does not depend on the base.
 \begin{prop}\label{trace is well-deefined}
 	The definition of $\mathrm{tr}$ given by \eqref{trace expression} is independent of the basis.
 \end{prop}
@@ -182,7 +283,6 @@ Actually one should show that the definition is well posed, namely that is indep
 	contenuto...
 \end{proof}
 
-{\color{red}The definition of trace is given only for positive operators. If we want to deal with general ones it is sufficient to consider $|T|=\sqrt{T^*T}$ \textbf{LA PARTE SU RADICE QUADRATA E MODULO DI UN OPERATORE VA AGGIUNTA??}}
 \begin{defi}\label{trace class def}
 	An operator $T \in \B(X)$ is called \textbf{trace class} if and only if $\mathrm{tr}|T| < \infty$
 \end{defi}
