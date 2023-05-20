@@ -360,7 +360,7 @@ We are now going to show some properties of Hilbert-Schmidt and trace class oper
 	where exchange of series is allowed since all terms are non-negative.
 \end{proof}
 \begin{teo}\label{Hilbert-Schmidt operators are compact and bounded}
-	Let $T \in \B(H)$ be a Hilbert-Schmidt operator. Then $T$ is bounded, with $\|T\| \leq \|T\|_{\mathrm{HS}}$, and compact. Moreover, a compact operator $T$ is Hilbert-Schmidt if and only if $\sum_{n=1}^{+\infty} \mu_n^2$, where $\{\mu_n\}_{n=1}^{+\infty}$ are the singular values of $T$.
+	Let $T \in \B(H)$ be a Hilbert-Schmidt operator. Then $\|T\| \leq \|T\|_{\mathrm{HS}}$ and $T$ is compact. Moreover, a compact operator $T$ is Hilbert-Schmidt if and only if $\sum_{n=1}^{+\infty} \mu_n^2$, where $\{\mu_n\}_{n=1}^{+\infty}$ are the singular values of $T$.
 \end{teo}
 \begin{proof}
 	Let $\{e_n\}_{n \in \N}$ be an orthonormal basis of $H$ and let $x \in H$. We have:
@@ -407,7 +407,7 @@ so, an operator is trace class if and only if $\sqrt{|T|}$ is Hilbert-Schmidt. B
 \end{proof}
 
 \begin{teo}\label{trace class operators are compact and bounded}
-	Let $T \in \B(H)$. Then $T$ is trace class if and only if it is compact and $\sum_{n=1}^{+\infty} \mu_n$, where $\{\mu_n\}_{n \in \N}$ are the singular values of $T$. Moreover, if $T$ is trace class then $\mathrm{tr}|T| = \sum_{n=1}^{+\infty} \mu_n$ and additionally, if it is also self-adjoint, $\mathrm{tr}T = \sum_{n=1}^{+\infty} \lambda_n$ where $\{\lambda_n\}_{n \in \N}$. Finally, $T$ is bounded and $\|T\| \leq \mathrm{tr}|T|$.
+	Let $T \in \B(H)$. Then $T$ is trace class if and only if it is compact and $\sum_{n=1}^{+\infty} \mu_n$, where $\{\mu_n\}_{n \in \N}$ are the singular values of $T$. Moreover, if $T$ is trace class then $\mathrm{tr}|T| = \sum_{n=1}^{+\infty} \mu_n$ and additionally, if it is also self-adjoint, $\mathrm{tr}T = \sum_{n=1}^{+\infty} \lambda_n$ where $\{\lambda_n\}_{n \in \N}$. Finally, we have $\|T\| \leq \mathrm{tr}|T|$.
 \end{teo}
 \begin{proof}
 	Let $T = U|T|$ be the polar decomposition of $T$. If $T$ is trace class $\sqrt{|T|}$ is Hilbert-Schmidt, but from Theorem \ref{Hilbert-Schmidt operators are compact and bounded} we have that $\sqrt{|T|}$ is compact, therefore also $T = U \sqrt{|T|}\sqrt{|T|}$ and $|T|$ are compact. Not only $|T|$ is compact, but it is also self-adjoint and its eigenvalues are exactly $\{\mu_n\}_{n \in \N}$. Letting $\{e_n\}_{n \in \N}$ be an orthonormal basis made up of eigenvectors of $|T|$, we have
