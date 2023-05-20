@@ -95,7 +95,8 @@ sorting=nyt
 \chapter{Preliminaries}\label{chapter preliminaries}
 In this first chapter we briefly recall some basics definition and results about functional analysis and Fourier transform. In section \ref{section basics of functional analysis} basic concepts about operators between Banach spaces are presented. In section \ref{section Fourier transform and its properties} Fourier transform is defined and essential properties are given.
 \section{Basics of Functional Analysis}\label{section basics of functional analysis}
-In this section we focus our attention on linear operators between Banach spaces. Across the section a generic Banach space will be denoted as $X$ (or $Y$) endowed with the norm $\| \cdot \|_X$. In case we will deal with an Hilbert space we will denote it with $H$ (or $K$) and its inner product as $\langle \cdot, \cdot \rangle_H$. {\color{red}Pedex in the norm and in the scalar product may be dropped in case there is no ambiguity}.\\
+In this section we focus our attention on linear operators between Banach spaces. Across the section a generic Banach space will be denoted as $X$ (or $Y$) endowed with the norm $\| \cdot \|_X$. In case we will deal with an Hilbert space we will denote it with $H$ (or $K$) and its inner product as $\langle \cdot, \cdot \rangle_H$. {\color{red}Pedex in the norm and in the scalar product may be dropped in case there is no ambiguity}. {\color{red} Moreover, all the theory will be presented assuming we are dealing with infinite dimensional spaces but, if not otherwise stated, everything can be adapted almost directly for finite dimensional spaces.}
+
 A generic linear operator between two Banach spaces $X$ and $Y$ will be denoted as $T : X \rightarrow Y$. As a standard notation, the image of $x \in X$ through $T$ will be indicated as $T(x)$, or equivalently as $Tx$.
 \begin{defi}\label{bounded operator}
 	A linear operator $T : X \rightarrow Y$ is \textbf{bounded} if there exist $C>0$ such that
@@ -121,7 +122,8 @@ After this we define the \emph{norm} of an operator
 		\|T\| \coloneqq \inf\{C>0 : \| Tx \|_Y \leq C \| x \|_X \  \forall x \in X\} = \sup \left\{ \dfrac{\| Tx \|_Y}{\| x \|_X} : x \in X \setminus \{0\}\right\}
 	\end{equation*}
 \end{defi}
-The proof of the equivalence between two definition is straightforward. We see that the norm of an operator is the best constant for which boundedness property \eqref{boundedness property} holds. {\color{blue} Sometimes, in order to emphasize the spaces between which $T$ operates, we may write the norm of $T$ as $\| T \|_{X \rightarrow Y}$.}\\
+The proof of the equivalence between two definition is straightforward. We see that the norm of an operator is the best constant for which boundedness property \eqref{boundedness property} holds. {\color{blue} Sometimes, in order to emphasize the spaces between which $T$ operates, we may write the norm of $T$ as $\| T \|_{X \rightarrow Y}$.}
+
 In the following we will mostly deal with $X$ and $Y$ being $L^2(\R^d)$, which is an Hilbert space. For operators between Hilbert spaces we can give the norm of an operator by means of the dual norm:
 \begin{equation*}
 	\| T \|_H = \sup\{|\langle Tx, y \rangle_H| : x,y \in H,\,\ \|x\|_H = \|y\|_H = 1 \}
@@ -156,18 +158,60 @@ If an operator is compact or self-adjoint its spectrum has some additional prope
 Therefore for compact operators, all the values in the spectrum, except at most for 0, are eigenvalues.\\
 Another fundamental result arises if we study the spectrum of compact and self-adjoint operators.
 \begin{teo}\label{self-adjoint compact operators are diagonalizable}
-	Let $H$ be a separable Hilbert space and $T \in \B(H)$ a compact and self-adjoint operator. Then there exist an orthonormal basis of $H$ composed of eigenvectors of $T$
+	Let $H$ be a separable Hilbert space and $T \in \B(H)$ a compact and self-adjoint operator. Then there exist an orthonormal basis $\{\psi_n\}_{n \in \N}$ with eigenvalues $\{\lambda_n\}_{n \in \N}$ of $H$ composed of eigenvectors of $T$. Moreover $\lim_{n \rightarrow +\infty} \lambda_n = 0$.
 \end{teo}
-Hence self-adjoint compact operators can always be diagonalized in some suitable basis (\cite{brezis}).
+Hence self-adjoint compact operators can always be diagonalized in some suitable basis (\cite{brezis}). 
 
-Now we are going to consider two important classes of operators: \emph{trace class} operators and \emph{Hilbert-Schmidt} operators.\\
+From this Theorem immediately follows the next corollary, which relates the eigenvalues of a compact self-adjoint operator with its norm.
+\begin{cor}\label{norm is greatest eigenvalue}
+	Let $T \in \B(H)$ be a self-adjoint compact operator on a separable Hilbert space $H$ and suppose its eigenvalues are ordered in such a way that $|\lambda_1| \geq |\lambda_2| \geq \cdots$. Then $\|T\| = |\lambda_1|$.
+\end{cor}
+
+If an operator $T$ is compact but not self-adjoint we can easily construct an operator, related to $T$, that is compact and also self-adjoint, namely considering $T^*T$.
+\begin{cor}\label{canonical form for compact operators corollary}
+	Let $T \in \B(H)$ be a compact operator. There there exist orthonormal sets $\{\psi_n\}_{n \in \N}$ and $\{\phi\}_{n \in \N}$ and non-negative real numbers $\{\mu_n\}_{n \in \N}$ with $\lim_{n \rightarrow +\infty} \mu_n = 0$ so that
+	\begin{equation}\label{canonical form for compact operators formula}
+		T = \sum_{n=1}^{+\infty} \mu_n (\cdot , \psi_n)\phi_n
+	\end{equation}
+	where the series converges in norm. These $\mu_n$ are called \emph{singular values} of $T$ and are the square root of the eigenvalues of $T^*T$ or, equivalently, the eigenvalues of $|T|$.
+\end{cor}
+
+\subsection{Trace class and Hilbert-Schmidt operators}
+Now we are going to consider two important classes of operators: \emph{trace class} operators and \emph{Hilbert-Schmidt} operators.
+
 The trace of an operator can be defined as it is for matrices.
 \begin{defi}\label{non-negative operator}
 	Let $H$ be an Hilbert space. An operator $T \in \B(H)$ is said \textbf{non-negative} if
-	\begin{equation*}
+	\begin{equation}\label{non-negative operator formula}
 		\langle T x, x \rangle \geq 0 \quad \forall x \in H
-	\end{equation*}
+	\end{equation}
 \end{defi}
+Condition \eqref{non-negative operator formula} is sufficient to show that, on Hilbert spaces over the field of complex numbers, non-negative operators are automatically self-adjoint. This result is an immediate corollary of the following form of the polarization identity.
+\begin{prop}\label{polarization identity for sesquilinear forms}
+	Let $\mathcal{S} : H \times H \rightarrow \C$ be a sesquilinear form over the complex Hilbert space $H$. Then, for every $x,y \in H$:
+	\begin{equation}\label{polarization identity for sesquilinear forms formula}
+		\mathcal{S}(x,y) = \dfrac{1}{4}\sum_{k=0}^3 i^k \mathcal{S}(x + i^k y, x + i^k y)
+	\end{equation}
+\end{prop}
+\begin{proof}
+	The proof follows from a direct computation of the right-hand side
+	\begin{align*}
+		&\sum_{k=0}^3 i^k \mathcal{S}(x + i^k y, x + i^k y) = \mathcal{S}(x,x)\sum_{k=0}^{3}i^k + \mathcal{S}(x,y) \sum_{k=0}^{3} i^k i^{-k} + \mathcal{S}(y,x) \sum_{k=0}^{3} i^k i^k+\\
+		&+ \mathcal{S}(y,y)\sum_{k=0}^{3} i^k i^k i^{-k} = 4 \mathcal{S}(x,y) \implies \mathcal{S}(x,y) = \dfrac{1}{4}\sum_{k=0}^3 i^k \mathcal{S}(x + i^k y, x + i^k y).
+	\end{align*}
+\end{proof}
+\begin{prop}\label{positive operators are self-adjoint}
+	Let $T \in \B(H)$ be a non-negative operator over a complex Hilbert space $H$. Then $T$ is self-adjoint.
+\end{prop}
+\begin{proof}
+	First of all we notice that if $T$ is non-negative, the quantity $\langle Tx,x \rangle$ is real, therefore $\langle Tx,x \rangle = \overline{\langle Tx,x \rangle} = \langle x,Tx \rangle$. Letting $\mathcal{T}(\cdot,\cdot) = \langle T \cdot, \cdot \rangle$, and using the polarization identity \eqref{polarization identity for sesquilinear forms formula}:
+	\begin{align}
+		\overline{\mathcal{T}(y,x)} &= \dfrac{1}{4}\sum_{k=0}^{3}  \overline{i^{k}\mathcal{T}(y + i^k x, y + i^k x)} \overset{T\ \mathrm{positive}}{=} \dfrac{1}{4}\sum_{k=0}^{3} i^{-k} \mathcal{T}(y + i^k x, y + i^k x) =\nonumber\\
+									&= \dfrac{1}{4}\sum_{k=0}^{3} i^{-k} \mathcal{T}\left(i^k(x + i^{-k}y), i^k(x + i^{-k}y)\right) = \\
+									&= \dfrac{1}{4}\sum_{k=0}^{3} i^{-k} \mathcal{T}(x + i^{-k}, x + i^{-k}y) = \mathcal{T}(x,y) \label{polarization identity}
+	\end{align}
+\end{proof}
+{\color{blue}Non-negative operators are somewhat ``special'', since their behaviour resembles, in some sense, the one of complex numbers. In particular, one can define the \emph{square root} of non-negative operator. Before doing so, we need the following Lemma.}
 \begin{lem}\label{power series of square root lemma}
 	The power series of $\sqrt{1-z}$ about zero converges absolutely for all complex numbers such that $|z| \leq 1$.
 \end{lem}
@@ -176,60 +220,68 @@ The trace of an operator can be defined as it is for matrices.
 	\begin{equation*}
 		\sqrt{1-z} = \sum_{n=0}^{+\infty}c_n z^n = 1 + \sum_{n=1}^{+\infty} (-1)^n\binom{1/2}{n} z^n
 	\end{equation*}
-	where the binomial $\binom{r}{n}$ is given by $\frac{r(r-1)\cdots(r-n+1)}{n!}$ for every $r \in \R$ and every $n \in \N$, while $\binom{r}{0}=1$. Since $\sqrt{1-z}$ is analytic for $|z|<1$ the series here converges absolutely, so now we have to consider the case $|z|=1$. We notice that $c_n < 0$ for every $n \geq 1$ because when $n$ is even $\binom{1/2}{n}$ is negative while if $n$ is odd $\binom{1/2}{n}$ is positive, therefore
+	where the binomial $\binom{r}{n}$ is defined by $\frac{r(r-1)\cdots(r-n+1)}{n!}$ for every $r \in \R$ and every $n \in \N$, while if $n=0$ we have $\binom{r}{0}=1$. Since $\sqrt{1-z}$ is analytic for $|z|<1$, the series here converges absolutely, so now we have to consider the case $|z|=1$. We notice that $c_n < 0$ for every $n \geq 1$ because when $n$ is even $\binom{1/2}{n}$ is negative, while if $n$ is odd $\binom{1/2}{n}$ is positive, therefore
 	\begin{align*}
 		1-\sqrt{1-x} = \sum_{n=1}^{+\infty} (-c_n) x^n
 	\end{align*}
 	is a positive series. Using this fact, given $N \in \N$, we have
 	\begin{align*}
-		\sum_{n=0}^{N} |c_n| &= 1 + \sum_{n=1}^{N} (-c_n) = 1 + \lim_{x \rightarrow 1^-} \sum_{n=1}^{N} (-c_n)x^n \overset{\mathrm{positive series}}{\leq} \\
+		\sum_{n=0}^{N} |c_n| &= 1 + \sum_{n=1}^{N} (-c_n) = 1 + \lim_{x \rightarrow 1^-} \sum_{n=1}^{N} (-c_n)x^n \overset{\mathrm{positive\ series}}{\leq} \\
 							 &\leq 1 + \lim_{x \rightarrow 1^-} \sum_{n=1}^{+\infty} (-c_n)x^n = 1 + \lim_{x \rightarrow 1^-}(1-\sqrt{1-x}) = 2.
 	\end{align*}
 	Since this holds for every $N$, taking the limit $N \rightarrow +\infty$ we obtain $\sum_{n=1}^{+\infty} |c_n| < \infty$, which means exactly that the power series is absolutely convergent.
 \end{proof}
 \begin{teo}\label{existence of square root}
-	Let $T \in \B(X)$ be a non-negative operator. Then, there exist a unique non-negative operator $S \in \B(X)$ such that $S^2 = T$. {\color{blue} Moreover $S$ commutes with all operators commuting with $T$}.
+	Let $T \in \B(X)$ be a non-negative operator. Then, there exist a unique non-negative operator $S \in \B(X)$ such that $S^2 = T$. Moreover $S$ commutes with all bounded operators commuting with $T$.
 	
 	We call $S$ the \textbf{square root} of $T$ and we denote it by $S = \sqrt{T}$.
 \end{teo}
 \begin{proof}
 	If $T=0$ we let $\sqrt{T}=0$, otherwise we define $B = I - \|T\|^{-1}T$, where $I$ is the identity operator.
-	Since $T$ is non-negative, for every $x \in X$ such that $\|x\|_X = 1$ we have
+	Since $T$ is non-negative, for every $x \in X$ such that $\|x\|_X = 1$, we have
 	\begin{align*}
 		\langle Bx,x \rangle = \langle (I-\|T\|^{-1}T)x, x\rangle = \|x\|_X^2 - \|T\|^{-1}\langle Tx,x \rangle \leq \|x\|_X^2 = 1
 	\end{align*}
-	therefore, taking the supremum above all possible $x$, we obtain that $\|B\| \leq 1$. Thanks to previous Lemma \ref{power series of square root lemma} this implies that the series $\sum_{n=0}^{+\infty}c_n B^n$ is absolutely convergent, therefore convergent, in $\B(X)$ to an operator we indicate with $B_{1/2}$. We define
+	which implies, {\color{red} using polarization identity}, that $\|B\| \leq 1$. Thanks to Lemma \ref{power series of square root lemma}, this means that the series $\sum_{n=0}^{+\infty}c_n B^n$ is absolutely convergent, therefore convergent, in $\B(X)$ to an operator we indicate with $B_{1/2}$. We define
 	\begin{equation}\label{square root of an operator}
 		S = \|T\|^{1/2} B_{1/2}
 	\end{equation}
-	and we want to show that $S$ is non-negative, {\color{blue} self-adjoint} and that $S^2 = T$. We start proving that $B_{1/2}$, hence $S$, is non-negative. Taking $x \in X$, we have
+	and we want to show that $S$ is non-negative and satisfies $S^2 = T$. We start proving that $B_{1/2}$, hence $S$, is non-negative. Taking $x \in X$, we have
 	\begin{align*}
 		\langle B_{1/2}x,x \rangle &= \langle (I + \sum_{n=1}^{+\infty} c_n B^n),x \rangle = \|x\|_X^2 + \sum_{n=1}^{+\infty} c_n\langle B^n x,x \rangle \geq \|x\|_X^2 + \sum_{n=1}^{+\infty} c_n \|B\|^n \|x\|_X^2 \geq\\
 								   &\geq \|x\|_X^2 + \sum_{n=1}^{+\infty} c_n \|x\|_X^2 = 0
 	\end{align*}
 	where we used the fact that $c_n$ are negative, $\|B\| \leq 1$ and that $1 + \sum_{n=1}^{\infty}c_n = \sqrt{1-x}\rvert_{x=1} = 0$.
 	
-	{\color{blue} Se serve aggiungere parte su autoaggiunto}
-	
 	Now we shall prove that $S^2 = T$, which means $\|T\|(B_{1/2})^2 = T$:
 	\begin{align*}
 		(B_{1/2})^2 = \left(\sum_{n=0}^{+\infty}c_n B^n\right) \left(\sum_{m=0}^{+\infty}c_m B^m\right) = \sum_{n=0}^{+\infty} \left(\sum_{m=0}^{n} c_m c_{n-m}\right) B^n = \sum_{n=0}^{+\infty} d_n B^n
 	\end{align*}
-	where the rearrangement is justified since all series are absolutely converging. In order to compute $d_n = \sum_{m=0}^{n} c_m c_{n-m}$ we notice the following:
+	where the rearrangement is justified since all series are absolutely converging. In order to compute $d_n = \sum_{m=0}^{n} c_m c_{n-m}$, we notice the following:
 	\begin{align*}
 			1-x &= \sqrt{1-x} \sqrt{1-x} = \left(\sum_{n=0}^{+\infty}c_n x^n\right) \left(\sum_{m=0}^{+\infty}c_m x^m\right) = \sum_{n=0}^{+\infty} \left(\sum_{m=0}^{n} c_m c_{n-m}\right) x^n 
 	\end{align*}
-	which implies that $d_0=1$, $d_1 = -1$ and $d_n = 0$ for $n \geq 2$, therefore $B_{1/2} = I - B$ and, in the end
+	which implies that $d_0=1$, $d_1 = -1$ and $d_n = 0$ for $n \geq 2$, therefore $B_{1/2} = I - B$ and, in the end:
 	\begin{align*}
 		S^2 = \|T\|(B_{1/2})^2 = \|T\|(I - B) = \|T\|(I - I + \|T\|^{-1}T) = T.
 	\end{align*}
-	
+	Lastly, since the series that defines $B_{1/2}$, hence $S$, is absolutely convergent, it commutes with every bounded operator commuting with $T$.
 
-	Up to now we only proved the existence of a square root for $T$, in particular the one given by the expression \eqref{square root of an operator}. To prove uniqueness of the square root we start supposing $S_0$ is another self-adjoint non-negative operator in $\B(X)$ such that $S_0^2 = T$
-	
-	{\color{blue} concludere dim}
+	Up to now we only proved the existence of a square root for $T$, in particular the one given by the expression \eqref{square root of an operator}. To prove uniqueness of the square root we start supposing $S_0$ is another non-negative operator in $\B(X)$ such that $S_0^2 = T$. We notice that $S_0$ commutes with $T$, indeed $S_0 T = S_0 S_0^2 = S_0^2 S_0 = T S_0$. Therefore $S_0$ commutes also with $S$, thus we have:
+	\begin{align*}
+		(S-S_0)^2S + (S-S_0)^2S_0 &= (S-S_0)[(S-S_0)S + (S-S_0)S_0] =\\
+								  &= (S-S_0)(S^2 - S_0S + SS_0 -S_0^2) =\\
+								  &= (S-S_0)(S^2 - S_0^2) = (S-S_0)(T-T)=0.
+	\end{align*}
+	But $(S-S_0)^2 S$ and $(S-S_0)^2 S_0$ are non-negative operator, so they must vanish, in particular also their difference $(S-S_0)^2 S - (S-S_0)^ S_0 = (S-S_0)^3$ is zero. This implies $(S-S_0)^4 = (S-S_0) (S-S_0)^3 = 0$, but since both $S$ and $S_0$ are self-adjoint, for every $x \in H$ we have:
+	\begin{align*}
+		0 = \langle (S-S_0)^4 x,x \rangle = \langle (S-S_0)^2 u, (S-S_0)^2 u \rangle =  \|(S-S_0)^2 x\|^2 \implies (S-S_0)^2 = 0
+	\end{align*}
+	and with the same argument we conclude that also $S-S_0 = 0$.
 \end{proof}
-From formula \eqref{square root of an operator} it is clear that if $T$ is self-adjoint also $\sqrt{T}$ is and the same is true if $T$ is compact.
+\begin{remark}
+	From expression \eqref{square root of an operator} it is clear that if $T$ is compact then also $\sqrt{T}$, since it is a limit of compact operators.
+\end{remark}
 \begin{defi}\label{absolute value of an operator definition}
 	Given an operator $T \in \B(X)$ we define its \textbf{absolute value} as
 	\begin{equation}\label{absolute value of an operator formula}
@@ -239,87 +291,167 @@ From formula \eqref{square root of an operator} it is clear that if $T$ is self-
 \begin{defi}\label{partial isometry}
 	A linear operator $U \in \B(X)$ is a \textbf{partial isometry} if it is an isometry over $(\mathrm{Ker}\,U)^{\perp}$, i.e. $\|Ux\|_X = \|x\|_X$ for every $x \in (\mathrm{Ker}\,U)^{\perp}$
 \end{defi}
+\begin{prop}\label{U^* is a partial isometry}
+	Let $U \in \B(H)$ be a partial isometry. Then also $U^*$ is a partial isometry.
+\end{prop}
+\begin{proof}
+	{\color{red} Since $U$ is a partial isometry, from polarization identity it follows that $\langle Ux,Uy \rangle = \langle x,y \rangle$ for every $x,y \in (\mathrm{Ker}(U))^{\perp}$. Clearly the same equality holds if $x \in (\mathrm{Ker}(U))^{\perp}$ while $y \in \mathrm{Ker}(U)$, so $U^*U$ is the identity over $(\mathrm{Ker}(U))^{\perp}$. This implies that $U^*$ is an isometry onto $\overline{\mathrm{Im}(U)} = (\mathrm{Ker}(U^*))^{\perp}$, hence it is a partial isometry too.}
+\end{proof}
 \begin{teo}\label{polar decomposition theorem}
 	Given $T \in \B(X)$ there exist unique a partial isometry $U$ such that
 	\begin{equation}\label{polar decomposition formula}
-		T = U|T|
+		T = U|T|,
 	\end{equation}
 	which is uniquely determined by the condition $\mathrm{Ker}\,U = \mathrm{Ker}\,T$.
 \end{teo}
 \begin{proof}
-	contenuto...
-\end{proof}
-
-We can now define the class of \emph{Hilbert-Schmidt} operators.
-\begin{defi}\label{Hilbert-Schmidt operator definition}
-	Let $T \in \B(H)$ be a linear operator. $T$ is a \textbf{Hilbert-Schmidt} operator if, given an orthonormal basis $\{\varphi_n\}_{n \in \N}$ of $H$, it holds that:
-	\begin{equation}\label{Hilbert-Schmidt operator condition}
-		\sum_{n=0}^{+\infty} \|T \varphi_n \|^2 < \infty
-	\end{equation}
-	The square root of the previous expression is the \textbf{Hilbert-Schmidt norm} of the operator $T$:
-	\begin{equation}\label{Hilbert-Schmidt norm formula}
-		\|T\|_{\mathrm{HS}} = \left( \sum_{n=0}^{+\infty} \|T \varphi_n \|^2 \right)^{1/2}
-	\end{equation}
-\end{defi}
-In principle, the definition of the Hilbert-Schmidt norm could depend upon the choice of the basis. However, with the following proposition we state that the definition is well-posed since it actually does not depend on the basis.
-\begin{prop}\label{Hilbert-Schmidt norm is well-defined}
-	The sum of the series in \eqref{Hilbert-Schmidt norm formula} is independent of the basis.
-\end{prop}
-\begin{proof}
-	contenuto...
+	We start defining $\tilde{U} : \mathrm{Im}|T| \rightarrow \mathrm{Im}T$. Every $\phi \in \mathrm{Im}|T|$ can be written as $\phi = |T|\psi$ for some $\psi \in H$ and we define $\tilde{U}(\phi) = \tilde{U}(|T|\psi) \coloneqq T\psi$. We notice that	
+	\begin{align*}
+		\|\phi\|^2 &= \||T|\psi\|^2 = \langle |T|\psi, |T|\psi \rangle  = \langle |T|^2 \psi, \psi \rangle = \langle T^*T \psi, \psi \rangle = \|T \psi \|^2 = \|\tilde{U}\phi\|.
+	\end{align*}
+	This computation ensures us that the definition of $\tilde{U}$ is consistent (if $\phi = |T|\psi_1 = |T|\psi_2$ for some $\psi_1,\psi_2 \in H$, then $|T|(\psi_1 - \psi_2)=0$, but $\| |T|(\psi_1 - \psi_2)\| = \| T(\psi_1 - \psi_2)\|$, $T\psi_1 = T\psi_2$) and it implies that $\tilde{U}$ is an isometry over $\mathrm{Im}(|T|)$, thus it can be uniquely extended to an isometry of $\overline{\mathrm{Im}(|T|)}$ over $\overline{\mathrm{Im}T}$. The definition of the map $U$ is straightforward extending $\tilde{U}$ to all $H$ defining it 0 on $(\mathrm{Im}(|T|))^{\perp}$. Since $|T|$ is self-adjoint $(\mathrm{Im}(|T|))^{\perp} = \mathrm{Ker}(|T|)$. Furthermore, since $\| |T|\psi\| = \| T\psi\|$, $|T|\psi=0$ if and only if $T\psi=0$, therefore $\mathrm{Ker}|T| = \mathrm{Ker}T$ which implies, in the end, that $\mathrm{Ker}U = \mathrm{Ker}T$.
+	
+	Lastly we shall prove that $U$ is unique. Suppose $V$ is another partial isometry such that $T = V|T|$ and $\mathrm{Ker}V = \mathrm{Ker}T$. First condition implies that $T = U|T| = V|T|$, so $U$ and $V$ coincide over $\mathrm{Im}|T|$ (and by continuity over its closure), while second condition implies that $\mathrm{Ker}T = \mathrm{Ker}U = \mathrm{Ker}T$, so $U$ and $V$ coincide over $\mathrm{Ker}|T| = (\mathrm{Im}|T|)^{\perp}$, therefore $U$ and $V$ coincide over $H = \overline{\mathrm{Im}|T|} \oplus \mathrm{Ker}|T|$.
 \end{proof}
 
 \begin{defi}\label{trace def}
-	Let $X$ be a separable Hilbert space with orthonormal basis $\{e_n\}_{n \in \N}$. Given $T \in \B(X)$ a positive operator we define the \textbf{trace} of $T$ as
-	\begin{equation*}\label{trace expression}
-		\mathrm{tr}(T) = \sum_{n=1}^{\infty} \langle A e_n, e_n \rangle
-	\end{equation*}
+	Let $X$ be a separable Hilbert space with orthonormal basis $\{e_n\}_{n \in \N}$. Given $T \in \B(X)$ a non-negative operator we define the \textbf{trace} of $T$ as
+	\begin{equation}\label{trace expression}
+		\mathrm{tr}(T) = \sum_{n=1}^{\infty} \langle T e_n, e_n \rangle
+	\end{equation}
 \end{defi}
-In principle the expression $\sum_{n=1}^{\infty} \langle A e_n, e_n \rangle$ could depend upon the basis $\{e_n\}_{n \in \N}$. The following theorem states that actually the definition is well posed, i.e. the trace does not depend on the base.
-\begin{prop}\label{trace is well-deefined}
+Since $T$ is non-negative the sum in \eqref{trace expression} is well defined and, in principle, it could depend upon the basis $\{e_n\}_{n \in \N}$. The following theorem states that actually the definition is well posed, i.e. the trace does not depend on the base.
+\begin{prop}\label{trace is well-defined}
 	The definition of $\mathrm{tr}$ given by \eqref{trace expression} is independent of the basis.
 \end{prop}
 \begin{proof}
-	contenuto...
-\end{proof}
-
-\begin{defi}\label{trace class def}
-	An operator $T \in \B(X)$ is called \textbf{trace class} if and only if $\mathrm{tr}|T| < \infty$
-\end{defi}
-\begin{teo}
-	For every trace class operator $\| T \| \leq \mathrm{tr}(T)$.
-\end{teo}
-\begin{proof}
-	contenuto...
-\end{proof}
-\begin{teo}
-	Every trace class operator is compact.
-\end{teo}
-\begin{proof}
-	contenuto...
+	Let $T \in \B(H)$ be a non-negative operator and $\{\phi_n\}_{n \in \N}$ and $\{\psi_n\}_{n \in \N}$ be two orthonormal basis of $H$. We have
+	\begin{align*}
+		\sum_{n=1}^{+\infty} \langle T\phi_n,\phi_n \rangle &= \sum_{n=1}^{+\infty} \|\sqrt{T}\phi_n\|^2 = \sum_{n=1}^{+\infty} \left(\sum_{m=1}^{+\infty} |\langle \sqrt{T}\phi_n, \psi_m \rangle|^2 \right)=\\
+															&= \sum_{m=1}^{+\infty} \left(\sum_{n=1}^{+\infty} |\langle \sqrt{T}\psi_m, \phi_n \rangle|^2 \right) = \sum_{m=1}^{+\infty} \|\sqrt{T}\psi_m\|^2 = \\
+															&= \sum_{m=1}^{+\infty} \langle T \psi_m, \psi_m \rangle
+	\end{align*}
+	where we used the fact that $\sqrt{T}$ is self-adjoint, while the exchange of series is allowed because all terms are non-negative.
 \end{proof}
 \begin{defi}\label{Hilbert-Schmidt operator def}
 	An operator $T \in \B(X)$ is called \textbf{Hilbert-Schmidt} if and only if $\mathrm{tr}(T^*T) < \infty$. We define the \textbf{Hilbert-Schmidt norm} of an operator as $\|T\|_{\mathrm{HS}} = \sqrt{\mathrm{tr}(T^*T)}$.
 \end{defi}
-\begin{teo}\label{Hilbert-Schmidt operator norm}
-	For every Hilbert-Schmidt operator $\| T \| \leq \| T \|_{\mathrm{HS}}$.
-\end{teo}
-\begin{teo}\label{Hilbert-Schmidt operators are compact}
-	Every Hilbert-Schmidt operator is compact.
-\end{teo}
-\begin{proof}
-	contenuto...
-\end{proof}
-The importance of Hilbert-Schmidt operator is related to the following theorem.
-\begin{teo}
-	Let $X = L^2(\R^d)$. Then $T \in \B(L^2(\R^d))$ is Hilbert-Schmidt if only if there exist a function $K \in L^2(\R^d \times \R^d)$, called integral kernel, such that
-	\begin{equation}\label{Hilbert-Schmidt integral operator}
-		(Tf)(x) = \int_{\R^d} K(x,y)f(y)dy \quad \forall f \in L^2(\R^d).
+From the definition of the trace we can see that, given an orthonormal basis $\{e_n\}_{n=1}^{+\infty}$,
+\begin{equation}\label{Hilbert-Schmidt norm expression}
+	\|T\|_{\mathrm{HS}}^2 = \mathrm{tr}(T^*T) = \sum_{n=1}^{+\infty} \langle T^*Te_n,e_n \rangle = \sum_{n=1}^{+\infty} \langle Te_n,Te_n \rangle = \sum_{n=1}^{+\infty} \|Te_n\|^2
+\end{equation}
+so we can say, in an equivalent way, that an operator is Hilbert-Schmidt if and only if $\sum_{n=1}^{+\infty} \|Te_n\|^2 < +\infty$. Thanks to Proposition \ref{trace is well-defined} we immediately see that the Hilbert-Schmidt norm is independent on the choice of the basis.
+
+We are now going to show some properties of Hilbert-Schmidt and trace class operators.
+\begin{prop}\label{|T| and T^* are Hilbert-Schmidt}
+	Let $T \in \B(H)$ be a Hilbert-Schmidt operator. Then also $|T|$ and $T^*$ are Hilbert-Schmidt operators and 
+	\begin{equation}\label{Hilbert-Schmidt norm of |T| and T^*}
+		\| |T| \|_{\mathrm{HS}} = \| T^* \|_{\mathrm{HS}} = \| T \|_{\mathrm{HS}}.
 	\end{equation}
-	Moreover $\mathrm{tr}(T^*T) = \int_{\R^{2d}} |K(x,y)|^2 dxdy$.
+\end{prop}
+\begin{proof}
+	We already know that, for every $x \in H$, $\|Tx\|^2 = \||T|x\|^2$, therefore from \eqref{Hilbert-Schmidt norm expression} we immediately see that $ \| |T| \|_{\mathrm{HS}} = \| T \|_{\mathrm{HS}}$.
+	
+	Consider now an orthonormal basis $\{e_n\}_{n \in \N}$ of $H$. From \eqref{Hilbert-Schmidt norm expression}:
+	\begin{align*}
+		\|T\|_{\mathrm{HS}}^2 &= \sum_{n=1}^{+\infty} \|Te_n\|^2 = \sum_{n=1}^{+\infty} \left(\sum_{m=1}^{+\infty} |\langle Te_n,e_m \rangle|^2\right) = \sum_{m=1}^{+\infty} \left(\sum_{n=1}^{+\infty} |\langle e_n, T^*e_m \rangle|^2\right) =\\
+							&= \sum_{m=1}^{+\infty} \|T^* e_m\|^2 = \|T^*\|_{\mathrm{HS}}^2
+	\end{align*}
+	where exchange of series is allowed since all terms are non-negative.
+\end{proof}
+\begin{teo}\label{Hilbert-Schmidt operators are compact and bounded}
+	Let $T \in \B(H)$ be a Hilbert-Schmidt operator. Then $T$ is bounded, with $\|T\| \leq \|T\|_{\mathrm{HS}}$, and compact. Moreover, a compact operator $T$ is Hilbert-Schmidt if and only if $\sum_{n=1}^{+\infty} \mu_n^2$, where $\{\mu_n\}_{n=1}^{+\infty}$ are the singular values of $T$.
 \end{teo}
 \begin{proof}
-	contenuto...
+	Let $\{e_n\}_{n \in \N}$ be an orthonormal basis of $H$ and let $x \in H$. We have:
+	\begin{align*}
+		\|Tx\|^2 &= \sum_{n=1}^{+\infty} |\langle Tx,e_n \rangle|^2 = \sum_{n=1}^{+\infty} |\langle x,T^*e_n \rangle|^2 \leq \|x\|^2 \sum_{n=1}^{+\infty} \|T^*e_n\|^2 =\\
+				 &= \|x\|^2 \|T^*\|_{\mathrm{HS}}^2 \overset{\eqref{Hilbert-Schmidt norm of |T| and T^*}}{=} \|x\|^2 \|T\|_{\mathrm{HS}}^2
+	\end{align*}
+	Taking the supremum over all $x \in H$ gives us that $\|T\| \leq \|T\|_{\mathrm{HS}}$.
+	
+	To prove that $T$ is compact, consider the following sequence of operators $T_N = \sum_{n=1}^{N} \langle \cdot , e_n \rangle Te_n$. All $T_N$ have finite rank, so they are compact and $T_N \rightarrow T$ in $\B(H)$, indeed:
+	\begin{align*}
+		\|T-T_N\| \leq \|T-T_N\|_{\mathrm{HS}}^2 = \sum_{n=N+1}^{+\infty} \|T e_n\|^2 \rightarrow 0 \quad \mathrm{as\ } N \rightarrow +\infty
+	\end{align*}
+	therefore, since $T$ is limit of compact operators, it is compact.
+	
+	Lastly, if $T$ is a compact operator also $T^*T$ is compact as well as self-adjoint, hence we can consider as orthonormal basis of $H$ the one given by its eigenvectors $\{e_n\}_{n \in \N}$. Recalling Corollary \ref{canonical form for compact operators corollary}, we know that $\mu_n^2$ are exactly the eigenvalues of $T^*T$.  For such basis we have:
+	\begin{align*}
+		\|T\|_{\mathrm{HS}}^2 &= \sum_{n=1}^{+\infty} \|Te_n\|^2 = \sum_{n=1}^{+\infty} \langle Te_n,Te_n \rangle = \sum_{n=1}^{+\infty} \langle T^*T e_n,e_n \rangle = \sum_{n=1}^{+\infty} \mu_n^2
+	\end{align*}
+\end{proof}
+We can now turn back to trace class operator. It is evident that trace class operators and Hilbert-Schmidt operators are strictly related. Indeed, as seen in the proof of Proposition \ref{trace is well-defined}, we have
+\begin{equation*}
+	\mathrm{tr}|T| = \sum_{n=1}^{+\infty} \langle |T|e_n, e_n \rangle = \sum_{n=1}^{+\infty} \|\sqrt{|T|}e_n\|^2 = \| T \|_{\mathrm{HS}}^2,
+\end{equation*}
+so, an operator is trace class if and only if $\sqrt{|T|}$ is Hilbert-Schmidt. By virtue of this link we can exploit properties of Hilbert-Schmidt operators in order to obtain informations about trace class operators. First of all, we are going to prove that expression \eqref{trace expression} is well-defined for every trace class operator and not only for non-negative ones.
+\begin{teo}
+	Let $T \in \B(H)$ be a trace class operator and $\{e_n\}_{n \in \N}$ an orthonormal basis of $H$. Then $\sum_{n=1}^{+\infty} \langle Te_n,e_n \rangle$ converges absolutely and the limit is independent of the basis.
+\end{teo}
+\begin{proof}
+	{\color{red}We start proving that the series converges absolutely. Letting $T = U |T|$ be the polar decomposition of $T$, we want to show that:
+		\begin{equation}\label{absoulte convergence trace intermediate}
+			\sum_{n=1}^{+\infty} |\langle Te_n,e_n  \rangle| = \sum_{n=1}^{+\infty} |\langle U\sqrt{|T|}\sqrt{|T|}e_n,e_n \rangle| = \sum_{n=1}^{+\infty} |\langle \sqrt{|T|}e_n,\sqrt{|T|}U^*e_n\rangle| < +\infty.
+		\end{equation}
+		From Cauchy-Schwarz inequality, for every term we have that $|\langle \sqrt{|T|}e_n,\sqrt{|T|}U^*e_n\rangle| \leq \|\sqrt{|T|}e_n \|\,\| \sqrt{|T|}U^*e_n\|$ and, since $T$ is trace class, $\sqrt{|T|}$ is Hilbert-Schmidt, so the sequence of $\|\sqrt{|T|}e_n\|$ is in $\ell^2(\N)$. Therefore we need to prove that also $\sqrt{|T|}U^*$ is an Hilbert-Schmidt operator. To do so, we consider an orthonormal basis of $(\mathrm{Ker}U^*)^{\perp}$, denoted with $\{\phi_i\}_{i \in \mathcal{I}}$, and an orthonormal basis of $\mathrm{Ker}U^*$, denoted with $\{\psi_j\}_{j \in \mathcal{J}}$, where $\mathcal{I}$ and $\mathcal{J}$ are at most countable. Clearly $\{\eta_n\}_{n \in \N} \coloneqq \{\phi_i\}_{i \in \mathcal{I}} \cup\{\psi_j\}_{j \in \mathcal{J}}$ is an orthonormal basis of $H$. We notice that, from Proposition \ref{U^* is a partial isometry}, $U^*$ is a partial isometry over $(\mathrm{Ker}U^*)^{\perp}$, so the set $\{U^*\phi_i\}_{i \in \mathcal{I}}$ is still an orthonormal basis of $(\mathrm{Ker}U^*)^{\perp}$, which can be completed to a basis of $H$ with $\{\psi_j\}_ {j \in \mathcal{J}}$. For the basis given by $\eta_n$ we have:
+		\begin{align*}
+			\sum_{n=1}^{+\infty} \|\sqrt{|T|}U^* \eta_n\|^2 = \sum_{i \in \mathcal{I}} \| \sqrt{|T|} U^*\phi_i\|^2 \leq \sum_{i \in \mathcal{I}} \| \sqrt{|T|} (U^*\phi_i)\|^2 + \sum_{j \in \mathcal{J}} \|\sqrt{|T|} \psi_j\|^2 = \|\sqrt{|T|}\|_{\mathrm{HS}}^2.
+		\end{align*}
+		Since the Hilbert-Schmidt norm is independent of the basis we can conclude that $\sqrt{|T|}U^*$ is an Hilbert-Schmidt operator. We can now go back to \eqref{absoulte convergence trace intermediate}:
+		\begin{align*}
+			\sum_{n=1}^{+\infty} |\langle Te_n,e_n  \rangle| &= \sum_{n=1}^{+\infty} |\langle \sqrt{|T|}e_n,\sqrt{|T|}U^*e_n\rangle| \leq \sum_{n=1}^{+\infty} \| \sqrt{|T|}e_n\|\, \|\sqrt{|T|}U^*e_n \| \overset{\mathrm{C-S}}{\leq}\\
+			&\leq \left(\sum_{n=1}^{+\infty} \| \sqrt{|T|}e_n\|^2 \right)^{1/2} \left(\sum_{n=1}^{+\infty} \| \sqrt{|T|}U^*e_n\|^2 \right)^{1/2} \leq \|\sqrt{|T|}\|_{\mathrm{HS}}^2.
+		\end{align*}
+		The proof of the independence of the basis is exactly the same as the one for Proposition \ref{trace is well-defined}, because now the exchange of series is allowed since the series is convergent.}
+\end{proof}
+
+\begin{teo}\label{trace class operators are compact and bounded}
+	Let $T \in \B(H)$. Then $T$ is trace class if and only if it is compact and $\sum_{n=1}^{+\infty} \mu_n$, where $\{\mu_n\}_{n \in \N}$ are the singular values of $T$. Moreover, if $T$ is trace class then $\mathrm{tr}|T| = \sum_{n=1}^{+\infty} \mu_n$ and additionally, if it is also self-adjoint, $\mathrm{tr}T = \sum_{n=1}^{+\infty} \lambda_n$ where $\{\lambda_n\}_{n \in \N}$. Finally, $T$ is bounded and $\|T\| \leq \mathrm{tr}|T|$.
+\end{teo}
+\begin{proof}
+	Let $T = U|T|$ be the polar decomposition of $T$. If $T$ is trace class $\sqrt{|T|}$ is Hilbert-Schmidt, but from Theorem \ref{Hilbert-Schmidt operators are compact and bounded} we have that $\sqrt{|T|}$ is compact, therefore also $T = U \sqrt{|T|}\sqrt{|T|}$ and $|T|$ are compact. Not only $|T|$ is compact, but it is also self-adjoint and its eigenvalues are exactly $\{\mu_n\}_{n \in \N}$. Letting $\{e_n\}_{n \in \N}$ be an orthonormal basis made up of eigenvectors of $|T|$, we have
+	\begin{align*}
+		\mathrm{tr}|T| = \sum_{n=1}^{+\infty} \langle |T|e_n,e_n \rangle = \sum_{n=1}^{+\infty} \mu_n.
+	\end{align*}
+	Conversely, if $T$ is a compact operator the previous formula still holds and shows that $T$ is also trace-class. With the same reasoning, if $T$ is self-adjoint and trace class, we can write the trace with respect to the basis made up its eigenvectors thus obtaining $\mathrm{tr}T = \sum_{n=1}^{+\infty} \lambda_n$.
+	
+	For the last part of the Theorem, we notice that $|T|$ is a compact self-adjoint non-negative operator, therefore, assuming its eigenvalues are decreasingly ordered, from Corollary \ref{norm is greatest eigenvalue} we have that $\| |T| \| = \mu_1$, hence:
+	\begin{align*}
+		\| T \| = \| U |T| \| \leq \| |T| \| = \mu_1 \leq \sum_{n=1}^{+\infty} \mu_n = \mathrm{tr}|T|.
+	\end{align*} 	
+\end{proof}
+
+In the special case $H = L^2(\R^d)$ we are able to give a characterization of Hilbert-Schmidt operators.
+\begin{teo}
+	An operator $T \in \B(L^2(\R^d))$ is Hilbert-Schmidt if only if there exist a function $K_T \in L^2(\R^d \times \R^d)$, called integral kernel, such that
+	\begin{equation}\label{Hilbert-Schmidt integral operator}
+		(Tf)(x) = \int_{\R^d} K_T(x,y)f(y)dy \quad \forall f \in L^2(\R^d).
+	\end{equation}
+	Moreover $\|T\|_{\mathrm{HS}} = \mathrm{tr}(T^*T) = \int_{\R^{2d}} |K(x,y)|^2 dxdy$.
+\end{teo}
+\begin{proof}
+	Letting $\{e_n\}_{n \in \N}$ be an orthonormal basis of $L^2(\R^d)$, then $\{e_n \otimes \overline{e}_m\}_{(n,m) \in \N \times \N}$, where $(e_n \otimes \overline{e_m})(x,y) \coloneqq e_n(x)\overline{e_m(y)}$, is an orthonormal basis of $L^2(\R^{2d})$.
+	
+	We start supposing that $T \in \B(H)$ is a Hilbert-Schmidt operator and we define
+	\begin{equation}\label{integral kernel formula}
+		K_T(x,y) = \sum_{n,m=1}^{+\infty} \langle Te_n,e_m \rangle_{L^2(\R^d)} e_m(x)\overline{e_n(y)}
+	\end{equation}
+	Then
+	\begin{equation}\label{equivalence norm L2 and Hilbert-Schmidt norm}
+		\begin{aligned}
+			\|K_T\|_{L^2(\R^{2d})}^2 &= \sum_{n,m=1}^{+\infty} |\langle Te_n,e_m \rangle|^2 = \sum_{n=1}^{+\infty} \sum_{m=1}^{+\infty} |\langle Te_n,e_m \rangle|^2 =\\
+			&= \sum_{n=1}^{+\infty} \|T e_n\|^2_{L^2(\R^d)} = \|T\|_{\mathrm{HS}}^2
+		\end{aligned}		
+	\end{equation}
+	and, given $f \in L^2(\R^d)$,
+	{\color{red}\begin{align*}
+			\int_{\R^d} K_T(x,y)f(y)dy &= \int_{\R^d} \sum_{n,m=1}^{+\infty} \langle Te_n,e_m \rangle_{L^2(\R^d)} e_m(x) \overline{e_n(y)}f(y)dy = \\
+			&= \sum_{n,m=1}^{+\infty} \langle Te_n,e_m \rangle_{L^2(\R^d)} \langle f,e_n \rangle_{L^2(\R^d)} e_m(x) = \\
+			&= \sum_{m=1}^{+\infty} \langle Tf,e_m \rangle_{L^2(\R^d)} e_n(x) = (Tf)(x)
+		\end{align*} perché lo scambio di serie e integrale è permesso?
+		
+	Conversely, if we define $T$ by \eqref{Hilbert-Schmidt integral operator} we have to show that this operator is Hilbert-Schmidt, but this is straightforward since  \eqref{equivalence norm L2 and Hilbert-Schmidt norm} still holds.}
 \end{proof}
 In light of this theorem, operators defined by \eqref{Hilbert-Schmidt integral operator} are called \emph{Hilbert-Schmidt integral operators}.
 
@@ -327,7 +459,21 @@ In light of this theorem, operators defined by \eqref{Hilbert-Schmidt integral o
 	An Hilbert-Schmidt integral operator with kernel $K$ is self-adjoint if and only if $K(x,y) = \overline{K(y,x)}$.
 \end{prop}
 \begin{proof}
-	contenuto...
+	Let $f,g \in L^2(\R^d)$. We start showing that $K(x,y)f(y)\overline{g(x)} \in L^1(\R^{2d})$:
+	\begin{align*}
+		&\int_{\R^{2d}} |K(x,y)| |f(y)| |g(x)| dxdy \overset{\mathrm{Tonelli}}{=} \int_{\R^d} \left(\int_{\R^d} |K(x,y)||f(y)| dy\right) |g(x)| dx = \\
+		&= \int_{\R^d} (T_{|K|} |f|)(y) |g(y)| \overset{\mathrm{C-S}}{\leq} \|T_{|K|}\|_2 \|g\|_2 \leq \|K\|_2 \| f \|_2 \|g\|_2 < +\infty,
+	\end{align*}
+	where $T_{|K|}$ denotes the Hilbert-Schmidt integral operator with kernel $|K|$ and $\|T_{|K|}|f|\|_2 \leq \|K\|_2 \| f \|_2$ because $T_{|K|}$ is Hilbert-Schmidt, therefore $\|T_{|K|}\| \leq \|T_{|K|}\|_{\mathrm{HS}} = \| K \|_2$. We are now in the position to use Fubini's theorem:
+	\begin{align*}
+		\langle Tf,g \rangle &= \int_{\R^d} \left(\int_{\R^d} K(x,y)f(y)dy\right)\overline{g(x)}dx = \int_{\R^d} \left(\int_{\R^d} K(x,y)\overline{g(x)}dx\right) f(y)dy =\\
+							 &= \int_{\R^d} \overline{\left(\int_{\R^d} \overline{K(x,y)} g(x)dx\right)} f(y)dy = \langle f,T^*g \rangle
+	\end{align*}
+	therefore the expression of $T^*$ is:
+	\begin{equation*}
+		T^*f(x) = \int_{\R^d} \overline{K(y,x)} f(y)dy,
+	\end{equation*}
+	so $T$ is self-adjoint if and only if $K(x,y) = \overline{K(y,x)}$.
 \end{proof}
 
 
