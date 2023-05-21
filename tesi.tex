@@ -477,15 +477,7 @@ In light of this theorem, operators defined by \eqref{Hilbert-Schmidt integral o
 \end{proof}
 
 
-\begin{itemize}
-	\item Norma operatoriale (FATTO)
-	\item Operatori autoaggiunti? (FATTO)
-	\item Operatori compatti (FATTO)
-	\item Spettro operatori (FATTO)
-	\item Operatori di classe traccia
-	\item Operatori di Hilbert-Schmidt?
-\end{itemize}
-\section{Fourier Transform and its properties}\label{section Fourier transform and its properties}
+\section{Fourier Transform and its properties}\label{Fourier transform and its properties section}
 \begin{defi}\label{Fourier transform def}
 	Let $f \in L^1(\R^d)$. We define the \textbf{Fourier transform} of $f$ the function
 	\begin{equation}\label{Fourier transform formula}
@@ -613,9 +605,9 @@ Thanks to these properties and Theorems \ref{duality decay-regularity theorem} a
 	\end{align*}
 \end{proof}
 
-{\color{blue}\begin{teo}[Hausdorff-Young]
+\begin{teo}[Hausdorff-Young]
 	Let $1 \leq p \leq 2$ and let $p'$ such that $\frac{1}{p} + \frac{1}{p'} = 1$. Then $\F : L^p(\R^d) \rightarrow L^{p'}(\R^d)$ and $\| \hat{f }\|_{p'} \leq \| f \|_p$.
-\end{teo}}
+\end{teo}
 In the following we will need the sharp version of the Hausdorff-Young inequality: 
 \begin{equation}\label{Hausdorff-Yound inequality}
 	\| \hat{f} \|_{p'} \leq \left(\dfrac{p^{1/p}}{p'^{1/p'}}\right)^{d/2} \|f\|_p = A_p^d \|f\|_p
@@ -628,16 +620,6 @@ Just like the Hausdorff-Young inequality, Young's inequality holds in a sharp ve
 \begin{equation}\label{Young inequality sharp}
 	\|f * g\|_r \leq (A_p A_q A_{r'})^d \|f\|_p \|g\|_q.
 \end{equation}
-
-
-	\begin{itemize}
-		\item Defizione trasformata (FATTO)
-		\item Teorema di Plancherel (FATTO)
-		\item Formula di inversione(FATTO)
-		\item Proprietà di decadimento e regolarità (FATTO)
-		\item Proprietà operatori di traslazione e modulazione??
-		\item Disuguaglianza di Hausdorff-Young ??
-	\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -713,7 +695,7 @@ Combing this with \eqref{STFT is an isometry formula} and using a simple interpo
 	\begin{align*}
 		\|\V_{\phi} f\|_p &\leq A_{p'}^d \left(A_{2/p'}^d A_{2/p'}^d A_{(p/p')'}^d \| \,|f|^{p'} \|_{2/p'} \|\,|\phi^*|^{p'}\|_{2/p'} \right)^{1/p'}.
 	\end{align*}
-	However $\| \,|f|^{p'} \|_{2/p'} = (\int_{\R^d} (|f(x)|^{p'})^{2/p'}dx)^{p'/2} = \|f\|_2^{p'}$ and from a direct calculation {\color{blue} QUALE??} one can see that $A_{p'}^d A_{2/p'}^{2d/p'}A_{(p/p')'}^{d/p'}=(2/p)^d$, which corresponds to the desired result.
+	However $\| \,|f|^{p'} \|_{2/p'} = (\int_{\R^d} (|f(x)|^{p'})^{2/p'}dx)^{p'/2} = \|f\|_2^{p'}$ and from a direct calculation (which can be found in \ref{constant in Lieb's inequality calculation}) one can see that $A_{p'}^d A_{2/p'}^{2d/p'}A_{(p/p')'}^{d/p'}=(2/p)^d$, which corresponds to the desired result.
 \end{proof}
 
 From a direct computation one can see that the adjoint operator of the STFT operator $\V_{\phi}$ is given by the following expression:
@@ -840,7 +822,7 @@ If we compare the integral kernels of $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$ we s
 	(Q_{\Omega} P_T)^* Q_{\Omega} P_T &= P_T^* Q_{\Omega}^* Q_{\Omega} P_T= P_T Q_{\Omega} P_T\\
 	(P_T Q_{\Omega})^* P_T Q_{\Omega} &= Q_{\Omega}^* P_T^* P_T Q_{\Omega} = Q_{\Omega} P_T Q_{\Omega}
 \end{align} 
-These are, by construction, self-adjoint operators, and since both $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$ are compact operators (thanks to Proposition \ref{projection operators are Hilbert-Schmidt} and Theorem \ref{Hilbert-Schmidt operators are compact}) they are also compact (we recall that composition between a general operator and a compact one is compact). Hence, by Theorem \ref{self-adjoint compact operators are diagonalizable} they can be diagonalized.\\
+These are, by construction, self-adjoint operators, and since both $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$ are compact operators (thanks to Proposition \ref{projection operators are Hilbert-Schmidt} and Theorem \ref{Hilbert-Schmidt operators are compact and bounded}) they are also compact (we recall that composition between a general operator and a compact one is compact). Hence, by Theorem \ref{self-adjoint compact operators are diagonalizable} they can be diagonalized.\\
 {\color{red} Aggiungere qualcosa sulle prolate spheroidal wave functions?}
 
 
@@ -887,9 +869,9 @@ Thanks to these result and an interpolation argument one can show that $\L_{F,\p
 	\item Proprietà di limitatezza e compattezza
 	\item Autovalori e autofunzioni
 \end{itemize}
-\subsection{Spherically Symmetric Weights}
+\subsection{Spherically Symmetric Weights}\label{spherically symmetric weights section}
 In this section we will consider the special case in which the window for the STFT is a Gaussian \eqref{gaussian normalized} and the weight $F$ is spherically symmetric. Letting $r_j^2 = x_j^2 + \omega_j^2$ for $j=1,\ldots,d$ and $r^2=(r_1^2\ldots,r_d^2) \in \R^d$, the hypothesis about $F$ can be rephrased in the following way
-\begin{equation}\label{sperically symmetric weight}
+\begin{equation}\label{spherically symmetric weight}
 	F(x,\omega) = \mathdutchcal{F}(r^2).
 \end{equation}
 {\color{blue} In order to highlight the dependence of $F$ through $\mathdutchcal{F}$ the corresponding localization operator will be denoted as $L_{\mathdutchcal{F},\varphi}$}.
@@ -986,110 +968,85 @@ Before proving the theorem we need the following lemma:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Uncertainty principles}\label{chapter uncertainty principles}
-In previous chapters sometimes we wrote about ``good'' and ``bad'' localization of a signal. Although intuitively this can be understood in these sloppy terms, we can specify and quantify the localization of a function. The notion of localization can be stated in multiple ways and in various contexts. {\color{blue} Here we present some \emph{uncertainty principles}.}
-\section{Heisenberg's uncertainty principle}\label{section Heisenberg's UP}
-{\color{red}\begin{lem}\label{uncertainty principle for operators lemma}
-	Let $A,B: D \subset X \rightarrow X$ be two linear symmetric (i.e. formally self-adjoint) operators defined on an invariant subspace $D$ (i.e. $A(D),B(D) \subset D$) of an Hilbert space $X$. Then, for every $a,b \in \R$ and for every $f$ in $D$
-	\begin{equation}\label{uncertainty principle for operators formula}
-		\| (A-a)f \| \cdot \| (B-b) f\| \geq \dfrac12\lvert\langle [A,B]f,f \rangle \rvert
+
+\begin{lem}\label{Heisenberg's uncertainty principle lemma}
+	Let $f \in L^2(\R)$. Then
+	\begin{equation}\label{Heisenberg's uncertainty principle lemma formula}
+		\int_{\R} t^2 |f(t)|^2dt + \int_{\R} \omega^2 |\hat{f}(\omega)|^2d\omega = \dfrac{1}{2\pi} \sum_{k=0}^{+\infty} (2k+1)|\langle f,H_k \rangle|^2
 	\end{equation}
-	where $[A,B] = AB-BA$ is the commutator of $A$ and $B$. Equality holds if and only if $(A-a)f = i c(B-b)f$ for some $c \in \R$.
-\end{lem}}
+	where $H_k$ is the $k$-th Hermite function. In particular we have
+	\begin{equation}\label{Heisenberg's uncertainty principle lemma inequality}
+		\int_{\R} t^2 |f(t)|^2dt + \int_{\R} \omega^2 |\hat{f}(\omega)|^2d\omega \geq \dfrac{\|f\|_2^2}{2\pi}
+	\end{equation}
+	with equality if and only if $f$ is a multiple of $H_0$.
+\end{lem}
 \begin{proof}
-	By Cauchy-Schwarz inequality we have
-	\begin{equation}\label{Cauchy Schwarz lemma uncertainty principle}
-		\| (A-a)f \| \cdot \| (B-b) f\| \geq |\langle (A-a)f, (B-b)f \rangle|
-	\end{equation}
-	The right-hand side is the modulus of a complex number. For every $z \in \C$ we have
+	Our aim is to exploit the fact that Hermite functions are an orthonormal basis of $L^2(\R)$ by computing $\langle tf, H_k\rangle$. {\color{red} Before going on we remark that the previous expression is not an $L^2$ scalar product but is a duality between a tempered distribution and a function in the Schwartz class}. To do so, we just need to use the recursive relation \eqref{Hermite functions recursion}:
 	\begin{equation*}
-		|z|^2 = \mathrm{Re}(z)^2 + \mathrm{Im}(z)^2 \geq \mathrm{Im}(z)^2 \implies |z| \geq \left| \dfrac{z-\overline{z}}{2i}\right| = \dfrac{1}{2} |z-\overline{z}|.
+		\langle tf, H_k \rangle = \langle f, tH_k \rangle = \dfrac{1}{2\sqrt{\pi}} \left( \sqrt{k+1} \langle f, H_{k+1} \rangle+ \sqrt{k}\langle f,H_{k-1}\rangle \right).
 	\end{equation*}
-	Using this inequality we have
-	\begin{align}
-		|\langle (A-a)f, (B-b)f \rangle| &\geq \frac{1}{2}\left| \langle (A-a)f, (B-b)f \rangle - \langle (B-b)f, (A-a)f \rangle \right| = \label{second inequality lemma uncertainty principle}\\
-										 &=\dfrac{1}{2}| \langle Af,Bf \rangle - \langle Af,bf \rangle - \langle af,Bf \rangle + \langle af,bf \rangle +\nonumber\\
-										 &\phantom{\dfrac{1}{2}|} - \langle Bf,Af \rangle + \langle Bf,af \rangle + \langle bf,Af \rangle - \langle bf,af \rangle | =\nonumber\\
-										 &=\dfrac{1}{2}|\langle (AB - BA)f,f \rangle| = \dfrac{1}{2}|\langle [A,B]f,f \rangle| \nonumber
-	\end{align}
-	When using Cauchy-Schwarz in \eqref{Cauchy Schwarz lemma uncertainty principle}, we have equality if and only if
-	\begin{enumerate}[label=(\roman*)]
-		\item $(A-a)f = \lambda (B-b)f$ for some $\lambda \in \C$;
-		\item $(B-b)f=0$.
-	\end{enumerate}
-	In the latter case we have equality also in \eqref{second inequality lemma uncertainty principle}, while in the former equality occurs if and only if $|\langle (A-a)f,(B-b)f\rangle| = \lambda \|(B-b)f\|^2$ is purely imaginary, which means that $\lambda = ic$ for some $c \in \R$.
+	To compute the similar quantity for $\hat{f}$ we also need to recall that Hermite functions are eigenfunction of the Fourier transform \eqref{Hermite functions are eigenfunctions of Fourier transform}:
+	\begin{align*}
+		\langle \omega \hat{f}, H_k \rangle &= \langle \hat{f}, \omega H_k \rangle = \dfrac{1}{2\sqrt{\pi}} \left( \sqrt{k+1} \langle \hat{f}, H_{k+1} \rangle + \sqrt{k}\langle \hat{f},H_{k-1}\rangle \right) \overset{\eqref{Hermite functions are eigenfunctions of Fourier transform} + \F\;\mathrm{unitary}}{=} \\
+											&= \dfrac{1}{2\sqrt{\pi}} \left( \sqrt{k+1} (-i)^{k+1}\langle f, H_{k+1} \rangle + \sqrt{k}(-i)^{k-1}\langle f,H_{k-1}\rangle \right)=\\
+											&= \dfrac{1}{2\sqrt{\pi}} (-i)^{k-1} \left( \sqrt{k}\langle f,H_{k-1}\rangle - \sqrt{k+1} \langle f, H_{k+1} \rangle  \right)
+	\end{align*}
+	Now, since $H_k$ form an orthonormal basis of $L^2(\R)$ we can use Parseval's identity:
+	\begin{align*}
+		\int_{\R} t^2 |f(t)|^2dt + \int_{\R} \omega^2 |\hat{f}(\omega)|^2d\omega &= \sum_{k=0}^{+\infty} \left( |\langle tf, H_k \rangle|^2 + |\langle \omega \hat{f}, H_k\rangle|^2 \right) = \\
+								 											     &= \dfrac{1}{2\pi}\sum_{k=0}^{+\infty} \left[ (k+1)|\langle f,H_{k+1}\rangle|^2 + k|\langle f,H_{k-1}\rangle| \right] = \\
+								 											     &= \dfrac{1}{2\pi}\sum_{k=0}^{+\infty} (2k+1)|\langle f,H_k\rangle|^2.
+	\end{align*}	
+	Since $(2k+1) \geq 1$ inequality \eqref{Heisenberg's uncertainty principle lemma inequality} immediately proven, and equality hold if and only if $\langle f,H_k \rangle = 0$ for every $k > 1$, which means exactly that $f$ is a multiple of $H_0$.
+\end{proof}
+\begin{lem}\label{Heisenberg's uncertainty principle lemma d dimensions}
+	Let $f \in L^2(\R^d)$. Then, for every $j = 1,\ldots,d$:
+	\begin{equation}\label{Heisenberg's uncertainty principle lemma d dimensions formula}
+		\int_{\R^d} t_j^2 |f(t)|^2 dt + \int_{\R^d} \omega_j^2 |\hat{f}(\omega)|^2 = \dfrac{1}{2\pi} \sum_{k \in \N_0^d} (2k_j + 1) |\langle f, H_k \rangle|^2
+	\end{equation}
+	where $\N_0 = \N \cup \{0\}$ and $H_k$ is the d-dimensional Hermite functions related to the multi-index $k \in \N_0^d$.
+\end{lem}
+\begin{proof}
+	contenuto...
+\end{proof}
+{\color{red}If one of the integrals in \eqref{Heisenberg's uncertainty principle lemma inequality} is infinite the inequality is trivially satisfied, therefore we can focus our attention for those function for which the integrals are finite}. This lemma is sufficient in order to prove Heisenberg's uncertainty principle.
+\begin{teo}\label{Heisenberg's uncertainty principle theorem}
+	Let $f \in L^2(\R^d)$ and $a,b \in \R^d$. Then:
+	\begin{equation}\label{Heisenberg's uncertainty principle formula}
+		\left( \int_{\R^d} |t-a|^2 |f(t)|^2dt \right)^{1/2} \left( \int_{\R^d} |\omega - b|^2 |\hat{f}(\omega)|^2 d\omega \right)^{1/2} \geq \dfrac{d\|f\|_2^2}{4\pi}
+	\end{equation}
+	where $|t-a| = \sum_{j=1}^{d}(t_j - a_j)^2$ is the Euclidean distance.
+\end{teo}
+
+\begin{proof}
+	Firsly, we notice that it is sufficient to prove the inequality when $a=b=0$, since the generic case can be recovered from this special one by means of a phase-space translation. Indeed, given $f \in L^2(\R^d)$ we can consider $g = M_{-b}T_{-a}f$ for which we have:
+	\begin{align*}
+		|f(t)|^2 &= |(T_a M_b g)(t)|^2 = |e^{2\pi i b \cdot (t-a)} g(t-a)|^2 = |g(t-a)|^2\\
+		|\hat{f}(\omega)|^2 &= |\F(T_a M_b g)(\omega)|^2 \overset{\ref{properties of translation modulation and dilation operators}}{=} |M_{-a} T_b \hat{g}(\omega)|^2 = |e^{-2\pi i a \cdot \omega} \hat{g}(\omega - b)|^2 = |\hat{g}(\omega-b)|^2
+	\end{align*}
+	and $\|f\|_2 = \|g\|_2$. In light of we will consider $a=b=0$.
+	
+	We start considering the 1-dimensional case. We observe that in the left-hand side of \eqref{Heisenberg's uncertainty principle formula} we have the product of two integrals, while in \eqref{Heisenberg's uncertainty principle lemma inequality} we have an estimate for the sum of these. The transition from the latter to the former estimate can be done through a dilation argument. Precisely, given $f \in L^2(\R)$, we consider the following dilation:
+	\begin{equation*}
+		g(t) = \lambda^{-1/2}f(t/\lambda) \implies \hat{g}(\omega) = \lambda^{1/2} \F(D_{1/\lambda}g) \overset{\ref{properties of translation modulation and dilation operators}\ref{Fourier transform of dilation}}{=} \lambda^{1/2} \hat{f}(\lambda \omega).
+	\end{equation*}
+	We remark that this dilation is different from the one considered in Section \ref{Fourier transform and its properties section}, expression \eqref{dilation operator def}. Indeed, now we chose the dilation so that $\|g\|_2 = \|f\|_2$, while previously the dilation was chosen in order to preserve the $L^1$ norm. Putting $g$ in \eqref{Heisenberg's uncertainty principle lemma inequality} provides us:
+	\begin{align*}
+		\dfrac{\|f\|_2^2}{2\pi} &\leq \int_{\R} t^2 |g(t)|^2dt + \int_{\R} \omega^2 |\hat{g}(\omega)|^2d\omega =\\
+								&= \dfrac{1}{\lambda} \int_{\R} t^2 |f(t/\lambda)|^2dt  + \lambda \int_{\R} \omega^2 |\hat{f}(\lambda \omega)|^2d\omega = \\
+								&= \lambda^2 \int_{\R} t^2 |f(t)|^2dt + \dfrac{1}{\lambda^2} \int_{\R} \omega^2 |\hat{f}(\omega)|^2d\omega.
+	\end{align*}
+	We can choose $\lambda$ in order to minimize the last expression. Thus, deriving with respect to $\lambda^2$ and putting the derivative to 0 we obtain that the minimum is achieved when $\lambda^2 = (\int_{\R} \omega^2 |\hat{f}(\omega)|^2d\omega)^{1/2} (\int_{\R} t^2 |f(t)|^2dt)^{-1/2}.$ If we substitute this $\lambda$ into the last expression we obtain the following inequality
+	\begin{equation}\label{Heisenberg's uncertainty principle inequality 2}
+		\left( \int_{\R} t^2 |f(t)|^2dt \right)^{1/2} \left(\int_{\R} \omega^2 |\hat{f}(\omega)|^2d\omega \right)^{1/2} \geq \dfrac{\|f\|_2^2}{4\pi}
+	\end{equation}
+	which is exactly \eqref{Heisenberg's uncertainty principle formula} for $d=1$.
 \end{proof}
 
-\begin{teo}[Heisenberg's uncertainty principle]\label{Heisenberg's uncertainty principle theorem}
-	If $f \in L^2(\R^d)$, for every $a,b \in \R^d$
-	\begin{equation}\label{Heisenberg's uncertainty principle formula}
-		\left(\int_{\R^d}|t-a|^2 |f(t)|^2 dt\right)^{1/2} \left(\int_{\R^d} |\omega-b|^2 |\hat{f}(\omega)|^2 d\omega\right)^{1/2} \geq \dfrac{d}{4\pi}\| f \|_2^2
-	\end{equation}
-	Equality holds if and only if $f$ is a multiple of a Gaussian, i.e. $e^{2 \pi i b \cdot t}e^{-\pi c |x-a|^2}$ for some $c > 0$.
-\end{teo}
-\begin{proof}
-	We will first consider $f$ is a function in the Schwartz class $\mathcal{S}(\R^d)$, in which case both integrals in \eqref{Heisenberg's uncertainty principle formula} are finite. Since $|t-a|^2 = \sum_1^d (t_j-i_j)^2$ (and the same holds for $|\omega-b|^2$), we will start considering
-	\begin{equation*}
-		\left(\int_{\R^d}(t_j-a_j)^2 |f(t)|^2 dt\right)^{1/2} \left(\int_{\R^d} (\omega_k-b_k)^2 |\hat{f}(\omega)|^2 d\omega\right)^{1/2} = \| (t_j-a_j)f\|_2 \cdot \| (\omega_k-b_k)\hat{f}\|_2.
-	\end{equation*}
-	for $1 \leq j,k \leq d$. The first term is exactly as the first one appearing in \eqref{uncertainty principle for operators formula}, where the operator $A=A_j$ is now the multiplication operator $f \in \mathcal{S}(\R^d) \mapsto A_jf = t_j f \in \mathcal{S}(\R^d)$, which is {\color{red} (formally)} self-adjoint over $\mathcal{S}(\R^d)$. So, in order to apply \ref{uncertainty principle for operators lemma}, we have to work on the second term:
-	\begin{align*}
-		(\omega_k - b) \hat{f}(\omega) &= \omega_k \hat{f}(\omega) - \F(b_k f)(\omega) \overset{\ref{duality regularity-decay theorem}}{=} \F \left(\dfrac{1}{2\pi i}\pdfrac{f}{t_k}\right) - \F(b_k f)(\omega) =\\
-									   &= \F \left( \left(\dfrac{1}{2\pi i}\pdfrac{}{t_k} - b_k\right)f\right)(\omega)
-	\end{align*}
-	and thanks to Plancherel's theorem we have that $\|(\omega_k-b_k)\hat{f}\|_2 = \left\| \left(\frac{1}{2\pi i}\pfrac{}{t_k} - b_k\right)f\right\|_2$, so that now the operator $B=B_k$ appearing in \eqref{uncertainty principle for operators formula} is $f \in \mathcal{S}(\R^d) \mapsto B_kf = \frac{1}{2\pi i}\pfrac{f}{t_k} \in \mathcal{S}(\R^d)$. Again, this is {\color{red} (formally)} self-adjoint over $\mathcal{S}(\R^d)$, so we can apply Lemma \ref{uncertainty principle for operators lemma}:
-	\begin{equation*}
-		\left(\int_{\R^d}(t_j-a_j)^2 |f(t)|^2 dt\right)^{1/2} \left(\int_{\R^d} (\omega_k-b_k)^2 |\hat{f}(\omega)|^2 d\omega\right)^{1/2} \geq \dfrac12\lvert\langle [A_j,B_k]f,f \rangle \rvert
-	\end{equation*}
-	Now we just need to compute the commutator of $A_j$ and $B_k$. Let $f \in \mathcal{S}(\R^d)$:
-	\begin{align*}
-		[A_j,B_k]f(t) &= B_kA_jf(t)-A_jB_kf(t) = \dfrac{1}{2\pi i}\pdfrac{}{t_k}(t_jf(t)) - t_j \dfrac{1}{2\pi i}\pdfrac{f}{t_k}(t) =\\
-				  &= \dfrac{1}{2\pi i}\delta_{jk} f(t) + \dfrac{1}{2\pi i} t_j \pdfrac{f}{t_k}(t) - t_j \dfrac{1}{2\pi i}\pdfrac{f}{t_k}(t) = \dfrac{1}{2\pi i}\delta_{jk} f(t)
-	\end{align*}
-	therefore $[A_j,B_k] = \frac{1}{2\pi i}\delta_{jk}$, where $\delta_{jk}$ has to be intended as a function identically equal to 1 if $j=k$ or identically equal to 0 if $j \neq k$. Since $A_j$ and $B_k$ commute when $j \neq k$ from now on we will only consider the case $j=k$, in which Lemma \ref{uncertainty principle for operators lemma} allows us to conclude that
-	\begin{equation}\label{Heisenberg's uncertainty principle formula componentwise}
-		\left(\int_{\R^d}(t_j-a_j)^2 |f(t)|^2 dt\right)^{1/2} \left(\int_{\R^d} (\omega_j-b_j)^2 |\hat{f}(\omega)|^2 d\omega\right)^{1/2} \geq \dfrac{\|f\|_2^2}{4\pi}
-	\end{equation}
-	If we sum over $j$ we can see the left-hand side as a scalar product in $\R^n$ and use Cauchy-Schwarz inequality:
-	\begin{align}
-		\dfrac{d \|f\|_2^2}{4\pi} &\leq \sum_{j=1}^{d}\left(\int_{\R^d}(t_j-a_j)^2 |f(t)|^2 dt\right)^{1/2} \left(\int_{\R^d} (\omega_j-b_j)^2 |\hat{f}(\omega)|^2 d\omega\right)^{1/2} \leq\label{Heisenberg's uncertainty principle Cauchy Schwarz in Rd}\\
-								  &\leq \left(\sum_{j=1}^{d} \int_{\R^d}(t_j-a_j)^2 |f(t)|^2 dt \right)^{1/2} \left(\sum_{j=1}^{d} \int_{\R^d} (\omega_j-b_j)^2 |\hat{f}(\omega)|^2 d\omega \right)^{1/2}=\nonumber\\
-								  &= \left(\int_{\R^d}|t-a|^2 |f(t)|^2 dt\right)^{1/2} \left(\int_{\R^d} |\omega-b|^2 |\hat{f}(\omega)|^2 d\omega\right)^{1/2}\nonumber
-	\end{align}
-	which is the desired result.
-	
-	{\color{red} From Lemma \ref{uncertainty principle for operators lemma} we also know that in \eqref{Heisenberg's uncertainty principle formula componentwise} equality holds if and only if
-	\begin{equation}\label{Heisenberg's uncertainty principle differential equation}
-		\left(\dfrac{1}{2\pi i}\pdfrac{}{t_j} - b_j\right)f = ic_j (t_j-a_j)f
-	\end{equation}
-	for some $c_j \in \R$. In principle $c_j$ could be different but the second inequality in \eqref{Heisenberg's uncertainty principle Cauchy Schwarz in Rd} becomes an equality if and only if $|c_j|=c \geq 0$, that is all $c_j$ have the same modulus (but possibly different sign). 	PERCHé C NON PUò ESSERE 0???.\\
-	We start by considering the case when $a=b=0$.
-	\begin{align}\label{Heisenberg's uncertainty principle differential equation centered}
-		\dfrac{1}{2\pi i}\pdfrac{f}{t_j}(t) = ic_j t_j f(t) \quad j=1,\ldots,d.
-	\end{align}
-	We notice that if $f$ is a solution it cannot become 0, because in this case there would be some $t_0 \in \R^d$ such that $f(t_0)=0, \nabla f(t_0)=0$ which means that $f$ is identically 0 (\textbf{Perché??}) . Moreover, if $f$ is a solution also $-f$ is, hence we can suppose that $f$ is always strictly positive and divide by $f$:
-	\begin{align*}
-		\dfrac{1}{2\pi i} \dfrac{1}{f} \pdfrac{f}{t_j}(t) = ic_j t_j f(t) \implies \pdfrac{}{t_j}\left[\log(f(t))\right] = -2\pi c_j t_j
-	\end{align*}
-	Letting $g(t)=\log(f(t))$ and considering the equation for $j=1$ we get
-	\begin{align*}
-		\pdfrac{g}{t_1}(t) = -2\pi c_1 t_1 \implies g(t) = - \pi c_1 t_1^2 + g_1(t_2,\ldots,t_d).
-	\end{align*}
-	The equation for $j=2$ becomes
-	\begin{align*}
-		\pdfrac{g}{t_2}(t) = \pdfrac{g_1}{t_2}(t) = -\pi c_2 t_2^2 \implies g_1(t_2,\ldots,t_d) = -\pi c_2 t_2^2 + g_2(t_3,\ldots,t_d).
-	\end{align*}
-	At the end we will have
-	\begin{align*}
-		g(t) = -\sum_{j=1}^{d}\pi c_j t_j^2 + K \implies f(t) = e^K e^{-\pi \sum_{j=1}^{d} c_j t_j^2} = C e^{-\pi \sum_{j=1}^{d} c_j t_j^2}
-	\end{align*}
-	for some $K \in \R$. We already noticed that all $c_j$ have same modulus. Now that we have the explicit expression of $f$ we can see that they are all positive, otherwise $f$ would not belong to $L^2(\R^d)$. Thanks to this observation we can finally write $f(t) = C e^{-\pi c |t|^2}$.\\
-	Suppose now that $a$ and $b$ are not 0. We define $\tilde{f}(t) = M_b T_a f(t)$ and we will show that $\tilde{f}$ solves \eqref{Heisenberg's uncertainty principle differential equation}:
-	\begin{align*}
-		\left(\dfrac{1}{2\pi i}\pdfrac{}{t_j} - b_j\right)\tilde{f}(t) &= \dfrac{1}{2\pi i} e^{2 \pi i b \cdot t} \left(2\pi i b_j f(t-a) + \pdfrac{f}{t_j}(t-a)\right) - b_j e^{2 \pi i b \cdot t}f(t-a) =\\
-		&=e^{2 \pi i b \cdot t}\dfrac{1}{2 \pi i}f(t-a) \overset{\eqref{Heisenberg's uncertainty principle differential equation centered}}{=} e^{2 \pi i b \cdot t} i c (t_j-a_j) f(t-a) = i c (t_j-a_j) \tilde{f}(t).
-	\end{align*}
-	}
-\end{proof}
+
+
+
+
 For a generic function $f \in L^2(\R^d)$ the left-hand side of \eqref{Heisenberg's uncertainty principle formula} may be infinite, in which case the statement is trivially satisfied. {\color{blue}We shall comment a mathematical interpretation of Heisenberg's uncertainty principle. This can be written in the following form
 \begin{equation*}
 	\left(\int_{\R^d}|t-a|^2 \dfrac{|f(t)|^2}{\|f\|_2^2} dt\right)^{1/2} \left(\int_{\R^d} |\omega-b|^2 \dfrac{|\hat{f}(\omega)|^2}{\|\hat{f}\|_2^2}d\omega\right)^{1/2} \geq \dfrac{d}{4\pi}
@@ -1248,7 +1205,7 @@ Clearly the constant $C$ will depend on $p$, $A$ and $B$. In \cite{nicolatilli_n
 	\end{enumerate}
 	Finally, in all the cases, condition $|\langle L_F f,g \rangle| = \|L_F\|$ holds for some, $f,g \in L^2(\R^d)$ such that $\|f\|_2 = \|g\|_2 = 1$, if and only if both $f$ and $g$ are of the kind \eqref{translated Gaussian}, possibly with different $c$'s, but with the same $(x_0,\omega_0) \in \R^{2d}$ which coincides with the centre of $F$.
 \end{teo}
-We will not give the proof of these results since some of its parts are similar to the one we will see in the following Section. Moreover, we point out that the case $A=
+We will not give the proof of these results since some of its parts are similar to the one we will see in the following section. Moreover, we point out that the case $A=
 \infty$ means we are dropping the $L^{\infty}$ constraint.
 
 \section{Generic case}
@@ -1262,11 +1219,11 @@ under the following constraints on $F$:
 \end{equation}
 where $p,q \in (1,\infty)$ and $A,B \in (0,\infty)$. In this setting it is no more possible to find an explicit expression for $C$ and $F$, {\color{red} although they can be easily computed numerically.}
 
-Theorem \ref{Nicola-Tilli norm theorem case 2} includes the case when $F$ satisfies just an $L^p$ constraint by taking $A$ ($L^{\infty}$ constraint). In the current setting we have an $L^p$ and an $L^q$ bound, hence, thanks to \ref{Nicola-Tilli bound p>1 first regime}, it is straightforward to see that
+Theorem \ref{Nicola Tilli norm theorem}\ref{Nicola-Tilli norm theorem case 2} includes the case when $F$ satisfies just an $L^p$ constraint by taking $A$ ($L^{\infty}$ constraint) equal to $\infty$. In the current setting we have an $L^p$ and an $L^q$ bound, hence, thanks to \ref{Nicola-Tilli bound p>1 first regime}, it is straightforward to see that
 \begin{equation*}
-	\| L_F\|_{L_2 \rightarrow L_2} \leq \min\{\kappa_p^{d\kappa_p}A, \, \kappa_q^{d\kappa_q}B\}
+	\| L_F\|_{L_2 \rightarrow L_2} \leq \min\{\kappa_p^{d\kappa_p}A, \, \kappa_q^{d\kappa_q}B\}.
 \end{equation*}
-Suppose that the first term is less than the second, which means:
+Suppose that the first term is smaller than the second, which means:
 \begin{equation}\label{condition B/A first}
 	\kappa_p^{d\kappa_p}A \leq \kappa_q^{d\kappa_q}B \iff \dfrac{B}{A} \geq \left(\dfrac{\kappa_p^{\kappa_p}}{\kappa_q^{\kappa_q}}\right)^d
 \end{equation}
@@ -1281,39 +1238,23 @@ Since we want $F$ to satisfy the $L^q$ constraint we should have
 \end{equation*}
 which is equivalent to
 \begin{equation*}\label{condition B/A second}
-	\dfrac{B}{A} \geq \kappa_p^{d\left(\frac1q - \frac1p\right)}\left(\dfrac{p}{q}\right)^{\frac{d}{q}}
+	\dfrac{B}{A} \geq \kappa_p^{d\left(\frac1q - \frac1p\right)}\left(\dfrac{p}{q}\right)^{\frac{d}{q}}.
 \end{equation*}
 If this condition were less restrictive than the one given by \eqref{condition B/A first} we would have solved the problem. Unfortunately, this is not the case. Indeed it is always true, regardless of $p$ and $q$, that
-\begin{equation*}
+\begin{equation}\label{curious inequality between conjugate exponents original}
 	\kappa_p^{d\left(\frac1q - \frac1p\right)}\left(\dfrac{p}{q}\right)^{\frac{d}{q}} \geq \left(\dfrac{\kappa_p^{\kappa_p}}{\kappa_q^{\kappa_q}}\right)^d
-\end{equation*}
-Recalling that $\kappa_p =\frac{1}{p'}$, where $p'$ is the conjugate exponent of $p$, this inequality can be stated in a different way:
-\begin{align*}
-	\left(\dfrac{1}{p'}\right)^{\frac{1}{q}-\frac{1}{p}}\left(\dfrac{p}{q}\right)^{\frac{1}{q}} \geq \left(\dfrac{1}{p'}\right)^{\frac{1}{p'}} \left(\dfrac{1}{q'}\right)^{-\frac{1}{q'}}\iff \left(\dfrac{1}{p'}\right)^{\frac{1}{q}-\frac{1}{p} - \frac{1}{p'}}\left(\dfrac{1}{q'}\right)^{\frac{1}{q'}} \left(\dfrac{p}{q}\right)^{\frac{1}{q}} \geq 1
-\end{align*}
-but, since $\frac{1}{p}+\frac{1}{p'}=1$ and $\frac{1}{q} - 1 = \frac{1}{q'}$, in conclusion we have:
-\begin{equation*}
-	\left(\dfrac{p'}{q'}\right)^{\frac1{q'}} \left(\dfrac{p}{q}\right)^{\frac{1}{q}} \geq 1
-\end{equation*}
-{\color{blue}It is quite easy that this inequality holds for every pair of $p,q>1$. Letting $x=\frac{1}{p}$ and $y=\frac{1}{q}$ we can take the $\log$ of the right-hand side and study it as a function of $x$ and $y$:
-	\begin{equation*}
-		f(x,y) = (1-y)\left[\log(1-x) - \log(1-y)\right] + y\left[\log(x) - \log(y)\right]
-	\end{equation*}
-	Taking the partial derivative with respect to $x$ we have
-	\begin{equation*}
-		\pdfrac{f}{x}(x,y) = -\dfrac{1-y}{1-x} + \dfrac{y}{x} = \dfrac{y-x}{x(1-x)}
-	\end{equation*}
-	Since $x \in (0,1)$, $\pfrac{f}{x}(x,y)$ is positive for $x<y$. SCRIVERE IN APPENDICE?}
+\end{equation}
+The proof of this inequality can be found in \ref{curious inequality between conjugate exponents}.
 
 Despite this fact, at least we can say that, if $B/A \geq \kappa_p^{d\left(\frac{1}{q}-\frac{1}{p}\right)}\left(\frac{p}{q}\right)^{\frac{d}{q}}$ or $B/A \leq \kappa_q^{d\left(\frac{1}{q}-\frac{1}{p}\right)}\left(\frac{p}{q}\right)^{\frac{d}{p}}$, the problem is already solved and the solution is given by Theorem \ref{Nicola Tilli norm theorem}. Therefore, from now on, we will suppose to be in the intermediate case, that is
 \begin{equation}\label{intermediate regime}
 	\kappa_q^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{p}} < \dfrac{B}{A} < \kappa_p^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{q}}
 \end{equation}
 We notice that the condition is well-posed, since it is actually true that
-\begin{align*}
+\begin{align}\label{another inequality between conjugate exponents original}
 	\kappa_q^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{p}} < \kappa_p^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{q}}
-\end{align*}
-whenever $p \neq q$. {\color{blue} Aggiungere dimostrazione in appendice?}
+\end{align}
+whenever $p \neq q$ (proof is in \ref{another inequality between conjugate exponents}).
 
 Before tackling the problem in this intermediate regime, we prove a Theorem from \cite{nicolatilli_norm} which gives a bound for $\| L_F \|$ in terms of the distribution function of $|F|$.
 \begin{teo}\label{norm limitation}
@@ -1649,6 +1590,52 @@ Therefore $(c_1^*, \varphi(c_1^*) = c_2^*)$ is the unique pair of multipliers fo
 \end{equation*}
 and, in the end, $u(t;c_1^*,c_2^*)$ is the unique maximizer for \eqref{nonstandard variational problem formulation}.
 \end{proof}
+
+\appendix
+
+\chapter{Calculations}
+
+\section{Constant in Lieb's inequality}\label{constant in Lieb's inequality calculation}
+In the last part of the proof of Lieb's inequality \ref{Lieb's inequality} we used the following equality $A_{p'}^d A_{2/p'}^{2d/p'}A_{(p/p')'}^{d/p'}=(2/p)^d$ without proving it. We recall that the Babenko-Bechner constant $A_p$ is given by:
+\begin{equation*}
+	A_p = \left(\dfrac{p^{1/p}}{p'^{1/p'}}\right).
+\end{equation*} 
+
+
+
+\section{Curious inequality between conjugate exponent}\label{curious inequality between conjugate exponents}
+We consider inequality \eqref{curious inequality between conjugate exponents original}, which we rewrite for the sake of clarity:
+\begin{equation*}
+	\kappa_p^{d\left(\frac1q - \frac1p\right)}\left(\dfrac{p}{q}\right)^{\frac{d}{q}} \geq \left(\dfrac{\kappa_p^{\kappa_p}}{\kappa_q^{\kappa_q}}\right)^d
+\end{equation*}
+Firstly we want to restate in a more concise way. Recalling that $\kappa_p =\frac{1}{p'}$, where $p'$ is the conjugate exponent of $p$, we have:
+\begin{align*}
+	\left(\dfrac{1}{p'}\right)^{\frac{1}{q}-\frac{1}{p}}\left(\dfrac{p}{q}\right)^{\frac{1}{q}} \geq \left(\dfrac{1}{p'}\right)^{\frac{1}{p'}} \left(\dfrac{1}{q'}\right)^{-\frac{1}{q'}}\iff \left(\dfrac{1}{p'}\right)^{\frac{1}{q}-\frac{1}{p} - \frac{1}{p'}}\left(\dfrac{1}{q'}\right)^{\frac{1}{q'}} \left(\dfrac{p}{q}\right)^{\frac{1}{q}} \geq 1
+\end{align*}
+but, since $\frac{1}{p}+\frac{1}{p'}=1$ and $\frac{1}{q} - 1 = \frac{1}{q'}$, in conclusion we have:
+\begin{equation*}
+	\left(\dfrac{p'}{q'}\right)^{\frac1{q'}} \left(\dfrac{p}{q}\right)^{\frac{1}{q}} \geq 1
+\end{equation*}
+In order to prove that this inequality holds for every pair of $p,q>1$ we consider the left-hand side as function of $x=\frac{1}{p}$ and $y=\frac{1}{q}$ (therefore $\frac{1}{p'} = 1-x$ and $\frac{1}{q'} = 1-y$). If we take the logarithm of this quantity we want to show that:
+	\begin{equation*}
+		f(x,y) = (1-y)\left[\log(1-y) - \log(1-x)\right] + y\left[\log(y) - \log(x)\right] \geq 0.
+	\end{equation*}
+	The partial derivative of $f$ with respect to $x$ is:
+	\begin{equation*}
+		\pdfrac{f}{x}(x,y) = \dfrac{1-y}{1-x} - \dfrac{y}{x} = \dfrac{x-y}{x(1-x)}.
+	\end{equation*}
+	Since $x \in (0,1)$, $\pfrac{f}{x}(x,y)$ is negative for $x<y$ and positive for $x>y$, so $f$ has a minimum for $x=y$ where $f(x,x) = 0$.
+
+\section{Another inequality between conjugate exponents}\label{another inequality between conjugate exponents}
+We want to prove that inequality \eqref{another inequality between conjugate exponents original} holds, namely that:
+\begin{align*}
+	\kappa_q^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{p}} < \kappa_p^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{q}}
+\end{align*}
+whenever $p \neq q$. As for the previous section, since $\kappa_p = \frac{1}{p'}$ and $\kappa_q = \frac{1}{q'}$ we can write the inequality in a more concise way:
+\begin{align*}
+	\left(\dfrac{1}{q'}\right)^{\frac{1}{q}-\frac{1}{p}} \left(\dfrac{p}{q}\right)^{\frac{1}{p}} < \left(\dfrac{1}{p'}\right)^{\frac{1}{q}-\frac{1}{p}} \left(\dfrac{p}{q}\right)^{\frac{1}{q}} \iff \left(\dfrac{q\phantom{'} \, p'}{q' \, p}\right)^{\frac{1}{q}-\frac{1}{p}} < 1 \iff \left(\dfrac{q-1}{p-1}\right)^{\frac{1}{q}-\frac{1}{p}} < 1.
+\end{align*}
+If $q>p$ the base is greater than 1 while the exponent is less than 1, whereas if $q<p$ the converse happens, which proves that inequality holds whenever $p \neq q$.
 
 \nocite{*}
 \printbibliography
