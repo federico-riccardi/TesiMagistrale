@@ -667,7 +667,7 @@ Combing this with \eqref{STFT is an isometry formula} and using a simple interpo
 \begin{teo}\label{Lieb's inequality}
 	If $f,\phi \in L^2(\R^d)$ and $2 \leq p \leq \infty$, then
 	\begin{equation}\label{Lieb's inequality formula}
-		\int_{\R^{2d}} |\V_{\phi}(x,\omega)|^p dxd\omega \leq \left(\dfrac{2}{p}\right)^d \|f\|_2^p \cdot \|g\|_2^p
+		\| \V_{\phi} \|_p^p = \int_{\R^{2d}} |\V_{\phi}(x,\omega)|^p dxd\omega \leq \left(\dfrac{2}{p}\right)^d \|f\|_2^p \cdot \|g\|_2^p
 	\end{equation}
 \end{teo}
 \begin{proof}
@@ -695,7 +695,7 @@ Combing this with \eqref{STFT is an isometry formula} and using a simple interpo
 	\begin{align*}
 		\|\V_{\phi} f\|_p &\leq A_{p'}^d \left(A_{2/p'}^d A_{2/p'}^d A_{(p/p')'}^d \| \,|f|^{p'} \|_{2/p'} \|\,|\phi^*|^{p'}\|_{2/p'} \right)^{1/p'}.
 	\end{align*}
-	However $\| \,|f|^{p'} \|_{2/p'} = (\int_{\R^d} (|f(x)|^{p'})^{2/p'}dx)^{p'/2} = \|f\|_2^{p'}$ and from a direct calculation (which can be found in \ref{constant in Lieb's inequality calculation}) one can see that $A_{p'}^d A_{2/p'}^{2d/p'}A_{(p/p')'}^{d/p'}=(2/p)^d$, which corresponds to the desired result.
+	However $\| \,|f|^{p'} \|_{2/p'} = (\int_{\R^d} (|f(x)|^{p'})^{2/p'}dx)^{p'/2} = \|f\|_2^{p'}$ and from a direct calculation (which can be found in \ref{constant in Lieb's inequality calculation}) one can see that $A_{p'}^d A_{2/p'}^{2d/p'}A_{(p/p')'}^{d/p'}=(2/p)^{d/p}$, which corresponds to the desired result.
 \end{proof}
 
 From a direct computation one can see that the adjoint operator of the STFT operator $\V_{\phi}$ is given by the following expression:
@@ -1596,10 +1596,38 @@ and, in the end, $u(t;c_1^*,c_2^*)$ is the unique maximizer for \eqref{nonstanda
 \chapter{Calculations}
 
 \section{Constant in Lieb's inequality}\label{constant in Lieb's inequality calculation}
-In the last part of the proof of Lieb's inequality \ref{Lieb's inequality} we used the following equality $A_{p'}^d A_{2/p'}^{2d/p'}A_{(p/p')'}^{d/p'}=(2/p)^d$ without proving it. We recall that the Babenko-Bechner constant $A_p$ is given by:
+In the last part of the proof of Lieb's inequality \ref{Lieb's inequality} we used the following equality $A_{p'}^d A_{2/p'}^{2d/p'}A_{(p/p')'}^{d/p'}=(2/p)^{d/p}$ without proving it. We recall that the Babenko-Bechner constant $A_p$ is given by:
 \begin{equation*}
-	A_p = \left(\dfrac{p^{1/p}}{p'^{1/p'}}\right).
-\end{equation*} 
+	A_p = \left(\dfrac{p^{1/p}}{p'^{1/p'}}\right)^{1/2}.
+\end{equation*}
+Since there is an exponent $1/2$ in the Babenko-Bechner constant it is better to compute the square of $A_{p'}^d A_{2/p'}^{2d/p'}A_{(p/p')'}^{d/p'}$. For the sake of clarity we are going to compute every single term and then we are going to multiply them.
+\begin{itemize}
+	\item $\displaystyle A_{p'}^2 = \dfrac{p'^{1/p'}}{p^{1/p}}$;
+	\item In order to compute $A_{2/p'}^{2\cdot 2/p'}$ we start computing $(2/p')'$:
+	\begin{equation*}
+		\left(\dfrac{2}{p'}\right)' = \dfrac{2/p'}{2/p'-1} = \dfrac{2}{2-p'},
+	\end{equation*}
+	therefore
+	\begin{align*}
+		A_{2/p'}^{2\cdot 2/p'} &= \left[  \left(\dfrac{2}{p'}\right)^{p'/2} \left(\dfrac{2-p'}{2}\right)^{(2-p')/2}\right]^{2/p'} = \dfrac{2}{p'} \left(\dfrac{2-p'}{2}\right)^{(2-p')/(p')} = \\
+							   &= \dfrac{2^{2(1-1/p')}}{p'}(2-p')^{2/p'-1} = \dfrac{2^{2/p}}{p'} (2-p')^{1/p'-1/p};
+	\end{align*}
+	\item Like the previous case, we start computing $(p/p')'$:
+	\begin{equation*}
+		\left(\dfrac{p}{p'}\right)' = \dfrac{p/p'}{p/p'-1} = \dfrac{p}{p-p'},
+	\end{equation*}
+	hence
+	\begin{align*}
+		A_{(p/p')'}^{2/p'} &= \left[ \left(\dfrac{p}{p-p'}\right)^{(p-p')/p} \left(\dfrac{p'}{p}\right)^{p'/p}\right]^{1/p'} = \left(\dfrac{p}{p-p'}\right)^{1/p' - 1/p} \left(\dfrac{p'}{p}\right)^{1/p} = \\
+						   &= \left(1-\dfrac{p'}{p}\right)^{1/p-1/p'} \left(\dfrac{p'}{p}\right)^{1/p} = (2-p')^{1/p-1/p'}\left(\dfrac{p'}{p}\right)^{1/p}.
+	\end{align*}
+	We are now ready to calculate the product of the three constant:
+	\begin{align*}
+		A_{p'}^2 A_{2/p'}^{2 \cdot 2/p'} A_{(p/p')'}^{2/p'} &= \dfrac{p'^{1/p'}}{p^{1/p}} \dfrac{2^{2/p}}{p'} (2-p')^{1/p'-1/p} (2-p')^{1/p-1/p'}\left(\dfrac{p'}{p}\right)^{1/p} = \\
+															&= 2^{2/p} p^{-2/p}p'^{1/p'+1/p-1} = \left(\dfrac{2}{p}\right)^{2/p}
+	\end{align*}
+	which is the desired result.
+\end{itemize}
 
 
 
