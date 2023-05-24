@@ -177,7 +177,7 @@ If an operator $T$ is compact but not self-adjoint we can easily construct an op
 \end{cor}
 
 \subsection{Trace class and Hilbert-Schmidt operators}
-Now we are going to consider two important classes of operators: \emph{trace class} operators and \emph{Hilbert-Schmidt} operators.
+Now we are going to consider two important classes of operators: \emph{trace-class} operators and \emph{Hilbert-Schmidt} operators.
 
 The trace of an operator can be defined as it is for matrices.
 \begin{defi}\label{non-negative operator}
@@ -342,7 +342,7 @@ From the definition of the trace we can see that, given an orthonormal basis $\{
 \end{equation}
 so we can say, in an equivalent way, that an operator is Hilbert-Schmidt if and only if $\sum_{n=1}^{+\infty} \|Te_n\|^2 < +\infty$. Thanks to Proposition \ref{trace is well-defined} we immediately see that the Hilbert-Schmidt norm is independent on the choice of the basis.
 
-We are now going to show some properties of Hilbert-Schmidt and trace class operators.
+We are now going to show some properties of Hilbert-Schmidt and trace-class operators.
 \begin{prop}\label{|T| and T^* are Hilbert-Schmidt}
 	Let $T \in \B(H)$ be a Hilbert-Schmidt operator. Then also $|T|$ and $T^*$ are Hilbert-Schmidt operators and 
 	\begin{equation}\label{Hilbert-Schmidt norm of |T| and T^*}
@@ -381,40 +381,57 @@ We are now going to show some properties of Hilbert-Schmidt and trace class oper
 		\|T\|_{\mathrm{HS}}^2 &= \sum_{n=1}^{+\infty} \|Te_n\|^2 = \sum_{n=1}^{+\infty} \langle Te_n,Te_n \rangle = \sum_{n=1}^{+\infty} \langle T^*T e_n,e_n \rangle = \sum_{n=1}^{+\infty} \mu_n^2
 	\end{align*}
 \end{proof}
-We can now turn back to trace class operator. It is evident that trace class operators and Hilbert-Schmidt operators are strictly related. Indeed, as seen in the proof of Proposition \ref{trace is well-defined}, we have
+\begin{prop}\label{Hilbert-Schmidt operator are an ideal}
+	Let $T \in \B(H)$ be a Hilbert-Schmidt operator and $S \in \B(H)$. Then $TS$ and $ST$ are both Hilbert-Schmidt operators.
+\end{prop}
+\begin{proof}
+	Given an orthonormal basis $\{e_n\}_{n \in \N}$ of $H$ we have:
+	\begin{align*}
+		\|ST\|_{\mathrm{HS}}^2 = \sum_{n=1}^{+\infty} \|ST e_n\|^2 \leq \|S\|^2 \sum_{n=1}^{+\infty} \|T e_n\|^2 = \|S\|^2 \|T\|_{\mathrm{HS}}^2
+	\end{align*}
+	so $ST$ is Hilbert-Schmidt. Moreover, from Proposition \ref{Hilbert-Schmidt norm of |T| and T^*} follows:
+	\begin{align*}
+		\| TS \|_{\mathrm{HS}} = \| (TS)^* \|_{\mathrm{HS}} = \| S^* T^* \|_{\mathrm{HS}} \leq \|S^*\| \|  T^* \|_{\mathrm{HS}} = \|S \| \| T \|_{\mathrm{HS}}
+	\end{align*}
+\end{proof}
+We can now turn back to trace-class operator. It is evident that trace-class operators and Hilbert-Schmidt operators are strictly related. Indeed, as seen in the proof of Proposition \ref{trace is well-defined}, we have
 \begin{equation*}
 	\mathrm{tr}|T| = \sum_{n=1}^{+\infty} \langle |T|e_n, e_n \rangle = \sum_{n=1}^{+\infty} \|\sqrt{|T|}e_n\|^2 = \| T \|_{\mathrm{HS}}^2,
 \end{equation*}
-so, an operator is trace class if and only if $\sqrt{|T|}$ is Hilbert-Schmidt. By virtue of this link we can exploit properties of Hilbert-Schmidt operators in order to obtain informations about trace class operators. First of all, we are going to prove that expression \eqref{trace expression} is well-defined for every trace class operator and not only for non-negative ones.
+so, an operator is trace-class if and only if $\sqrt{|T|}$ is Hilbert-Schmidt. By virtue of this link we can exploit properties of Hilbert-Schmidt operators in order to obtain informations about trace-class operators. First of all, we are going to prove that expression \eqref{trace expression} is well-defined for every trace-class operator and not only for non-negative ones.
 \begin{teo}
-	Let $T \in \B(H)$ be a trace class operator and $\{e_n\}_{n \in \N}$ an orthonormal basis of $H$. Then $\sum_{n=1}^{+\infty} \langle Te_n,e_n \rangle$ converges absolutely and the limit is independent of the basis.
+	Let $T \in \B(H)$ be a trace-class operator and $\{e_n\}_{n \in \N}$ an orthonormal basis of $H$. Then $\sum_{n=1}^{+\infty} \langle Te_n,e_n \rangle$ converges absolutely and the limit is independent of the basis.
 \end{teo}
 \begin{proof}
-	{\color{red}We start proving that the series converges absolutely. Letting $T = U |T|$ be the polar decomposition of $T$, we want to show that:
-		\begin{equation}\label{absoulte convergence trace intermediate}
-			\sum_{n=1}^{+\infty} |\langle Te_n,e_n  \rangle| = \sum_{n=1}^{+\infty} |\langle U\sqrt{|T|}\sqrt{|T|}e_n,e_n \rangle| = \sum_{n=1}^{+\infty} |\langle \sqrt{|T|}e_n,\sqrt{|T|}U^*e_n\rangle| < +\infty.
-		\end{equation}
-		From Cauchy-Schwarz inequality, for every term we have that $|\langle \sqrt{|T|}e_n,\sqrt{|T|}U^*e_n\rangle| \leq \|\sqrt{|T|}e_n \|\,\| \sqrt{|T|}U^*e_n\|$ and, since $T$ is trace class, $\sqrt{|T|}$ is Hilbert-Schmidt, so the sequence of $\|\sqrt{|T|}e_n\|$ is in $\ell^2(\N)$. Therefore we need to prove that also $\sqrt{|T|}U^*$ is an Hilbert-Schmidt operator. To do so, we consider an orthonormal basis of $(\mathrm{Ker}U^*)^{\perp}$, denoted with $\{\phi_i\}_{i \in \mathcal{I}}$, and an orthonormal basis of $\mathrm{Ker}U^*$, denoted with $\{\psi_j\}_{j \in \mathcal{J}}$, where $\mathcal{I}$ and $\mathcal{J}$ are at most countable. Clearly $\{\eta_n\}_{n \in \N} \coloneqq \{\phi_i\}_{i \in \mathcal{I}} \cup\{\psi_j\}_{j \in \mathcal{J}}$ is an orthonormal basis of $H$. We notice that, from Proposition \ref{U^* is a partial isometry}, $U^*$ is a partial isometry over $(\mathrm{Ker}U^*)^{\perp}$, so the set $\{U^*\phi_i\}_{i \in \mathcal{I}}$ is still an orthonormal basis of $(\mathrm{Ker}U^*)^{\perp}$, which can be completed to a basis of $H$ with $\{\psi_j\}_ {j \in \mathcal{J}}$. For the basis given by $\eta_n$ we have:
-		\begin{align*}
-			\sum_{n=1}^{+\infty} \|\sqrt{|T|}U^* \eta_n\|^2 = \sum_{i \in \mathcal{I}} \| \sqrt{|T|} U^*\phi_i\|^2 \leq \sum_{i \in \mathcal{I}} \| \sqrt{|T|} (U^*\phi_i)\|^2 + \sum_{j \in \mathcal{J}} \|\sqrt{|T|} \psi_j\|^2 = \|\sqrt{|T|}\|_{\mathrm{HS}}^2.
-		\end{align*}
-		Since the Hilbert-Schmidt norm is independent of the basis we can conclude that $\sqrt{|T|}U^*$ is an Hilbert-Schmidt operator. We can now go back to \eqref{absoulte convergence trace intermediate}:
-		\begin{align*}
-			\sum_{n=1}^{+\infty} |\langle Te_n,e_n  \rangle| &= \sum_{n=1}^{+\infty} |\langle \sqrt{|T|}e_n,\sqrt{|T|}U^*e_n\rangle| \leq \sum_{n=1}^{+\infty} \| \sqrt{|T|}e_n\|\, \|\sqrt{|T|}U^*e_n \| \overset{\mathrm{C-S}}{\leq}\\
-			&\leq \left(\sum_{n=1}^{+\infty} \| \sqrt{|T|}e_n\|^2 \right)^{1/2} \left(\sum_{n=1}^{+\infty} \| \sqrt{|T|}U^*e_n\|^2 \right)^{1/2} \leq \|\sqrt{|T|}\|_{\mathrm{HS}}^2.
-		\end{align*}
-		The proof of the independence of the basis is exactly the same as the one for Proposition \ref{trace is well-defined}, because now the exchange of series is allowed since the series is convergent.}
+	We start proving that the series converges absolutely. Letting $T = U |T|$ be the polar decomposition of $T$, we want to show that:
+	\begin{equation}\label{absoulte convergence trace intermediate}
+		\sum_{n=1}^{+\infty} |\langle Te_n,e_n  \rangle| = \sum_{n=1}^{+\infty} |\langle U\sqrt{|T|}\sqrt{|T|}e_n,e_n \rangle| = \sum_{n=1}^{+\infty} |\langle \sqrt{|T|}e_n,\sqrt{|T|}U^*e_n\rangle| < +\infty.
+	\end{equation}
+	From Cauchy-Schwarz' inequality, for every term we have that $|\langle \sqrt{|T|}e_n,\sqrt{|T|}U^*e_n\rangle| \leq \|\sqrt{|T|}e_n \|\,\| \sqrt{|T|}U^*e_n\|$.
+	Since $T$ is trace-class, $\sqrt{|T|}$ is Hilbert-Schmidt and, thanks to Proposition \ref{Hilbert-Schmidt operator are an ideal}, also $\sqrt{|T|}U^*$ is a Hilbert-Schmidt operator, therefore both $\{\|\sqrt{|T|}e_n\|\}_{n \in \N}$ and $\{\|\sqrt{|T|}U^* e_n\|\}_{n \in \N}$ are in $\ell^2(\N)$. This allows us to use the Cauchy-Schwarz inequality in the last expression of \eqref{absoulte convergence trace intermediate}, thus obtaining:
+	\begin{align*}
+		\sum_{n=1}^{+\infty} |\langle Te_n,e_n  \rangle| &= \sum_{n=1}^{+\infty} |\langle \sqrt{|T|}e_n,\sqrt{|T|}U^*e_n\rangle| \leq \sum_{n=1}^{+\infty} \| \sqrt{|T|}e_n\|\, \|\sqrt{|T|}U^*e_n \| \overset{\mathrm{C-S}}{\leq}\\
+		&\leq \left(\sum_{n=1}^{+\infty} \| \sqrt{|T|}e_n\|^2 \right)^{1/2} \left(\sum_{n=1}^{+\infty} \| \sqrt{|T|}U^*e_n\|^2 \right)^{1/2} \leq \|\sqrt{|T|}\|_{\mathrm{HS}}^2.
+	\end{align*}
+	The proof of the independence of the basis is exactly the same as the one for Proposition \ref{trace is well-defined}, because now the exchange of series is allowed since the series is convergent.
+\end{proof}
+Another immediate corollary of Proposition \ref{Hilbert-Schmidt operator are an ideal} is the following proposition
+\begin{prop}\label{trace-class operators are Hilbert-Schmidt}
+	Let $T \in \B(H)$ be a trace-class operator. Then $T$ is also Hilbert-Schmidt.
+\end{prop}
+\begin{proof}
+	Let $T = U |T|$ be the polar decomposition of $T$. Since $T$ is trace-class $\sqrt{|T|}$ is an Hilbert-Schmidt operator. Therefore, from Proposition \ref{Hilbert-Schmidt operator are an ideal} follows that $T = U \sqrt{|T|} \sqrt{|T|}$ is an Hilbert-Schmidt operator.
 \end{proof}
 
-\begin{teo}\label{trace class operators are compact and bounded}
-	Let $T \in \B(H)$. Then $T$ is trace class if and only if it is compact and $\sum_{n=1}^{+\infty} \mu_n$, where $\{\mu_n\}_{n \in \N}$ are the singular values of $T$. Moreover, if $T$ is trace class then $\mathrm{tr}|T| = \sum_{n=1}^{+\infty} \mu_n$ and additionally, if it is also self-adjoint, $\mathrm{tr}T = \sum_{n=1}^{+\infty} \lambda_n$ where $\{\lambda_n\}_{n \in \N}$. Finally, we have $\|T\| \leq \mathrm{tr}|T|$.
+\begin{teo}\label{trace-class operators are compact and bounded}
+	Let $T \in \B(H)$. Then $T$ is trace-class if and only if it is compact and $\sum_{n=1}^{+\infty} \mu_n$, where $\{\mu_n\}_{n \in \N}$ are the singular values of $T$. Moreover, if $T$ is trace-class then $\mathrm{tr}|T| = \sum_{n=1}^{+\infty} \mu_n$ and additionally, if it is also self-adjoint, $\mathrm{tr}T = \sum_{n=1}^{+\infty} \lambda_n$ where $\{\lambda_n\}_{n \in \N}$. Finally, we have $\|T\| \leq \mathrm{tr}|T|$.
 \end{teo}
 \begin{proof}
-	Let $T = U|T|$ be the polar decomposition of $T$. If $T$ is trace class $\sqrt{|T|}$ is Hilbert-Schmidt, but from Theorem \ref{Hilbert-Schmidt operators are compact and bounded} we have that $\sqrt{|T|}$ is compact, therefore also $T = U \sqrt{|T|}\sqrt{|T|}$ and $|T|$ are compact. Not only $|T|$ is compact, but it is also self-adjoint and its eigenvalues are exactly $\{\mu_n\}_{n \in \N}$. Letting $\{e_n\}_{n \in \N}$ be an orthonormal basis made up of eigenvectors of $|T|$, we have
+	Let $T = U|T|$ be the polar decomposition of $T$. If $T$ is trace-class $\sqrt{|T|}$ is Hilbert-Schmidt, but from Theorem \ref{Hilbert-Schmidt operators are compact and bounded} we have that $\sqrt{|T|}$ is compact, therefore also $T = U \sqrt{|T|}\sqrt{|T|}$ and $|T|$ are compact. Not only $|T|$ is compact, but it is also self-adjoint and its eigenvalues are exactly $\{\mu_n\}_{n \in \N}$. Letting $\{e_n\}_{n \in \N}$ be an orthonormal basis made up of eigenvectors of $|T|$, we have
 	\begin{align*}
 		\mathrm{tr}|T| = \sum_{n=1}^{+\infty} \langle |T|e_n,e_n \rangle = \sum_{n=1}^{+\infty} \mu_n.
 	\end{align*}
-	Conversely, if $T$ is a compact operator the previous formula still holds and shows that $T$ is also trace-class. With the same reasoning, if $T$ is self-adjoint and trace class, we can write the trace with respect to the basis made up its eigenvectors thus obtaining $\mathrm{tr}T = \sum_{n=1}^{+\infty} \lambda_n$.
+	Conversely, if $T$ is a compact operator the previous formula still holds and shows that $T$ is also trace-class. With the same reasoning, if $T$ is self-adjoint and trace-class, we can write the trace with respect to the basis made up its eigenvectors thus obtaining $\mathrm{tr}T = \sum_{n=1}^{+\infty} \lambda_n$.
 	
 	For the last part of the Theorem, we notice that $|T|$ is a compact self-adjoint non-negative operator, therefore, assuming its eigenvalues are decreasingly ordered, from Corollary \ref{norm is greatest eigenvalue} we have that $\| |T| \| = \mu_1$, hence:
 	\begin{align*}
@@ -423,7 +440,7 @@ so, an operator is trace class if and only if $\sqrt{|T|}$ is Hilbert-Schmidt. B
 \end{proof}
 
 In the special case $H = L^2(\R^d)$ we are able to give a characterization of Hilbert-Schmidt operators.
-\begin{teo}
+\begin{teo}\label{representation of Hilbert-Schmidt integral operator}
 	An operator $T \in \B(L^2(\R^d))$ is Hilbert-Schmidt if only if there exist a function $K_T \in L^2(\R^d \times \R^d)$, called integral kernel, such that
 	\begin{equation}\label{Hilbert-Schmidt integral operator}
 		(Tf)(x) = \int_{\R^d} K_T(x,y)f(y)dy \quad \forall f \in L^2(\R^d).
@@ -431,12 +448,14 @@ In the special case $H = L^2(\R^d)$ we are able to give a characterization of Hi
 	Moreover $\|T\|_{\mathrm{HS}} = \mathrm{tr}(T^*T) = \int_{\R^{2d}} |K(x,y)|^2 dxdy$.
 \end{teo}
 \begin{proof}
-	Letting $\{e_n\}_{n \in \N}$ be an orthonormal basis of $L^2(\R^d)$, then $\{e_n \otimes \overline{e}_m\}_{(n,m) \in \N \times \N}$, where $(e_n \otimes \overline{e_m})(x,y) \coloneqq e_n(x)\overline{e_m(y)}$, is an orthonormal basis of $L^2(\R^{2d})$.
+	If $\{e_n\}_{n \in \N}$ be an orthonormal basis of $L^2(\R^d)$, then $\{e_n \otimes \overline{e}_m\}_{(n,m) \in \N \times \N}$, where $(e_n \otimes \overline{e_m})(x,y) \coloneqq e_n(x)\overline{e_m(y)}$, is an orthonormal basis of $L^2(\R^{2d})$.
 	
-	We start supposing that $T \in \B(H)$ is a Hilbert-Schmidt operator and we define
+	We start supposing that $T \in \B(H)$ is a Hilbert-Schmidt operator and we want to show that \eqref{Hilbert-Schmidt integral operator} holds with:
 	\begin{equation}\label{integral kernel formula}
-		K_T(x,y) = \sum_{n,m=1}^{+\infty} \langle Te_n,e_m \rangle_{L^2(\R^d)} e_m(x)\overline{e_n(y)}
+		K_T(x,y) = \sum_{n,m=1}^{+\infty} \langle Te_n,e_m \rangle_{L^2(\R^d)} e_m(x)\overline{e_n(y)}.
 	\end{equation}
+	If we define $K_T^N = \sum_{n,m=1}^{N} \langle Te_n,e_m \rangle_{L^2(\R^d)} e_m(x)\overline{e_n(y)}$ it is clear that $K_T^N \rightarrow K_T$ in $L^2(\R^{2d})$.
+
 	Then
 	\begin{equation}\label{equivalence norm L2 and Hilbert-Schmidt norm}
 		\begin{aligned}
@@ -456,7 +475,11 @@ In the special case $H = L^2(\R^d)$ we are able to give a characterization of Hi
 In light of this theorem, operators defined by \eqref{Hilbert-Schmidt integral operator} are called \emph{Hilbert-Schmidt integral operators}.
 
 \begin{prop}\label{condition integral operator self-adjoint}
-	An Hilbert-Schmidt integral operator with kernel $K$ is self-adjoint if and only if $K(x,y) = \overline{K(y,x)}$.
+	Let $T$ be an Hilbert-Schmidt integral operator over $L^2(\R^d)$ with integral kernel $K \in L^2(\R^{2d})$. Then its adjoin operator is given by
+	\begin{equation}\label{Hilbert-Schmidt integral operator adjoint}
+		T^*f(x) = \int_{\R^d} \overline{K(y,x)} f(y)dy.
+	\end{equation}
+	Therefore $T$ is self-adjoint if and only if $K(x,y) = \overline{K(y,x)}$.
 \end{prop}
 \begin{proof}
 	Let $f,g \in L^2(\R^d)$. We start showing that $K(x,y)f(y)\overline{g(x)} \in L^1(\R^{2d})$:
@@ -469,11 +492,7 @@ In light of this theorem, operators defined by \eqref{Hilbert-Schmidt integral o
 		\langle Tf,g \rangle &= \int_{\R^d} \left(\int_{\R^d} K(x,y)f(y)dy\right)\overline{g(x)}dx = \int_{\R^d} \left(\int_{\R^d} K(x,y)\overline{g(x)}dx\right) f(y)dy =\\
 							 &= \int_{\R^d} \overline{\left(\int_{\R^d} \overline{K(x,y)} g(x)dx\right)} f(y)dy = \langle f,T^*g \rangle
 	\end{align*}
-	therefore the expression of $T^*$ is:
-	\begin{equation*}
-		T^*f(x) = \int_{\R^d} \overline{K(y,x)} f(y)dy,
-	\end{equation*}
-	so $T$ is self-adjoint if and only if $K(x,y) = \overline{K(y,x)}$.
+	where the expression of $T^*$ is exactly the one in \eqref{Hilbert-Schmidt integral operator adjoint}.
 \end{proof}
 
 
@@ -638,7 +657,7 @@ In the above definition we did not specify where $f$ and $\phi$ are chosen. Sinc
 \end{equation*}
 In general, the STFT of $f$ with respect to $\phi$ will be defined whenever  $\langle f, M_{\omega} T_x \phi \rangle$ is an expression of some sort of duality. For example, if $f \in \mathcal{S}'(\R^d)$ and $\phi \in \mathcal{S}(\R^d)$ then $M_{\omega} T_x \overline{\phi} \in \mathcal{S}(\R^d)$, therefore $\langle f, M_{\omega} T_x \phi \rangle$ can be seen as the usual duality between tempered distributions and functions in the Schwartz space.\\
 {\color{blue} Aggiungere scritture equivalenti della STFT??}
-\subsection{Properties of STFT}
+\subsection{Properties of STFT}\label{properties of STFT subsection}
 In this section we will present and prove some properties about the STFT. An excellent reference is \cite{grochenig}.
 \begin{teo}\label{orthogonality relations theorem}
 	Let $f_1,f_2,\phi_1,\phi_2 \in L^2(\R^d$). Then $\V_{\phi_i}f_i \in L^2(\R^{2d})$ and the following holds:
@@ -663,7 +682,11 @@ From the Cauchy-Schwarz inequality we immediately see that $\V_{\phi} f$ is in $
 \begin{equation}\label{STFT is bounded}
 	|\V_{\phi} f(x,\omega)| = |\langle f, M_{\omega} T_x \phi\rangle| \overset{\mathrm{C-S}}{\leq} \|f\|_2 \|M_{\omega}T_x \phi\|_2 = \|f\|_2 \|\phi\|_2.
 \end{equation}
-Combing this with \eqref{STFT is an isometry formula} and using a simple interpolation argument we see that $\V_{\phi}f \in L^p(\R^{2d})$ for every $p \in [2,\infty)$ and that $\|\V_{\phi}f\|_p \leq \|f\|_2 \|\phi\|_2$. This result is improved by the following theorem due to Lieb.
+Combing this with \eqref{STFT is an isometry formula} and using a simple interpolation argument we see that $\V_{\phi}f \in L^p(\R^{2d})$ for every $p \in [2,+\infty]$ and that 
+\begin{equation}\label{STFT is in L^p for p>=2}
+	\|\V_{\phi}f\|_p \leq \|f\|_2 \|\phi\|_2.
+\end{equation}
+This result is improved by the following theorem due to Lieb.
 \begin{teo}\label{Lieb's inequality}
 	If $f,\phi \in L^2(\R^d)$ and $2 \leq p \leq \infty$, then
 	\begin{equation}\label{Lieb's inequality formula}
@@ -799,7 +822,10 @@ After defining these projection operators we may think to combine them into a si
 	Q_{\Omega} P_T, \; P_T Q_{\Omega} : L^2(\R^d) \rightarrow L^2(\R^d)
 \end{equation*}
 which hopefully is able to localize a signal both in time and frequency ``near'' to the set $T \times \Omega$.\\
-It is clear that these operators are linear and bounded, in particular their norms are less or equal than 1.
+It is clear that these operators are linear and bounded, in particular their norms are less or equal than 1. We notice that these operators are one the adjoint of the other, indeed:
+\begin{equation}\label{projection operators adjoint}
+	(Q_{\Omega} P_T)^* = P_T^* Q_{\Omega}^* = Q_{\Omega} P_T.
+\end{equation}
 
 Up to now the only (essential) hypothesis on $T$ and $\Omega$ is that they are measurable. Clearly, by adding some requirements on $T$ and $\Omega$ we expect $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$ to gain some properties.
 \begin{prop}\label{projection operators are Hilbert-Schmidt}
@@ -815,9 +841,21 @@ Up to now the only (essential) hypothesis on $T$ and $\Omega$ is that they are m
 	which has $\| K \|_{L^2(\R^{2d})} = \sqrt{|T||\Omega|}$.
 \end{prop}
 \begin{proof}
-	contenuto...
+	Given $f \in L^2(\R^d)$ we have:
+	\begin{align*}
+		Q_{\Omega}P_T f(x) = \int_{\Omega} e^{2 \pi i \omega \cdot x} \left(\int_{T} e^{-2\pi i \omega \cdot t} f(t)dt\right)d\omega \overset{\mathrm{Fubini}}{=} \int_{\R^d} \chi_T(t) \left(\int_{\Omega} e^{2 \pi i \omega \cdot (x -t)} d\omega\right)f(t)dt
+	\end{align*}
+	where the use of Fubini's theorem is allowed since $\Omega$ and $T$ have finite measure. This gives us the expression of $Q_{\Omega}P_T$. In order to obtain also the expression for $P_T Q_{\Omega}$ it suffices to recall from \eqref{projection operators adjoint} that $(Q_{\Omega} P_T)^* = P_T Q_{\Omega}$. Therefore, the integral kernel of $P_T Q_{\Omega}$ is given by Proposition \ref{condition integral operator self-adjoint}. Lastly, from Theorem \ref{representation of Hilbert-Schmidt integral operator} we have that $\|Q_{\Omega} P_T\|_{\mathrm{HS}} = \|P_T Q_{\Omega}\|_{\mathrm{HS}} = \|K\|_{L^2(\R^{2d})}$, and:
+	\begin{align*}
+		\|K\|_{L^2(\R^{2d})} &= \left(\int_{\R^{2d}}   |K(x,t)|^2 dxdt\right)^{1/2} =\\
+							 &= \left(\int_{\R^{2d}} \chi_T(t) \Bigg| \int_{\R^d} e^{2 \pi i \omega \cdot (x-t)} \chi_{\Omega}(\omega)d\omega \Bigg|^2 dxdt \right)^{1/2} = \\
+							 &= \left(\int_{\R^{2d}} \chi_T(t) \big|\F^{-1}(\chi_{\Omega})(x-t)\big|^2dxdt\right)^{1/2} \overset{\mathrm{Tonelli}}{=} \\
+							 &= \left[ \int_{\R^d} \chi_T(t) \left(\int_{\R^d} \big|\F^{-1}(\chi_{\Omega})(x-t)\big|^2 dx\right)dt\right]^{1/2} = \\
+							 &= \left(\int_{\R^d} \| T_t \F^{-1} (\chi_{\Omega})\|_2^2 \chi_T(t)dt\right)^{1/2} \overset{T_t\,\mathrm{isometry} + \mathrm{Plancherel}}{=}\\
+							 &= \| \chi_{\Omega} \|_2 \|\chi_T\|_2 = \sqrt{|T| |\Omega|}
+	\end{align*}
 \end{proof}
-If we compare the integral kernels of $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$ we see that $K(x,t) \neq \overline{K(t,x)}$, hence, by proposition \ref{condition integral operator self-adjoint}, we immediately conclude that both operator are not self-adjoint. {\color{red} Since it is better to deal with self-adjoint operators when it comes to spectral properties, it would be nice if we could construct those starting from $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$.} This is easily done by considering
+If we compare the integral kernels of $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$ we see that $K(x,t) \neq \overline{K(t,x)}$, hence, by proposition \ref{condition integral operator self-adjoint}, we immediately conclude that both operator are not self-adjoint. {\color{red} Since it is better to deal with self-adjoint operators when it comes to spectral properties, it would be nice if we could construct those starting from $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$.} This is easily done by considering:
 \begin{align}
 	(Q_{\Omega} P_T)^* Q_{\Omega} P_T &= P_T^* Q_{\Omega}^* Q_{\Omega} P_T= P_T Q_{\Omega} P_T\\
 	(P_T Q_{\Omega})^* P_T Q_{\Omega} &= Q_{\Omega}^* P_T^* P_T Q_{\Omega} = Q_{\Omega} P_T Q_{\Omega}
@@ -845,6 +883,24 @@ Indeed, assuming $\L_{F,\phi}$ is bounded, we could define $ L_{F,\phi} f$ throu
 \end{equation}
 and therefore $L_{F,\phi}$ as the function which maps $f$ into its representation.\\
 {\color{blue} QUESTA PARTE VA MESSA A POSTO IN MODO DA UNIFORMARE I RISULTATI}
+{\color{red}\begin{prop}\label{F in L^p L_F bounded}
+	Let $F \in L^p(\R^{2d})$ for $p \in [1,+\infty]$. Then $L_{F,\phi}$ is bounded and $\|L_{F,\phi}\| \leq \|F\|_p$.
+\end{prop}
+\begin{proof}
+	Let $f,g \in L^2(\R^d)$. We have:
+	\begin{align*}
+		|\L_{F,\phi} (f,g)| \leq \int_{\R^{2d}} |F(x,\omega)| |\V_{\phi}f(x,\omega)| |\V_{\phi}g(x,\omega)| dxd\omega 
+	\end{align*}
+	From \eqref{STFT is in L^p for p>=2} we know that, given $f \in L^2(\R^d)$, $\V_{\phi} f \in L^p(\R^d)$ for every $p \in [2,+\infty]$ and $\|\V_{\phi} f\|_p \leq \|f\|_2$. We want to find an exponent $q \geq 2$ in order to apply (generalized) H\"older's inequality:
+	\begin{align*}
+		\dfrac{1}{p} + \dfrac{1}{q} + \dfrac{1}{q} = 1 \implies q =  \dfrac{2p}{p-1},
+	\end{align*}
+	which is greater or equal than 2 regardless of $p$. Applying H\"older's inequality with exponents $p$, $q$ and $q$ we have:
+	\begin{align*}
+		|\L_{F,\phi} (f,g)| \leq \|F\|_p \|\V_{\phi}f\|_q \|\V_{\phi}g\|_q \leq \|F\|_p \|f\|_2 \|g\|_2.
+	\end{align*}
+	Taking the supremum above all normalized $f,g \in L^2(\R^d)$ gives us the boundedness of $\L_{F,\phi}$ and, in the end, of $L_{F,\phi}$.
+\end{proof}}
 \begin{prop}\label{F bounded L_F bounded}
 	If $F \in L^{\infty}(\R^{2d})$ then $\| L_{F,\phi}\| \leq \| F \|_{\infty}$.
 \end{prop}
@@ -862,13 +918,79 @@ Thanks to these result and an interpolation argument one can show that $\L_{F,\p
 	Let $F \in L^p(\R^{2d})$ for $1 < p < \infty$. Then there exist a unique bounded linear operator $L_{F,\phi} : L^2(\R^d) \rightarrow L^2(\R^d)$ such that $L_{F,\phi} f$ is given by \eqref{L_F through duality} for all $f \in L^2(\R^d)$ and all simple functions $F$ for which $|\{F(x) \neq 0\}| < \infty$. Moreover, the application that maps $F$ into $L_{F,\phi}$ is bounded.
 \end{prop}
 {\color{blue} Since simple functions supported on a set of finite measure are dense in $L^p(\R^{2d})$, through dominated convergence we can conclude that \eqref{sesquilinear form localization operator} holds for every $F \in L^p(\R^{2d})$.}
-\begin{itemize}
-	\item Definizione
-	\item Operatori di proiezione
-	\item Operatori di localizzazione di Daubechies
-	\item Proprietà di limitatezza e compattezza
-	\item Autovalori e autofunzioni
-\end{itemize}
+
+In previous section we managed to prove that projection operators $Q_{\Omega}P_T$ and $P_T Q_{\Omega}$ are Hilbert-Schmidt operators, provided both $T$ and $\Omega$ have finite measure, which is equivalent to asking that $\chi_T$ and $\chi_{\Omega}$ are in $L^1(\R^d)$. An analogous result holds for Daubechies's localization operators.
+\begin{teo}\label{F integrable L_F Hilbert-Schmidt}
+	Let $F \in L^1(\R^{2d})$. Then $L_{F,\phi}$ is an Hilbert-Schmidt integral operator with kernel
+	\begin{equation}\label{integral kernel localization operator}
+		K_F(s,t) = \int_{\R^{2d}} F(x,\omega) M_{\omega} T_x \phi(s) \overline{M_{\omega} T_x \phi(t)} dx d\omega
+	\end{equation}
+	{\color{blue} Moreover $\|K_F\|_2 \leq \|F\|_1$.}
+\end{teo}
+\begin{proof}
+		Let $f,g \in L^2(\R^d)$. We begin showing that $F(x,\omega) f(t) \overline{M_{\omega}T_{x} \phi(t)} \, \overline{g(s)}M_{\omega}T_x \phi(s)$ belongs to $L^1(\R^{2d} \times \R^d \times \R^d)$:
+	\begin{align*}
+		&\int_{\R^{4d}} |F(x,\omega) f(t) \overline{M_{\omega}T_{x} \phi(t)} \, \overline{g(s)}M_{\omega}T_x \phi(s)| dx d\omega dt ds \overset{\mathrm{Tonelli}}{=}\\
+		&= \int_{\R^{2d}} |F(x,\omega)|\left( \int_{\R^d} |f(t)| |M_{\omega}T_x \phi(t)|dt\right) \left( \int_{\R^d} |g(s)| |M_{\omega}T_x g(s)|ds\right)dx d\omega \overset{\mathrm{C-S}}{\leq} \\
+		&\leq \|f\|_2 \|\phi\|_2 \|g\|_2 \|\phi\|_2 \int_{\R^{2d}} |F(x,\omega)|dx d\omega = \|F\|_1 \|f\|_2 \|g\|_2
+	\end{align*}
+	Now we can apply Fubini's theorem in the expression of $\langle L_{F,\phi}f,g\rangle$:
+	\begin{align*}
+		\langle L_{F,\phi}f,g \rangle &= \int_{\R^{2d}} F(x,\omega) \left(\int_{\R^d} f(t) \overline{M_{\omega}T_x \phi(t)}dt\right) \overline{\left(\int_{\R^d} g(s) \overline{M_{\omega}T_x \phi(s)}ds\right)} dx d\omega \overset{\mathrm{Fubini}}{=} \\
+									  &= \int_{\R^d} \left[\int_{\R^d}\left( \int_{\R^{2d}} F(x,\omega) M_{\omega}T_x \phi(s) \overline{M_{\omega} T_x \phi(t)} dx d\omega \right) f(t) dt\right] \overline{g(s)}ds = \\
+									  &= \int_{\R^d} \left(\int_{\R^d} K_F(s,t) f(t)dt\right) \overline{g(s)} ds.
+	\end{align*}
+	Since this holds for every $f$ and $g$ we can conclude that $L_{F,\phi} f = \int_{\R^d} K_F(\cdot,t) f(t)dt $. In order to prove that $L_{F,\phi}$ is Hilbert-Schmidt all we have left to do is to show that $K_F \in L^2(\R^{2d})$:
+	\begin{align*}
+		\|K_F\|_2^2 &= | \langle K_F, K_F \rangle |\leq \int_{\R^{2d}} \left( \int_{\R^{2d}} |F(x,\omega)| |M_{\omega}T_x \phi(s)| |M_{\omega} T_x \phi(t)| dx d\omega\right)\\
+					&\phantom{=| \langle K_F, K_F \rangle |\leq \int_{\R^{2d}}} \! {\cdot} \left(\int_{\R^{2d}} |F(y,\xi)| |M_{\xi}T_y \phi(s)| |M_{\xi} T_y \phi(t)| dy d\xi\right) ds dt \overset{\mathrm{Fubini}}{=} \\
+					&= \int_{\R^{4d}} |F(x,\omega)| |F(y,\xi)| \left(\int_{\R} |M_{\omega} T_x \phi(t)| |M_{\xi} T_y \phi(t)| dt\right) \\
+					&\phantom{= \int_{\R^{4d}} |F(x,\omega)| |F(y,\xi)|} \!\cdot\left(\int_{\R} |M_{\omega}T_x \phi(s)| |F(y,\xi)| |M_{\xi}T_y \phi(s)| ds\right) dx d\omega dy d\xi \overset{\mathrm{C-S}}{\leq}\\
+					& \leq \|\phi\|_2^4 \int_{\R^{2d}} |F(x,\omega)| dx d\omega \int_{\R^{2d}} |F(y,\xi)| dy d\xi = \|F\|_1^2.
+	\end{align*}
+\end{proof}
+Reminding Theorem \ref{Hilbert-Schmidt operators are compact and bounded} we observe that, if $F$ is integrable, the corresponding localization operator $L_{F,\phi}$ is compact. Moreover, since we have the explicit expression of the integral kernel, from Proposition \ref{condition integral operator self-adjoint} follows immediately the next sufficient condition on $F$ in order to make $L_{F,\phi}$ self-adjoint.
+\begin{prop}\label{condition localization operator self-adjoint}
+	If $F \in L^1(\R^{2d})$ is a real-valued function then $L_{F,\phi}$ is self-adjoint.
+\end{prop}
+We will now prove that localization operators with integrable weight function are trace-class operators. In light of Proposition \ref{trace-class operators are Hilbert-Schmidt}, we highlight that this is a stronger condition than just being an Hilbert-Schmidt operator.
+\begin{teo}\label{F integrable L_F trace-class}
+	Let $F \in L^1(\R^{2d})$. Then $L_{F,\phi}$ is a trace-class operator. Moreover, given an orthonormal basis $\{e_n\}_{n \in \N}$ of $L^2(\R^d)$, the following holds:
+	\begin{equation}\label{trace of localization operators}
+		\sum_{n=1}^{+\infty} |\langle L_{F,\phi}e_n,e_n \rangle| \leq \|F\|_1 \quad \mathrm{tr}L_{F,\phi} = \int_{\R^{2d}} F(x,\omega) dx d\omega
+	\end{equation}
+\end{teo}
+\begin{proof}
+	We start proving that $L_{F,\phi}$ is a trace-class operator. Given an orthonormal basis $\{e_n\}_{n \in \N}$ of $L^2(\R^d)$:
+	\begin{align*}
+		\sum_{n=1}^{+\infty} |\langle L_{F,\phi} e_n, e_n \rangle| &= \sum_{n=1}^{+\infty} \Big| \int_{\R^{2d}} F(x,\omega) \V_{\phi}e_n(x,\omega) \overline{\V_{\phi} e_n(x,\omega)} dx d\omega \Big| \leq \\
+																   &\leq \sum_{n=1}^{+\infty} \int_{\R^{2d}} |F(x,\omega)| |\V_{\phi} e_n(x,\omega)\|^2 dxd\omega =\\
+																   &= \int_{\R^{2d}} |F(x,\omega)| \sum_{n=1}^{+\infty} |\langle e_n, M_{\omega}T_x \phi \rangle|^2 dx d\omega \overset{\mathrm{Parseval}}{=}\\
+																   &= \int_{\R^{2d}} |F(x,\omega)| \|M_{\omega} T_x \phi\|_2^2 dx d\omega = \|\phi\|_2^2 \|F\|_1 = \|F\|_1.
+	\end{align*}
+	where the exchange between series and integral is due to the monotone convergence theorem. Now that we know that $L_{F,\phi}$ is trace-class we can compute its trace:
+	\begin{align*}
+		\mathrm{tr}L_{F,\phi} &= \sum_{n=1}^{+\infty} \langle L_{F,\phi}e_n e_n \rangle = \sum_{n=1}^{+\infty}  \int_{\R^{2d}} F(x,\omega) |\V_{\phi}e_n(x,\omega)|^2 dx d\omega=\\
+							  &= \lim_{N \rightarrow +\infty} \sum_{n=1}^{N} \int_{\R^{2d}} F(x,\omega) |\V_{\phi}e_n(x,\omega)|^2 dx d\omega =\\
+							  &= \lim_{N \rightarrow +\infty} \int_{\R^{2d}} F(x,\omega) \sum_{n=1}^{N} |\V_{\phi}e_n(x,\omega)|^2 dx d\omega.
+	\end{align*}
+	Since
+	\begin{align*}
+		|F(x,\omega)| \sum_{n=1}^{N} |\V_{\phi}e_n(x,\omega)|^2 \leq |F(x,\omega)| \sum_{n=1}^{+\infty} |\V_{\phi}e_n(x,\omega)|^2 = |F(x,\omega)| \in L^1(\R^{2d})
+	\end{align*}
+	we can apply Lebesgue's dominated convergence theorem to conclude that: 
+	\begin{align*}
+		\mathrm{tr}L_{F,\phi} = \lim_{N \rightarrow +\infty} \int_{\R^{2d}} F(x,\omega) \sum_{n=1}^{N} |\V_{\phi}e_n(x,\omega)|^2 dx d\omega = \int_{\R^{2d}} F(x,\omega) dx d\omega.
+	\end{align*}
+\end{proof}
+So far, except for \ref{F in L^p L_F bounded}, we considered only the case $F \in L^1(\R^{2d})$. As the last result of the section we will deal with the more generic case $F \in L^p(\R^{2d})$ for $p < +\infty$.
+\begin{prop}\label{F in L^p L_F compact}
+	Let $F \in L^p(\R^{2d})$ with $1 \leq p < \infty$. Then the corresponding localization operator $L_{F,\phi}$ is compact.
+\end{prop}
+\begin{proof}
+	Given $F \in L^p(\R^{2d})$ it is sufficient to consider a sequence $F_n$ of functions in $L^1(\R^{2d})$ such that $F_n \rightarrow F$ in $L^p(\R^{2d})$. For example, we can suppose that $F_n$ are in Schwartz's class $\mathcal{S}(\R^{2d})$, which is a well-known dense subspace of $L^p(\R^{2d})$ for $p < +\infty$. Indeed, from Proposition \ref{F in L^p L_F bounded}, we have that $\| L_{F_n,\phi} - L_{F,\phi}\| \leq \|F_n - F\|_p$, so $L_{F_n,\phi} \rightarrow L_{F,\phi}$ in $\B(L^2(\R^d))$. Since $\mathcal{S}(\R^{2d}) \subset L^1(\R^{2d})$, $L_{F_n,\phi}$ are compact, thus also $L_{F,\phi}$ is.
+\end{proof}
+
 \subsection{Spherically Symmetric Weights}\label{spherically symmetric weights section}
 In this section we will consider the special case in which the window for the STFT is a Gaussian \eqref{gaussian normalized} and the weight $F$ is spherically symmetric. Letting $r_j^2 = x_j^2 + \omega_j^2$ for $j=1,\ldots,d$ and $r^2=(r_1^2\ldots,r_d^2) \in \R^d$, the hypothesis about $F$ can be rephrased in the following way
 \begin{equation}\label{spherically symmetric weight}
@@ -904,7 +1026,7 @@ where $|k|=k_1 + \cdots k_d$ is the length of the multi-index.
 \begin{teo}\label{eigenvalues and eigenvectors localization operator spherically symmetric weight}
 	Eigenfuctions of $L_{\mathdutchcal{F},\varphi}$ are the $d$-dimensional Hermite functions $H_k$, with corresponding eigenvalues
 	\begin{equation}\label{eigenvalues of localization operators with radial weight}
-		\lambda_k = \dfrac{\pi^{|k|}}{k!}\int_0^{+\infty} {\cdots} \int_0^{+\infty} \mathdutchcal{F}\left(\frac{s_1}{\pi},\ldots,\frac{s_d}{\pi}\right) \left(\prod_{j=1}^{d} s^{k_j} \right) e^{-(s_1 + \cdots + s_d)} ds_1 \cdots ds_d
+		\lambda_k = \dfrac{1}{k!}\int_0^{+\infty} {\cdots} \int_0^{+\infty} \mathdutchcal{F}\left(\frac{s_1}{\pi},\ldots,\frac{s_d}{\pi}\right) \left(\prod_{j=1}^{d} s_j^{k_j} \right) e^{-(s_1 + \cdots + s_d)} ds_1 \cdots ds_d
 	\end{equation}
 \end{teo}
 Before proving the theorem we need the following lemma:
@@ -957,7 +1079,7 @@ Before proving the theorem we need the following lemma:
 	\end{align*}
 	where $k! = k_1! \cdots k_d!$. With the change of variable $s_j = \pi r_j^2$, we finally obtain:
 	\begin{equation*}
-		\langle  L_{\mathdutchcal{F},\varphi}H_k,H_k\rangle = \dfrac{1}{k!} \int_0^{+\infty} \cdots \int_0^{+\infty} \mathdutchcal{F}\left(\frac{s_1}{\pi},\ldots,\frac{s_d}{\pi}\right) \left(\prod_{j=1}^{d} s^{k_j} \right) e^{-(s_1 + \cdots + s_d)} ds_1 \cdots ds_d
+		\langle  L_{\mathdutchcal{F},\varphi}H_k,H_k\rangle = \dfrac{1}{k!} \int_0^{+\infty} \cdots \int_0^{+\infty} \mathdutchcal{F}\left(\frac{s_1}{\pi},\ldots,\frac{s_d}{\pi}\right) \left(\prod_{j=1}^{d} s_j^{k_j} \right) e^{-(s_1 + \cdots + s_d)} ds_1 \cdots ds_d
 	\end{equation*}
 	which is exactly the expression \eqref{eigenvalues of localization operators with radial weight}.
 \end{proof}
@@ -1002,7 +1124,7 @@ Before proving the theorem we need the following lemma:
 \begin{lem}\label{Heisenberg's uncertainty principle lemma d dimensions}
 	Let $f \in L^2(\R^d)$. Then, for every $j = 1,\ldots,d$:
 	\begin{equation}\label{Heisenberg's uncertainty principle lemma d dimensions formula}
-		\int_{\R^d} t_j^2 |f(t)|^2 dt + \int_{\R^d} \omega_j^2 |\hat{f}(\omega)|^2 = \dfrac{1}{2\pi} \sum_{k \in \N_0^d} (2k_j + 1) |\langle f, H_k \rangle|^2
+		\int_{\R^d} t_j^2 |f(t)|^2 dt + \int_{\R^d} \omega_j^2 |\hat{f}(\omega)|^2d\omega = \dfrac{1}{2\pi} \sum_{k \in \N_0^d} (2k_j + 1) |\langle f, H_k \rangle|^2
 	\end{equation}
 	where $\N_0 = \N \cup \{0\}$ and $H_k$ is the d-dimensional Hermite functions related to the multi-index $k \in \N_0^d$.
 \end{lem}
@@ -1093,7 +1215,7 @@ In this form the uncertainty principle has a heuristic yet meaningful interpreta
 		&\|f\|_2 = \|f - Q_{\Omega}P_T f + Q_{\Omega}P_T f \|_2 \leq \|f - Q_{\Omega}P_T f\|_2 + \| Q_{\Omega}P_T f  \|_2 \implies\\
 		\implies &\|Q_{\Omega}P_T f \|_2 \geq \|f\|_2 - \|f - Q_{\Omega}P_T f\|_2 \geq (1-\varepsilon_{\Omega} - \varepsilon_T)\|f\|_2
 	\end{align*}
-	Thanks to Proposition \ref{projection operators are Hilbert-Schmidt} we know that $\| Q_{\Omega}P_T\|_{\mathrm{HS}} = \sqrt{|T| \, |\Omega|}$ and from Theorem \ref{Hilbert-Schmidt operators are compact} we know that $\|Q_{\Omega}P_T\| \leq \| Q_{\Omega}P_T\|_{\mathrm{HS}}$, therefore
+	Thanks to Proposition \ref{projection operators are Hilbert-Schmidt} we know that $\| Q_{\Omega}P_T\|_{\mathrm{HS}} = \sqrt{|T| \, |\Omega|}$ and from Theorem \ref{Hilbert-Schmidt operators are compact and bounded} we know that $\|Q_{\Omega}P_T\| \leq \| Q_{\Omega}P_T\|_{\mathrm{HS}}$, therefore
 	\begin{equation*}
 		(1-\varepsilon_{\Omega} - \varepsilon_T)\|f\|_2 \leq \|Q_{\Omega}P_T f \|_2 \leq \sqrt{|T| \, |\Omega|} \|f\|_2.
 	\end{equation*}
