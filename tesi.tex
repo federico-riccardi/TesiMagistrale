@@ -52,6 +52,7 @@ sorting=nyt
 \newtheorem{lem}[teo]{Lemma}
 \newtheorem{cor}[teo]{Corollary}
 \newtheorem{prop}[teo]{Proposition}
+\theoremstyle{definition}
 \newtheorem{es}[teo]{Example}
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
@@ -125,9 +126,9 @@ After this we define the \emph{norm} of an operator
 The proof of the equivalence between two definition is straightforward. We see that the norm of an operator is the best constant for which boundedness property \eqref{boundedness property} holds. {\color{blue} Sometimes, in order to emphasize the spaces between which $T$ operates, we may write the norm of $T$ as $\| T \|_{X \rightarrow Y}$.}
 
 In the following we will mostly deal with $X$ and $Y$ being $L^2(\R^d)$, which is an Hilbert space. For operators between Hilbert spaces we can give the norm of an operator by means of the dual norm:
-\begin{equation*}
+\begin{equation}\label{dual norm}
 	\| T \|_H = \sup\{|\langle Tx, y \rangle_H| : x,y \in H,\,\ \|x\|_H = \|y\|_H = 1 \}
-\end{equation*}
+\end{equation}
 
 An important class of operators is the class of \emph{compact operators}.
 \begin{defi}\label{compact operator}
@@ -468,8 +469,8 @@ In the special case $H = L^2(\R^d)$ we are able to give a characterization of Hi
 			\int_{\R^d} K_T(x,y)f(y)dy &= \int_{\R^d} \sum_{n,m=1}^{+\infty} \langle Te_n,e_m \rangle_{L^2(\R^d)} e_m(x) \overline{e_n(y)}f(y)dy = \\
 			&= \sum_{n,m=1}^{+\infty} \langle Te_n,e_m \rangle_{L^2(\R^d)} \langle f,e_n \rangle_{L^2(\R^d)} e_m(x) = \\
 			&= \sum_{m=1}^{+\infty} \langle Tf,e_m \rangle_{L^2(\R^d)} e_n(x) = (Tf)(x)
-		\end{align*} perché lo scambio di serie e integrale è permesso?
-		
+		\end{align*} 
+	The exchange between integral and series is possible since the operator $		$
 	Conversely, if we define $T$ by \eqref{Hilbert-Schmidt integral operator} we have to show that this operator is Hilbert-Schmidt, but this is straightforward since  \eqref{equivalence norm L2 and Hilbert-Schmidt norm} still holds.}
 \end{proof}
 In light of this theorem, operators defined by \eqref{Hilbert-Schmidt integral operator} are called \emph{Hilbert-Schmidt integral operators}.
@@ -881,9 +882,9 @@ Indeed, assuming $\L_{F,\phi}$ is bounded, we could define $ L_{F,\phi} f$ throu
 \begin{equation}\label{L_F through duality}
 	\L_{F,\phi}(f,g) = \langle L_{F,\phi}f,g \rangle  = \int_{\R^d} L_{F,\phi}f(t) \overline{g(t)}\quad \forall g \in L^2(\R^d)
 \end{equation}
-and therefore $L_{F,\phi}$ as the function which maps $f$ into its representation.\\
-{\color{blue} QUESTA PARTE VA MESSA A POSTO IN MODO DA UNIFORMARE I RISULTATI}
-{\color{red}\begin{prop}\label{F in L^p L_F bounded}
+and therefore $L_{F,\phi}$ as the function which maps $f$ into its representation.
+
+\begin{prop}\label{F in L^p L_F bounded}
 	Let $F \in L^p(\R^{2d})$ for $p \in [1,+\infty]$. Then $L_{F,\phi}$ is bounded and $\|L_{F,\phi}\| \leq \|F\|_p$.
 \end{prop}
 \begin{proof}
@@ -900,24 +901,7 @@ and therefore $L_{F,\phi}$ as the function which maps $f$ into its representatio
 		|\L_{F,\phi} (f,g)| \leq \|F\|_p \|\V_{\phi}f\|_q \|\V_{\phi}g\|_q \leq \|F\|_p \|f\|_2 \|g\|_2.
 	\end{align*}
 	Taking the supremum above all normalized $f,g \in L^2(\R^d)$ gives us the boundedness of $\L_{F,\phi}$ and, in the end, of $L_{F,\phi}$.
-\end{proof}}
-\begin{prop}\label{F bounded L_F bounded}
-	If $F \in L^{\infty}(\R^{2d})$ then $\| L_{F,\phi}\| \leq \| F \|_{\infty}$.
-\end{prop}
-\begin{proof}
-	contenuto...
 \end{proof}
-\begin{prop}\label{F integrable L_F bounded}
-	If $F \in L^1(\R^{2d})$ then $\| L_{F,\phi}\| \leq \| F \|_1$.
-\end{prop}
-\begin{proof}
-	contenuto...
-\end{proof}
-Thanks to these result and an interpolation argument one can show that $\L_{F,\phi}$, and hence $L_{F,\phi}$, is bounded also when $F \in L^p(\R^{2d})$ for $1 < p < \infty$. A proof can be found in \cite{wong}, Proposition 12.3.
-\begin{prop}\label{F in Lp L_F bounded}
-	Let $F \in L^p(\R^{2d})$ for $1 < p < \infty$. Then there exist a unique bounded linear operator $L_{F,\phi} : L^2(\R^d) \rightarrow L^2(\R^d)$ such that $L_{F,\phi} f$ is given by \eqref{L_F through duality} for all $f \in L^2(\R^d)$ and all simple functions $F$ for which $|\{F(x) \neq 0\}| < \infty$. Moreover, the application that maps $F$ into $L_{F,\phi}$ is bounded.
-\end{prop}
-{\color{blue} Since simple functions supported on a set of finite measure are dense in $L^p(\R^{2d})$, through dominated convergence we can conclude that \eqref{sesquilinear form localization operator} holds for every $F \in L^p(\R^{2d})$.}
 
 In previous section we managed to prove that projection operators $Q_{\Omega}P_T$ and $P_T Q_{\Omega}$ are Hilbert-Schmidt operators, provided both $T$ and $\Omega$ have finite measure, which is equivalent to asking that $\chi_T$ and $\chi_{\Omega}$ are in $L^1(\R^d)$. An analogous result holds for Daubechies's localization operators.
 \begin{teo}\label{F integrable L_F Hilbert-Schmidt}
@@ -925,7 +909,7 @@ In previous section we managed to prove that projection operators $Q_{\Omega}P_T
 	\begin{equation}\label{integral kernel localization operator}
 		K_F(s,t) = \int_{\R^{2d}} F(x,\omega) M_{\omega} T_x \phi(s) \overline{M_{\omega} T_x \phi(t)} dx d\omega
 	\end{equation}
-	{\color{blue} Moreover $\|K_F\|_2 \leq \|F\|_1$.}
+	Moreover $\|K_F\|_2 \leq \|F\|_1$.
 \end{teo}
 \begin{proof}
 		Let $f,g \in L^2(\R^d)$. We begin showing that $F(x,\omega) f(t) \overline{M_{\omega}T_{x} \phi(t)} \, \overline{g(s)}M_{\omega}T_x \phi(s)$ belongs to $L^1(\R^{2d} \times \R^d \times \R^d)$:
@@ -1083,6 +1067,56 @@ Before proving the theorem we need the following lemma:
 	\end{equation*}
 	which is exactly the expression \eqref{eigenvalues of localization operators with radial weight}.
 \end{proof}
+In conclusion, we will consider two meaningful examples, namely when the weight $F$ is the characteristic function of a disk centred around the origin and when it is a Gaussian. In order to make computations easier we confine ourselves in the case $d=1$.
+\begin{es}[Localization on a disk]
+	We study arguably the most simple case, namely when $F$ is the characteristic function of the disk $\mathdutchcal{B}_R = \{(x,\omega) \in \R^2 : x^2 + \omega^2 \leq R^2\}$:
+	\begin{equation*}
+			F(x,\omega) = \mathdutchcal{F}(r^2) = \begin{cases}
+				1 \quad \mathrm{if\ } x^2 + \omega^2 = r^2 \leq R^2\\
+				0 \quad \mathrm{otherwise}
+			\end{cases} 
+	\end{equation*}
+	In order to highlight that $F$ is the characteristic function of $\mathdutchcal{B}_R$ we let $L_{\mathdutchcal{F},\varphi} = L_{\mathdutchcal{B}_R,\varphi}$. Noticing that $\mathdutchcal{F}(\frac{s}{\pi}) = \chi_{[0,\pi R^2]} (s)$, expression \eqref{eigenvalues of localization operators with radial weight} brings to:
+	\begin{align*}
+		\lambda_k(R) = \dfrac{1}{k!} \int_{0}^{+\infty} \chi_{[0,\pi R^2]}(s) s^k e^{-s} ds = \dfrac{1}{k!} \int_{0}^{\pi R^2} s^k e^{-s} ds = \gamma(k+1,\pi R^2)
+	\end{align*}
+	where $\gamma$ is the lower incomplete gamma function. An easy integration by part, when $k \geq 1$, leads to:
+	\begin{equation*}
+		\int_{0}^{\pi R^2} s^k e^{-s} ds = -(\pi R^2)^k e^{-\pi R^2} + k \int_{0}^{\pi R^2} s^{k-1} e^{-s} ds.
+	\end{equation*}
+	Iterating this process gives us the following formula for the $k$-th eigenvalue:
+	\begin{equation*}
+		\lambda_k = 1 - e^{-\pi R^2} \sum_{j=0}^{k} \dfrac{(\pi R^2)^j}{j!}, \quad k=0,1,\ldots
+	\end{equation*}
+	Since $(\pi R^2)^j/j!$ is strictly positive, it follows immediately that the sequence of eigenvalues is strictly decreasing. Moreover, since $F$ is real-valued, from Proposition \ref{condition localization operator self-adjoint} we have that $L_{\mathdutchcal{B}_R,\varphi}$ is self-adjoint, as well as compact. Therefore, from Corollay \ref{norm is greatest eigenvalue} we conclude that:
+	\begin{equation*}
+		\| L_{\mathdutchcal{B}_R,\varphi} \| = |\lambda_0| = 1 - e^{-\pi R^2}.
+	\end{equation*}
+	Recalling the definition of the norm for operators between Hilbert spaces \ref{dual norm}, we obtain that, for every normalized $f \in L^2(\R^d)$:
+	\begin{equation*}
+		\begin{gathered}
+			\lambda_0 = \|L_{\mathdutchcal{B}_R,\varphi} \| \geq |\langle L_{\mathdutchcal{B}_R,\varphi} f, f \rangle | = \int_{\mathdutchcal{B}_R} |\V_{\varphi} f(x,\omega) |^2 dx d\omega \implies \\
+			\implies  \int_{\mathdutchcal{B}_R} |\V_{\varphi} f(x,\omega) |^2 \leq 1 - e^{-\pi R^2}.
+		\end{gathered}
+	\end{equation*}
+	The left-hand side of the last expression represents the energy of $\V_{\varphi} f$ concentrated on the disk $\mathdutchcal{B}_R$.
+	{\color{blue} Aggiungere commento che colleghi questo risultato a quello nella sezione 6}.
+\end{es}
+
+\begin{es}[Localization with Gaussian weight]
+	Another natural choice for the weight function $F$ is a Gaussian:
+	\begin{equation*}
+		F(x,\omega) = e^{-\alpha \pi (x^2 + \omega^2)}
+	\end{equation*}
+	where $\alpha > 0$ is a dilatation parameter. In this case $\mathdutchcal{F}(\frac{s}{\pi}) = e^{-\alpha s}$, so from \eqref{eigenvalues of localization operators with radial weight} and integrating by parts $k+1$ times we obtain the eigenvalues of $L_{\mathdutchcal{F},\varphi}$:
+	\begin{align*}
+		\lambda_k = \dfrac{1}{k!} \int_0^{+\infty} s^k e^{-(1+\alpha)s}ds = (1+\alpha)^{-(k+1)}, \quad k=0,1,\ldots
+	\end{align*}
+	Like the previous case, eigenvalues are already ordered in decreasing order and $F$ is still real-valued, therefore
+	\begin{equation*}
+		\|L_{\mathdutchcal{F},\varphi}\| = 1+\alpha.
+	\end{equation*}
+\end{es}
 
 
 
@@ -1714,6 +1748,53 @@ and, in the end, $u(t;c_1^*,c_2^*)$ is the unique maximizer for \eqref{nonstanda
 \end{proof}
 
 \appendix
+\chapter{Unconditional convergence}
+In some cases we had to deal with series over multiple indices. Formally, the possibility of manipulating these series is related to the property of \emph{unconditional convergence}.
+\begin{defi}\label{unconditional convergence def}
+	Let $\{x_j\}_{j \in \mathcal{J}}$ be a countable subset of a Banach space $X$. The series $\sum_{j \in \mathcal{J}} x_j$ is said to \textbf{converge unconditionally} to some $x \in X$ if, for every $\varepsilon > 0$, there exist a finite subset $J_0$ of $\mathcal{J}$ such that
+	\begin{equation*}
+		\| x - \sum_{j \in J} x_j \| \leq \varepsilon
+	\end{equation*}
+	for every finite set $J \supseteq J_0$.
+\end{defi}
+
+From the assumption that the set of indices is countable we may think to consider a bijective mapping $\sigma : \N \rightarrow \mathcal{J}$ and define the convergence of $\sum_{j \in \mathcal{J}} x_j$ using the map $\sigma$ and the classical definition of convergence of a series indexed by natural numbers. However, since the map $\sigma$ is not unique, the convergence of the series may depend upon the particular choice of the enumeration of $\mathcal{J}$. This is not the case for series that converge unconditionally.
+\begin{prop}\label{equivalence unconditional convergence}
+	Let $\{x_j\}_{j \in \mathcal{J}}$ be a countable subset of a Banach space $X$ and $x \in X$. Then following statements are equivalent:
+	\begin{enumerate}[label=(\roman*)]
+		\item $\sum_{j \in \mathcal{J}} x_j$ converges unconditionally to $x$;
+		\item for every enumeration $\sigma : \N \rightarrow \mathcal{J}$
+		\begin{equation*}
+			\lim_{N \rightarrow +\infty} \| x - \sum_{n=1}^N f_{\sigma(n)} \| = 0. 
+		\end{equation*}
+		In particular, $x$ does not depend on the enumeration $\sigma$.
+	\end{enumerate}
+\end{prop}
+\begin{proof}
+	contenuto...
+\end{proof}
+
+\begin{prop}\label{exchange of series and operator}
+	Let $A \in \B(X,Y)$. If $\sum_{j \in \mathcal{J}} x_j$ converges unconditionally in $X$ to $x$, then $\sum_{j \in \mathcal{J}} Ax_j$ converges unconditionally to $Ax$.
+\end{prop}
+\begin{proof}
+	Let $\varepsilon > 0$. By definition, there exist $J_0 \subseteq \mathcal{J}$ finite such that $\| x - \sum_{j \in J} x_j \|_X \leq \varepsilon$ for every finite set $J \supseteq J_0$. Then:
+	\begin{align*}
+		\|Ax - \sum_{j \in J} Ax_j \|_Y = \|A(x - \sum_{j \in J} x_j) \|_Y \leq \|A\| \|x - \sum_{j \in J} x_j \|_X < \|A\| \varepsilon,
+	\end{align*}
+	thus the series $\sum_{j \in \mathcal{J}} Ax_j$ converges unconditionally to $Ax$.
+\end{proof}
+\begin{prop}\label{exchange order double series}
+	Suppose that $\sum_{(n,m) \in \N^d} x_{n,m}$ converges unconditionally to $x \in X$. Then the inner partial sum $s_{n,M} = \sum_{m=1}^{M} x_{n,m}$ converges to some $y_n \in X$ for every $n \in \N$ and $x = \sum_{n \in \N} y_n$ with unconditional convergence. Likewise $\sum_{n=1}^{N} x_{n,m}$ converges to some $z_m \in X$ for every $m \in \N$ and $x = \sum_{m \in \N} z_m$.
+\end{prop}
+\begin{proof}
+	Since $\sum_{(n,m) \in \N^2} x_{n,m}$ is unconditionally convergent to $x$, given $\varepsilon > 0$, by definition there exist $J_0 \subset \N^2$ such that $\|x - \sum_{(n,m) \in J} x_{n,m}\| < \varepsilon$ for every finite set $J$ containing $J_0$. Without loss of generality, we can suppose that $J_0$ is of the form $J_0 = \{(n,m) \in \N^2 : n \leq N_0,\, m \leq M_0\}$ for some $N_0,M_0 \in \N$. In such a way we have:
+	\begin{equation*}
+		\| x - \sum_{n=1}^N \sum_{m=1}^M x_{n,m} \| < \varepsilon
+	\end{equation*}
+	for every $N \geq N_0$ and $M \geq M_0$.
+\end{proof}
+
 
 \chapter{Calculations}
 
