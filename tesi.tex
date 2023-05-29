@@ -676,14 +676,32 @@ In this section we will present and prove some properties about the STFT. An exc
 	\end{equation}
 \end{teo}
 \begin{proof}
-	contenuto...
+	We start proving that, if $f \in L^2(\R^d)$ and $\phi \in \mathcal{S}(\R^d)$ the STFT of $f$ with window $\phi$ is in $L^2(\R^{2d})$. In order to do so, we need an equivalent formulation of the STFT:
+	\begin{equation*}
+		\V_{\phi} f (x,\omega)  = \int_{\R^d} f(t) \overline{\phi(t-x)}e^{-2 \pi i \omega \cdot t} dt = \F(f T_x \overline{\phi})(\omega).
+	\end{equation*}
+	Since we supposed $\phi \in \mathcal{S}(\R^d)$, the function $f T_x \overline{\phi}$ is in $L^2(\R^d)$ for every $x \in \R^d$, hence:
+	\begin{align*}
+		\| \V_{\phi} f \|_2^2 &= \int_{\R^{2d}} |\V_{\phi} f(x,\omega)|^2 dx d\omega \overset{\mathrm{Tonelli}}{=} \int_{\R^d} \left(\int_{\R^d} |\V_{\phi} f(x,\omega)|^2 \right) d\omega = \\
+							  &= \int_{\R^d} \left(\int_{\R^d} |\F(f T_x \overline{\phi})|^2(\omega) d\omega\right) dx \overset{\mathrm{Plancherel}}{=}  \int_{\R^d} \left(\int_{\R^d} |f(t) \overline{\phi(t-x)}|^2 dt \right) dx \overset{\mathrm{Tonelli}}{=}\\
+							  &= \int_{\R^d} |f(t)|^2 \left(\int_{\R^d} |\phi(t-x)|^2 dx\right) dt = \|f\|_2^2 \|\phi\|_2^2.
+	\end{align*}
+	
+	Now, consider $f_1, f_2 \in L^2(\R^d)$ and $\phi_1, \phi_2 \in \mathcal{S}(\R^d)$. Both $\V_{\phi_1} f_1$ and $\V_{\phi_2} f_2$ are in $L^2(\R^{2d})$, so their product is in $L^1(\R^{2d})$, hence we can use Fubini's theorem in the following:
+	\begin{align*}
+		\langle \V{\phi_1} f_1, \V_{\phi_2} f_2 \rangle &= \int_{\R^{2d}} \V_{\phi_1} f_1(x,\omega) \overline{\V_{\phi_2} f_2(x,\omega)} dx d\omega \overset{\mathrm{Fubini}}{=} \\
+													    &= \int_{\R^d} \left(\int_{\R^d} \F(f_1 T_x \overline{\phi_1})(\omega) \overline{\F(f_2 T_x \overline{\phi_2})(\omega)} d\omega \right) dx \overset{\mathrm{Parseval}}{=}\\
+													    &= \int_{\R^d} \left( \int_{\R^d} f_1(t) \overline{\phi_1(t-x)} \, \overline{f_2(t)} \phi_2(t-x) dt \right)	dx \overset{\mathrm{Fubini}}{=}\\
+													    &= \int_{\R^d} f_1(t) \overline{f_2(t)} \left(\int_{\R^{d}}\phi_2(t-x) \overline{\phi_1(t-x)}dx\right) dt = \langle f_1, f_2 \rangle \langle \phi_2,\phi_1\rangle.    
+	\end{align*}
+	The transition from $\mathcal{S}(\R^d)$ to whole $L^2(\R^d)$ is done trough a density argument. Indeed, for $f_1, f_2 \in L^2(\R^d)$ and $\phi_{1} \in \mathcal{S}(\R^d)$ fixed, the mapping $\phi_2 \in L^2(\R^d) \mapsto \langle \V_{\phi_1} f_1, \V_{\phi_2} f_2 \rangle$ is a linear functional and we just showed that it is bounded over $\mathcal{S}(\R^d)$, where it coincides with $\langle f_1, f_2 \rangle \langle \phi_2, \phi_1$. Since Schwartz's class is a dense subspace of $L^2(\R^d)$ it extends to a bounded linear operator for every $\phi_2 \in L^2(\R^d)$. Similarly, for fixed $f_1, f_2 \in L^2(\R^d)$ and $\phi_2 \in L^2(\R^d)$ the mapping $\phi_1 \in L^2(\R^d) \mapsto \langle \V_{\phi_1} f_1, \V_{\phi_2} f_2 \rangle$ is an antilinear functional that coincides with $\langle f_1, f_2 \rangle \langle \phi_2, \phi_1$ over $\mathcal{S}(\R^d)$, therefore it extends to a bounded linear functional over whole $L^2(\R^d)$.
 \end{proof}
 \begin{cor}
 	If $f, \phi \in L^2(\R^d)$ then
 	\begin{equation}\label{STFT is an isometry formula}
 		\| \V_{\phi} f\|_2 = \| f \|_2 \| \phi \|_2
 	\end{equation} 
-	In particular if $\| \phi \|_2 = 1$ we see that $\V_{\phi}$ is an isometry from $L^2(\R^d)$ into $L^2(\R^{2d})$.
+	In particular, if $\| \phi \|_2 = 1$, $\V_{\phi}$ is an isometry from $L^2(\R^d)$ into $L^2(\R^{2d})$.
 \end{cor}
 \begin{proof}
 	It is sufficient to consider \eqref{orthogonality relation formula} with $\phi_1 = \phi_2 = \phi$ and $f_1 = f_2 = f$.
