@@ -37,6 +37,7 @@ greek, evenboxes, english]{toptesi}
 \usepackage{mathtools}
 \hypersetup{colorlinks, linkcolor=blue, citecolor=blue}
 \usepackage{cancel}
+\usepackage{aligned-overset}
 \usepackage{color}
 \usepackage[
 backend=bibtex,
@@ -1175,7 +1176,7 @@ In conclusion, we will consider two meaningful examples, namely when the weight 
 	with equality if and only if $f$ is a multiple of $H_0$.
 \end{lem}
 \begin{proof}
-	Our aim is to exploit the fact that Hermite functions are an orthonormal basis of $L^2(\R)$ by computing $\langle tf, H_k\rangle$. {\color{red} Before going on we remark that the previous expression is not an $L^2$ scalar product but is a duality between a tempered distribution and a function in the Schwartz class}. To do so, we just need to use the recursive relation \eqref{Hermite functions recursion}:
+	Our aim is to exploit the fact that Hermite functions are an orthonormal basis of $L^2(\R)$ by computing $\langle tf, H_k\rangle$. Before going on we remark that the previous expression is not an $L^2$ scalar product but is a duality between a tempered distribution and a function in the Schwartz class. However, from the theory of tempered distributions we have that $\langle tf, H_k \rangle = \langle f, t H_f \rangle$ and the latter expression is indeed a scalar product in $L^2(\R^d)$. Moreover, from this observation, we see that $t H_k$ appears. Therefore, using \eqref{Hermite functions recursion} we have:
 	\begin{equation*}
 		\langle tf, H_k \rangle = \langle f, tH_k \rangle = \dfrac{1}{2\sqrt{\pi}} \left( \sqrt{k+1} \langle f, H_{k+1} \rangle+ \sqrt{k}\langle f,H_{k-1}\rangle \right).
 	\end{equation*}
@@ -1193,6 +1194,28 @@ In conclusion, we will consider two meaningful examples, namely when the weight 
 	\end{align*}	
 	Since $(2k+1) \geq 1$ inequality \eqref{Heisenberg's uncertainty principle lemma inequality} immediately proven, and equality hold if and only if $\langle f,H_k \rangle = 0$ for every $k > 1$, which means exactly that $f$ is a multiple of $H_0$.
 \end{proof}
+Before extending the previous lemma to the multi-dimensional case we need the following result.
+\begin{lem}\label{Fourier transform for restrictions}
+	Let $ f \in L^2(\R^d)$. We let $t' = (t_2, \ldots, t_d) \in \R^{d-1}$, $\omega' = (\omega_2, \ldots, \omega_d) \in \R^{d-1}$ and define $\F_{t_1} f (\omega_1) = \F(f(\cdot, t'))(\omega_1)$, $\F_{t'} f(\omega') = \F (f(t_1, \cdot))(\omega')$. Then $\F_{t_1} f (\omega_1) \in L^2(\R^{d-1})$ for almost every $\omega_1 \in \R$ and $\F_{t'} (\F_{t_1} f (\omega_1))(\omega') = \F f(\omega)$.
+\end{lem}
+\begin{proof}
+	Before starting, we point out that, since $f \in L^2(\R^d)$, $f(\cdot, t') \in L^2(\R)$ for almost every $t' \in \R^{d-1}$, therefore $\F_{t_1} f(\omega_1)$ is well-defined for almost every $t' \in \R^{d-1}$. Then we have:
+	\begin{align*}
+		\int_{\R^d} |\F_{t_1} f (\omega_1)|^2 d\omega_1 dt' \overset{\mathrm{Tonelli}}&{=} \int_{\R^{d-1}} \int_{\R} |\F(f(\cdot,t'))(\omega_1)|^2 d\omega_1 dt' \overset{\mathrm{Plancherel}}{=}\\
+																					  &= \int_{\R^{d-1}} \int_{\R} |f(t_1,t')|^2 dt_1 dt' = \|f\|_2.
+	\end{align*}
+	which proves that $\F_{t_1} f(\omega_1)$ is in $L^2(\R^{d-1})$ for almost every $\omega_1 \in \R$.
+	
+	Now suppose that $f \in L^1(\R^d) \cap L^2(\R^d)$. Since $f$ is in $L^1(\R^d)$ we can use \eqref{Fourier transform formula} to express $\F_{t_1} f$:
+	\begin{equation*}
+	\begin{gathered}
+		\F_{t_1} f(\omega_1) = \int_{\R} f(t_1,t') e^{-2 \pi i \omega_1 t_1} dt_1 \implies \\
+		\F_{t'} (\F_{t_1} f(\omega_1))(\omega') = \int_{\R^{d-1}} \left(\int_{\R} f(t_1,t') e^{-2 \pi i \omega_1 t_1} dt_1\right) e^{-2 \pi i \omega' \cdot t'} dt' \overset{\mathrm{Fubini}}{=}\\
+												= \int_{\R^d} f(t_1,t') e^{-2 \pi i \omega_1 t_1} e^{-2 \pi i \omega' \cdot t'} dt_1 dt' = \F f(\omega).
+	\end{gathered}
+	\end{equation*}
+	Through the density of $L^1(\R^d) \cap L^2(\R^d)$ in $L^2(\R^d)$ the last part of the statement follows.
+\end{proof}
 \begin{lem}\label{Heisenberg's uncertainty principle lemma d dimensions}
 	Let $f \in L^2(\R^d)$. Then, for every $j = 1,\ldots,d$:
 	\begin{equation}\label{Heisenberg's uncertainty principle lemma d dimensions formula}
@@ -1205,7 +1228,40 @@ In conclusion, we will consider two meaningful examples, namely when the weight 
 	with equality if and only if $f$ is a multiple of $H_0$.
 \end{lem}
 \begin{proof}
-	contenuto...
+	Without loss of generality we consider the case $j=1$. For the ease of notation let $t' = (t_2, \ldots, t_d) \in \R^{d-1}$ and $dt' = dt_2 \cdots dt_d$ ({\color{blue} and the same for $\omega$}). Moreover, we introduce the following notation:
+	\begin{equation*}
+		\langle f, g \rangle_{t_1} = \langle f(\cdot, t'), g(\cdot,t') \rangle \quad \langle f, g \rangle_{t'} = \langle f(t_1, \cdot), g(t_1, \cdot) \rangle
+	\end{equation*}
+	
+	From Lemma \ref{Heisenberg's uncertainty principle lemma}, since $f (\cdot, t') \in L^2(\R)$ for a.e. $t' \in \R^{d-1}$, we have:
+	\begin{equation*}
+		\int_{\R} t_1^2 |f(t_1, t')|^2 dt_1 + \int_{\R} \omega_1^2 |\F_{t_1} f(\omega_1)|^2 d\omega_1 = \dfrac{1}{2\pi} \sum_{k_1=0}^{+\infty} (2k_1 + 1) |\langle f, H_{k_1} \rangle_{t_1}|^2
+	\end{equation*}
+	which holds for almost every $t' \in \R^{d-1}$. We can now integrate with respect to $t'$ every member:
+	\begin{itemize}
+		\item $\displaystyle \int_{\R^{d-1}} \int_{\R} t_1^2 |f(t_1, t')|^2 dt_1 dt' \overset{\mathrm{Tonelli}}{=} \int_{\R^d} t_1^2 |f(t)|^2 dt$;
+		\item $\displaystyle \int_{\R^{d-1}} \int_{\R}  \omega_1^2|\F_{t_1} f(\omega_1)|^2 d\omega_1 dt' \overset{\mathrm{Tonelli}}{=} \int_{\R} \omega_1^2 \int_{\R^{d-1}} |\F_{t_1} f(\omega_1)|^2 dt' d\omega_1$.\vspace{0.1mm}\\
+		
+		From Lemma \ref{Fourier transform for restrictions} we know that $\F_{t_1} f(\omega_1)(\omega_1) \in L^2(\R^{d-1})$ for a.e. $\omega_1 \in \R$. Therefore, we can use Plancherel's theorem in the inner integral for a.e. $\omega_1 \in \R$ and obtain:
+		\begin{align*}
+			\int_{\R^{d-1}} \int_{\R}  \omega_1^2 |\F_{t_1} f(\omega_1)|^2 d\omega_1 dt' &= \int_{\R} \omega_1^2\int_{\R^{d-1}} |\F_{t'} (\F_{t_1} f(\omega_1))(\omega')|^2 d\omega' d\omega_1 \overset{\ref{Fourier transform for restrictions}}{=}\\
+																			  &= \int_{\R} \int_{\R^{d-1}} \omega_1^2 |\F f(\omega_1,\omega')|^2 d\omega' d\omega_1 = \int_{\R^d} \omega_1^2 |\F (\omega)|^2 d\omega.
+		\end{align*}
+		\item For the last term we start pointing out that integral and series can be exchanged because every term is non-negative. Then, from Parseval's identity we have:
+		\begin{align*}
+			\int_{\R^{d-1}} |\langle f, H_{k_1} \rangle_{t_1}|^2 dt' &= \sum_{k' \in \N_0^{d-1}} |\langle \langle f, H_{k_1} \rangle_{t_1}, H_{k'} \rangle_{t'}|^2 = \\
+											 &= \sum_{k' \in \N_0^{d-1}} \Big| \int_{\R^{d-1}} \left(\int_{\R} f(t_1,t') \overline{H_{k_1}(t_1)} dt_1 \right) \overline{H_{k'}(t')} dt' \Big|^2 \overset{\mathrm{Fubini}}{=} \\
+											 &= \sum_{k' \in \N_0^{d-1}} \Big| \int_{\R^{d}} f(t) \overline{H_{(k,k')}(t)} dt \Big|^2 = \sum_{k' \in \N_0^{d-1}} |\langle f, H_{(k,k')} \rangle|^2.
+		\end{align*}
+		where we used the fact that multi-dimensional Hermite functions are just the tensor product of 1-dimensional ones. Plugging this result in the series leads to:
+		\begin{align*}
+			\int_{\R^{d-1}} \sum_{k_1=0}^{+\infty} (2k_1 + 1) |\langle f, H_{k_1} \rangle |^2 &= \sum_{k_1=0}^{+\infty} \sum_{k' \in \N_0^{d-1}} (2k_1+1) |\langle f, H_{(k,k')} \rangle|^2 =\\
+																							  &= \sum_{k \in \N_0^d} (2k_1+1)|\langle f, H_k \rangle|^2
+			\end{align*}
+		and we notice that the rearrangement of the series is allowed since convergence is unconditional. Putting all these results together leads to \eqref{Heisenberg's uncertainty principle lemma d dimensions formula}.
+		
+		The proof of the last part of the statement is exactly the same as the one in Lemma \ref{Heisenberg's uncertainty principle lemma}.
+	\end{itemize}	
 \end{proof}
 {\color{red}If one of the integrals in \eqref{Heisenberg's uncertainty principle lemma inequality} is infinite the inequality is trivially satisfied, therefore we can focus our attention for those function for which the integrals are finite}. This lemma is sufficient in order to prove Heisenberg's uncertainty principle.
 \begin{teo}\label{Heisenberg's uncertainty principle theorem}
