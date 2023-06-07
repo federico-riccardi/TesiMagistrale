@@ -95,18 +95,18 @@ sorting=nyt
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Preliminaries}\label{chapter preliminaries}
-In this first chapter we briefly recall some basics definition and results about functional analysis and Fourier transform. In section \ref{section basics of functional analysis} basic concepts about operators between Banach spaces are presented. In section \ref{Fourier transform and its properties section} Fourier transform is defined and essential properties are given.
+In this first chapter we briefly recall some basic definition and results on functional analysis and Fourier transform. In section \ref{section basics of functional analysis} basic concepts about operators between Banach and Hilbert spaces are presented. In addition, certain classes of operators, namely the trace class and the Hilbert-Schmidt class, are introduced with some of their most important properties. Then in section \ref{Fourier transform and its properties section} Fourier transform is defined and some of its essential properties are given.
 \section{Basics of Functional Analysis}\label{section basics of functional analysis}
-In this section we focus our attention on linear operators between Banach spaces. Across the section a generic Banach space will be denoted as $X$ (or $Y$) endowed with the norm $\| \cdot \|_X$. In case we will deal with an Hilbert space we will denote it with $H$ (or $K$) and its inner product as $\langle \cdot, \cdot \rangle_H$. {\color{red}Pedex in the norm and in the scalar product may be dropped in case there is no ambiguity}. {\color{red} Moreover, all the theory will be presented assuming we are dealing with infinite dimensional spaces but, if not otherwise stated, everything can be adapted almost directly for finite dimensional spaces.}
+In this section we turn our attention to linear operators between Banach spaces. Throughout the section, we will refer to a generic Banach space as $X$ (or $Y$) endowed with the norm $\| \cdot \|_X$. If we are dealing with a Hilbert space, we will denote it by $H$ (or $K$) and its inner product by $\langle \cdot, \cdot \rangle_H$. {\color{red}Pedex in the norm and scalar product may be dropped in case there is no ambiguity}. {\color{red} Moreover, the whole theory is presented under the assumption that we are dealing with infinite dimensional spaces, but, unless otherwise stated, everything can be adapted almost directly for finite dimensional spaces.}
 
-A generic linear operator between two Banach spaces $X$ and $Y$ will be denoted as $T : X \rightarrow Y$. As a standard notation, the image of $x \in X$ through $T$ will be indicated as $T(x)$, or equivalently as $Tx$.
+A generic linear operator between two Banach spaces $X$ and $Y$ is denoted as $T : X \rightarrow Y$. As a standard notation, the image of $x \in X$ through $T$ is indicated as $T(x)$, or equivalently as $Tx$.
 \begin{defi}\label{bounded operator}
 	A linear operator $T : X \rightarrow Y$ is \textbf{bounded} if there exist $C>0$ such that
 	\begin{equation}\label{boundedness property}
-		\| Tx \|_Y \leq C \| x \|_X \quad \forall x \in X
+		\| Tx \|_Y \leq C \| x \|_X \quad \forall x \in X.
 	\end{equation}
 \end{defi}
-For linear operator boundedness is strictly related to continuity as the subsequent theorem states.
+For linear operators,  boundedness is strictly related to continuity, as the following theorem states.
 \begin{teo}\label{equivalente boundedness continuity}
 	For a linear operator $T$ the following statements are equivalent:
 	\begin{itemize}
@@ -114,28 +114,38 @@ For linear operator boundedness is strictly related to continuity as the subsequ
 		\item $T$ is bounded.
 	\end{itemize}
 \end{teo}
-We denote the set of linear bounded (continuous) operators from $X$ to $Y$ as $\B(X,Y)$, while if $X=Y$ we will just write $\B(X)$.\\
 For the sake of completeness we mention that actually, for linear operators, boundedness is equivalent to uniform continuity.
+We denote the set of linear bounded (continuous) operators from $X$ to $Y$ as $\B(X,Y)$, while if $X=Y$ we will just write $\B(X)$.
 
-After this we define the \emph{norm} of an operator.
+The smallest constant for which \ref{boundedness property} holds is the \emph{norm} of $T$.
 \begin{defi}\label{norm operator}
 	Given a linear bounded operator $T$ we define its \textbf{norm} as the following number:
 	\begin{equation*}
 		\|T\| \coloneqq \inf\{C>0 : \| Tx \|_Y \leq C \| x \|_X \  \forall x \in X\} = \sup \left\{ \dfrac{\| Tx \|_Y}{\| x \|_X} : x \in X \setminus \{0\}\right\}
 	\end{equation*}
 \end{defi}
-The proof of the equivalence between two definition is straightforward. We see that the norm of an operator is the best constant for which boundedness property \eqref{boundedness property} holds. Sometimes, in order to emphasize the spaces between which $T$ operates, we may write the norm of $T$ as $\| T \|_{X \rightarrow Y}$.
+The proof of the equivalence between two definition is straightforward. Sometimes, in order to emphasize the spaces between which $T$ operates, we may write the norm of $T$ as $\| T \|_{X \rightarrow Y}$.
 
-In the following we will mostly deal with $X$ and $Y$ being $L^2(\R^d)$, which is an Hilbert space. For operators between Hilbert spaces we can give the norm of an operator by means of the dual norm:
+In what follows we will mostly deal with $X$ and $Y$ being $L^2(\R^d)$, that is, a Hilbert space. For operators between Hilbert spaces, we can specify the norm of an operator using the dual norm:
 \begin{equation}\label{dual norm}
-	\| T \|_H = \sup\{|\langle Tx, y \rangle_H| : x,y \in H,\,\ \|x\|_H = \|y\|_H = 1 \}
+	\| T \|_H = \sup\{|\langle Tx, y \rangle_H| : x,y \in H,\,\ \|x\|_H = \|y\|_H = 1 \}.
 \end{equation}
 
-An important class of operators is the class of \emph{compact operators}.
+Among all operators, a rather important class is the one of \emph{compact} operators.
 \begin{defi}\label{compact operator}
-	A linear bounded operator $T$ is \textbf{compact} if for every bounded sequence $\{x_n\}_{n \in \N} \subset X$ the sequence of the images $\{Tx_n\}_{n \in \N} \subset Y$ has a converging subsequence.
+	An operator $T \in \B(X,Y)$ is \textbf{compact} if, for every bounded sequence $\{x_n\}_{n \in \N} \subset X$ the sequence of the images $\{Tx_n\}_{n \in \N} \subset Y$ has a converging subsequence.
 \end{defi}
-The property of compactness can be stated in multiple ways \textbf{SERVE SCRIVERLE?}.
+\begin{teo}\label{space of compact operators is closed}
+	The set of compact operators is a closed subspace of $\B(X,Y)$ (with respect to the operator norm topology).
+\end{teo}
+A first simple example of compact operators are \emph{finite-rank} operators.
+\begin{defi}\label{finite-rank operator definition}
+	An operator $T \in \B(X,Y)$ is said to be \emph{finite-rank} if $\mathrm{Im}(T)$ is finite-dimensional.
+\end{defi}
+Although this is a simple example of compact operators, finite rank operators are of some importance in the light of the following immediate corollary of Theorem \ref{space of compact operators is closed}.
+\begin{cor}\label{limit of finite rank operator is compact}
+	Let $\{T_n\}_{n \in \N} \subset \B(X,Y)$ be a sequence of finite-rank operators that converges to $T \in \B(X,Y)$. Then $T$ is compact.
+\end{cor}
 
 Now we suppose $H$ and $K$ to be Hilbert spaces. Given $T \in \B(H,K)$ there exist a unique $T^* \in \B(K,H)$ such that:
 \begin{equation*}
@@ -147,9 +157,9 @@ From now on we suppose that $X$ is over the field $\C$ and that $T \in \B(X)$.
 \begin{defi}\label{spectrum def}
 	The set $\sigma(T) = \{\lambda \in \C : T - \lambda I \text{ is not invertible}\}$ is called  the \textbf{spectrum} of $T$.
 \end{defi}
-For operators between finite-dimensional spaces (matrices) the spectrum is made up of \emph{eigenvalues}, those $\lambda \in \C$ such that $T-\lambda I$ is not injective. On the other hand, when dealing with infinite-dimensional spaces, this is no more true. Eigenvalues are in the so called \emph{point spectrum}, which in general is just a part of the whole spectrum.
+For operators between finite-dimensional spaces (matrices), the spectrum consists of \emph{eigenvalues}, those $\lambda \in \C$ such that $T-\lambda I$ is not injective. However, this is no longer true for infinte-dimensional spaces. Eigenvalues are in the so called \emph{point spectrum}, which in general is just a part of the whole spectrum.
 
-If an operator is compact or self-adjoint its spectrum has some additional properties.
+For compact or self-adjoint operators we can state some properties about the spectrum.
 \begin{teo}[Fredholm's alternative]\label{Fredholm alternative}
 	Let $T \in \B(X)$ be a compact operator. Then for $T-I$ one and only one of the following happens:
 	\begin{itemize}
@@ -157,10 +167,10 @@ If an operator is compact or self-adjoint its spectrum has some additional prope
 		\item $T$ is not injective
 	\end{itemize}
 \end{teo}
-Therefore for compact operators, all the values in the spectrum, except at most for 0, are eigenvalues.\\
-Another fundamental result arises if we study the spectrum of compact and self-adjoint operators.
+Therefore, for compact operators, all the values in the spectrum, except at most for 0, are eigenvalues.\\
+Another fundamental result arises if we add the condition that $T$ is self-adjoint.
 \begin{teo}\label{self-adjoint compact operators are diagonalizable}
-	Let $H$ be a separable Hilbert space and $T \in \B(H)$ a compact and self-adjoint operator. Then there exist an orthonormal basis $\{\psi_n\}_{n \in \N}$ with eigenvalues $\{\lambda_n\}_{n \in \N}$ of $H$ composed of eigenvectors of $T$. Moreover $\lim_{n \rightarrow +\infty} \lambda_n = 0$.
+	Let $H$ be a separable Hilbert space and $T \in \B(H)$ a compact and self-adjoint operator. Then there exist an orthonormal basis $\{e_n\}_{n \in \N}$ with eigenvalues $\{\lambda_n\}_{n \in \N}$ of $H$ composed of eigenvectors of $T$. Moreover $\lim_{n \rightarrow +\infty} \lambda_n = 0$.
 \end{teo}
 Hence self-adjoint compact operators can always be diagonalized in some suitable basis (\cite{brezis}). 
 
@@ -169,23 +179,23 @@ From this Theorem immediately follows the next corollary, which relates the eige
 	Let $T \in \B(H)$ be a self-adjoint compact operator on a separable Hilbert space $H$ and suppose its eigenvalues are ordered in such a way that $|\lambda_1| \geq |\lambda_2| \geq \cdots$. Then $\|T\| = |\lambda_1|$.
 \end{cor}
 
-If an operator $T$ is compact but not self-adjoint we can easily construct an operator, related to $T$, that is compact and also self-adjoint, namely considering $T^*T$.
+In light of Theorem \ref{self-adjoint compact operators are diagonalizable}, it is clear that working with compact self-adjoint operators is of great importance. Thus, if an operator $T$ is compact but not self-adjoint, it would be nice to construct an operator associated with $T$ that is also self-adjoint. This task is easily accomplished considering $T^*T$.
 \begin{cor}\label{canonical form for compact operators corollary}
-	Let $T \in \B(H)$ be a compact operator. There there exist orthonormal sets $\{\psi_n\}_{n \in \N}$ and $\{\phi\}_{n \in \N}$ and non-negative real numbers $\{\mu_n\}_{n \in \N}$ with $\lim_{n \rightarrow +\infty} \mu_n = 0$ so that
+	Let $T \in \B(H)$ be a compact operator. Then there exist orthonormal sets $\{e_n\}_{n \in \N}$ and $\{y_n\}_{n \in \N}$ and non-negative real numbers $\{\mu_n\}_{n \in \N}$ with $\lim_{n \rightarrow +\infty} \mu_n = 0$ so that
 	\begin{equation}\label{canonical form for compact operators formula}
-		T = \sum_{n=1}^{+\infty} \mu_n (\cdot , \psi_n)\phi_n
+		T = \sum_{n=1}^{+\infty} \mu_n (\cdot , e_n)y_n,
 	\end{equation}
-	where the series converges in norm. These $\mu_n$ are called \emph{singular values} of $T$ and are the square root of the eigenvalues of $T^*T$ or, equivalently, the eigenvalues of $|T|$.
+	where the series converges in norm. These $\mu_n$ are called \emph{singular values} of $T$ and are the square root of the eigenvalues of $T^*T$.
 \end{cor}
 
 \subsection{Trace class and Hilbert-Schmidt operators}
-Now we are going to consider two important classes of operators: \emph{trace-class} operators and \emph{Hilbert-Schmidt} operators.
+In this section we are going to introduce two important classes of operators: \emph{trace-class} operators and \emph{Hilbert-Schmidt} operators.
 
-The trace of an operator can be defined as it is for matrices.
+The trace of an operator can be defined as it is for matrices. Before proceeding, however, we must define what does it means for an operator to be non-negative.
 \begin{defi}\label{non-negative operator}
 	Let $H$ be an Hilbert space. An operator $T \in \B(H)$ is said \textbf{non-negative} if
 	\begin{equation}\label{non-negative operator formula}
-		\langle T x, x \rangle \geq 0 \quad \forall x \in H
+		\langle T x, x \rangle \geq 0 \quad \forall x \in H.
 	\end{equation}
 \end{defi}
 Condition \eqref{non-negative operator formula} is sufficient to show that, on Hilbert spaces over the field of complex numbers, non-negative operators are automatically self-adjoint. This result is an immediate corollary of the following form of the polarization identity.
@@ -209,11 +219,11 @@ Condition \eqref{non-negative operator formula} is sufficient to show that, on H
 	First of all we notice that if $T$ is non-negative, the quantity $\langle Tx,x \rangle$ is real, therefore $\langle Tx,x \rangle = \overline{\langle Tx,x \rangle} = \langle x,Tx \rangle$. Letting $\mathcal{T}(\cdot,\cdot) = \langle T \cdot, \cdot \rangle$, and using the polarization identity \eqref{polarization identity for sesquilinear forms formula}:
 	\begin{align}
 		\overline{\mathcal{T}(y,x)} &= \dfrac{1}{4}\sum_{k=0}^{3}  \overline{i^{k}\mathcal{T}(y + i^k x, y + i^k x)} \overset{T\ \mathrm{positive}}{=} \dfrac{1}{4}\sum_{k=0}^{3} i^{-k} \mathcal{T}(y + i^k x, y + i^k x) =\nonumber\\
-									&= \dfrac{1}{4}\sum_{k=0}^{3} i^{-k} \mathcal{T}\left(i^k(x + i^{-k}y), i^k(x + i^{-k}y)\right) = \\
-									&= \dfrac{1}{4}\sum_{k=0}^{3} i^{-k} \mathcal{T}(x + i^{-k}, x + i^{-k}y) = \mathcal{T}(x,y) \label{polarization identity}
+									&= \dfrac{1}{4}\sum_{k=0}^{3} i^{-k} \mathcal{T}\left(i^k(x + i^{-k}y), i^k(x + i^{-k}y)\right) = \nonumber\\
+									&= \dfrac{1}{4}\sum_{k=0}^{3} i^{-k} \mathcal{T}(x + i^{-k}, x + i^{-k}y) = \mathcal{T}(x,y) \label{polarization identity}.
 	\end{align}
 \end{proof}
-Non-negative operators are somewhat ``special'', since their behaviour resembles, in some sense, the one of complex numbers. In particular, one can define the \emph{square root} of non-negative operator. Before doing so, we need the following lemma.
+Non-negative operators are somewhat ``special'', since their behaviour resembles, in some sense, the one of complex numbers. In particular, one can define the \emph{square root} of non-negative operator. Before we do this, we need a preceding lemma.
 \begin{lem}\label{power series of square root lemma}
 	The power series of $\sqrt{1-z}$ about zero converges absolutely for all complex numbers such that $|z| \leq 1$.
 \end{lem}
@@ -257,11 +267,11 @@ Non-negative operators are somewhat ``special'', since their behaviour resembles
 	
 	Now we shall prove that $S^2 = T$, which means $\|T\|(B_{1/2})^2 = T$:
 	\begin{align*}
-		(B_{1/2})^2 = \left(\sum_{n=0}^{+\infty}c_n B^n\right) \left(\sum_{m=0}^{+\infty}c_m B^m\right) = \sum_{n=0}^{+\infty} \left(\sum_{m=0}^{n} c_m c_{n-m}\right) B^n = \sum_{n=0}^{+\infty} d_n B^n
+		(B_{1/2})^2 = \left(\sum_{n=0}^{+\infty}c_n B^n\right) \left(\sum_{m=0}^{+\infty}c_m B^m\right) = \sum_{n=0}^{+\infty} \left(\sum_{m=0}^{n} c_m c_{n-m}\right) B^n = \sum_{n=0}^{+\infty} d_n B^n,
 	\end{align*}
 	where the rearrangement is justified since all series are absolutely converging. In order to compute $d_n = \sum_{m=0}^{n} c_m c_{n-m}$, we notice the following:
 	\begin{align*}
-			1-x &= \sqrt{1-x} \sqrt{1-x} = \left(\sum_{n=0}^{+\infty}c_n x^n\right) \left(\sum_{m=0}^{+\infty}c_m x^m\right) = \sum_{n=0}^{+\infty} \left(\sum_{m=0}^{n} c_m c_{n-m}\right) x^n 
+			1-x &= \sqrt{1-x} \sqrt{1-x} = \left(\sum_{n=0}^{+\infty}c_n x^n\right) \left(\sum_{m=0}^{+\infty}c_m x^m\right) = \sum_{n=0}^{+\infty} \left(\sum_{m=0}^{n} c_m c_{n-m}\right) x^n ,
 	\end{align*}
 	which implies that $d_0=1$, $d_1 = -1$ and $d_n = 0$ for $n \geq 2$, therefore $B_{1/2} = I - B$ and, in the end:
 	\begin{align*}
@@ -307,11 +317,11 @@ Non-negative operators are somewhat ``special'', since their behaviour resembles
 	which is uniquely determined by the condition $\mathrm{Ker}\,U = \mathrm{Ker}\,T$.
 \end{teo}
 \begin{proof}
-	We start defining $\tilde{U} : \mathrm{Im}|T| \rightarrow \mathrm{Im}T$. Every $\phi \in \mathrm{Im}|T|$ can be written as $\phi = |T|\psi$ for some $\psi \in H$ and we define $\tilde{U}(\phi) = \tilde{U}(|T|\psi) \coloneqq T\psi$. We notice that	
+	We start defining $\tilde{U} : \mathrm{Im}|T| \rightarrow \mathrm{Im}T$. Every $x \in \mathrm{Im}|T|$ can be written as $x = |T|y$ for some $y \in H$, so we can define $\tilde{U}(x) = \tilde{U}(|T|y) \coloneqq T y$. We notice that	
 	\begin{align*}
-		\|\phi\|^2 &= \||T|\psi\|^2 = \langle |T|\psi, |T|\psi \rangle  = \langle |T|^2 \psi, \psi \rangle = \langle T^*T \psi, \psi \rangle = \|T \psi \|^2 = \|\tilde{U}\phi\|.
+		\|x\|^2 &= \||T| y\|^2 = \langle |T|y, |T|y \rangle  = \langle |T|^2 y, y \rangle = \langle T^*T y, y \rangle = \|T y\|^2 = \|\tilde{U}x\|.
 	\end{align*}
-	This computation ensures us that the definition of $\tilde{U}$ is consistent (if $\phi = |T|\psi_1 = |T|\psi_2$ for some $\psi_1,\psi_2 \in H$, then $|T|(\psi_1 - \psi_2)=0$, but $\| |T|(\psi_1 - \psi_2)\| = \| T(\psi_1 - \psi_2)\|$, $T\psi_1 = T\psi_2$) and it implies that $\tilde{U}$ is an isometry over $\mathrm{Im}(|T|)$, thus it can be uniquely extended to an isometry of $\overline{\mathrm{Im}(|T|)}$ over $\overline{\mathrm{Im}T}$. The definition of the map $U$ is straightforward extending $\tilde{U}$ to all $H$ defining it 0 on $(\mathrm{Im}(|T|))^{\perp}$. Since $|T|$ is self-adjoint $(\mathrm{Im}(|T|))^{\perp} = \mathrm{Ker}(|T|)$. Furthermore, since $\| |T|\psi\| = \| T\psi\|$, $|T|\psi=0$ if and only if $T\psi=0$, therefore $\mathrm{Ker}|T| = \mathrm{Ker}T$ which implies, in the end, that $\mathrm{Ker}U = \mathrm{Ker}T$.
+	This computation ensures us that the definition of $\tilde{U}$ is consistent (if $x = |T|y_1 = |T|y_2$ for some $y_1,y_2 \in H$, then $|T|(y_1 - y_2)=0$, but $\| |T|(y_1 - y_2)\| = \| T(y_1 - y_2)\|$, therefore $Ty_1 = Ty_2$) and it implies that $\tilde{U}$ is an isometry over $\mathrm{Im}(|T|)$, thus it can be uniquely extended to an isometry of $\overline{\mathrm{Im}(|T|)}$ over $\overline{\mathrm{Im}T}$. The definition of the map $U$ is straightforward extending $\tilde{U}$ to all $H$ defining it 0 on $(\mathrm{Im}(|T|))^{\perp}$. Since $|T|$ is self-adjoint $(\mathrm{Im}(|T|))^{\perp} = \mathrm{Ker}(|T|)$. Furthermore, since $\| |T|y\| = \| Ty\|$, $|T|y=0$ if and only if $Ty=0$, therefore $\mathrm{Ker}|T| = \mathrm{Ker}T$ which implies, in the end, that $\mathrm{Ker}U = \mathrm{Ker}T$.
 	
 	Lastly we shall prove that $U$ is unique. Suppose $V$ is another partial isometry such that $T = V|T|$ and $\mathrm{Ker}V = \mathrm{Ker}T$. First condition implies that $T = U|T| = V|T|$, so $U$ and $V$ coincide over $\mathrm{Im}|T|$ (and by continuity over its closure), while second condition implies that $\mathrm{Ker}T = \mathrm{Ker}U = \mathrm{Ker}T$, so $U$ and $V$ coincide over $\mathrm{Ker}|T| = (\mathrm{Im}|T|)^{\perp}$, therefore $U$ and $V$ coincide over $H = \overline{\mathrm{Im}|T|} \oplus \mathrm{Ker}|T|$.
 \end{proof}
@@ -322,16 +332,16 @@ Non-negative operators are somewhat ``special'', since their behaviour resembles
 		\mathrm{tr}(T) = \sum_{n=1}^{\infty} \langle T e_n, e_n \rangle.
 	\end{equation}
 \end{defi}
-Since $T$ is non-negative the sum in \eqref{trace expression} is well defined and, in principle, it could depend upon the basis $\{e_n\}_{n \in \N}$. The following theorem states that actually the definition is well posed, i.e. the trace does not depend on the base.
+Since $T$ is non-negative, every term of the sum in \eqref{trace expression} is non-negative, so the series is either convergent or divergent. Nevertheless, in principle, it could depend on the basis $\{e_n\}_{n \in \N}$. The following theorem states that the definition is indeed well-posed, namely that the trace does not depend on the basis.
 \begin{prop}\label{trace is well-defined}
 	The definition of $\mathrm{tr}$ given by \eqref{trace expression} is independent of the basis.
 \end{prop}
 \begin{proof}
-	Let $T \in \B(H)$ be a non-negative operator and $\{\phi_n\}_{n \in \N}$ and $\{\psi_n\}_{n \in \N}$ be two orthonormal basis of $H$. We have
+	Let $T \in \B(H)$ be a non-negative operator and $\{e_n\}_{n \in \N}$ and $\{f_n\}_{n \in \N}$ be two orthonormal basis of $H$. We have
 	\begin{align*}
-		\sum_{n=1}^{+\infty} \langle T\phi_n,\phi_n \rangle &= \sum_{n=1}^{+\infty} \|\sqrt{T}\phi_n\|^2 = \sum_{n=1}^{+\infty} \left(\sum_{m=1}^{+\infty} |\langle \sqrt{T}\phi_n, \psi_m \rangle|^2 \right)=\\
-															&= \sum_{m=1}^{+\infty} \left(\sum_{n=1}^{+\infty} |\langle \sqrt{T}\psi_m, \phi_n \rangle|^2 \right) = \sum_{m=1}^{+\infty} \|\sqrt{T}\psi_m\|^2 = \\
-															&= \sum_{m=1}^{+\infty} \langle T \psi_m, \psi_m \rangle,
+		\sum_{n=1}^{+\infty} \langle Te_n,e_n \rangle &= \sum_{n=1}^{+\infty} \|\sqrt{T}e_n\|^2 = \sum_{n=1}^{+\infty} \left(\sum_{m=1}^{+\infty} |\langle \sqrt{T}e_n, f_m \rangle|^2 \right)=\\
+															&= \sum_{m=1}^{+\infty} \left(\sum_{n=1}^{+\infty} |\langle \sqrt{T}f_m, e_n \rangle|^2 \right) = \sum_{m=1}^{+\infty} \|\sqrt{T}f_m\|^2 = \\
+															&= \sum_{m=1}^{+\infty} \langle T f_m, f_m \rangle,
 	\end{align*}
 	where we used the fact that $\sqrt{T}$ is self-adjoint, while the exchange of series is allowed because all terms are non-negative.
 \end{proof}
@@ -340,7 +350,7 @@ Since $T$ is non-negative the sum in \eqref{trace expression} is well defined an
 \end{defi}
 From the definition of the trace we can see that, given an orthonormal basis $\{e_n\}_{n=1}^{+\infty}$,
 \begin{equation}\label{Hilbert-Schmidt norm expression}
-	\|T\|_{\mathrm{HS}}^2 = \mathrm{tr}(T^*T) = \sum_{n=1}^{+\infty} \langle T^*Te_n,e_n \rangle = \sum_{n=1}^{+\infty} \langle Te_n,Te_n \rangle = \sum_{n=1}^{+\infty} \|Te_n\|^2
+	\|T\|_{\mathrm{HS}}^2 = \mathrm{tr}(T^*T) = \sum_{n=1}^{+\infty} \langle T^*Te_n,e_n \rangle = \sum_{n=1}^{+\infty} \langle Te_n,Te_n \rangle = \sum_{n=1}^{+\infty} \|Te_n\|^2,
 \end{equation}
 so we can say, in an equivalent way, that an operator is Hilbert-Schmidt if and only if $\sum_{n=1}^{+\infty} \|Te_n\|^2 < +\infty$. Thanks to Proposition \ref{trace is well-defined} we immediately see that the Hilbert-Schmidt norm is independent on the choice of the basis.
 
@@ -372,11 +382,11 @@ We are now going to show some properties of Hilbert-Schmidt and trace-class oper
 	\end{align*}
 	Taking the supremum over all $x \in H$ gives us that $\|T\| \leq \|T\|_{\mathrm{HS}}$.
 	
-	To prove that $T$ is compact, consider the following sequence of operators $T_N = \sum_{n=1}^{N} \langle \cdot , e_n \rangle Te_n$. All $T_N$ have finite rank, so they are compact and $T_N \rightarrow T$ in $\B(H)$, indeed:
+	To prove that $T$ is compact, consider the following sequence of operators $T_N = \sum_{n=1}^{N} \langle \cdot , e_n \rangle Te_n$. All $T_N$ are finite-rank, so they are compact. Moreover, $T_N \rightarrow T$ in $\B(H)$, indeed:
 	\begin{align*}
 		\|T-T_N\| \leq \|T-T_N\|_{\mathrm{HS}}^2 = \sum_{n=N+1}^{+\infty} \|T e_n\|^2 \rightarrow 0 \quad \mathrm{as\ } N \rightarrow +\infty,
 	\end{align*}
-	therefore, since $T$ is limit of compact operators, it is compact.
+	therefore, from Corollary \ref{limit of finite rank operator is compact}, $T$ is compact.
 	
 	Lastly, if $T$ is a compact operator also $T^*T$ is compact as well as self-adjoint, hence we can consider as orthonormal basis of $H$ the one given by its eigenvectors $\{e_n\}_{n \in \N}$. Recalling Corollary \ref{canonical form for compact operators corollary}, we know that $\mu_n^2$ are exactly the eigenvalues of $T^*T$.  For such basis we have:
 	\begin{align*}
@@ -508,16 +518,18 @@ In light of this theorem, operators defined by \eqref{Hilbert-Schmidt integral o
 
 
 \section{Fourier Transform and its properties}\label{Fourier transform and its properties section}
+In this section we introduce the Fourier transform with its elementary properties, its relation with some fundamental operators in time-frequency analysis and with the convolution product.
 \begin{defi}\label{Fourier transform def}
 	Let $f \in L^1(\R^d)$. We define the \textbf{Fourier transform} of $f$ the function
 	\begin{equation}\label{Fourier transform formula}
 		\F f(\omega) = \hat{f}(\omega) \coloneqq \int_{\R^d} e^{-2 \pi i \omega \cdot t} f(t) dt
 	\end{equation}
 \end{defi}
-It is straightforward to see that the definition is well-posed and that $\F f \in L^{\infty}(\R^d)$ with $\|\F f\|_{\infty} \leq \| f \|_1$. Therefore $\F$ can be seen as a linear operator between $L^1(\R^d)$ and $L^{\infty}(\R^d)$ with $\| \F \| = 1$ (from the previous inequality actually we saw that $\| \F \| \leq 1$ but if we take $f \geq 0$ a.e. we have that $\hat{f}(0) = \| f \|_1$ that gives us the equality).\\
+It is straightforward to see that the definition is well-posed and that $\F f \in L^{\infty}(\R^d)$ with $\|\F f\|_{\infty} \leq \| f \|_1$. Therefore $\F$ can be seen as a linear operator between $L^1(\R^d)$ and $L^{\infty}(\R^d)$ with $\| \F \| \leq 1$. Actually, taking $f \geq 0$ a.e.,  we have that $\hat{f}(0) = \| f \|_1$, which gives us the equality.
+
 The Fourier transform of an $L^1(\R^d)$ is not only bounded, as stated by the \emph{Riemann-Lebesgue lemma}.
 \begin{teo}[Riemann-Lebesgue lemma]\label{Riemann-Lebesgue lemma}
-	Let $f \in L^1(\R^d)$. Therefore $\hat{f} \in C_0(\R^d) = \{f : \R^d \rightarrow \C \text{ continuous such that } \lim_{|t| \rightarrow \infty} |f(t)|=0\}$.
+	Let $f \in L^1(\R^d)$. Then $\hat{f} \in C_0(\R^d) = \{f : \R^d \rightarrow \C \text{ continuous such that } \lim_{|t| \rightarrow \infty} |f(t)|=0\}$.
 \end{teo}
 \begin{defi}\label{inverse Fourier transform def}
 	Let $f \in L^1(\R^d)$. We define the \textbf{inverse Fourier transform} of the function $f$
@@ -543,30 +555,30 @@ The Fourier transform is intimately related to regularity and decay properties. 
 \begin{teo}\label{duality regularity-decay theorem}
 	Let $f \in C^k(\R^d)$ for some $k \in \N$. If $f, \partial^{\alpha}f \in L^1(\R^d)$ for every $\alpha \in \N^d$ with $|\alpha| \leq k$ then
 	\begin{equation}\label{transform of derivative}
-		\F \left(\partial^{\alpha} f\right) (\omega) = \left(2 \pi i \omega\right)^{\alpha} \F f(\omega)
+		\F \left(\partial^{\alpha} f\right) (\omega) = \left(2 \pi i \omega\right)^{\alpha} \F f(\omega).
 	\end{equation}
 	In particular this implies that $\hat{f}(\omega) = o\left(|\omega|^{-k} \right) $ as $| \omega | \rightarrow \infty$.
 \end{teo}
-{\color{blue}To sum up, previous theorems state a duality between regularity and decay: if a function is smooth then its Fourier transform decays rapidly and vice versa.}
+In summary, previous theorems establish a duality between regularity and decay: if a function is smooth, then its Fourier transform decays rapidly and vice versa.
 
 
-If $f$ is in $L^2(\R^d)$, the integral in \eqref{Fourier transform formula} in general will not converge. Nevertheless we can define the Fourier transform of an $L^2$ function through a density argument. For example, one can use $L^2(\R^d) \cap L^1(\R^d)$, which is a dense subspace of $L^2(\R^d)$. On this space one can show that the Fourier transform is an isometry with respect to the $L^2$ norm and therefore it extends to an isometry on the whole $L^2(\R^d)$. This is stated by the \emph{Plancherel theorem}.
+If $f$ is in $L^2(\R^d)$, the integral in \eqref{Fourier transform formula} in general will not converge. Nevertheless, we can define the Fourier transform of an $L^2$ function through a density argument. For example, one can use $L^1(\R^d) \cap L^2(\R^d)$, which is a dense subspace of $L^2(\R^d)$. On this space one can show that the Fourier transform is an isometry with respect to the $L^2$ norm and therefore it extends to an isometry on the whole $L^2(\R^d)$. This is stated by the \emph{Plancherel theorem}.
 \begin{teo}[Plancherel theorem]\label{Plancherel theorem}
 	If $f \in L^1(\R^d) \cap L^2(\R^d)$ then $\| f \|_2 = \| \hat{f} \|_2$.
 \end{teo}
 Thanks to the polarization identity this implies that $\F$ preserves the inner product in $L^2(\R^d)$:
 \begin{equation}\label{Parseval formula}
-	\langle f,g \rangle_{L^2(\R^d)} = \langle \hat{f}, \hat{g} \rangle_{L^2(\R^d)} \quad \forall f,g \in L^2(\R^d)
+	\langle f,g \rangle_{L^2(\R^d)} = \langle \hat{f}, \hat{g} \rangle_{L^2(\R^d)} \quad \forall f,g \in L^2(\R^d),
 \end{equation}
 therefore the Fourier transform $\F$ is a unitary operator on $L^2(\R^d)$. Result \eqref{Parseval formula} is called \emph{Parseval formula}.
 
-Lastly, we introduce some fundamental operators in Fourier analysis. Given $x,\xi \in \R^d$ and $\lambda > 0$ we define the \emph{time-shift} (or translation) operator $T_x$
+We now introduce some fundamental operators in Fourier and time-frequency analysis. Given $x,\xi \in \R^d$ and $\lambda > 0$ we define the \emph{time-shift} (or translation) operator $T_x$
 \begin{equation}\label{time-shift operator def}
 	T_x f(t) = f(t-x) \quad \forall\, t \in \R^d,
 \end{equation}
 the \emph{modulation} operator $M_{\xi}$
 \begin{equation}\label{modulation operator def}
-	M_{\xi} f(t) = e^{2 \pi i \xi \cdot t} f(t) \quad \forall\, t \in \R^d
+	M_{\xi} f(t) = e^{2 \pi i \xi \cdot t} f(t) \quad \forall\, t \in \R^d,
 \end{equation}
 and the \emph{dilation} operator $D_{\lambda}$
 \begin{equation}\label{dilation operator def}
@@ -590,18 +602,17 @@ It is easy to check that all these operator are isometric (with respect to the $
 	\begin{enumerate}[label=(\roman*)]
 		\item $\begin{aligned}[t]
 			 \F(T_xf)(\omega) &= \int_{\R^d} f(t-x) e^{-2\pi i \omega \cdot t}dt \overset{s = t-x}{=} \int_{\R^d} f(s) e^{-2\pi i \omega \cdot (s+x)}ds = \\
-			                  &= e^{-2\pi i \omega \cdot x} \int_{\R^d} f(s) e^{-2\pi i \omega \cdot s}ds = M_{-x}\hat{f}(\omega) 
+			                  &= e^{-2\pi i \omega \cdot x} \int_{\R^d} f(s) e^{-2\pi i \omega \cdot s}ds = M_{-x}\hat{f}(\omega) ;
 		\end{aligned}$
 		\item $\begin{aligned}
-			\F(M_\xi f)(\omega) = \int_{\R^d} e^{2 \pi i \xi \cdot t} f(t) e^{-2 \pi i \omega \cdot t}dt = \int_{\R^d} f(t) e^{-2\pi i (\omega - \xi) \cdot t} dt = T_{\xi}\hat{f}(\omega)
+			\F(M_\xi f)(\omega) = \int_{\R^d} e^{2 \pi i \xi \cdot t} f(t) e^{-2 \pi i \omega \cdot t}dt = \int_{\R^d} f(t) e^{-2\pi i (\omega - \xi) \cdot t} dt = T_{\xi}\hat{f}(\omega);
 		\end{aligned}$
 	\item $\begin{aligned}
-		\F(D_{\lambda}f)(\omega) = \int_{\R^d} \lambda^d f(\lambda t) e^{-2\pi i \omega \cdot t}dt \overset{s=\lambda t}{=} \int_{\R^d} f(s) e^{-2 \pi i \omega \cdot \frac{s}{\lambda}}ds = \hat{f}\left(\frac{\omega}{\lambda}\right)
+		\F(D_{\lambda}f)(\omega) = \int_{\R^d} \lambda^d f(\lambda t) e^{-2\pi i \omega \cdot t}dt \overset{s=\lambda t}{=} \int_{\R^d} f(s) e^{-2 \pi i \omega \cdot \frac{s}{\lambda}}ds = \hat{f}\left(\frac{\omega}{\lambda}\right).
 	\end{aligned}$
 	\end{enumerate}	
 \end{proof}
-We point out that the second property, namely that $\F(M_{\xi}f) = T_{\xi}\hat{f}$, is shedding light on the role of modulation operator:\\
-while $T_x$ acts as a translation in the time domain, $M_{\xi}$ is a translation in the frequency domain. Therefore the time-frequency shift operator $\pi(x,\xi)$ is indeed a shift operator because it acts as a translation in the joint time-frequency domain.
+We point out that the second property, namely that $\F(M_{\xi}f) = T_{\xi}\hat{f}$, is shedding light on the role of modulation operator: while $T_x$ acts as a translation in the time domain, $M_{\xi}$ is a translation in the frequency domain. Therefore the time-frequency shift operator $\pi(x,\xi)$ is indeed a shift operator because it acts as a translation in the joint time-frequency domain.
 
 Thanks to these properties and Theorems \ref{duality decay-regularity theorem} and \ref{duality regularity-decay theorem} we can compute the Fourier transform of Gaussians.
 \begin{prop}\label{Fourier transform of Gaussian proposition}
@@ -657,7 +668,7 @@ Just like the Hausdorff-Young inequality, Young's inequality holds in a sharp ve
 \section{STFT}\label{section STFT}
 {\color{red}The \emph{short-time Fourier transform} or \emph{STFT} is a powerful tool, introduced by Gabor in \cite{gabor}, used to study properties of a signal locally both in time and frequency. The main idea behind the STFT is the following: if we want some information of the spectrum of a signal around a specific time, say $T$, we could choose an interval $(T-\Delta T, T + \Delta T)$ and take the Fourier transform of $f \chi_{(T-\Delta T, T + \Delta T)}$. Usually multiplying by a characteristic function will not give us a regular function (not even continuous) and in light of the duality between regularity and decay, the Fourier transform of $f \chi_{(T-\Delta T, T + \Delta T)}$ will not decay rapidly. Therefore a sharp cutoff in the time domain will result in a ``bad'' localization in the frequency domain. In order to avoid this kind of problems we could think to multiply the signal $f$ by a smooth function.}
 \begin{defi}\label{STFT def}
-	Fix a function $\phi \neq 0$ called \emph{window function}. The \textbf{short-time Fourier transform} of a function $f$ with window $\phi$ is defined as
+	Fix a function $y \neq 0$ called \emph{window function}. The \textbf{short-time Fourier transform} of a function $f$ with window $\phi$ is defined as
 	\begin{equation}\label{STFT formula}
 		\V_{\phi}f(x,\omega) = \int_{\R^d} f(t)\overline{\phi(t-x)}e^{-2 \pi i \omega \cdot t} dt, \quad (x,\omega) \in \R^{2d}
 	\end{equation}
@@ -1368,7 +1379,7 @@ If $\varepsilon \leq \frac{1}{2}$, this tells us that most of the energy of $f$ 
 	In Section \ref{Localization with projections section} we also noticed that $\|Q_{\Omega}\| \leq 1$, hence
 	\begin{align*}
 		\|f - Q_{\Omega}P_Tf \|_2 &= \|f - Q_{\Omega}f + Q_{\Omega}f - Q_{\Omega}P_T f \|_2 \leq \|f-Q_{\Omega}f \|_2 + \|Q_{\Omega}(f - P_T f) \|_2 \leq \\
-								  &\leq \|f-Q_{\Omega}f \|_2 + \|(f - P_T f) \|_2 \leq (\varepsilon_{\Omega} + \varepsilon_T)\|f\|_2.
+								  &\leq \|f-Q_{\Omega}f \|_2 + \|f - P_T f \|_2 \leq (\varepsilon_{\Omega} + \varepsilon_T)\|f\|_2.
 	\end{align*}
 	and consequently
 	\begin{align*}
@@ -1455,7 +1466,7 @@ where $L_{\Omega,\varphi}$ is the localization operator with weight $\chi_{\Omeg
 \end{teo}
 For the sake of completeness, we mention that the Theorem in \cite{nicolatilli_fk} is presented in a slightly different way, namely:
 \begin{equation*}
-	\int_{\Omega}  |\V f(x,\omega)|^2 \dxdo \leq \dfrac{\gamma\left(d, \pi(|\Omega|/\omega_{2d})^{1/d}\right)}{(d-1)!}
+	\int_{\Omega}  |\V f(x,\omega)|^2 \dxdo \leq \dfrac{\gamma\left(d, \pi(|\Omega|/\omega_{2d})^{1/d}\right)}{(d-1)!},
 \end{equation*}
 where $\omega_{2d}$ is the volume of the unit ball in $\R^{2d}$ and $\gamma$ is the lower incomplete gamma function. Recalling the definition of $\gamma$:
 \begin{equation*}
