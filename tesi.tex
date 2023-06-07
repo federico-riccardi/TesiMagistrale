@@ -95,7 +95,7 @@ sorting=nyt
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Preliminaries}\label{chapter preliminaries}
-In this first chapter we briefly recall some basics definition and results about functional analysis and Fourier transform. In section \ref{section basics of functional analysis} basic concepts about operators between Banach spaces are presented. In section \ref{section Fourier transform and its properties} Fourier transform is defined and essential properties are given.
+In this first chapter we briefly recall some basics definition and results about functional analysis and Fourier transform. In section \ref{section basics of functional analysis} basic concepts about operators between Banach spaces are presented. In section \ref{Fourier transform and its properties section} Fourier transform is defined and essential properties are given.
 \section{Basics of Functional Analysis}\label{section basics of functional analysis}
 In this section we focus our attention on linear operators between Banach spaces. Across the section a generic Banach space will be denoted as $X$ (or $Y$) endowed with the norm $\| \cdot \|_X$. In case we will deal with an Hilbert space we will denote it with $H$ (or $K$) and its inner product as $\langle \cdot, \cdot \rangle_H$. {\color{red}Pedex in the norm and in the scalar product may be dropped in case there is no ambiguity}. {\color{red} Moreover, all the theory will be presented assuming we are dealing with infinite dimensional spaces but, if not otherwise stated, everything can be adapted almost directly for finite dimensional spaces.}
 
@@ -117,14 +117,14 @@ For linear operator boundedness is strictly related to continuity as the subsequ
 We denote the set of linear bounded (continuous) operators from $X$ to $Y$ as $\B(X,Y)$, while if $X=Y$ we will just write $\B(X)$.\\
 For the sake of completeness we mention that actually, for linear operators, boundedness is equivalent to uniform continuity.
 
-After this we define the \emph{norm} of an operator
+After this we define the \emph{norm} of an operator.
 \begin{defi}\label{norm operator}
 	Given a linear bounded operator $T$ we define its \textbf{norm} as the following number:
 	\begin{equation*}
 		\|T\| \coloneqq \inf\{C>0 : \| Tx \|_Y \leq C \| x \|_X \  \forall x \in X\} = \sup \left\{ \dfrac{\| Tx \|_Y}{\| x \|_X} : x \in X \setminus \{0\}\right\}
 	\end{equation*}
 \end{defi}
-The proof of the equivalence between two definition is straightforward. We see that the norm of an operator is the best constant for which boundedness property \eqref{boundedness property} holds. {\color{blue} Sometimes, in order to emphasize the spaces between which $T$ operates, we may write the norm of $T$ as $\| T \|_{X \rightarrow Y}$.}
+The proof of the equivalence between two definition is straightforward. We see that the norm of an operator is the best constant for which boundedness property \eqref{boundedness property} holds. Sometimes, in order to emphasize the spaces between which $T$ operates, we may write the norm of $T$ as $\| T \|_{X \rightarrow Y}$.
 
 In the following we will mostly deal with $X$ and $Y$ being $L^2(\R^d)$, which is an Hilbert space. For operators between Hilbert spaces we can give the norm of an operator by means of the dual norm:
 \begin{equation}\label{dual norm}
@@ -192,11 +192,11 @@ Condition \eqref{non-negative operator formula} is sufficient to show that, on H
 \begin{prop}\label{polarization identity for sesquilinear forms}
 	Let $\mathcal{S} : H \times H \rightarrow \C$ be a sesquilinear form over the complex Hilbert space $H$. Then, for every $x,y \in H$:
 	\begin{equation}\label{polarization identity for sesquilinear forms formula}
-		\mathcal{S}(x,y) = \dfrac{1}{4}\sum_{k=0}^3 i^k \mathcal{S}(x + i^k y, x + i^k y)
+		\mathcal{S}(x,y) = \dfrac{1}{4}\sum_{k=0}^3 i^k \mathcal{S}(x + i^k y, x + i^k y).
 	\end{equation}
 \end{prop}
 \begin{proof}
-	The proof follows from a direct computation of the right-hand side
+	The proof follows from a direct computation of the right-hand side:
 	\begin{align*}
 		&\sum_{k=0}^3 i^k \mathcal{S}(x + i^k y, x + i^k y) = \mathcal{S}(x,x)\sum_{k=0}^{3}i^k + \mathcal{S}(x,y) \sum_{k=0}^{3} i^k i^{-k} + \mathcal{S}(y,x) \sum_{k=0}^{3} i^k i^k+\\
 		&+ \mathcal{S}(y,y)\sum_{k=0}^{3} i^k i^k i^{-k} = 4 \mathcal{S}(x,y) \implies \mathcal{S}(x,y) = \dfrac{1}{4}\sum_{k=0}^3 i^k \mathcal{S}(x + i^k y, x + i^k y).
@@ -213,7 +213,7 @@ Condition \eqref{non-negative operator formula} is sufficient to show that, on H
 									&= \dfrac{1}{4}\sum_{k=0}^{3} i^{-k} \mathcal{T}(x + i^{-k}, x + i^{-k}y) = \mathcal{T}(x,y) \label{polarization identity}
 	\end{align}
 \end{proof}
-{\color{blue}Non-negative operators are somewhat ``special'', since their behaviour resembles, in some sense, the one of complex numbers. In particular, one can define the \emph{square root} of non-negative operator. Before doing so, we need the following Lemma.}
+Non-negative operators are somewhat ``special'', since their behaviour resembles, in some sense, the one of complex numbers. In particular, one can define the \emph{square root} of non-negative operator. Before doing so, we need the following lemma.
 \begin{lem}\label{power series of square root lemma}
 	The power series of $\sqrt{1-z}$ about zero converges absolutely for all complex numbers such that $|z| \leq 1$.
 \end{lem}
@@ -244,7 +244,7 @@ Condition \eqref{non-negative operator formula} is sufficient to show that, on H
 	\begin{align*}
 		\langle Bx,x \rangle = \langle (I-\|T\|^{-1}T)x, x\rangle = \|x\|_X^2 - \|T\|^{-1}\langle Tx,x \rangle \leq \|x\|_X^2 = 1
 	\end{align*}
-	which implies, {\color{red} using polarization identity}, that $\|B\| \leq 1$. Thanks to Lemma \ref{power series of square root lemma}, this means that the series $\sum_{n=0}^{+\infty}c_n B^n$ is absolutely convergent, therefore convergent, in $\B(X)$ to an operator we indicate with $B_{1/2}$. We define
+	which implies, using polarization identity, that $\|B\| \leq 1$. Thanks to Lemma \ref{power series of square root lemma}, this means that the series $\sum_{n=0}^{+\infty}c_n B^n$ is absolutely convergent, therefore convergent, in $\B(X)$ to an operator we indicate with $B_{1/2}$. We define
 	\begin{equation}\label{square root of an operator}
 		S = \|T\|^{1/2} B_{1/2}
 	\end{equation}
@@ -287,11 +287,11 @@ Condition \eqref{non-negative operator formula} is sufficient to show that, on H
 \begin{defi}\label{absolute value of an operator definition}
 	Given an operator $T \in \B(X)$ we define its \textbf{absolute value} as
 	\begin{equation}\label{absolute value of an operator formula}
-		|T| \coloneqq \sqrt{T^*T}
+		|T| \coloneqq \sqrt{T^*T}.
 	\end{equation}
 \end{defi}
 \begin{defi}\label{partial isometry}
-	A linear operator $U \in \B(X)$ is a \textbf{partial isometry} if it is an isometry over $(\mathrm{Ker}\,U)^{\perp}$, i.e. $\|Ux\|_X = \|x\|_X$ for every $x \in (\mathrm{Ker}\,U)^{\perp}$
+	A linear operator $U \in \B(X)$ is a \textbf{partial isometry} if it is an isometry over $(\mathrm{Ker}\,U)^{\perp}$, i.e. $\|Ux\|_X = \|x\|_X$ for every $x \in (\mathrm{Ker}\,U)^{\perp}$.
 \end{defi}
 \begin{prop}\label{U^* is a partial isometry}
 	Let $U \in \B(H)$ be a partial isometry. Then also $U^*$ is a partial isometry.
@@ -319,7 +319,7 @@ Condition \eqref{non-negative operator formula} is sufficient to show that, on H
 \begin{defi}\label{trace def}
 	Let $X$ be a separable Hilbert space with orthonormal basis $\{e_n\}_{n \in \N}$. Given $T \in \B(X)$ a non-negative operator we define the \textbf{trace} of $T$ as
 	\begin{equation}\label{trace expression}
-		\mathrm{tr}(T) = \sum_{n=1}^{\infty} \langle T e_n, e_n \rangle
+		\mathrm{tr}(T) = \sum_{n=1}^{\infty} \langle T e_n, e_n \rangle.
 	\end{equation}
 \end{defi}
 Since $T$ is non-negative the sum in \eqref{trace expression} is well defined and, in principle, it could depend upon the basis $\{e_n\}_{n \in \N}$. The following theorem states that actually the definition is well posed, i.e. the trace does not depend on the base.
@@ -331,7 +331,7 @@ Since $T$ is non-negative the sum in \eqref{trace expression} is well defined an
 	\begin{align*}
 		\sum_{n=1}^{+\infty} \langle T\phi_n,\phi_n \rangle &= \sum_{n=1}^{+\infty} \|\sqrt{T}\phi_n\|^2 = \sum_{n=1}^{+\infty} \left(\sum_{m=1}^{+\infty} |\langle \sqrt{T}\phi_n, \psi_m \rangle|^2 \right)=\\
 															&= \sum_{m=1}^{+\infty} \left(\sum_{n=1}^{+\infty} |\langle \sqrt{T}\psi_m, \phi_n \rangle|^2 \right) = \sum_{m=1}^{+\infty} \|\sqrt{T}\psi_m\|^2 = \\
-															&= \sum_{m=1}^{+\infty} \langle T \psi_m, \psi_m \rangle
+															&= \sum_{m=1}^{+\infty} \langle T \psi_m, \psi_m \rangle,
 	\end{align*}
 	where we used the fact that $\sqrt{T}$ is self-adjoint, while the exchange of series is allowed because all terms are non-negative.
 \end{proof}
@@ -357,7 +357,7 @@ We are now going to show some properties of Hilbert-Schmidt and trace-class oper
 	Consider now an orthonormal basis $\{e_n\}_{n \in \N}$ of $H$. From \eqref{Hilbert-Schmidt norm expression}:
 	\begin{align*}
 		\|T\|_{\mathrm{HS}}^2 &= \sum_{n=1}^{+\infty} \|Te_n\|^2 = \sum_{n=1}^{+\infty} \left(\sum_{m=1}^{+\infty} |\langle Te_n,e_m \rangle|^2\right) = \sum_{m=1}^{+\infty} \left(\sum_{n=1}^{+\infty} |\langle e_n, T^*e_m \rangle|^2\right) =\\
-							&= \sum_{m=1}^{+\infty} \|T^* e_m\|^2 = \|T^*\|_{\mathrm{HS}}^2
+							&= \sum_{m=1}^{+\infty} \|T^* e_m\|^2 = \|T^*\|_{\mathrm{HS}}^2,
 	\end{align*}
 	where exchange of series is allowed since all terms are non-negative.
 \end{proof}
@@ -368,19 +368,19 @@ We are now going to show some properties of Hilbert-Schmidt and trace-class oper
 	Let $\{e_n\}_{n \in \N}$ be an orthonormal basis of $H$ and let $x \in H$. We have:
 	\begin{align*}
 		\|Tx\|^2 &= \sum_{n=1}^{+\infty} |\langle Tx,e_n \rangle|^2 = \sum_{n=1}^{+\infty} |\langle x,T^*e_n \rangle|^2 \leq \|x\|^2 \sum_{n=1}^{+\infty} \|T^*e_n\|^2 =\\
-				 &= \|x\|^2 \|T^*\|_{\mathrm{HS}}^2 \overset{\eqref{Hilbert-Schmidt norm of |T| and T^*}}{=} \|x\|^2 \|T\|_{\mathrm{HS}}^2
+				 &= \|x\|^2 \|T^*\|_{\mathrm{HS}}^2 \overset{\eqref{Hilbert-Schmidt norm of |T| and T^*}}{=} \|x\|^2 \|T\|_{\mathrm{HS}}^2.
 	\end{align*}
 	Taking the supremum over all $x \in H$ gives us that $\|T\| \leq \|T\|_{\mathrm{HS}}$.
 	
 	To prove that $T$ is compact, consider the following sequence of operators $T_N = \sum_{n=1}^{N} \langle \cdot , e_n \rangle Te_n$. All $T_N$ have finite rank, so they are compact and $T_N \rightarrow T$ in $\B(H)$, indeed:
 	\begin{align*}
-		\|T-T_N\| \leq \|T-T_N\|_{\mathrm{HS}}^2 = \sum_{n=N+1}^{+\infty} \|T e_n\|^2 \rightarrow 0 \quad \mathrm{as\ } N \rightarrow +\infty
+		\|T-T_N\| \leq \|T-T_N\|_{\mathrm{HS}}^2 = \sum_{n=N+1}^{+\infty} \|T e_n\|^2 \rightarrow 0 \quad \mathrm{as\ } N \rightarrow +\infty,
 	\end{align*}
 	therefore, since $T$ is limit of compact operators, it is compact.
 	
 	Lastly, if $T$ is a compact operator also $T^*T$ is compact as well as self-adjoint, hence we can consider as orthonormal basis of $H$ the one given by its eigenvectors $\{e_n\}_{n \in \N}$. Recalling Corollary \ref{canonical form for compact operators corollary}, we know that $\mu_n^2$ are exactly the eigenvalues of $T^*T$.  For such basis we have:
 	\begin{align*}
-		\|T\|_{\mathrm{HS}}^2 &= \sum_{n=1}^{+\infty} \|Te_n\|^2 = \sum_{n=1}^{+\infty} \langle Te_n,Te_n \rangle = \sum_{n=1}^{+\infty} \langle T^*T e_n,e_n \rangle = \sum_{n=1}^{+\infty} \mu_n^2
+		\|T\|_{\mathrm{HS}}^2 &= \sum_{n=1}^{+\infty} \|Te_n\|^2 = \sum_{n=1}^{+\infty} \langle Te_n,Te_n \rangle = \sum_{n=1}^{+\infty} \langle T^*T e_n,e_n \rangle = \sum_{n=1}^{+\infty} \mu_n^2.
 	\end{align*}
 \end{proof}
 \begin{prop}\label{Hilbert-Schmidt operator are an ideal}
@@ -389,11 +389,11 @@ We are now going to show some properties of Hilbert-Schmidt and trace-class oper
 \begin{proof}
 	Given an orthonormal basis $\{e_n\}_{n \in \N}$ of $H$ we have:
 	\begin{align*}
-		\|ST\|_{\mathrm{HS}}^2 = \sum_{n=1}^{+\infty} \|ST e_n\|^2 \leq \|S\|^2 \sum_{n=1}^{+\infty} \|T e_n\|^2 = \|S\|^2 \|T\|_{\mathrm{HS}}^2
+		\|ST\|_{\mathrm{HS}}^2 = \sum_{n=1}^{+\infty} \|ST e_n\|^2 \leq \|S\|^2 \sum_{n=1}^{+\infty} \|T e_n\|^2 = \|S\|^2 \|T\|_{\mathrm{HS}}^2,
 	\end{align*}
 	so $ST$ is Hilbert-Schmidt. Moreover, from Proposition \ref{Hilbert-Schmidt norm of |T| and T^*} follows:
 	\begin{align*}
-		\| TS \|_{\mathrm{HS}} = \| (TS)^* \|_{\mathrm{HS}} = \| S^* T^* \|_{\mathrm{HS}} \leq \|S^*\| \|  T^* \|_{\mathrm{HS}} = \|S \| \| T \|_{\mathrm{HS}}
+		\| TS \|_{\mathrm{HS}} = \| (TS)^* \|_{\mathrm{HS}} = \| S^* T^* \|_{\mathrm{HS}} \leq \|S^*\| \|  T^* \|_{\mathrm{HS}} = \|S \| \| T \|_{\mathrm{HS}}.
 	\end{align*}
 \end{proof}
 We can now turn back to trace-class operator. It is evident that trace-class operators and Hilbert-Schmidt operators are strictly related. Indeed, as seen in the proof of Proposition \ref{trace is well-defined}, we have
@@ -603,7 +603,7 @@ It is easy to check that all these operator are isometric (with respect to the $
 We point out that the second property, namely that $\F(M_{\xi}f) = T_{\xi}\hat{f}$, is shedding light on the role of modulation operator:\\
 while $T_x$ acts as a translation in the time domain, $M_{\xi}$ is a translation in the frequency domain. Therefore the time-frequency shift operator $\pi(x,\xi)$ is indeed a shift operator because it acts as a translation in the joint time-frequency domain.
 
-Thanks to these properties and Theorems \ref{duality decay-regularity theorem} and \ref{duality regularity-decay theorem} we can state compute the Fourier transform of Gaussians.
+Thanks to these properties and Theorems \ref{duality decay-regularity theorem} and \ref{duality regularity-decay theorem} we can compute the Fourier transform of Gaussians.
 \begin{prop}\label{Fourier transform of Gaussian proposition}
 	The Fourier transform maps Gaussian into Gaussians. More precisely, for $\lambda > 0$, we have:
 	\begin{equation}\label{Fourier transform of Gaussian formula}
@@ -634,7 +634,7 @@ Thanks to these properties and Theorems \ref{duality decay-regularity theorem} a
 										  &= \prod_{j=1}^d \dfrac{1}{\sqrt{\lambda}}e^{-\frac{1}{\lambda}\pi \omega_j^2} = \dfrac{1}{\lambda^{d/2}} e^{-\frac{1}{\lambda}\pi|\omega|^2}.
 	\end{align*}
 \end{proof}
-
+{\color{blue} Aggiungere un commento e il legame tra la trasformata di Fourier e la convoluzione}
 \begin{teo}[Hausdorff-Young]
 	Let $1 \leq p \leq 2$ and let $p'$ such that $\frac{1}{p} + \frac{1}{p'} = 1$. Then $\F : L^p(\R^d) \rightarrow L^{p'}(\R^d)$ and $\| \hat{f }\|_{p'} \leq \| f \|_p$.
 \end{teo}
@@ -666,8 +666,8 @@ In the above definition we did not specify where $f$ and $\phi$ are chosen. Sinc
 \begin{equation*}
 	\V_{\phi}f(x,\omega) = \langle f, M_{\omega} T_x \phi \rangle = \langle f, \pi(x,\omega) \phi \rangle
 \end{equation*}
-In general, the STFT of $f$ with respect to $\phi$ will be defined whenever  $\langle f, M_{\omega} T_x \phi \rangle$ is an expression of some sort of duality. For example, if $f \in \mathcal{S}'(\R^d)$ and $\phi \in \mathcal{S}(\R^d)$ then $M_{\omega} T_x \overline{\phi} \in \mathcal{S}(\R^d)$, therefore $\langle f, M_{\omega} T_x \phi \rangle$ can be seen as the usual duality between tempered distributions and functions in the Schwartz space.\\
-{\color{blue} Aggiungere scritture equivalenti della STFT??}
+In general, the STFT of $f$ with respect to $\phi$ will be defined whenever  $\langle f, M_{\omega} T_x \phi \rangle$ is an expression of some sort of duality. For example, if $f \in \mathcal{S}'(\R^d)$ and $\phi \in \mathcal{S}(\R^d)$ then $M_{\omega} T_x \overline{\phi} \in \mathcal{S}(\R^d)$, therefore $\langle f, M_{\omega} T_x \phi \rangle$ can be seen as the usual duality between tempered distributions and functions in the Schwartz space.
+
 \subsection{Properties of STFT}\label{properties of STFT subsection}
 In this section we will present and prove some properties about the STFT. An excellent reference is \cite{grochenig}.
 \begin{teo}\label{orthogonality relation theorem}
@@ -1194,23 +1194,29 @@ In conclusion, we will consider two meaningful examples, namely when the weight 
 	\end{align*}	
 	Since $(2k+1) \geq 1$ inequality \eqref{Heisenberg's uncertainty principle lemma inequality} immediately proven, and equality hold if and only if $\langle f,H_k \rangle = 0$ for every $k > 1$, which means exactly that $f$ is a multiple of $H_0$.
 \end{proof}
-Before extending the previous lemma to the multi-dimensional case we need the following result.
+Before extending the previous lemma to the multi-dimensional case we need the following result related to the Fourier transform of restrictions. Before stating the lemma we introduce the following notation:
+\begin{equation*}
+	\begin{gathered}
+		t' = (t_2, \ldots, t_d) \in \R^{d-1},\quad \omega' = (\omega_2, \ldots, \omega_d) \in \R^{d-1}\\
+		(\F_1 f) (\omega_1, t') = \F(f(\cdot, t'))(\omega_1),\quad (\F' f)(t_1, \omega') = \F (f(t_1, \cdot))(\omega')
+	\end{gathered}
+\end{equation*}
 \begin{lem}\label{Fourier transform for restrictions}
-	Let $ f \in L^2(\R^d)$. We let $t' = (t_2, \ldots, t_d) \in \R^{d-1}$, $\omega' = (\omega_2, \ldots, \omega_d) \in \R^{d-1}$ and define $\F_{t_1} f (\omega_1) = \F(f(\cdot, t'))(\omega_1)$, $\F_{t'} f(\omega') = \F (f(t_1, \cdot))(\omega')$. Then $\F_{t_1} f (\omega_1) \in L^2(\R^{d-1})$ for almost every $\omega_1 \in \R$ and $\F_{t'} (\F_{t_1} f (\omega_1))(\omega') = \F f(\omega)$.
+	Let $ f \in L^2(\R^d)$. Then $\F_1 f (\omega_1, \cdot) \in L^2(\R^{d-1})$ for almost every $\omega_1 \in \R$ and $\F' (\F_1 f (\omega_1, \cdot))(\omega') = \F f(\omega)$.
 \end{lem}
 \begin{proof}
-	Before starting, we point out that, since $f \in L^2(\R^d)$, $f(\cdot, t') \in L^2(\R)$ for almost every $t' \in \R^{d-1}$, therefore $\F_{t_1} f(\omega_1)$ is well-defined for almost every $t' \in \R^{d-1}$. Then we have:
+	Before starting, we point out that, since $f \in L^2(\R^d)$, $f(\cdot, t') \in L^2(\R)$ for almost every $t' \in \R^{d-1}$, therefore $\F_1 f(\cdot, t')$ is well-defined for almost every $t' \in \R^{d-1}$. Then we have:
 	\begin{align*}
-		\int_{\R^d} |\F_{t_1} f (\omega_1)|^2 d\omega_1 dt' \overset{\mathrm{Tonelli}}&{=} \int_{\R^{d-1}} \int_{\R} |\F(f(\cdot,t'))(\omega_1)|^2 d\omega_1 dt' \overset{\mathrm{Plancherel}}{=}\\
+		\int_{\R^d} |\F_1 f (\omega_1, t')|^2 d\omega_1 dt' \overset{\mathrm{Tonelli}}&{=} \int_{\R^{d-1}} \int_{\R} |\F(f(\cdot,t'))(\omega_1)|^2 d\omega_1 dt' \overset{\mathrm{Plancherel}}{=}\\
 																					  &= \int_{\R^{d-1}} \int_{\R} |f(t_1,t')|^2 dt_1 dt' = \|f\|_2.
 	\end{align*}
-	which proves that $\F_{t_1} f(\omega_1)$ is in $L^2(\R^{d-1})$ for almost every $\omega_1 \in \R$.
+	which proves that $\F_1 f(\omega_1, \cdot)$ is in $L^2(\R^{d-1})$ for almost every $\omega_1 \in \R$.
 	
-	Now suppose that $f \in L^1(\R^d) \cap L^2(\R^d)$. Since $f$ is in $L^1(\R^d)$ we can use \eqref{Fourier transform formula} to express $\F_{t_1} f$:
+	Now suppose that $f \in L^1(\R^d) \cap L^2(\R^d)$. Since $f$ is in $L^1(\R^d)$ we can use \eqref{Fourier transform formula} to make $\F_1 f$ explicit:
 	\begin{equation*}
 	\begin{gathered}
-		\F_{t_1} f(\omega_1) = \int_{\R} f(t_1,t') e^{-2 \pi i \omega_1 t_1} dt_1 \implies \\
-		\F_{t'} (\F_{t_1} f(\omega_1))(\omega') = \int_{\R^{d-1}} \left(\int_{\R} f(t_1,t') e^{-2 \pi i \omega_1 t_1} dt_1\right) e^{-2 \pi i \omega' \cdot t'} dt' \overset{\mathrm{Fubini}}{=}\\
+		\F_1 f(\omega_1, t') = \int_{\R} f(t_1,t') e^{-2 \pi i \omega_1 t_1} dt_1 \implies \\
+		\F' (\F_1 f(\omega_1, \cdot))(\omega') = \int_{\R^{d-1}} \left(\int_{\R} f(t_1,t') e^{-2 \pi i \omega_1 t_1} dt_1\right) e^{-2 \pi i \omega' \cdot t'} dt' \overset{\mathrm{Fubini}}{=}\\
 												= \int_{\R^d} f(t_1,t') e^{-2 \pi i \omega_1 t_1} e^{-2 \pi i \omega' \cdot t'} dt_1 dt' = \F f(\omega).
 	\end{gathered}
 	\end{equation*}
@@ -1228,23 +1234,23 @@ Before extending the previous lemma to the multi-dimensional case we need the fo
 	with equality if and only if $f$ is a multiple of $H_0$.
 \end{lem}
 \begin{proof}
-	Without loss of generality we consider the case $j=1$. For the ease of notation let $t' = (t_2, \ldots, t_d) \in \R^{d-1}$ and $dt' = dt_2 \cdots dt_d$ ({\color{blue} and the same for $\omega$}). Moreover, we introduce the following notation:
+	Without loss of generality we consider the case $j=1$. Moreover, we introduce the following notation:
 	\begin{equation*}
-		\langle f, g \rangle_{t_1} = \langle f(\cdot, t'), g(\cdot,t') \rangle \quad \langle f, g \rangle_{t'} = \langle f(t_1, \cdot), g(t_1, \cdot) \rangle
+		\langle f, g \rangle_1 = \langle f(\cdot, t'), g(\cdot,t') \rangle \quad \langle f, g \rangle' = \langle f(t_1, \cdot), g(t_1, \cdot) \rangle
 	\end{equation*}
 	
 	From Lemma \ref{Heisenberg's uncertainty principle lemma}, since $f (\cdot, t') \in L^2(\R)$ for a.e. $t' \in \R^{d-1}$, we have:
 	\begin{equation*}
-		\int_{\R} t_1^2 |f(t_1, t')|^2 dt_1 + \int_{\R} \omega_1^2 |\F_{t_1} f(\omega_1)|^2 d\omega_1 = \dfrac{1}{2\pi} \sum_{k_1=0}^{+\infty} (2k_1 + 1) |\langle f, H_{k_1} \rangle_{t_1}|^2
+		\int_{\R} t_1^2 |f(t_1, t')|^2 dt_1 + \int_{\R} \omega_1^2 |\F_1 f(\omega_1, t')|^2 d\omega_1 = \dfrac{1}{2\pi} \sum_{k_1=0}^{+\infty} (2k_1 + 1) |\langle f, H_{k_1} \rangle_1|^2
 	\end{equation*}
 	which holds for almost every $t' \in \R^{d-1}$. We can now integrate with respect to $t'$ every member:
 	\begin{itemize}
 		\item $\displaystyle \int_{\R^{d-1}} \int_{\R} t_1^2 |f(t_1, t')|^2 dt_1 dt' \overset{\mathrm{Tonelli}}{=} \int_{\R^d} t_1^2 |f(t)|^2 dt$;
-		\item $\displaystyle \int_{\R^{d-1}} \int_{\R}  \omega_1^2|\F_{t_1} f(\omega_1)|^2 d\omega_1 dt' \overset{\mathrm{Tonelli}}{=} \int_{\R} \omega_1^2 \int_{\R^{d-1}} |\F_{t_1} f(\omega_1)|^2 dt' d\omega_1$.\vspace{0.1mm}\\
+		\item $\displaystyle \int_{\R^{d-1}} \int_{\R}  \omega_1^2|\F_1 f(\omega_1, t')|^2 d\omega_1 dt' \overset{\mathrm{Tonelli}}{=} \int_{\R} \omega_1^2 \int_{\R^{d-1}} |\F_1 f(\omega_1, t')|^2 dt' d\omega_1$.\vspace{0.1mm}\\
 		
-		From Lemma \ref{Fourier transform for restrictions} we know that $\F_{t_1} f(\omega_1)(\omega_1) \in L^2(\R^{d-1})$ for a.e. $\omega_1 \in \R$. Therefore, we can use Plancherel's theorem in the inner integral for a.e. $\omega_1 \in \R$ and obtain:
+		From Lemma \ref{Fourier transform for restrictions} we know that $\F_1 f(\omega_1) \in L^2(\R^{d-1})$ for a.e. $\omega_1 \in \R$. Therefore, we can use Plancherel's theorem in the inner integral for a.e. $\omega_1 \in \R$ and obtain:
 		\begin{align*}
-			\int_{\R^{d-1}} \int_{\R}  \omega_1^2 |\F_{t_1} f(\omega_1)|^2 d\omega_1 dt' &= \int_{\R} \omega_1^2\int_{\R^{d-1}} |\F_{t'} (\F_{t_1} f(\omega_1))(\omega')|^2 d\omega' d\omega_1 \overset{\ref{Fourier transform for restrictions}}{=}\\
+			\int_{\R^{d-1}} \int_{\R}  \omega_1^2 |\F_1 f(\omega_1, t')|^2 d\omega_1 dt' &= \int_{\R} \omega_1^2\int_{\R^{d-1}} |\F' (\F_1 f(\omega_1, \cdot))(\omega')|^2 d\omega' d\omega_1 \overset{\ref{Fourier transform for restrictions}}{=}\\
 																			  &= \int_{\R} \int_{\R^{d-1}} \omega_1^2 |\F f(\omega_1,\omega')|^2 d\omega' d\omega_1 = \int_{\R^d} \omega_1^2 |\F (\omega)|^2 d\omega.
 		\end{align*}
 		\item For the last term we start pointing out that integral and series can be exchanged because every term is non-negative. Then, from Parseval's identity we have:
@@ -1256,54 +1262,66 @@ Before extending the previous lemma to the multi-dimensional case we need the fo
 		where we used the fact that multi-dimensional Hermite functions are just the tensor product of 1-dimensional ones. Plugging this result in the series leads to:
 		\begin{align*}
 			\int_{\R^{d-1}} \sum_{k_1=0}^{+\infty} (2k_1 + 1) |\langle f, H_{k_1} \rangle |^2 &= \sum_{k_1=0}^{+\infty} \sum_{k' \in \N_0^{d-1}} (2k_1+1) |\langle f, H_{(k,k')} \rangle|^2 =\\
-																							  &= \sum_{k \in \N_0^d} (2k_1+1)|\langle f, H_k \rangle|^2
+																							  &= \sum_{k \in \N_0^d} (2k_1+1)|\langle f, H_k \rangle|^2,
 			\end{align*}
 		and we notice that the rearrangement of the series is allowed since convergence is unconditional. Putting all these results together leads to \eqref{Heisenberg's uncertainty principle lemma d dimensions formula}.
 		
 		The proof of the last part of the statement is exactly the same as the one in Lemma \ref{Heisenberg's uncertainty principle lemma}.
 	\end{itemize}	
 \end{proof}
-{\color{red}If one of the integrals in \eqref{Heisenberg's uncertainty principle lemma inequality} is infinite the inequality is trivially satisfied, therefore we can focus our attention for those function for which the integrals are finite}. This lemma is sufficient in order to prove Heisenberg's uncertainty principle.
+Previous lemma is sufficient in order to prove Heisenberg's uncertainty principle.
 \begin{teo}\label{Heisenberg's uncertainty principle theorem}
 	Let $f \in L^2(\R^d)$ and $a,b \in \R^d$. Then:
 	\begin{equation}\label{Heisenberg's uncertainty principle formula}
 		\left( \int_{\R^d} |t-a|^2 |f(t)|^2dt \right)^{1/2} \left( \int_{\R^d} |\omega - b|^2 |\hat{f}(\omega)|^2 d\omega \right)^{1/2} \geq \dfrac{d\|f\|_2^2}{4\pi}
 	\end{equation}
-	where $|t-a| = \sum_{j=1}^{d}(t_j - a_j)^2$ is the Euclidean distance.
+	where $|t-a| = \sum_{j=1}^{d}(t_j - a_j)^2$ is the Euclidean distance. Moreover, equality is achieved if and only if $f(t) = c \varphi(\lambda t)$, where $\varphi$ is the normalized Gaussian given by \eqref{gaussian normalized}, $c \in \C$ and $\lambda > 0$.
 \end{teo}
 
 \begin{proof}
 	Firsly, we notice that it is sufficient to prove the inequality when $a=b=0$, since the generic case can be recovered from this special one by means of a phase-space translation. Indeed, given $f \in L^2(\R^d)$ we can consider $g = M_{-b}T_{-a}f$ for which we have:
 	\begin{align*}
-		|f(t)|^2 &= |(T_a M_b g)(t)|^2 = |e^{2\pi i b \cdot (t-a)} g(t-a)|^2 = |g(t-a)|^2\\
-		|\hat{f}(\omega)|^2 &= |\F(T_a M_b g)(\omega)|^2 \overset{\ref{properties of translation modulation and dilation operators}}{=} |M_{-a} T_b \hat{g}(\omega)|^2 = |e^{-2\pi i a \cdot \omega} \hat{g}(\omega - b)|^2 = |\hat{g}(\omega-b)|^2
+		|f(t)|^2 &= |(T_a M_b g)(t)|^2 = |e^{2\pi i b \cdot (t-a)} g(t-a)|^2 = |g(t-a)|^2,\\
+		|\hat{f}(\omega)|^2 &= |\F(T_a M_b g)(\omega)|^2 \overset{\ref{properties of translation modulation and dilation operators}}{=} |M_{-a} T_b \hat{g}(\omega)|^2 = |e^{-2\pi i a \cdot \omega} \hat{g}(\omega - b)|^2 = |\hat{g}(\omega-b)|^2,
 	\end{align*}
 	and $\|f\|_2 = \|g\|_2$. In light of this, we will consider $a=b=0$.
 	
 	We start proving that, for every component, the following holds:
 	\begin{equation}\label{Heisenberg's uncertainty principle component formula}
-		\left( \int_{\R^d} t_j^2\, |f(t)|^2dt \right)^{1/2} \left( \int_{\R^d} \omega_j^2\, |\hat{f}(\omega)|^2 d\omega \right)^{1/2} \geq \dfrac{\|f\|_2^2}{4\pi}
+		\left( \int_{\R^d} t_j^2\, |f(t)|^2dt \right)^{1/2} \left( \int_{\R^d} \omega_j^2\, |\hat{f}(\omega)|^2 d\omega \right)^{1/2} \geq \dfrac{\|f\|_2^2}{4\pi}.
 	\end{equation} We observe that in the left-hand side of \eqref{Heisenberg's uncertainty principle component formula}, apart from a square root, we have the product of two integrals, while in \eqref{Heisenberg's uncertainty principle lemma d dimensions inequality} we have an estimate for the sum of these. The transition from the latter to the former estimate can be done through a dilation argument. Precisely, given $f \in L^2(\R^d)$, we consider the following dilation:
 	\begin{equation*}
 		g(t) = \lambda^{-d/2}f(t/\lambda) \implies \hat{g}(\omega) = \lambda^{d/2} \F(D_{1/\lambda}g) \overset{\ref{properties of translation modulation and dilation operators}\ref{Fourier transform of dilation}}{=} \lambda^{d/2} \hat{f}(\lambda \omega).
 	\end{equation*}
 	We remark that this dilation is different from the one considered in Section \ref{Fourier transform and its properties section}, expression \eqref{dilation operator def}. Indeed, now we chose the dilation so that $\|g\|_2 = \|f\|_2$, while previously the dilation was chosen in order to preserve the $L^1$ norm. Putting $g$ in \eqref{Heisenberg's uncertainty principle lemma d dimensions inequality} provides us:
-	\begin{align*}
+	\begin{align}\label{Heisenberg's uncertainty principle inequality 1}
 		\dfrac{\|f\|_2^2}{2\pi} &\leq \int_{\R^d} t_j^2 |g(t)|^2dt + \int_{\R^d} \omega_j^2 |\hat{g}(\omega)|^2d\omega =\\
-								&= \dfrac{1}{\lambda^d} \int_{\R^d} t_j^2 |f(t/\lambda)|^2dt  + \lambda^d \int_{\R^d} \omega^2 |\hat{f}(\lambda \omega)|^2d\omega = \\
-								&= \lambda^2 \int_{\R^d} t_j^2 |f(t)|^2dt + \dfrac{1}{\lambda^2} \int_{\R^d} \omega_j^2 |\hat{f}(\omega)|^2d\omega.
-	\end{align*}
-	We can choose $\lambda$ in order to minimize the last expression. Thus, deriving with respect to $\lambda^2$ and putting the derivative to 0 we obtain that the minimum is achieved when $\lambda^2 = (\int_{\R^d} \omega_j^2 |\hat{f}(\omega)|^2d\omega)^{1/2} (\int_{\R^d} t_j^2 |f(t)|^2dt)^{-1/2}.$ If we substitute this $\lambda$ into the last expression we obtain exactly \eqref{Heisenberg's uncertainty principle component formula}. We can now prove \eqref{Heisenberg's uncertainty principle formula}:
+								&= \dfrac{1}{\lambda^d} \int_{\R^d} t_j^2 |f(t/\lambda)|^2dt  + \lambda^d \int_{\R^d} \omega^2 |\hat{f}(\lambda \omega)|^2d\omega = \nonumber \\
+								&= \lambda^2 \int_{\R^d} t_j^2 |f(t)|^2dt + \dfrac{1}{\lambda^2} \int_{\R^d} \omega_j^2 |\hat{f}(\omega)|^2d\omega. \nonumber
+	\end{align}
+	We can choose $\lambda$ in order to minimize the last expression. Thus, deriving with respect to $\lambda^2$ and putting the derivative to 0 we obtain that the minimum is achieved when 
+	\begin{equation}\label{Heisenberg's uncertainty principle lambda}
+		\lambda^2 = \left(\int_{\R^d} \omega_j^2 |\hat{f}(\omega)|^2d\omega\right)^{1/2} \left(\int_{\R^d} t_j^2 |f(t)|^2dt\right)^{-1/2}.
+	\end{equation}
+	If we substitute this $\lambda$ into the last expression we obtain exactly \eqref{Heisenberg's uncertainty principle component formula}. Moreover, equality is achieved if and only if it is achieved in \eqref{Heisenberg's uncertainty principle inequality 1}, but Lemma \ref{Heisenberg's uncertainty principle lemma d dimensions} then implies that $g(t) = c H_0$ for some $c \in \C$. Recalling the definition of $g$ we obtain $f(t) = c \lambda^{d/2} H_0(\lambda t)$. If we put the explicit expression of $f$ into \eqref{Heisenberg's uncertainty principle lambda} we will see that $\lambda$ can be chosen arbitrarily, indeed:
 	\begin{align*}
-		\left( \int_{\R^d} |t|^2 |f(t)|^2dt \right)^{1/2} \left( \int_{\R^d} |\omega|^2 |\hat{f}(\omega)|^2 d\omega \right)^{1/2} = \\
-		=\left( \sum_{j=1}^d \int_{\R^d} t_j^2 |f(t)|^2dt \right)^{1/2} \left( \sum_{j=1}^d \int_{\R^d} \omega_j^2 |\hat{f}(\omega)|^2 d\omega \right)^{1/2}.
+		\lambda^2 &= \left(\int_{\R^d} \omega_j^2 |c|^2 \lambda^{-d} |\F(D_{\lambda} H_0)(\omega)|^2 d\omega\right)^{1/2} \left(\int_{\R^d} t_j^2 |c|^2 \lambda^d |H_0(\lambda t)|^2dt\right)^{-1/2} \overset{\eqref{properties of translation modulation and dilation operators}\ref{Fourier transform of dilation} + \eqref{Hermite functions are eigenfunctions of Fourier transform}}{=}\\
+				  &= \left(\int_{\R^d} \omega_j^2 \lambda^{-d} |H_0(\omega/\lambda)|^2 d\omega\right)^{1/2} \left(\int_{\R^d} t_j^2 \lambda^d |H_0(\lambda t)|^2dt\right)^{-1/2} \overset{\xi = \omega/\lambda}{\underset{s = \lambda t}{=}}\\
+					  &= \lambda^2 \left(\int_{\R^d} \xi_j^2 |H_0(\xi)|^2 d\xi \right)^{1/2} \left(\int_{\R^d} s_j^2  |H(s)|^2 ds \right)^{-1/2} = \lambda^2.
 	\end{align*}
-	We can see the last expression as the product of the Euclidean norm of vectors $( \| t_j f \|_2 )_{j=1}^d$ and $( \| \omega_j \hat{f} \|_2)_{j=1}^d$. Thus, from Cauchy-Schwarz inequality in $\R^d$, we obtain:
+	We notice that this result is independent of $j$. So, to sum up, equality in \eqref{Heisenberg's uncertainty principle component formula} is achieved for every $j=1,\ldots,d$ if and only if $f(t) = c H_0(\lambda t)$ for some $c \in \C$ and $\lambda > 0$.
+	
+	Now that we have \eqref{Heisenberg's uncertainty principle component formula} we can prove \eqref{Heisenberg's uncertainty principle formula}, starting from:
+	\begin{align*}
+		&\left( \int_{\R^d} |t|^2 |f(t)|^2dt \right)^{1/2} \left( \int_{\R^d} |\omega|^2 |\hat{f}(\omega)|^2 d\omega \right)^{1/2} = \\
+		=&\left( \sum_{j=1}^d \int_{\R^d} t_j^2 |f(t)|^2dt \right)^{1/2} \left( \sum_{j=1}^d \int_{\R^d} \omega_j^2 |\hat{f}(\omega)|^2 d\omega \right)^{1/2}.
+	\end{align*}
+	We notice that the last expression is the product of the Euclidean norm of vectors $( \| t_j f \|_2 )_{j=1}^d$ and $( \| \omega_j \hat{f} \|_2)_{j=1}^d$. Thus, from Cauchy-Schwarz inequality in $\R^d$, we obtain:
 	\begin{align*}
 		&\left( \int_{\R^d} |t|^2 |f(t)|^2dt \right)^{1/2} \left( \int_{\R^d} |\omega|^2 |\hat{f}(\omega)|^2 d\omega \right)^{1/2} \geq \\
-		\geq &\sum_{j=1}^d \left( \int_{\R^d} t_j^2 |f(t)|^2dt \right)^{1/2} \left( \int_{\R^d} \omega_j^2 |\hat{f}(\omega)|^2 d\omega \right)^{1/2} \geq \dfrac{d \|f\|_2^2}{4 \pi}.
+		\geq &\sum_{j=1}^d \left( \int_{\R^d} t_j^2 |f(t)|^2dt \right)^{1/2} \left( \int_{\R^d} \omega_j^2 |\hat{f}(\omega)|^2 d\omega \right)^{1/2} \overset{\eqref{Heisenberg's uncertainty principle component formula}}{\geq} \dfrac{d \|f\|_2^2}{4 \pi}.
 	\end{align*}
-	{\color{red} Manca pezzo sull'uguaglianza...From Lemma \ref{Heisenberg's uncertainty principle lemma d dimensions} we know that the latter inequality becomes an equality if and only if $f$ is }
+	Finally, equality is achieved if and only if both inequalities in the last expression become equalities. From the first part of the proof we know that equality in the latter inequality is achieved if and only if $f(t) = c H_0(\lambda t)$ for some $c \in \C$ and $\lambda > 0$. Moreover, always from previous computations we saw that in this case $f$ satisfies \eqref{Heisenberg's uncertainty principle lambda} for every $j=1,\ldots,d$. This means exactly that vectors $(\|t_j f\|_2)_{j=1}^d$ and $(\|\omega_j \hat{f}\|_2)_{j=1}^d$ are parallel, therefore equality is achieved also when using Cauchy-Schwartz's inequality.
 \end{proof}
 
 
@@ -1327,12 +1345,13 @@ In this form the uncertainty principle has a heuristic yet meaningful interpreta
 \textbf{AGGIUNGERE INTERPRETAZIONI IN MECCANICA QUANTISTICA E ANALISI DEI SEGNALI}.}
 \section{Donoho-Stark's uncertainty principle}\label{section Donoho-Stark's UP}
 \begin{defi}\label{epsilon-concetrated def}
-	A function $f \in L^2(\R^d)$ is $\mathbf{\varepsilon}$-\textbf{concetrated} on a measurable set $T \subseteq \R^d$ if
+	A function $f \in L^2(\R^d)$ is $\mathbf{\varepsilon}$-\textbf{concetrated} on a measurable set $T \subseteq \R^d$ for some $\varepsilon \in [0,1]$ if
 	\begin{equation*}
-		\left(\int_{T^c} |f(t)|^2 dt \right)^{1/2} \leq \varepsilon \| f \|_2
+		\left(\int_{T^c} |f(t)|^2 dt \right)^{1/2} \leq \varepsilon \| f \|_2,
 	\end{equation*}
 	where $T^c = \R^d \setminus T$ denotes the complement set of $T$.
 \end{defi}
+If $\varepsilon \leq \frac{1}{2}$, this tells us that most of the energy of $f$ is inside $T$. Therefore, in such case we may call $T$ the \emph{essential support} of $f$.
 \begin{teo}[Donoho-Stark's uncertainty principle]\label{Donoho-Stark's uncertainty principle theorem}
 	Let $f \in L^2(\R^d) \setminus \{0\}$, suppose that $f$ is $\varepsilon_T$-concentrated on $T \subseteq \R^d$ while $\hat{f}$ is $\varepsilon_{\Omega}$-concentrated on $\Omega \subseteq \R^d$. Then
 	\begin{equation}\label{Donoho-Stark's uncertainty principle formula}
@@ -1361,6 +1380,15 @@ In this form the uncertainty principle has a heuristic yet meaningful interpreta
 		(1-\varepsilon_{\Omega} - \varepsilon_T)\|f\|_2 \leq \|Q_{\Omega}P_T f \|_2 \leq \sqrt{|T| \, |\Omega|} \|f\|_2.
 	\end{equation*}
 \end{proof}
+Taking $\varepsilon = 0$ in \eqref{Donoho-Stark's uncertainty principle formula} gives us the following corollary.
+\begin{cor}
+	Let $f \in L^2(\R^d) \setminus \{0\}$, $\mathrm{supp}f \subseteq T$, $\mathrm{supp}\hat{f} \subseteq \Omega$. Then $|T| |\Omega| \geq 1$.
+\end{cor}
+Loosely speaking, this result is telling us that $f$ and $\hat{f}$ cannot be simultaneously too concentrated. So, for example, if $f$ is strongly concentrated in the time domain, i.e. $|T|$ is small, the necessarily $|\Omega|$ has to be large. {\color{blue} However, a much stronger result holds.}
+\begin{teo}
+	Suppose $f \in L^1(\R^d)$, $\mathrm{supp}f \subseteq T$ and $\mathrm{supp}\hat{f} \subseteq \Omega$. If $|T| |\Omega| < +\infty$ then $f=0$.
+\end{teo}
+{\color{blue}As pointed out in \cite{grochenig}, this results forces us not to talk about ``support of a function'' in the usual way, since in this case the only information we have is that either $f = 0$ or $|\mathrm{supp} f||\mathrm{supp} \hat{f}| = +\infty$. Therefore, a more suitable notion is the one of essential support, since for this we can give a quantitative result, namely \ref{Donoho-Stark's uncertainty principle theorem}.}
 \section{Lieb's uncertainty principle}\label{section Lieb's UP}
 {\color{blue} Up to now we presented two uncertainty principles related to the Fourier transform}. {\color{red}However uncertainty principles can be stated for every time of time-frequency analysis}. {\color{blue}In this and in the following section we present some uncertainty principles for the STFT.}
 
@@ -1462,7 +1490,7 @@ Once Theorem \ref{faberkrahn theorem} has been established, arguing like previou
 
 As for the results in Section \ref{Daubechies' localization operators section}, assumptions on the weight function $F$ are related to its integrability and boundedness. The problem we are consider is, in fact, finding an optimal estimate of the type
 \begin{equation}\label{sharp estimate Nicola-Tilli}
-	\|L_F\|_{L^2(\R^d) \rightarrow L^2(\R^d)} \leq C
+	\|L_F\|_{L^2(\R^d) \rightarrow L^2(\R^d)} \leq C,
 \end{equation}
 where $F$ satisfies the following constraints:
 \begin{equation}\label{constraints Nicola-Tilli}
@@ -1472,6 +1500,7 @@ Clearly the constant $C$ will depend on $p$, $A$ and $B$. In \cite{nicolatilli_n
 \begin{equation}\label{kappa_p}
 	\kappa_p \coloneqq \dfrac{p-1}{p}.
 \end{equation}
+Moreover, for the sake of brevity we denote the variable $(x,\omega) \in \R^{2d}$ as $z$ and therefore $dxd\omega$ as $dz$ 
 \begin{teo}\label{Nicola Tilli norm theorem}
 	Assume $p \in [1,\infty)$, $A \in (0, \infty]$ and $B \in (0,\infty)$ with the additional condition that $A < \infty$ when $p=1$. Let $F$ satisfy the constraints in \eqref{constraints Nicola-Tilli}.
 	\begin{enumerate}[label=(\roman*)]
@@ -1525,7 +1554,7 @@ Theorem \ref{Nicola Tilli norm theorem}\ref{Nicola-Tilli norm theorem case 2} in
 \end{equation*}
 Suppose that the first term is smaller than the second, which means:
 \begin{equation}\label{condition B/A first}
-	\kappa_p^{d\kappa_p}A \leq \kappa_q^{d\kappa_q}B \iff \dfrac{B}{A} \geq \left(\dfrac{\kappa_p^{\kappa_p}}{\kappa_q^{\kappa_q}}\right)^d
+	\kappa_p^{d\kappa_p}A \leq \kappa_q^{d\kappa_q}B \iff \dfrac{B}{A} \geq \left(\dfrac{\kappa_p^{\kappa_p}}{\kappa_q^{\kappa_q}}\right)^d.
 \end{equation}
 Clearly, for $B$ sufficiently large we expect that the solution of current problem is the same as the one with just an $L^p$ constraint, namely the one given by \eqref{Nicola-Tilli maximal function p>1 first regime}. Therefore, we want to compare its $L^q$ norm with the bound given by $B$:
 \begin{align*}
@@ -1534,7 +1563,7 @@ Clearly, for $B$ sufficiently large we expect that the solution of current probl
 \end{align*}
 Since we want $F$ to satisfy the $L^q$ constraint we should have
 \begin{equation*}
-	\lambda \left(\dfrac{p-1}{q}\right)^{d/q} \leq B \overset{\lambda = \kappa_p^{-d/p}A}{\implies} \left(\dfrac{p}{p-1}\right)^{d/p} \left(\dfrac{p-1}{q}\right)^{d/q}A \leq B
+	\lambda \left(\dfrac{p-1}{q}\right)^{d/q} \leq B \overset{\lambda = \kappa_p^{-d/p}A}{\implies} \left(\dfrac{p}{p-1}\right)^{d/p} \left(\dfrac{p-1}{q}\right)^{d/q}A \leq B,
 \end{equation*}
 which is equivalent to
 \begin{equation*}\label{condition B/A second}
@@ -1542,7 +1571,7 @@ which is equivalent to
 \end{equation*}
 If this condition were less restrictive than the one given by \eqref{condition B/A first} we would have solved the problem. Unfortunately, this is not the case. Indeed it is always true, regardless of $p$ and $q$, that
 \begin{equation}\label{curious inequality between conjugate exponents original}
-	\kappa_p^{d\left(\frac1q - \frac1p\right)}\left(\dfrac{p}{q}\right)^{\frac{d}{q}} \geq \left(\dfrac{\kappa_p^{\kappa_p}}{\kappa_q^{\kappa_q}}\right)^d
+	\kappa_p^{d\left(\frac1q - \frac1p\right)}\left(\dfrac{p}{q}\right)^{\frac{d}{q}} \geq \left(\dfrac{\kappa_p^{\kappa_p}}{\kappa_q^{\kappa_q}}\right)^d.
 \end{equation}
 The proof of this inequality can be found in \ref{curious inequality between conjugate exponents}.
 
@@ -1560,17 +1589,17 @@ Before tackling the problem in this intermediate regime, we prove a Theorem from
 \begin{teo}\label{norm limitation}
 	Assume $F \in L^p(\R^{2d})$ for some $p \in [1,+\infty)$ and let $\mu(t) = |\{|F|>t\}|$ be the distribution function of $|F|$. Then
 	\begin{equation}\label{norm limitation formula}
-		\| L_F \| \leq \int_0^{\infty} G(\mu(t))dt
+		\| L_F \| \leq \int_0^{\infty} G(\mu(t))dt.
 	\end{equation}
 	Equality occurs if and only if $F(z)=e^{i\theta}\rho(|z-z_0|)$ for some $\theta \in \R$, $z_0 \in \R^{2d}$ and some nonincreasing function $\rho : [0,+\infty) \rightarrow [0,+\infty)$
 \end{teo}
 \begin{proof}
-	For the sake of brevity we denote the variable $(x,\omega) \in R^{2d}$ as $z$ and therefore $dxd\omega$ as $dz$. Let $f,g \in L^2(\R^d)$ such that $\| f \|_2 = \| g \|_2 = 1$.
-	{\color{blue} Since we are in a Hilbert space $\| L_F \|$ can be computed as the supremum of $|\langle L_F f,g \rangle|$ over all normalized $f$ and $g$. Therefore we are interested in estimating the previous scalar product}
+	Let $f,g \in L^2(\R^d)$ such that $\| f \|_2 = \| g \|_2 = 1$.
+	Since we are in a Hilbert space $\| L_F \|$ can be computed as the supremum of $|\langle L_F f,g \rangle|$ over all normalized $f$ and $g$. Therefore we are interested in estimating the previous scalar product:
 	\begin{equation}\label{first inequality}
 	\begin{aligned}
 		| \langle L_F f, g \rangle |  &= | \L_{F}(f,g) | \leq \int_{\R^{2d}} |F(z)| \cdot |\V f(z)| \cdot | \V g(z) | dz \overset{\text{C-S}}{\leq} \\
-									  &\leq \left( \int_{\R^{2d}} |F(z)| \cdot |\V f(z)|^2 dz \right)^{1/2} \left( \int_{\R^{2d}} |F(z)| \cdot |\V g(z)|^2 dz \right)^{1/2} 
+									  &\leq \left( \int_{\R^{2d}} |F(z)| \cdot |\V f(z)|^2 dz \right)^{1/2} \left( \int_{\R^{2d}} |F(z)| \cdot |\V g(z)|^2 dz \right)^{1/2}.
 	\end{aligned}
 	\end{equation}
 	Since the result is symmetric in $f$ and $g$ we can study just one of the terms. Letting $m = \esssup |F(z)|$ and assuming $m>0$ (otherwise every result is trivial) we can use the ``layer cake'' representation \cite[][Theorem 1.13]{liebloss}:
@@ -1580,9 +1609,9 @@ Before tackling the problem in this intermediate regime, we prove a Theorem from
 	in order to find
 	\begin{align*}
 		\int_{\R^{2d}} |F(z)| \cdot |\V f(z)|^2 dz &= \int_{\R^{2d}} \left( \int_0^m \chi_{\{|F|>t\}}(z)dt \right) |\V f(z)|^2 dz \overset{\text{Tonelli}}{=}\\
-											 &= \int_0^m \left( \int_{\R^{2d}} \chi_{\{|F|>t\}}(z) |\V f(z)|^2 dz \right)dt = \int_0^m \left( \int_{\{|F|>t\}} |\V f(z)|^2 dz \right)dt
+											 &= \int_0^m \left( \int_{\R^{2d}} \chi_{\{|F|>t\}}(z) |\V f(z)|^2 dz \right)dt = \int_0^m \left( \int_{\{|F|>t\}} |\V f(z)|^2 dz \right)dt.
 	\end{align*}
-	We notice that the quantity in the inner integral is exactly the one in the theorem \ref{faberkrahn theorem}, hence
+	We notice that the quantity in the inner integral is exactly the one in Theorem \ref{faberkrahn theorem}, hence
 	\begin{equation}\label{limitation with G}
 		\int_{\R^{2d}} |F(z)| \cdot |\V f(z)|^2 dz \leq \int_0^m G\left(|\{|F|>t\}|\right)dt = \int_0^m G(\mu(t)) dt
 	\end{equation}
@@ -1611,7 +1640,7 @@ Before tackling the problem in this intermediate regime, we prove a Theorem from
 	but since $|\V f(z)|^2 > 0$, equality in \ref{first inequality} with $f$ and $g$ as \eqref{translated Gaussian} occurs if and only if $F(z) = e^{i \theta} |F(z)|$.
 \end{proof}
 
-In light of the previous Theorem it is natural to seek for sharp upper bound for the right-hand side of \eqref{norm limitation formula}. Since this involves the distribution function $|F|$ we shall search this bound between all the possible distribution functions. In order to do so we need to rephrase constraints \eqref{constraints generic case} in terms of $\mu$. This can be easily done one more time thanks to a more general version of the ``layer cake'' representation (see \cite[][Theorem 1.13]{liebloss} or \cite[][Proposition 1.1.4]{grafakos}):
+In light of the previous Theorem it is natural to seek for a sharp upper bound for the right-hand side of \eqref{norm limitation formula}. Since this involves the distribution function $|F|$ we shall search this bound between all the possible distribution functions. In order to do so we need to rephrase constraints \eqref{constraints generic case} in terms of $\mu$. This can be easily done one more time thanks to a more general version of the ``layer cake'' representation (see \cite[][Theorem 1.13]{liebloss} or \cite[][Proposition 1.1.4]{grafakos}):
 \begin{equation*}
 	\|F\|_p^p = p \int_0^{\infty} t^{p-1}|\{|F|>t\}|dt.
 \end{equation*}
@@ -1661,7 +1690,7 @@ Firstly, we shall prove existence of maximizers.
 \end{proof}
 {\color{blue} In order to do some ``meaningful'' calculus of variations over $I$ we need to enlarge $\mathcal{C}$, because the monotonicity assumption is quite strict. We will show that removing this hypothesis leaves the supremum unchanged and that maximizers are indeed monotonic.}
 \begin{prop}\label{monotonicity of maximizer}
-	Let $\mathcal{C}' = \{u : (0,+\infty) \rightarrow [0,+\infty) \text{ such that } u \text{ is measurable and satisfies } \eqref{constraints generic case distribution function}$. Then
+	Let $\allowdisplaybreaks[1]\mathcal{C}' = \{u : (0,+\infty) \rightarrow [0,+\infty) \text{ such that } u \text{ is measurable and satisfies } \eqref{constraints generic case distribution function}$. Then
 	\begin{equation}
 		\sup_{v \in \mathcal{C}} I(v) = \sup_{v \in \mathcal{C}'} I(v).
 	\end{equation}
@@ -1705,7 +1734,7 @@ Before stating and proving the theorem that gives the only maximal function of \
 	\end{equation}
 	where $\lambda_1, \lambda_2$ are both positive and uniquely determined by
 	\begin{equation*}
-		p\int_0^{+\infty} t^{p-1}u(t)dt = A^p, \quad q\int_0^{+\infty} t^{q-1}u(t)dt = B^q
+		p\int_0^{+\infty} t^{p-1}u(t)dt = A^p, \quad q\int_0^{+\infty} t^{q-1}u(t)dt = B^q.
 	\end{equation*}
 \end{teo}
 \begin{proof}
