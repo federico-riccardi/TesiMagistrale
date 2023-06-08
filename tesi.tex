@@ -146,6 +146,10 @@ Although this is a simple example of compact operators, finite rank operators ar
 \begin{cor}\label{limit of finite rank operator is compact}
 	Let $\{T_n\}_{n \in \N} \subset \B(X,Y)$ be a sequence of finite-rank operators that converges to $T \in \B(X,Y)$. Then $T$ is compact.
 \end{cor}
+Another crucial property of compact operators is the following.
+\begin{teo}\label{composition of compact operators is compact}
+	Let $X,Y,Z$ be three Banach spaces and let $T \in \B(X,Y)$, $S \in \B(Y,Z)$. Then, if at least one of $T$ and $S$ is compact, then $ST \in \B(X,Z)$ is compact.
+\end{teo}
 
 Now we suppose $H$ and $K$ to be Hilbert spaces. Given $T \in \B(H,K)$ there exist a unique $T^* \in \B(K,H)$ such that:
 \begin{equation*}
@@ -544,8 +548,27 @@ The inverse Fourier transform is denoted with $\F^{-1}$ because it is actually t
 		f(t) = \F^{-1} \circ \F f(t) = \int_{\R^d} \hat{f}(\omega) e^{2 \pi i \omega \cdot t}d\omega
 	\end{equation*}
 \end{teo}
+If $f$ is in $L^2(\R^d)$, the integral in \eqref{Fourier transform formula} in general will not converge. Nevertheless, we can define the Fourier transform of an $L^2$ function through a density argument. For example, one can use $L^1(\R^d) \cap L^2(\R^d)$, which is a dense subspace of $L^2(\R^d)$. On this space one can show that the Fourier transform is an isometry with respect to the $L^2$ norm and therefore it extends to an isometry on the whole $L^2(\R^d)$. This is stated by the \emph{Plancherel theorem}.
+\begin{teo}[Plancherel theorem]\label{Plancherel theorem}
+	If $f \in L^1(\R^d) \cap L^2(\R^d)$ then $\| f \|_2 = \| \hat{f} \|_2$.
+\end{teo}
+Thanks to the polarization identity this implies that $\F$ preserves the inner product in $L^2(\R^d)$:
+\begin{equation}\label{Parseval formula}
+	\langle f,g \rangle_{L^2(\R^d)} = \langle \hat{f}, \hat{g} \rangle_{L^2(\R^d)} \quad \forall f,g \in L^2(\R^d),
+\end{equation}
+therefore the Fourier transform $\F$ is a unitary operator on $L^2(\R^d)$. Result \eqref{Parseval formula} is called \emph{Parseval formula}.
 
-The Fourier transform is intimately related to regularity and decay properties. The duality between these two is stated in the following theorems.
+So far we have seen that the Fourier transform is defined on $L^1$ and $L^2$. {\color{blue} It can be shown, through Riesz-Thorin's interpolation theorem, that it can be extended to all $L^p$ spaces for $1 < p < 2$.}
+\begin{teo}[Hausdorff-Young]
+	Let $1 \leq p \leq 2$ and let $p'$ such that $\frac{1}{p} + \frac{1}{p'} = 1$. Then $\F : L^p(\R^d) \rightarrow L^{p'}(\R^d)$ and $\| \hat{f }\|_{p'} \leq \| f \|_p$.
+\end{teo}
+In what follows we will need the sharp version of the Hausdorff-Young inequality: 
+\begin{equation}\label{Hausdorff-Yound inequality}
+	\| \hat{f} \|_{p'} \leq \left(\dfrac{p^{1/p}}{p'^{1/p'}}\right)^{d/2} \|f\|_p = A_p^d \|f\|_p
+\end{equation}
+where $A_p$ is the so-called Babenko-Bechner constant.
+
+Having considered the spaces over which the Fourier transform is defined, we can focus on some of its properties. In particular, we want to focus on the close relationship that arises between regularity and decay properties. This is explained by the following theorems.
 \begin{teo}\label{duality decay-regularity theorem}
 	Let $f \in L^1(\R^d)$. If $|t|^k f \in L^1(\R^d)$ for some $k \in \N$ then $\hat{f} \in C_0^k(\R^d)$ and the following holds for every $\alpha \in \N^d$ with $|\alpha| \leq k$:
 	\begin{equation}\label{derivative of transform}
@@ -560,17 +583,6 @@ The Fourier transform is intimately related to regularity and decay properties. 
 	In particular this implies that $\hat{f}(\omega) = o\left(|\omega|^{-k} \right) $ as $| \omega | \rightarrow \infty$.
 \end{teo}
 In summary, previous theorems establish a duality between regularity and decay: if a function is smooth, then its Fourier transform decays rapidly and vice versa.
-
-
-If $f$ is in $L^2(\R^d)$, the integral in \eqref{Fourier transform formula} in general will not converge. Nevertheless, we can define the Fourier transform of an $L^2$ function through a density argument. For example, one can use $L^1(\R^d) \cap L^2(\R^d)$, which is a dense subspace of $L^2(\R^d)$. On this space one can show that the Fourier transform is an isometry with respect to the $L^2$ norm and therefore it extends to an isometry on the whole $L^2(\R^d)$. This is stated by the \emph{Plancherel theorem}.
-\begin{teo}[Plancherel theorem]\label{Plancherel theorem}
-	If $f \in L^1(\R^d) \cap L^2(\R^d)$ then $\| f \|_2 = \| \hat{f} \|_2$.
-\end{teo}
-Thanks to the polarization identity this implies that $\F$ preserves the inner product in $L^2(\R^d)$:
-\begin{equation}\label{Parseval formula}
-	\langle f,g \rangle_{L^2(\R^d)} = \langle \hat{f}, \hat{g} \rangle_{L^2(\R^d)} \quad \forall f,g \in L^2(\R^d),
-\end{equation}
-therefore the Fourier transform $\F$ is a unitary operator on $L^2(\R^d)$. Result \eqref{Parseval formula} is called \emph{Parseval formula}.
 
 We now introduce some fundamental operators in Fourier and time-frequency analysis. Given $x,\xi \in \R^d$ and $\lambda > 0$ we define the \emph{time-shift} (or translation) operator $T_x$
 \begin{equation}\label{time-shift operator def}
@@ -645,19 +657,21 @@ Thanks to these properties and Theorems \ref{duality decay-regularity theorem} a
 										  &= \prod_{j=1}^d \dfrac{1}{\sqrt{\lambda}}e^{-\frac{1}{\lambda}\pi \omega_j^2} = \dfrac{1}{\lambda^{d/2}} e^{-\frac{1}{\lambda}\pi|\omega|^2}.
 	\end{align*}
 \end{proof}
-{\color{blue} Aggiungere un commento e il legame tra la trasformata di Fourier e la convoluzione}
-\begin{teo}[Hausdorff-Young]
-	Let $1 \leq p \leq 2$ and let $p'$ such that $\frac{1}{p} + \frac{1}{p'} = 1$. Then $\F : L^p(\R^d) \rightarrow L^{p'}(\R^d)$ and $\| \hat{f }\|_{p'} \leq \| f \|_p$.
-\end{teo}
-In the following we will need the sharp version of the Hausdorff-Young inequality: 
-\begin{equation}\label{Hausdorff-Yound inequality}
-	\| \hat{f} \|_{p'} \leq \left(\dfrac{p^{1/p}}{p'^{1/p'}}\right)^{d/2} \|f\|_p = A_p^d \|f\|_p
-\end{equation}
-where $A_p$ is the so-called Babenko-Bechner constant. This constant appears also in the sharp version of Young's theorem
+
+We conclude this section by considering what a convolution is and how this product relates to the Fourier transform. Given two functions $f,g : \R^d \rightarrow \R$, their convolution is given by:
+\begin{equation*}\label{convolution formula}
+	(f * g) (x) = \int_{\R^d} f(y) g(x - y)dy.
+\end{equation*}
+The well-posedness of the convolution is given by Young's theorem.
 \begin{teo}[Young]\label{Young theorem}
 	Given $f \in L^p(\R^d)$ and $g \in L^q(\R^d)$, suppose that $\frac{1}{p}+\frac{1}{q}=1+\frac{1}{r}$ with $r \geq 1$. Then $f * g \in L^r(\R^d)$ and $\|f * g\|_r \leq \|f\|_p \|g\|_q$.
 \end{teo}
-Just like the Hausdorff-Young inequality, Young's inequality holds in a sharp version:
+We notice that, if $p=q=1$, then $r=1$ so the convolution of two $L^1$ functions is still in $L^1$. Thanks to this, using Fubini's theorem it is immediate to see that:
+\begin{equation*}\label{Fourier transform of convolution}
+	\F(f * g) = \F f \cdot \F g,
+\end{equation*}
+which explains the connection between convolution and Fourier transform.
+Just like as Young's inequality, in what follows we will need the sharp version of  Hausdorff-Young's inequality, namely:
 \begin{equation}\label{Young inequality sharp}
 	\|f * g\|_r \leq (A_p A_q A_{r'})^d \|f\|_p \|g\|_q.
 \end{equation}
@@ -665,36 +679,38 @@ Just like the Hausdorff-Young inequality, Young's inequality holds in a sharp ve
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Short-Time Fourier Transform}\label{chapter STFT}
+
+The Fourier transform is a widely used tool in both theoretical and applied settings. In particular, from an applied point of view, the importance of the Fourier transform lies primarily in the possibility of examining a signal in the frequency domain, and thus obtaining information that would otherwise be difficult to derive from the time domain. However, the distinction between these domains is rigid, whereas it is of great importance to have a tool with which time and frequency characteristics can be examined simultaneously. There are many representations that can accomplish this task, such as the Wigner distribution, the ambiguity function and so on. The basic time-frequency representation of a signal is probably the \emph{short-time Fourier transform} or \emph{STFT}. In this chapter we will define the STFT and describe some of its properties.
 \section{STFT}\label{section STFT}
-{\color{red}The \emph{short-time Fourier transform} or \emph{STFT} is a powerful tool, introduced by Gabor in \cite{gabor}, used to study properties of a signal locally both in time and frequency. The main idea behind the STFT is the following: if we want some information of the spectrum of a signal around a specific time, say $T$, we could choose an interval $(T-\Delta T, T + \Delta T)$ and take the Fourier transform of $f \chi_{(T-\Delta T, T + \Delta T)}$. Usually multiplying by a characteristic function will not give us a regular function (not even continuous) and in light of the duality between regularity and decay, the Fourier transform of $f \chi_{(T-\Delta T, T + \Delta T)}$ will not decay rapidly. Therefore a sharp cutoff in the time domain will result in a ``bad'' localization in the frequency domain. In order to avoid this kind of problems we could think to multiply the signal $f$ by a smooth function.}
+The \emph{short-time Fourier transform} or \emph{STFT} is a powerful tool used in signal processing and time-frequency analysis to study the properties of a signal locally in both time and frequency. The main idea behind STFT is the following: if we want some information about the spectrum of a signal $f$ at a certain time, say $T$, we could choose an interval $(T-\Delta T, T + \Delta T)$ and take the Fourier transform of $f \chi_{(T-\Delta T, T + \Delta T)}$. Normally, multiplication by a characteristic function will not yield a regular function (not even continuous) and, in light of the duality between regularity and decay, the Fourier transform of $f \chi_{(T-\Delta T, T + \Delta T)}$ will not decay quickly. The problem with this not quick decay is that in this case the energy in the frequency domain will be spread all over the domain. Therefore, a sharp cutoff in the time domain leads to a ``poor'' localization in the frequency domain. In order to avoid this kind of problem, we could think to multiply the signal $f$ by a smooth function.
 \begin{defi}\label{STFT def}
-	Fix a function $y \neq 0$ called \emph{window function}. The \textbf{short-time Fourier transform} of a function $f$ with window $\phi$ is defined as
+	Fix a function $y \neq 0$, called \emph{window function}. The \textbf{short-time Fourier transform} of a function $f$ with window $\phi$ is defined as
 	\begin{equation}\label{STFT formula}
 		\V_{\phi}f(x,\omega) = \int_{\R^d} f(t)\overline{\phi(t-x)}e^{-2 \pi i \omega \cdot t} dt, \quad (x,\omega) \in \R^{2d}
 	\end{equation}
 \end{defi}
-In the above definition we did not specify where $f$ and $\phi$ are chosen. Since we are taking the Fourier transform of the function $f T_x\overline{\phi}$, the STFT is well defined whenever the Fourier transform of this function is. For example if both $f$ and $\phi$ are in $L^2(\R^d)$ then $f T_x\overline{\phi}$ is in $L^1(\R^d)$ for every $x \in \R^d$ and so the integral in \eqref{STFT formula} is defined. In this special case the STFT can be written as a scalar product in $L^2(\R^d)$:
+In the above definition we did not specify where $f$ and $\phi$ are chosen. We notice that \eqref{STFT formula} can be seen in an alternative way:
+\begin{equation}\label{STFT formula as Fourier transform}
+	\V_{\phi} f(x, \omega) = \F(f T_x \overline{\phi})(\omega),
+\end{equation}
+therefore STFT is well-defined whenever the Fourier transform of this function is. For example, if both $f$ and $\phi$ are in $L^2(\R^d)$ then $f T_x\overline{\phi}$ is in $L^1(\R^d)$ for every $x \in \R^d$ and so the integral in \eqref{STFT formula} is defined. In this special case the STFT can be written as a scalar product in $L^2(\R^d)$:
 \begin{equation*}
-	\V_{\phi}f(x,\omega) = \langle f, M_{\omega} T_x \phi \rangle = \langle f, \pi(x,\omega) \phi \rangle
+	\V_{\phi}f(x,\omega) = \langle f, M_{\omega} T_x \phi \rangle = \langle f, \pi(x,\omega) \phi \rangle.
 \end{equation*}
-In general, the STFT of $f$ with respect to $\phi$ will be defined whenever  $\langle f, M_{\omega} T_x \phi \rangle$ is an expression of some sort of duality. For example, if $f \in \mathcal{S}'(\R^d)$ and $\phi \in \mathcal{S}(\R^d)$ then $M_{\omega} T_x \overline{\phi} \in \mathcal{S}(\R^d)$, therefore $\langle f, M_{\omega} T_x \phi \rangle$ can be seen as the usual duality between tempered distributions and functions in the Schwartz space.
+In general, the STFT of $f$ with respect to $\phi$ will be defined whenever  $\langle f, M_{\omega} T_x \phi \rangle$ is an expression of some sort of duality. For example, if $f \in \mathcal{S}'(\R^d)$ and $\phi \in \mathcal{S}(\R^d)$, then $M_{\omega} T_x \phi \in \mathcal{S}(\R^d)$, therefore $\langle f, M_{\omega} T_x \phi \rangle$ can be seen as the usual duality between tempered distributions and functions in the Schwartz space. Despite this remark, we will mainly focus on the case in which both the window and the signal are in $L^2(\R^d)$.
 
 \subsection{Properties of STFT}\label{properties of STFT subsection}
-In this section we will present and prove some properties about the STFT. An excellent reference is \cite{grochenig}.
+In this section we will introduce and prove some basic properties of STFT. In particular, as we did for the Fourier transform, we want to know to which spaces $\V_{\phi} f$ belongs.
 \begin{teo}\label{orthogonality relation theorem}
 	Let $f_1,f_2,\phi_1,\phi_2 \in L^2(\R^d$). Then $\V_{\phi_i}f_i \in L^2(\R^{2d})$ and the following holds:
 	\begin{equation}\label{orthogonality relation formula}
-		\langle \V_{\phi_1} f_1, \V_{\phi_2} f_2 \rangle = \langle f_1, f_2 \rangle \overline{\langle \phi_1, \phi_2 \rangle}
+		\langle \V_{\phi_1} f_1, \V_{\phi_2} f_2 \rangle = \langle f_1, f_2 \rangle \overline{\langle \phi_1, \phi_2 \rangle}.
 	\end{equation}
 \end{teo}
 \begin{proof}
-	We start proving that, if $f \in L^2(\R^d)$ and $\phi \in \mathcal{S}(\R^d)$ the STFT of $f$ with window $\phi$ is in $L^2(\R^{2d})$. In order to do so, we need an equivalent formulation of the STFT:
-	\begin{equation*}
-		\V_{\phi} f (x,\omega)  = \int_{\R^d} f(t) \overline{\phi(t-x)}e^{-2 \pi i \omega \cdot t} dt = \F(f T_x \overline{\phi})(\omega).
-	\end{equation*}
-	Since we supposed $\phi \in \mathcal{S}(\R^d)$, the function $f T_x \overline{\phi}$ is in $L^2(\R^d)$ for every $x \in \R^d$, hence:
+	We start proving that, if $f \in L^2(\R^d)$ and $\phi \in \mathcal{S}(\R^d)$, the STFT of $f$ with window $\phi$ is in $L^2(\R^{2d})$. Since we supposed $\phi \in \mathcal{S}(\R^d)$, the function $f T_x \overline{\phi}$ is in $L^2(\R^d)$ for every $x \in \R^d$, hence:
 	\begin{align*}
-		\| \V_{\phi} f \|_2^2 &= \int_{\R^{2d}} |\V_{\phi} f(x,\omega)|^2 dx d\omega \overset{\mathrm{Tonelli}}{=} \int_{\R^d} \left(\int_{\R^d} |\V_{\phi} f(x,\omega)|^2 \right) d\omega = \\
+		\| \V_{\phi} f \|_2^2 &= \int_{\R^{2d}} |\V_{\phi} f(x,\omega)|^2 dx d\omega \overset{\mathrm{Tonelli}}{=} \int_{\R^d} \left(\int_{\R^d} |\V_{\phi} f(x,\omega)|^2 \right) d\omega \overset{\eqref{STFT formula as Fourier transform}}{=} \\
 							  &= \int_{\R^d} \left(\int_{\R^d} |\F(f T_x \overline{\phi})|^2(\omega) d\omega\right) dx \overset{\mathrm{Plancherel}}{=}  \int_{\R^d} \left(\int_{\R^d} |f(t) \overline{\phi(t-x)}|^2 dt \right) dx \overset{\mathrm{Tonelli}}{=}\\
 							  &= \int_{\R^d} |f(t)|^2 \left(\int_{\R^d} |\phi(t-x)|^2 dx\right) dt = \|f\|_2^2 \|\phi\|_2^2.
 	\end{align*}
@@ -706,12 +722,12 @@ In this section we will present and prove some properties about the STFT. An exc
 													    &= \int_{\R^d} \left( \int_{\R^d} f_1(t) \overline{\phi_1(t-x)} \, \overline{f_2(t)} \phi_2(t-x) dt \right)	dx \overset{\mathrm{Fubini}}{=}\\
 													    &= \int_{\R^d} f_1(t) \overline{f_2(t)} \left(\int_{\R^{d}}\phi_2(t-x) \overline{\phi_1(t-x)}dx\right) dt = \langle f_1, f_2 \rangle \langle \phi_2,\phi_1\rangle.    
 	\end{align*}
-	The transition from $\mathcal{S}(\R^d)$ to whole $L^2(\R^d)$ is done trough a density argument. Indeed, for $f_1, f_2 \in L^2(\R^d)$ and $\phi_{1} \in \mathcal{S}(\R^d)$ fixed, the mapping $\phi_2 \in L^2(\R^d) \mapsto \langle \V_{\phi_1} f_1, \V_{\phi_2} f_2 \rangle$ is a linear functional and we just showed that it is bounded over $\mathcal{S}(\R^d)$, where it coincides with $\langle f_1, f_2 \rangle \langle \phi_2, \phi_1$. Since Schwartz's class is a dense subspace of $L^2(\R^d)$ it extends to a bounded linear operator for every $\phi_2 \in L^2(\R^d)$. Similarly, for fixed $f_1, f_2 \in L^2(\R^d)$ and $\phi_2 \in L^2(\R^d)$ the mapping $\phi_1 \in L^2(\R^d) \mapsto \langle \V_{\phi_1} f_1, \V_{\phi_2} f_2 \rangle$ is an antilinear functional that coincides with $\langle f_1, f_2 \rangle \langle \phi_2, \phi_1$ over $\mathcal{S}(\R^d)$, therefore it extends to a bounded linear functional over whole $L^2(\R^d)$.
+	The transition from $\mathcal{S}(\R^d)$ to whole $L^2(\R^d)$ is done trough a density argument. Indeed, for $f_1, f_2 \in L^2(\R^d)$ and $\phi_{1} \in \mathcal{S}(\R^d)$ fixed, the mapping $\phi_2 \in L^2(\R^d) \mapsto \langle \V_{\phi_1} f_1, \V_{\phi_2} f_2 \rangle$ is a linear functional and we just showed that it is bounded over $\mathcal{S}(\R^d)$, where it coincides with $\langle f_1, f_2 \rangle \langle \phi_2, \phi_1 \rangle$. Since Schwartz's class is a dense subspace of $L^2(\R^d)$ it extends to a bounded linear operator for every $\phi_2 \in L^2(\R^d)$. Similarly, for fixed $f_1, f_2 \in L^2(\R^d)$ and $\phi_2 \in L^2(\R^d)$ the mapping $\phi_1 \in L^2(\R^d) \mapsto \langle \V_{\phi_1} f_1, \V_{\phi_2} f_2 \rangle$ is an antilinear functional that coincides with $\langle f_1, f_2 \rangle \langle \phi_2, \phi_1 \rangle$ over $\mathcal{S}(\R^d)$, therefore it extends to a bounded linear functional over whole $L^2(\R^d)$.
 \end{proof}
 \begin{cor}
 	If $f, \phi \in L^2(\R^d)$ then
 	\begin{equation}\label{STFT is an isometry formula}
-		\| \V_{\phi} f\|_2 = \| f \|_2 \| \phi \|_2
+		\| \V_{\phi} f\|_2 = \| f \|_2 \| \phi \|_2.
 	\end{equation} 
 	In particular, if $\| \phi \|_2 = 1$, $\V_{\phi}$ is an isometry from $L^2(\R^d)$ into $L^2(\R^{2d})$.
 \end{cor}
@@ -726,25 +742,21 @@ Combing this with \eqref{STFT is an isometry formula} and using a simple interpo
 \begin{equation}\label{STFT is in L^p for p>=2}
 	\|\V_{\phi}f\|_p \leq \|f\|_2 \|\phi\|_2.
 \end{equation}
-This result is improved by the following theorem due to Lieb.
+This result is improved by the following theorem due to Lieb \cite{lieb_integral}.
 \begin{teo}\label{Lieb's inequality}
-	If $f,\phi \in L^2(\R^d)$ and $2 \leq p \leq \infty$, then
+	If $f,\phi \in L^2(\R^d)$ and $2 \leq p < \infty$, then:
 	\begin{equation}\label{Lieb's inequality formula}
-		\| \V_{\phi} \|_p^p = \int_{\R^{2d}} |\V_{\phi}(x,\omega)|^p dxd\omega \leq \left(\dfrac{2}{p}\right)^d \|f\|_2^p \cdot \|g\|_2^p
+		\| \V_{\phi} \|_p^p = \int_{\R^{2d}} |\V_{\phi}(x,\omega)|^p dxd\omega \leq \left(\dfrac{2}{p}\right)^d \|f\|_2^p \cdot \|g\|_2^p.
 	\end{equation}
 \end{teo}
 \begin{proof}
-	For this proof we will need to use an alternative form of the STFT:
-	\begin{equation*}
-		\V_{\phi} f(x,\omega) = \int_{\R^d} f(t) e^{-2\pi i \omega \cdot t} \overline{\phi(t-x)}dt = \F(f T_x \overline{\phi})(\omega)
-	\end{equation*}
-	Using Cauchy-Schwarz inequality it is immediate to see that $f T_x \overline{\phi} \in L^1(\R^d)$ for every $x \in \R^d$. In addition to that, since $\V_{\phi} f = \F(f T_x \overline{\phi}) \in L^2(\R^{2d})$, from Fubini's theorem we can say that $ \F(f T_x \overline{\phi}) \in L^2(\R^d) $ for almost every $x \in R^d$ and therefore also $f T_x \overline{\phi} \in L^2(\R^d)$ for a.e. $x \in \R^d$. Through an interpolation argument we obtain that $f T_x \overline{\phi} \in L^q(\R^d)$ for every $q \in [1,2]$.
+	Using the Cauchy-Schwarz inequality it is immediate to see that $f T_x \overline{\phi} \in L^1(\R^d)$ for every $x \in \R^d$. In addition to that, since $\V_{\phi} f = \F(f T_x \overline{\phi}) \in L^2(\R^{2d})$, from Fubini's theorem we can say that $ \F(f T_x \overline{\phi}) \in L^2(\R^d) $ for almost every $x \in R^d$ and therefore also $f T_x \overline{\phi} \in L^2(\R^d)$ for a.e. $x \in \R^d$. Through an interpolation argument we obtain that $f T_x \overline{\phi} \in L^q(\R^d)$ for every $q \in [1,2]$.
 	
 	We start considering the $L^p$ norm of $\V_{\phi} f$:
 	\begin{align}
 		\|\V_{\phi} f\|_p &= \left(\int_{\R^{2d}} |\V_{\phi}f(x,\omega)|^p dxd\omega\right)^{1/p} \overset{\mathrm{Tonelli}}{=} \left[\int_{\R^d} \left(\int_{\R^d} |\V_{\phi} f (x,\omega)|^p d\omega\right)dx\right]^{1/p} =\nonumber \\
 						  &= \left[\int_{\R^d} \left(\int_{\R^d} |\F(f T_x \overline{\phi})(\omega)|^p d\omega\right)dx\right]^{1/p} \overset{\eqref{Young inequality sharp}}{\leq} \nonumber\\
-						  &\leq A_{p'}^d\left[\int_{\R^d} \left(\int_{\R^d} |f(t) \overline{\phi(t-x)}|^{p'}dt\right)^{p/p'}dx\right]^{1/p} \label{Lieb's inequality intermediate}
+						  &\leq A_{p'}^d\left[\int_{\R^d} \left(\int_{\R^d} |f(t) \overline{\phi(t-x)}|^{p'}dt\right)^{p/p'}dx\right]^{1/p}, \label{Lieb's inequality intermediate}
 	\end{align}
 	where the use of Young's inequality \eqref{Young inequality sharp} is justified since we noticed that $fT_x \overline{\phi}$ is in $L^q(\R^d)$ for every $q \in [1,2]$, so in particular it is in $L^{p'}(\R^d)$. Letting $\phi^*(t) = \overline{\phi(-t)}$ and considering the inner integral we have
 	\begin{align*}
@@ -752,7 +764,7 @@ This result is improved by the following theorem due to Lieb.
 	\end{align*}
 	so the expression in \eqref{Lieb's inequality intermediate} is the $L^{p/p'}(\R^d)$ norm of $|f|^{p'} * |\phi^*|^{p'}$. Since both $f$ and $\phi$ are in $L^2(\R^d)$ and $p' \leq 2$ we have that $|f|^{p'},|\phi^*|^{p'} \in L^{2/p'}(\R^d)$. Thanks to Young's theorem \ref{Young theorem} $|f|^{p'} * |\phi^*|^{p'}$ belongs to $L^r(\R^d)$, where $r$ is given by:
 	\begin{equation*}
-		\dfrac{1}{(2/p')} + \dfrac{1}{(2/p')} = 1 + \dfrac{1}{r} \implies r = \dfrac{1}{p'-1} = \dfrac{1}{\frac{p}{p-1}-1} = p-1 = \dfrac{p}{p'}
+		\dfrac{1}{(2/p')} + \dfrac{1}{(2/p')} = 1 + \dfrac{1}{r} \implies r = \dfrac{1}{p'-1} = \dfrac{1}{\frac{p}{p-1}-1} = p-1 = \dfrac{p}{p'},
 	\end{equation*}
 	therefore, using the sharp version of Young's inequality \eqref{Young inequality sharp} in \eqref{Lieb's inequality intermediate} we obtain:
 	\begin{align*}
@@ -763,13 +775,13 @@ This result is improved by the following theorem due to Lieb.
 
 From a direct computation one can see that the adjoint operator of the STFT operator $\V_{\phi}$ is given by the following expression:
 \begin{equation}\label{STFT adjoint}
-	\V_{\phi}^* g(t) = \int_{\R^{2d}} g(x,\omega) \phi(t-x) e^{2 \pi i \omega \cdot t} dxd\omega = \int_{\R^{2d}} g(x,\omega) M_{\omega}T_x \phi (t) dxd\omega\quad \forall g \in L^2(\R^{2d})
+	\V_{\phi}^* g(t) = \int_{\R^{2d}} g(x,\omega) \phi(t-x) e^{2 \pi i \omega \cdot t} dxd\omega = \int_{\R^{2d}} g(x,\omega) M_{\omega}T_x \phi (t) dxd\omega\quad \forall g \in L^2(\R^{2d}).
 \end{equation}
-This adjoint operator appears in the following nice property
+This adjoint operator appears in the following nice property, named \emph{inversion formula for the STFT}.
 \begin{teo}\label{inversion formula theorem}
 	Let $f \in L^2(\R^d)$ and $\phi, \gamma \in L^2(\R^{2d})$ such that $\langle \phi, \gamma \rangle \neq 0$. Then:
 	\begin{equation}\label{inversion formula}
-		f(t) = \dfrac{1}{\langle \phi, \gamma \rangle} \V_{\gamma}^* \V_{\phi} f(t) = \dfrac{1}{\langle \phi, \gamma \rangle} \int_{\R^{2d}} \V_{\phi}f(x,\omega)M_{\omega}T_x \gamma (t) dxd\omega \quad \forall t \in \R^d
+		f(t) = \dfrac{1}{\langle \phi, \gamma \rangle} \V_{\gamma}^* \V_{\phi} f(t) = \dfrac{1}{\langle \phi, \gamma \rangle} \int_{\R^{2d}} \V_{\phi}f(x,\omega)M_{\omega}T_x \gamma (t) dxd\omega \quad \forall t \in \R^d.
 	\end{equation}
 \end{teo}
 \begin{proof}
@@ -844,36 +856,39 @@ Clearly the norm of the Fock space is induced by the following scalar product
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Localization Operators}\label{chapter localization operators}
-One of the main problems in signal analysis or, in general, time-frequency analysis is to extract some informations about signal in order to analyse it. {\color{red}We saw that STFT can be a tool for this purpose, however it has some practical problems: it doubles the dimension of the output and it is highly redundant (SE AVANZA TEMPO).}\\
-In this chapter we see two possible ways to deal with the problem of creating operators able to localize a signal both in time and frequency.
+In the previous chapter we defined the STFT, which, roughly speaking, gives us a 'time-frequency picture' of a signal. Once we have our joint representation, we might be interested in highlighting some of its features, for example, to understand where most of the energy is in phase-space.
+
+In this chapter we will look at two ways in which we can solve the problem of creating operators able to localize a signal.
 \section{Localization with projections}\label{Localization with projections section}
-The most straightforward way to localize a signal, say in the time domain, is to use a sharp cut-off, which means a characteristic function. If we suppose to have a signal $f \in L^2(\R^d)$ and we want to localize it in a measurable subset $T \subseteq \R^d$ of the time domain we can consider the natural projection operator
+Our first attempt to localize a signal is arguably the most straightforward one, namely using a sharp cutoff. If we suppose to have a signal $f \in L^2(\R^d)$ and we want to localize it in a measurable subset $T \subseteq \R^d$ of the time domain we can consider the natural projection operator:
 \begin{equation}\label{time projection operator}
-	P_T : L^2(\R^d) \rightarrow L^2(\R^d) \quad P_T f(t) = \chi_T(t) f(t)
+	P_T : L^2(\R^d) \rightarrow L^2(\R^d) \quad P_T f(t) = \chi_T(t) f(t).
 \end{equation}
-This is clearly a projection operator, which means that $P_T^2 = P_T = P_T^*$.\\
-In the same fashion we can define an operator able to localize on a measurable subset $\Omega \subseteq \R^d$ in the frequency domain. Their definition it is not as direct as the one for time projections but it is still easy to understand
+This is clearly a projection operator, which means that $P_T^2 = P_T = P_T^*$.
+
+In the same fashion we can define an operator able to localize on a measurable subset $\Omega \subseteq \R^d$ in the frequency domain. Its definition it is not as direct as the one for time projections but it is still easy to understand:
 \begin{equation}\label{frequency projection operator}
-	Q_{\Omega} : L^2(\R^d) \rightarrow L^2(\R^d) \quad Q_{\Omega} f(t) = \F^{-1} \left(\chi_{\Omega} \F f \right)(t) = \int_{\Omega} \hat{f}(\omega) e^{2 \pi i \omega \cdot t} d\omega
+	Q_{\Omega} : L^2(\R^d) \rightarrow L^2(\R^d) \quad Q_{\Omega} f(t) = \F^{-1} \left(\chi_{\Omega} \F f \right)(t) = \int_{\Omega} \hat{f}(\omega) e^{2 \pi i \omega \cdot t} d\omega.
 \end{equation}
-It is also quite simple to show that this is a projection operator
+It is also quite simple to show that this is a projection operator:
 \begin{align*}
-	&Q_{\Omega}^2 = \F^{-1} \chi_{\Omega} \F \F^{-1} \chi_{\Omega} \F = \F^{-1} \chi_{\Omega} \chi_{\Omega} \F = \F^{-1} \chi_{\Omega} \F = Q_{\Omega}\\
-	&Q_{\Omega}^* = \left( \F^{-1} \chi_{\Omega} \F\right)^* = \F^* \chi_{\Omega}^* \left(F^{-1}\right)^* = \F^{-1} \chi_{\Omega} \F = Q_{\Omega}
+	&Q_{\Omega}^2 = \F^{-1} \chi_{\Omega} \F \F^{-1} \chi_{\Omega} \F = \F^{-1} \chi_{\Omega} \chi_{\Omega} \F = \F^{-1} \chi_{\Omega} \F = Q_{\Omega};\\
+	&Q_{\Omega}^* = \left( \F^{-1} \chi_{\Omega} \F\right)^* = \F^* \chi_{\Omega}^* \left(\F^{-1}\right)^* = \F^{-1} \chi_{\Omega} \F = Q_{\Omega},
 \end{align*}
 where we used the fact that the Fourier transform is a unitary operator on $L^2(\R^d)$, namely that $\F^* = \F^{-1}$.\\
-Moreover, both operators have norm less or equal than 1, independently of $T$ and $\Omega$:
+Since both operators are projections, their norm is less or equal than 1, independently of $T$ and $\Omega$, indeed:
 \begin{align*}
-	&\| P_T f \|_{L^2(\R^d)} = \| f \|_{L^2(T)} \leq \| f \|_{L^2(\R^d)} \\
-	&\| Q_{\Omega} f \|_{L^2(\R^d)} = \| \F^{-1} \chi_{\Omega} \F f\|_{L^2(\R^d)} \overset{\text{Plancherel}}{=} \| \F f\|_{L^2(\Omega)} \leq \| \F f \|_{L^2(\R^d)} \overset{\text{Plancherel}}{=} \| f \|_{L^2(\R^d)}
+	&\| P_T f \|_{L^2(\R^d)} = \| f \|_{L^2(T)} \leq \| f \|_{L^2(\R^d)};\\
+	&\| Q_{\Omega} f \|_{L^2(\R^d)} = \| \F^{-1} \chi_{\Omega} \F f\|_{L^2(\R^d)} \overset{\text{Plancherel}}{=} \| \F f\|_{L^2(\Omega)} \leq \| \F f \|_{L^2(\R^d)} \overset{\text{Plancherel}}{=} \| f \|_{L^2(\R^d)}.
 \end{align*}
 
-After defining these projection operators we may think to combine them into a single operator
+Clearly, those operators do not answer our original question about localization in time-frequency, since $P_T$ and $Q_{\Omega}$ act only in time and frequency, respectively. However, we may think to combine these projections into a single operator:
 \begin{equation*}\label{composition of projections}
-	Q_{\Omega} P_T, \; P_T Q_{\Omega} : L^2(\R^d) \rightarrow L^2(\R^d)
+	Q_{\Omega} P_T, \; P_T Q_{\Omega} : L^2(\R^d) \rightarrow L^2(\R^d),
 \end{equation*}
-which hopefully is able to localize a signal both in time and frequency ``near'' to the set $T \times \Omega$.\\
-It is clear that these operators are linear and bounded, in particular their norms are less or equal than 1. We notice that these operators are one the adjoint of the other, indeed:
+which hopefully are able to localize a signal both in time and frequency ``near'' to the set $T \times \Omega$.
+
+It is clear that these operators are linear and bounded, in particular their norms are less or equal than 1. Moreover, they are one the adjoint of the other, indeed:
 \begin{equation}\label{projection operators adjoint}
 	(Q_{\Omega} P_T)^* = P_T^* Q_{\Omega}^* = Q_{\Omega} P_T.
 \end{equation}
@@ -882,41 +897,39 @@ Up to now the only (essential) hypothesis on $T$ and $\Omega$ is that they are m
 \begin{prop}\label{projection operators are Hilbert-Schmidt}
 	Let $T,\Omega \subset \R^d$ with finite measure. Then $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$ are Hilbert-Schmidt integral operators of the form
 	\begin{align}
-		Q_{\Omega} P_T f(x) &= \int_{\R^d} K(x,t) f(t) dt \\
-		P_T Q_{\Omega} f(x) &= \int_{\R^d} \overline{K(t,x)}f(t)dt
+		Q_{\Omega} P_T f(x) &= \int_{\R^d} K(x,t) f(t) dt; \\
+		P_T Q_{\Omega} f(x) &= \int_{\R^d} \overline{K(t,x)}f(t)dt,
 	\end{align}
 	where
 	\begin{equation}\label{integral kernel projection operators}
-		K(x,t) = \chi_T(t) \int_{\Omega} e^{2 \pi i \omega \cdot (x-t)}d\omega
+		K(x,t) = \chi_T(t) \int_{\Omega} e^{2 \pi i \omega \cdot (x-t)}d\omega,
 	\end{equation}
 	which has $\| K \|_{L^2(\R^{2d})} = \sqrt{|T||\Omega|}$.
 \end{prop}
 \begin{proof}
 	Given $f \in L^2(\R^d)$ we have:
 	\begin{align*}
-		Q_{\Omega}P_T f(x) = \int_{\Omega} e^{2 \pi i \omega \cdot x} \left(\int_{T} e^{-2\pi i \omega \cdot t} f(t)dt\right)d\omega \overset{\mathrm{Fubini}}{=} \int_{\R^d} \chi_T(t) \left(\int_{\Omega} e^{2 \pi i \omega \cdot (x -t)} d\omega\right)f(t)dt
+		Q_{\Omega}P_T f(x) = \int_{\Omega} e^{2 \pi i \omega \cdot x} \left(\int_{T} e^{-2\pi i \omega \cdot t} f(t)dt\right)d\omega \overset{\mathrm{Fubini}}{=} \int_{\R^d} \chi_T(t) \left(\int_{\Omega} e^{2 \pi i \omega \cdot (x -t)} d\omega\right)f(t)dt,
 	\end{align*}
-	where the use of Fubini's theorem is allowed since $\Omega$ and $T$ have finite measure. This gives us the expression of $Q_{\Omega}P_T$. In order to obtain also the expression for $P_T Q_{\Omega}$ it suffices to recall from \eqref{projection operators adjoint} that $(Q_{\Omega} P_T)^* = P_T Q_{\Omega}$. Therefore, the integral kernel of $P_T Q_{\Omega}$ is given by Proposition \ref{condition integral operator self-adjoint}. Lastly, from Theorem \ref{representation of Hilbert-Schmidt integral operator} we have that $\|Q_{\Omega} P_T\|_{\mathrm{HS}} = \|P_T Q_{\Omega}\|_{\mathrm{HS}} = \|K\|_{L^2(\R^{2d})}$, and:
+	where the use of Fubini's theorem is allowed since $\Omega$ and $T$ have finite measure. This gives us the expression of $Q_{\Omega}P_T$. In order to obtain also the expression for $P_T Q_{\Omega}$ it suffices to recall from \eqref{projection operators adjoint} that $(Q_{\Omega} P_T)^* = P_T Q_{\Omega}$. Therefore, the integral kernel of $P_T Q_{\Omega}$ is given by Proposition \ref{condition integral operator self-adjoint}. Lastly, from Theorem \ref{representation of Hilbert-Schmidt integral operator}, we have that $\|Q_{\Omega} P_T\|_{\mathrm{HS}} = \|P_T Q_{\Omega}\|_{\mathrm{HS}} = \|K\|_{L^2(\R^{2d})}$, and:
 	\begin{align*}
 		\|K\|_{L^2(\R^{2d})} &= \left(\int_{\R^{2d}}   |K(x,t)|^2 dxdt\right)^{1/2} =\\
 							 &= \left(\int_{\R^{2d}} \chi_T(t) \Bigg| \int_{\R^d} e^{2 \pi i \omega \cdot (x-t)} \chi_{\Omega}(\omega)d\omega \Bigg|^2 dxdt \right)^{1/2} = \\
 							 &= \left(\int_{\R^{2d}} \chi_T(t) \big|\F^{-1}(\chi_{\Omega})(x-t)\big|^2dxdt\right)^{1/2} \overset{\mathrm{Tonelli}}{=} \\
 							 &= \left[ \int_{\R^d} \chi_T(t) \left(\int_{\R^d} \big|\F^{-1}(\chi_{\Omega})(x-t)\big|^2 dx\right)dt\right]^{1/2} = \\
 							 &= \left(\int_{\R^d} \| T_t \F^{-1} (\chi_{\Omega})\|_2^2 \chi_T(t)dt\right)^{1/2} \overset{T_t\,\mathrm{isometry} + \mathrm{Plancherel}}{=}\\
-							 &= \| \chi_{\Omega} \|_2 \|\chi_T\|_2 = \sqrt{|T| |\Omega|}
+							 &= \| \chi_{\Omega} \|_2 \|\chi_T\|_2 = \sqrt{|T| |\Omega|}.
 	\end{align*}
 \end{proof}
-If we compare the integral kernels of $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$ we see that $K(x,t) \neq \overline{K(t,x)}$, hence, by proposition \ref{condition integral operator self-adjoint}, we immediately conclude that both operator are not self-adjoint. {\color{red} Since it is better to deal with self-adjoint operators when it comes to spectral properties, it would be nice if we could construct those starting from $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$.} This is easily done by considering:
+If we compare the integral kernels of $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$ we see that $K(x,t) \neq \overline{K(t,x)}$, hence, by Proposition \ref{condition integral operator self-adjoint}, we immediately conclude that both operator are not self-adjoint. We already know that, if possible, it is better to deal with self-adjoint operators, so we should consider the following operators:
 \begin{align}
-	(Q_{\Omega} P_T)^* Q_{\Omega} P_T &= P_T^* Q_{\Omega}^* Q_{\Omega} P_T= P_T Q_{\Omega} P_T\\
-	(P_T Q_{\Omega})^* P_T Q_{\Omega} &= Q_{\Omega}^* P_T^* P_T Q_{\Omega} = Q_{\Omega} P_T Q_{\Omega}
+	(Q_{\Omega} P_T)^* Q_{\Omega} P_T &= P_T^* Q_{\Omega}^* Q_{\Omega} P_T= P_T Q_{\Omega} P_T;\\
+	(P_T Q_{\Omega})^* P_T Q_{\Omega} &= Q_{\Omega}^* P_T^* P_T Q_{\Omega} = Q_{\Omega} P_T Q_{\Omega}.
 \end{align} 
-These are, by construction, self-adjoint operators, and since both $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$ are compact operators (thanks to Proposition \ref{projection operators are Hilbert-Schmidt} and Theorem \ref{Hilbert-Schmidt operators are compact and bounded}) they are also compact (we recall that composition between a general operator and a compact one is compact). Hence, by Theorem \ref{self-adjoint compact operators are diagonalizable} they can be diagonalized.\\
-{\color{red} Aggiungere qualcosa sulle prolate spheroidal wave functions?}
-
+By construction, these are self-adjoint operators, and since both $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$ are compact, thanks to Proposition \ref{projection operators are Hilbert-Schmidt}, Theorem \ref{Hilbert-Schmidt operators are compact and bounded} and Theorem \ref{composition of compact operators is compact} they are also compact. Hence, by Theorem \ref{self-adjoint compact operators are diagonalizable}, they can be diagonalized. In the particular but relevant case where $T$ and $\Omega$ are intervals (disks in the multi-dimensional case) the eigenfunctions of these operators are the \emph{prolate spheroidal wave functions} and have been studied by Slepian, Pollak and Landau in a series of papers \cite{prolate_I, prolate_II, prolate_III, prolate_IV}.
 
 \section{Daubechies' localization operators}\label{Daubechies' localization operators section}
-{\color{red} Projection operators considered in the previous section are powerful tools in signal analysis and quantum mechanics}. Nevertheless they treat time and frequency in a separate way. We already saw that a good tool to simultaneously study a signal in time and frequency is the STFT but we also pointed out its limits. {\color{red} However we can think to construct localization operators using the STFT instead of the Fourier transform}. This is exactly what was done by Ingrid Daubechies in 1988 in \cite{daubechies}. From Theorem \ref{inversion formula theorem} we know that the adjoint operator of $\V_{\phi}$ acts as inverse operator. If we choose a window $\phi \in L^2(\R^{2d})$ normalized, \ref{inversion formula} becomes
+The projection operators considered in the previous section fulfil the task of localizing a signal in both time and frequency. However, they are still treated separately. Indeed, if we consider, for example, $Q_{\Omega} P_T$, we see that at the first moment we perform localization in time and then in frequency. Since our task is to localize in both domains at the same time, it would be more natural to have an operator that treats time and frequency in a joint way. This is exactly what Ingrid Daubechies did in her remarkable 1988-paper \cite{daubechies}. From Theorem \ref{inversion formula theorem} we know that the adjoint operator of $\V_{\phi}$ acts as inverse operator. If we choose a window $\phi \in L^2(\R^{2d})$ normalized, \ref{inversion formula} becomes
 \begin{equation*}
 	f(t) = \V_{\phi}^* \V_{\phi}f(t)
 \end{equation*}
