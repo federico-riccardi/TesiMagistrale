@@ -60,6 +60,7 @@ sorting=nyt
 
 \newcommand{\R}{\mathbb{R}} %scorciatoia per R reali
 \newcommand{\N}{\mathbb{N}} %scorciatoia per N naturali
+\newcommand{\Q}{\mathbb{Q}} %scorciatioia per Q razionali
 \newcommand{\V}{\mathcal{V}} %STFT
 \newcommand{\F}{\mathscr{F}} %Fourier transform
 \newcommand{\Fock}{\mathcal{F}} %Fock space
@@ -95,9 +96,9 @@ sorting=nyt
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Preliminaries}\label{chapter preliminaries}
-In this first chapter we briefly recall some basic definition and results on functional analysis and Fourier transform. In section \ref{section basics of functional analysis} basic concepts about operators between Banach and Hilbert spaces are presented. In addition, certain classes of operators, namely the trace class and the Hilbert-Schmidt class, are introduced with some of their most important properties. Then in section \ref{Fourier transform and its properties section} Fourier transform is defined and some of its essential properties are given.
+In the first chapter we briefly recall some basic definitions and results of functional and Fourier analysis. In section \ref{section basics of functional analysis} basic concepts about operators between Banach and Hilbert spaces are presented. In addition, certain classes of operators, namely the trace class and the Hilbert-Schmidt class, are introduced with some of their most important properties. Then, in section \ref{Fourier transform and its properties section} Fourier transform is defined and some of its essential properties are given.
 \section{Basics of Functional Analysis}\label{section basics of functional analysis}
-In this section we turn our attention to linear operators between Banach spaces. Throughout the section, we will refer to a generic Banach space as $X$ (or $Y$) endowed with the norm $\| \cdot \|_X$. If we are dealing with a Hilbert space, we will denote it by $H$ (or $K$) and its inner product by $\langle \cdot, \cdot \rangle_H$. {\color{red}Pedex in the norm and scalar product may be dropped in case there is no ambiguity}. {\color{red} Moreover, the whole theory is presented under the assumption that we are dealing with infinite dimensional spaces, but, unless otherwise stated, everything can be adapted almost directly for finite dimensional spaces.}
+In this section we turn our attention to linear operators between Banach spaces. Throughout the section we will refer to a generic Banach space as $X$ (or $Y$), endowed with the norm $\| \cdot \|_X$. If we are dealing with a Hilbert space, we will denote it by $H$ (or $K$) and its inner product by $\langle \cdot, \cdot \rangle_H$. {\color{red}Pedex in the norm and scalar product may be dropped in case there is no ambiguity}. {\color{red} Moreover, the whole theory is presented under the assumption that we are dealing with infinite dimensional spaces, but, unless otherwise stated, everything can be adapted almost directly for finite dimensional spaces.}
 
 A generic linear operator between two Banach spaces $X$ and $Y$ is denoted as $T : X \rightarrow Y$. As a standard notation, the image of $x \in X$ through $T$ is indicated as $T(x)$, or equivalently as $Tx$.
 \begin{defi}\label{bounded operator}
@@ -110,7 +111,7 @@ For linear operators,  boundedness is strictly related to continuity, as the fol
 \begin{teo}\label{equivalente boundedness continuity}
 	For a linear operator $T$ the following statements are equivalent:
 	\begin{itemize}
-		\item $T$ is continuous
+		\item $T$ is continuous;
 		\item $T$ is bounded.
 	\end{itemize}
 \end{teo}
@@ -195,7 +196,7 @@ In light of Theorem \ref{self-adjoint compact operators are diagonalizable}, it 
 \subsection{Trace class and Hilbert-Schmidt operators}
 In this section we are going to introduce two important classes of operators: \emph{trace-class} operators and \emph{Hilbert-Schmidt} operators.
 
-The trace of an operator can be defined as it is for matrices. Before proceeding, however, we must define what does it means for an operator to be non-negative.
+The trace of an operator can be defined as it is for matrices. Before proceeding, however, we must define what it means for an operator to be non-negative.
 \begin{defi}\label{non-negative operator}
 	Let $H$ be an Hilbert space. An operator $T \in \B(H)$ is said \textbf{non-negative} if
 	\begin{equation}\label{non-negative operator formula}
@@ -414,7 +415,7 @@ We can now turn back to trace-class operator. It is evident that trace-class ope
 \begin{equation*}
 	\mathrm{tr}|T| = \sum_{n=1}^{+\infty} \langle |T|e_n, e_n \rangle = \sum_{n=1}^{+\infty} \|\sqrt{|T|}e_n\|^2 = \| T \|_{\mathrm{HS}}^2,
 \end{equation*}
-so, an operator is trace-class if and only if $\sqrt{|T|}$ is Hilbert-Schmidt. By virtue of this link we can exploit properties of Hilbert-Schmidt operators in order to obtain informations about trace-class operators. First of all, we are going to prove that expression \eqref{trace expression} is well-defined for every trace-class operator and not only for non-negative ones.
+so, an operator is trace-class if and only if $\sqrt{|T|}$ is Hilbert-Schmidt. By virtue of this link, we can exploit properties of Hilbert-Schmidt operators in order to obtain information about trace-class operators. First of all, we are going to prove that expression \eqref{trace expression} is well-defined for every trace-class operator and not only for non-negative ones.
 \begin{teo}
 	Let $T \in \B(H)$ be a trace-class operator and $\{e_n\}_{n \in \N}$ an orthonormal basis of $H$. Then $\sum_{n=1}^{+\infty} \langle Te_n,e_n \rangle$ converges absolutely and the limit is independent of the basis.
 \end{teo}
@@ -469,7 +470,7 @@ In the special case $H = L^2(\R^d)$ we are able to give a characterization of Hi
 		\| T_K f \|_{L^2(\R^d)}^2 &= \int_{\R^{d}} |T_K f(x)|^2 dx = \int_{\R^d} \Big|\int_{\R^{d}} K(x,y) f(y) dy\Big|^2 dx \leq\\
 						&\leq \int_{\R^d} \left(\int_{\R^{d}} |K(x,y)| |f(y)| dy\right)^2 dx.
 	\end{align*}
-	From Fubini's theorem we have that $|K(x,\cdot)| \in L^2(\R^d)$ for almost every $x \in \R^d$. Therefore, we can apply Cauchy-Schwartz's inequality in the inner integral, thus obtaining:
+	From Fubini's theorem we have that $|K(x,\cdot)| \in L^2(\R^d)$ for almost every $x \in \R^d$. Therefore, we can apply Cauchy-Schwarz's inequality in the inner integral, thus obtaining:
 	\begin{equation}\label{representation of Hilbert-Schmidt integral operator bound 1}
 		\| T_K f \|_{L^2(\R^d)}^2 \leq \|f\|_{L^2(\R^d)}^2 \int_{\R^d} \int_{\R^{d}} |K(x,y)|^2 dy dx = \| K \|_{L^2(\R^{2d})}^2 \|f\|_{L^2(\R^d)}
 	\end{equation}
@@ -600,7 +601,7 @@ Moreover, time-shift and modulation operators can be combined into a \emph{time-
 \begin{equation}\label{time-frequency shift def}
 	\pi(x,\xi) f(t) = M_{\xi} T_x f(t) \quad \forall\, t \in \R^d.
 \end{equation}
-It is easy to check that all these operator are isometric (with respect to the $L^1$ norm) isomorphism. We show how these operator act under the Fourier transform.
+It is easy to check that all these operators are isometric isomorphisms with respect to the $L^1$ norm. We show how these operators act under the Fourier transform.
 \begin{prop}\label{properties of translation modulation and dilation operators}
 	Let $f \in L^1(\R^d)$. Then the following holds:
 	\begin{enumerate}[label=(\roman*)]
@@ -802,7 +803,7 @@ This adjoint operator appears in the following nice property, named \emph{invers
 		(\V_{\gamma}^* \V_{\phi} - \langle \gamma, \phi \rangle I)f = 0 \implies \dfrac{1}{\langle \gamma, \phi \rangle}\V_{\gamma}^* \V_{\phi} f = f.
 	\end{equation*}
 \end{proof}
-Therefore the adjoint operator $\V_{\gamma}^*$ acts, in some sense, as an inverse operator. This will be of paramount importance in the following.
+Therefore, the adjoint operator $\V_{\gamma}^*$ acts, in some sense, as an inverse operator. This will be of paramount importance afterwards.
 \section{Bargmann Transform and Fock Space}\label{section Fock Space and Bargmann transform}
 {\color{blue} Throughout this section we will consider the STFT with Gaussian window.} We choose
 \begin{equation}\label{gaussian normalized}
@@ -816,28 +817,28 @@ Our aim now is to rearrange the terms in the above expression in order to make $
 \begin{align*}
 	\V_{\varphi}f(x,\omega) &= 2^{d/4} \int_{\R^d} f(t) e^{-\pi |t|^2 + 2 \pi x \cdot t - \pi |\omega|^2} e^{ - 2 \pi i \omega \cdot t} dt\\
 							&= 2^{d/4} \int_{\R^d} f(t) e^{-\pi |t|^2} e^{2 \pi (x - i \omega) \cdot t} e^{-\frac{\pi}{2}\left(|x|^2 - 2 i x \cdot \omega - |\omega|^2\right)} e^{-\frac{\pi}{2}\left(|x|^2 + |\omega|^2 + 2 i x \cdot \omega\right)}dt\\
-							&= 2^{d/4} e^{-\pi i x \cdot \omega} e^{-\frac{\pi}{2}\left(|x|^2 + |\omega|^2\right)} \int_{\R^d} f(t) e^{-\pi |t|^2} e^{2 \pi (x-i\omega) \cdot t}e^{-\frac{\pi}{2}(x-i\omega)^2}dt
+							&= 2^{d/4} e^{-\pi i x \cdot \omega} e^{-\frac{\pi}{2}\left(|x|^2 + |\omega|^2\right)} \int_{\R^d} f(t) e^{-\pi |t|^2} e^{2 \pi (x-i\omega) \cdot t}e^{-\frac{\pi}{2}(x-i\omega)^2}dt.
 \end{align*}
-The rearrangement may seem arbitrary but actually is done is such a way that inside the integral $x$ and $\omega$ enter only via $\overline{z}$.
+The rearrangement may seem arbitrary, but actually it is done in such a way that inside the integral $x$ and $\omega$ enter only via $\overline{z}$.
 \begin{defi}\label{Bargmann transform}
 	The \textbf{Bargmann transform} of a function $f$ on $\R^d$ is the function $\Barg f$ on $\C^d$ given by
 	\begin{equation}\label{Bargmann transform formula}
-		\Barg f(z) = 2^{d/4} \int_{\R^d} f(t) e^{2 \pi t \cdot z - \pi |t|^2 - \frac{\pi}{2}z^2}dt
+		\Barg f(z) = 2^{d/4} \int_{\R^d} f(t) e^{2 \pi t \cdot z - \pi |t|^2 - \frac{\pi}{2}z^2}dt.
 	\end{equation}
 \end{defi}
-We recall that a function defined over $C^d$ is \emph{entire} if it is holomorphic over all $\C^d$.
+We recall that a function defined over $\C^d$ is \emph{entire} if it is holomorphic over all $\C^d$.
 \begin{defi}\label{Fock space}
 	The \textbf{Fock space} $\Fock^2(\C^d)$ is the Hilbert space of all entire functions $F$ on $\C^d$ for which the norm
 	\begin{equation}\label{Fock space norm}
-		\|F\|^2_{\Fock} = \int_{\C^d} |F(z)|^2 e^{-\pi |z|^2}dz
+		\|F\|^2_{\Fock^2} = \int_{\C^d} |F(z)|^2 e^{-\pi |z|^2}dz
 	\end{equation}
 	is finite.
 \end{defi}
 Clearly the norm of the Fock space is induced by the following scalar product
 \begin{equation}\label{Fock space scalar product}
-	\langle F,G \rangle_{\Fock} \int_{\C^d} F(z) \overline{G(z)} e^{-\pi |z|^2}dz
+	\langle F,G \rangle_{\Fock^2} \int_{\C^d} F(z) \overline{G(z)} e^{-\pi |z|^2}dz
 \end{equation}
-\begin{prop}
+\begin{prop}\label{connection between Bargmann tranform and STFT proposition}
 	If $f$ is a function on $\R^d$ with polynomial growth then its Bargmann transform $\Barg f$ is an entire function on $\C^d$. Moreover, letting $z = x + i\omega$, the Bargmann transform of $f$ is related to its STFT through the following
 	\begin{equation}\label{connection between Bargmann transform and STFT}
 		\V_{\varphi} f(x,-\omega) = e^{\pi i x \cdot \omega} \Barg f(z) e^{-\pi |z|^2/2}
@@ -846,10 +847,10 @@ Clearly the norm of the Fock space is induced by the following scalar product
 \begin{proof}
 	contenuto...
 \end{proof}
-\begin{prop}
+\begin{prop}\label{Bargmann transform is an isometry}
 	If $f \in L^2(\R^d)$ then
 	\begin{equation}
-		\|f\|_2 = \left(\int_{\C^d} |\Barg f(z)|^2 e^{-\pi |z|^2}dz\right)^{1/2} = \|\Barg f\|_{\Fock}.
+		\|f\|_2 = \left(\int_{\C^d} |\Barg f(z)|^2 e^{-\pi |z|^2}dz\right)^{1/2} = \|\Barg f\|_{\Fock^2}.
 	\end{equation}
 	Thus $\Barg$ is an isometry from $L^2(\R^d)$ into $\Fock^2(\C^d)$.
 \end{prop}
@@ -929,57 +930,61 @@ If we compare the integral kernels of $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$ we s
 By construction, these are self-adjoint operators, and since both $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$ are compact, thanks to Proposition \ref{projection operators are Hilbert-Schmidt}, Theorem \ref{Hilbert-Schmidt operators are compact and bounded} and Theorem \ref{composition of compact operators is compact} they are also compact. Hence, by Theorem \ref{self-adjoint compact operators are diagonalizable}, they can be diagonalized. In the particular but relevant case where $T$ and $\Omega$ are intervals (disks in the multi-dimensional case) the eigenfunctions of these operators are the \emph{prolate spheroidal wave functions} and have been studied by Slepian, Pollak and Landau in a series of papers \cite{prolate_I, prolate_II, prolate_III, prolate_IV}.
 
 \section{Daubechies' localization operators}\label{Daubechies' localization operators section}
-The projection operators considered in the previous section fulfil the task of localizing a signal in both time and frequency. However, they are still treated separately. Indeed, if we consider, for example, $Q_{\Omega} P_T$, we see that at the first moment we perform localization in time and then in frequency. Since our task is to localize in both domains at the same time, it would be more natural to have an operator that treats time and frequency in a joint way. This is exactly what Ingrid Daubechies did in her remarkable 1988-paper \cite{daubechies}. From Theorem \ref{inversion formula theorem} we know that the adjoint operator of $\V_{\phi}$ acts as inverse operator. If we choose a window $\phi \in L^2(\R^{2d})$ normalized, \ref{inversion formula} becomes
+The projection operators considered in the previous section fulfil the task of localizing a signal in both time and frequency. However, those are still treated separately. Indeed, if we consider, for example, $Q_{\Omega} P_T$, we see that at the first moment we perform localization in time and only then in frequency. Since our task is to localize in both domains at the same time, it would be more natural to have an operator that treats time and frequency in a joint way. This is exactly what Ingrid Daubechies did in her remarkable 1988-paper \cite{daubechies}. 
+
+In Chapter \ref{chapter STFT} we defined a time-frequency representation of a signal, namely the STFT. Therefore, to reach our goal, it seems more natural to use STFT instead of the Fourier transform. Moreover, from Theorem \ref{inversion formula theorem} we know that the adjoint operator of $\V_{\phi}$ acts, in some sense, as an inverse operator. If we choose a window $\phi \in L^2(\R^{2d})$ normalized, \ref{inversion formula} becomes
 \begin{equation*}
-	f(t) = \V_{\phi}^* \V_{\phi}f(t)
+	f(t) = \V_{\phi}^* \V_{\phi}f(t).
 \end{equation*}
-The key idea is to multiply $\V_{\phi} f$ by a \emph{weight function} $F(\omega,t)$, which logically should highlight some features of $\V_{\phi}f$ :
+The key idea is to multiply $\V_{\phi} f$ by a \emph{weight function} $F(x,\omega)$, which logically should highlight some features of $\V_{\phi}f$, before applying the adjoint operator. This leads to the definition of \emph{time-frequency localization operators}:
 \begin{equation}\label{Daubechies' localization operator def}
-	L_{F,\phi} : L^2(\R^d) \rightarrow L^2(\R^d) \quad L_{F,\phi}f(t) = \V_{\phi}^* F \V_{\phi} f(t)
+	L_{F,\phi} : L^2(\R^d) \rightarrow L^2(\R^d), \quad L_{F,\phi}f(t) = \V_{\phi}^* F \V_{\phi} f(t).
 \end{equation}
-Related to this localization operator is the sesquilinear form $\L_{F,\phi} : L^2(\R^d) \times L^2(\R^d) \rightarrow \R$ defined by the expression
+Related to this localization operator is the sesquilinear form $\L_{F,\phi} : L^2(\R^d) \times L^2(\R^d) \rightarrow \R$ defined by the expression:
 \begin{equation}\label{sesquilinear form localization operator}
-	\L_{F,\phi}(f,g) = \int_{\R^{2d}} F(x,\omega) \V_{\phi}f(x,\omega) \overline{\V_{\phi}g(x,\omega)} dxd\omega
+	\L_{F,\phi}(f,g) = \int_{\R^{2d}} F(x,\omega) \V_{\phi}f(x,\omega) \overline{\V_{\phi}g(x,\omega)} dxd\omega.
 \end{equation}
-Indeed, assuming $\L_{F,\phi}$ is bounded, we could define $ L_{F,\phi} f$ through Riesz' representation theorem as the only element of $L^2(\R^d)$ such that
+Indeed, assuming $\L_{F,\phi}$ is bounded, we could define $ L_{F,\phi} f$ through Riesz' representation theorem as the only element of $L^2(\R^d)$ such that:
 \begin{equation}\label{L_F through duality}
-	\L_{F,\phi}(f,g) = \langle L_{F,\phi}f,g \rangle  = \int_{\R^d} L_{F,\phi}f(t) \overline{g(t)}\quad \forall g \in L^2(\R^d)
+	\L_{F,\phi}(f,g) = \langle L_{F,\phi}f,g \rangle  = \int_{\R^d} L_{F,\phi}f(t) \overline{g(t)}\quad \forall g \in L^2(\R^d).
 \end{equation}
 and therefore $L_{F,\phi}$ as the function which maps $f$ into its representation.
 
+
+Now that we have defined time-frequency localization operators our goal is to study their properties, starting from boundedness, compactness and the {\color{blue} appartenenza} to trace class or Hilbert-Schmidt class. We recall that the window function $\phi \in L^2(\R^d)$ is fixed, so it is clear that the properties of $L_{F,\phi}$ will depend upon $F$.
 \begin{prop}\label{F in L^p L_F bounded}
 	Let $F \in L^p(\R^{2d})$ for $p \in [1,+\infty]$. Then $L_{F,\phi}$ is bounded and $\|L_{F,\phi}\| \leq \|F\|_p$.
 \end{prop}
 \begin{proof}
-	Let $f,g \in L^2(\R^d)$. We have:
+	Letting $f,g \in L^2(\R^d)$, we have:
 	\begin{align*}
-		|\L_{F,\phi} (f,g)| \leq \int_{\R^{2d}} |F(x,\omega)| |\V_{\phi}f(x,\omega)| |\V_{\phi}g(x,\omega)| dxd\omega 
+		|\L_{F,\phi} (f,g)| \leq \int_{\R^{2d}} |F(x,\omega)| |\V_{\phi}f(x,\omega)| |\V_{\phi}g(x,\omega)| dxd\omega.
 	\end{align*}
 	From \eqref{STFT is in L^p for p>=2} we know that, given $f \in L^2(\R^d)$, $\V_{\phi} f \in L^p(\R^d)$ for every $p \in [2,+\infty]$ and $\|\V_{\phi} f\|_p \leq \|f\|_2$. We want to find an exponent $q \geq 2$ in order to apply (generalized) H\"older's inequality:
 	\begin{align*}
 		\dfrac{1}{p} + \dfrac{1}{q} + \dfrac{1}{q} = 1 \implies q =  \dfrac{2p}{p-1},
 	\end{align*}
-	which is greater or equal than 2 regardless of $p$. Applying H\"older's inequality with exponents $p$, $q$ and $q$ we have:
+	which is greater or equal than 2, regardless of $p$. Applying H\"older's inequality with exponents $p$, $q$ and $q$ we have:
 	\begin{align*}
 		|\L_{F,\phi} (f,g)| \leq \|F\|_p \|\V_{\phi}f\|_q \|\V_{\phi}g\|_q \leq \|F\|_p \|f\|_2 \|g\|_2.
 	\end{align*}
 	Taking the supremum above all normalized $f,g \in L^2(\R^d)$ gives us the boundedness of $\L_{F,\phi}$ and, in the end, of $L_{F,\phi}$.
 \end{proof}
 
-In previous section we managed to prove that projection operators $Q_{\Omega}P_T$ and $P_T Q_{\Omega}$ are Hilbert-Schmidt operators, provided both $T$ and $\Omega$ have finite measure, which is equivalent to asking that $\chi_T$ and $\chi_{\Omega}$ are in $L^1(\R^d)$. An analogous result holds for Daubechies's localization operators.
+In previous section we managed to prove that projection operators $Q_{\Omega}P_T$ and $P_T Q_{\Omega}$ are Hilbert-Schmidt operators, provided both $T$ and $\Omega$ have finite measure, which is equivalent to asking that $\chi_T$ and $\chi_{\Omega}$ are in $L^1(\R^d)$. An analogous result holds for Daubechies' localization operators.
 \begin{teo}\label{F integrable L_F Hilbert-Schmidt}
 	Let $F \in L^1(\R^{2d})$. Then $L_{F,\phi}$ is an Hilbert-Schmidt integral operator with kernel
 	\begin{equation}\label{integral kernel localization operator}
-		K_F(s,t) = \int_{\R^{2d}} F(x,\omega) M_{\omega} T_x \phi(s) \overline{M_{\omega} T_x \phi(t)} dx d\omega
+		K_F(s,t) = \int_{\R^{2d}} F(x,\omega) M_{\omega} T_x \phi(s) \overline{M_{\omega} T_x \phi(t)} dx d\omega.
 	\end{equation}
-	Moreover $\|K_F\|_2 \leq \|F\|_1$.
+	Moreover, $\|K_F\|_2 \leq \|F\|_1$.
 \end{teo}
 \begin{proof}
 		Let $f,g \in L^2(\R^d)$. We begin showing that $F(x,\omega) f(t) \overline{M_{\omega}T_{x} \phi(t)} \, \overline{g(s)}M_{\omega}T_x \phi(s)$ belongs to $L^1(\R^{2d} \times \R^d \times \R^d)$:
 	\begin{align*}
 		&\int_{\R^{4d}} |F(x,\omega) f(t) \overline{M_{\omega}T_{x} \phi(t)} \, \overline{g(s)}M_{\omega}T_x \phi(s)| dx d\omega dt ds \overset{\mathrm{Tonelli}}{=}\\
 		&= \int_{\R^{2d}} |F(x,\omega)|\left( \int_{\R^d} |f(t)| |M_{\omega}T_x \phi(t)|dt\right) \left( \int_{\R^d} |g(s)| |M_{\omega}T_x g(s)|ds\right)dx d\omega \overset{\mathrm{C-S}}{\leq} \\
-		&\leq \|f\|_2 \|\phi\|_2 \|g\|_2 \|\phi\|_2 \int_{\R^{2d}} |F(x,\omega)|dx d\omega = \|F\|_1 \|f\|_2 \|g\|_2
+		&\leq \|f\|_2 \|\phi\|_2 \|g\|_2 \|\phi\|_2 \int_{\R^{2d}} |F(x,\omega)|dx d\omega = \|F\|_1 \|f\|_2 \|g\|_2.
 	\end{align*}
 	Now we can apply Fubini's theorem in the expression of $\langle L_{F,\phi}f,g\rangle$:
 	\begin{align*}
@@ -987,24 +992,24 @@ In previous section we managed to prove that projection operators $Q_{\Omega}P_T
 									  &= \int_{\R^d} \left[\int_{\R^d}\left( \int_{\R^{2d}} F(x,\omega) M_{\omega}T_x \phi(s) \overline{M_{\omega} T_x \phi(t)} dx d\omega \right) f(t) dt\right] \overline{g(s)}ds = \\
 									  &= \int_{\R^d} \left(\int_{\R^d} K_F(s,t) f(t)dt\right) \overline{g(s)} ds.
 	\end{align*}
-	Since this holds for every $f$ and $g$ we can conclude that $L_{F,\phi} f = \int_{\R^d} K_F(\cdot,t) f(t)dt $. In order to prove that $L_{F,\phi}$ is Hilbert-Schmidt all we have left to do is to show that $K_F \in L^2(\R^{2d})$:
+	Since this holds for every $f$ and $g$ we can conclude that $L_{F,\phi} f = \int_{\R^d} K_F(\cdot,t) f(t)dt $. Thanks to Proposition \ref{Hilbert-Schmidt integral operator}, we know that such integral operator is an Hilbert-Schmidt operator if and only if $K_F \in L^2(\R^{2d})$, so all we have to do is to compute its norm.
 	\begin{align*}
 		\|K_F\|_2^2 &= | \langle K_F, K_F \rangle |\leq \int_{\R^{2d}} \left( \int_{\R^{2d}} |F(x,\omega)| |M_{\omega}T_x \phi(s)| |M_{\omega} T_x \phi(t)| dx d\omega\right)\\
 					&\phantom{=| \langle K_F, K_F \rangle |\leq \int_{\R^{2d}}} \! {\cdot} \left(\int_{\R^{2d}} |F(y,\xi)| |M_{\xi}T_y \phi(s)| |M_{\xi} T_y \phi(t)| dy d\xi\right) ds dt \overset{\mathrm{Fubini}}{=} \\
 					&= \int_{\R^{4d}} |F(x,\omega)| |F(y,\xi)| \left(\int_{\R} |M_{\omega} T_x \phi(t)| |M_{\xi} T_y \phi(t)| dt\right) \\
-					&\phantom{= \int_{\R^{4d}} |F(x,\omega)| |F(y,\xi)|} \!\cdot\left(\int_{\R} |M_{\omega}T_x \phi(s)| |F(y,\xi)| |M_{\xi}T_y \phi(s)| ds\right) dx d\omega dy d\xi \overset{\mathrm{C-S}}{\leq}\\
+					&\phantom{= \int_{\R^{4d}} |F(x,\omega)| |F(y,\xi)|} \!\cdot\left(\int_{\R} |M_{\omega}T_x \phi(s)| |M_{\xi}T_y \phi(s)| ds\right) dx d\omega dy d\xi \overset{\mathrm{C-S}}{\leq}\\
 					& \leq \|\phi\|_2^4 \int_{\R^{2d}} |F(x,\omega)| dx d\omega \int_{\R^{2d}} |F(y,\xi)| dy d\xi = \|F\|_1^2.
 	\end{align*}
 \end{proof}
-Reminding Theorem \ref{Hilbert-Schmidt operators are compact and bounded} we observe that, if $F$ is integrable, the corresponding localization operator $L_{F,\phi}$ is compact. Moreover, since we have the explicit expression of the integral kernel, from Proposition \ref{condition integral operator self-adjoint} follows immediately the next sufficient condition on $F$ in order to make $L_{F,\phi}$ self-adjoint.
+Reminding  that Hilbert-Schmidt operators are compact (Theorem \ref{Hilbert-Schmidt operators are compact and bounded}) we observe that, if $F$ is integrable, the corresponding localization operator $L_{F,\phi}$ is compact. Moreover, since we have the explicit expression of the integral kernel, from Proposition \ref{condition integral operator self-adjoint} follows immediately the next sufficient condition on $F$ in order to make $L_{F,\phi}$ self-adjoint.
 \begin{prop}\label{condition localization operator self-adjoint}
 	If $F \in L^1(\R^{2d})$ is a real-valued function then $L_{F,\phi}$ is self-adjoint.
 \end{prop}
-We will now prove that localization operators with integrable weight function are trace-class operators. In light of Proposition \ref{trace-class operators are Hilbert-Schmidt}, we highlight that this is a stronger condition than just being an Hilbert-Schmidt operator.
+We will now prove that localization operators with integrable weight function are trace-class operators. We want to emphasize that, in light of Proposition \ref{trace-class operators are Hilbert-Schmidt}, this is a stronger condition than just being an Hilbert-Schmidt operator.
 \begin{teo}\label{F integrable L_F trace-class}
 	Let $F \in L^1(\R^{2d})$. Then $L_{F,\phi}$ is a trace-class operator. Moreover, given an orthonormal basis $\{e_n\}_{n \in \N}$ of $L^2(\R^d)$, the following holds:
 	\begin{equation}\label{trace of localization operators}
-		\sum_{n=1}^{+\infty} |\langle L_{F,\phi}e_n,e_n \rangle| \leq \|F\|_1 \quad \mathrm{tr}L_{F,\phi} = \int_{\R^{2d}} F(x,\omega) dx d\omega
+		\sum_{n=1}^{+\infty} |\langle L_{F,\phi}e_n,e_n \rangle| \leq \|F\|_1 \quad \mathrm{tr}L_{F,\phi} = \int_{\R^{2d}} F(x,\omega) dx d\omega.
 	\end{equation}
 \end{teo}
 \begin{proof}
@@ -1013,21 +1018,20 @@ We will now prove that localization operators with integrable weight function ar
 		\sum_{n=1}^{+\infty} |\langle L_{F,\phi} e_n, e_n \rangle| &= \sum_{n=1}^{+\infty} \Big| \int_{\R^{2d}} F(x,\omega) \V_{\phi}e_n(x,\omega) \overline{\V_{\phi} e_n(x,\omega)} dx d\omega \Big| \leq \\
 																   &\leq \sum_{n=1}^{+\infty} \int_{\R^{2d}} |F(x,\omega)| |\V_{\phi} e_n(x,\omega)\|^2 dxd\omega =\\
 																   &= \int_{\R^{2d}} |F(x,\omega)| \sum_{n=1}^{+\infty} |\langle e_n, M_{\omega}T_x \phi \rangle|^2 dx d\omega \overset{\mathrm{Parseval}}{=}\\
-																   &= \int_{\R^{2d}} |F(x,\omega)| \|M_{\omega} T_x \phi\|_2^2 dx d\omega = \|\phi\|_2^2 \|F\|_1 = \|F\|_1.
+																   &= \int_{\R^{2d}} |F(x,\omega)| \|M_{\omega} T_x \phi\|_2^2 dx d\omega = \|\phi\|_2^2 \|F\|_1 = \|F\|_1,
 	\end{align*}
 	where the exchange between series and integral is due to the monotone convergence theorem. Now that we know that $L_{F,\phi}$ is trace-class we can compute its trace:
 	\begin{align*}
 		\mathrm{tr}L_{F,\phi} &= \sum_{n=1}^{+\infty} \langle L_{F,\phi}e_n e_n \rangle = \sum_{n=1}^{+\infty}  \int_{\R^{2d}} F(x,\omega) |\V_{\phi}e_n(x,\omega)|^2 dx d\omega=\\
-							  &= \lim_{N \rightarrow +\infty} \sum_{n=1}^{N} \int_{\R^{2d}} F(x,\omega) |\V_{\phi}e_n(x,\omega)|^2 dx d\omega =\\
-							  &= \lim_{N \rightarrow +\infty} \int_{\R^{2d}} F(x,\omega) \sum_{n=1}^{N} |\V_{\phi}e_n(x,\omega)|^2 dx d\omega.
+							  &= \lim_{N \rightarrow +\infty} \sum_{n=1}^{N} \int_{\R^{2d}} F(x,\omega) |\V_{\phi}e_n(x,\omega)|^2 dx d\omega.
 	\end{align*}
 	Since
 	\begin{align*}
-		|F(x,\omega)| \sum_{n=1}^{N} |\V_{\phi}e_n(x,\omega)|^2 \leq |F(x,\omega)| \sum_{n=1}^{+\infty} |\V_{\phi}e_n(x,\omega)|^2 = |F(x,\omega)| \in L^1(\R^{2d})
+		|F(x,\omega)| \sum_{n=1}^{N} |\V_{\phi}e_n(x,\omega)|^2 \leq |F(x,\omega)| \sum_{n=1}^{+\infty} |\V_{\phi}e_n(x,\omega)|^2 = |F(x,\omega)| \in L^1(\R^{2d}),
 	\end{align*}
 	we can apply Lebesgue's dominated convergence theorem to conclude that: 
 	\begin{align*}
-		\mathrm{tr}L_{F,\phi} = \lim_{N \rightarrow +\infty} \int_{\R^{2d}} F(x,\omega) \sum_{n=1}^{N} |\V_{\phi}e_n(x,\omega)|^2 dx d\omega = \int_{\R^{2d}} F(x,\omega) dx d\omega.
+		\mathrm{tr}L_{F,\phi} = \lim_{N \rightarrow +\infty} \sum_{n=1}^{N} \int_{\R^{2d}} F(x,\omega) |\V_{\phi}e_n(x,\omega)|^2 dx d\omega = \int_{\R^{2d}} F(x,\omega) dx d\omega.
 	\end{align*}
 \end{proof}
 So far, except for \ref{F in L^p L_F bounded}, we considered only the case $F \in L^1(\R^{2d})$. As the last result of the section we will deal with the more generic case $F \in L^p(\R^{2d})$ for $p < +\infty$.
@@ -1035,23 +1039,25 @@ So far, except for \ref{F in L^p L_F bounded}, we considered only the case $F \i
 	Let $F \in L^p(\R^{2d})$ with $1 \leq p < \infty$. Then the corresponding localization operator $L_{F,\phi}$ is compact.
 \end{prop}
 \begin{proof}
-	Given $F \in L^p(\R^{2d})$ it is sufficient to consider a sequence $F_n$ of functions in $L^1(\R^{2d})$ such that $F_n \rightarrow F$ in $L^p(\R^{2d})$. For example, we can suppose that $F_n$ are in Schwartz's class $\mathcal{S}(\R^{2d})$, which is a well-known dense subspace of $L^p(\R^{2d})$ for $p < +\infty$. Indeed, from Proposition \ref{F in L^p L_F bounded}, we have that $\| L_{F_n,\phi} - L_{F,\phi}\| \leq \|F_n - F\|_p$, so $L_{F_n,\phi} \rightarrow L_{F,\phi}$ in $\B(L^2(\R^d))$. Since $\mathcal{S}(\R^{2d}) \subset L^1(\R^{2d})$, $L_{F_n,\phi}$ are compact, thus also $L_{F,\phi}$ is.
+	Given $F \in L^p(\R^{2d})$, thanks to Theorem \ref{space of compact operators is closed} it is sufficient to consider a sequence $F_n$ of functions in $L^1(\R^{2d})$ such that $F_n \rightarrow F$ in $L^p(\R^{2d})$. For example, we can suppose that $F_n$ are in Schwartz's class $\mathcal{S}(\R^{2d})$, which is a well-known dense subspace of $L^p(\R^{2d})$ for $p < +\infty$. Indeed, from Proposition \ref{F in L^p L_F bounded}, we have that $\| L_{F_n,\phi} - L_{F,\phi}\| \leq \|F_n - F\|_p$, so $L_{F_n,\phi} \rightarrow L_{F,\phi}$ in $\B(L^2(\R^d))$. Since $\mathcal{S}(\R^{2d}) \subset L^1(\R^{2d})$, $L_{F_n,\phi}$ are compact, thus also $L_{F,\phi}$ is.
 \end{proof}
 
-\subsection{Spherically Symmetric Weights}\label{spherically symmetric weights section}
-In this section we will consider the special case in which the window for the STFT is a Gaussian \eqref{gaussian normalized} and the weight $F$ is spherically symmetric. Letting $r_j^2 = x_j^2 + \omega_j^2$ for $j=1,\ldots,d$ and $r^2=(r_1^2\ldots,r_d^2) \in \R^d$, the hypothesis about $F$ can be rephrased in the following way
+\subsection{Spherically Symmetric Weights}\label{section spherically symmetric weights}
+In previous section we managed to prove that, if the weight function $F$ is in $L^p(\R^{2d})$ for some $p < +\infty$ and it is real-valued then the corresponding localization operator $L_{F,\phi}$ is compact and self-adjoint. Thus, it is a natural to ask which are its eigenfuctions with corresponding eigenvalues. However, this in general is not feasible. Hence, we shall consider some specific class of weight and window functions. In particular, in this section we will consider the special case in which the window for the STFT is a Gaussian \eqref{gaussian normalized} and the weight $F$ is spherically symmetric. Letting $r_j^2 = x_j^2 + \omega_j^2$ for $j=1,\ldots,d$ and $r^2=(r_1^2\ldots,r_d^2) \in \R^d$, the hypothesis about $F$ can be rephrased in the following way
 \begin{equation}\label{spherically symmetric weight}
 	F(x,\omega) = \mathdutchcal{F}(r^2).
 \end{equation}
-{\color{blue} In order to highlight the dependence of $F$ through $\mathdutchcal{F}$ the corresponding localization operator will be denoted as $L_{\mathdutchcal{F},\varphi}$}.
-For this operators a complete characterization of the spectrum and eigenspaces is given in \cite{daubechies}. Before stating and proving the theorem we need to introduce some special function, namely \emph{Hermite functions}. In dimension $d=1$ Hermite functions are given by
+In order to highlight the dependence of $F$ through $\mathdutchcal{F}$ the corresponding localization operator will be denoted as $L_{\mathdutchcal{F},\varphi}$.
+For this operators a complete characterization of the spectrum and eigenspaces is given in the already cited paper of Daubechies \cite{daubechies}. 
+
+Before stating we need to introduce some special function, namely \emph{Hermite functions}. In dimension $d=1$, Hermite functions are given by
 \begin{equation}\label{Hermite function 1-dimensional}
-	H_k(t) = \dfrac{2^{1/4}}{\sqrt{k!}}\left(-\dfrac{1}{2\sqrt{\pi}}\right)^k e^{\pi t^2} \dfrac{d^k}{dt^k}\left(e^{-2\pi t^2}\right)
+	H_k(t) = \dfrac{2^{1/4}}{\sqrt{k!}}\left(-\dfrac{1}{2\sqrt{\pi}}\right)^k e^{\pi t^2} \dfrac{d^k}{dt^k}\left(e^{-2\pi t^2}\right),
 \end{equation}
-where $k \in \N$ ($\N$ is supposed to contain also 0). Hermite functions have lots of interesting and useful properties which can be found in \cite[][Section 1.7]{folland_harmonic}. We cite some of them which will be useful in the following.
+where $k \in \N \cup \{0\} \coloneqq \N_0$. Hermite functions have lots of interesting and useful properties. A standard reference is \cite[][Section 1.7]{folland_harmonic}. We cite some of them which will be useful in the following.
 \begin{enumerate}[label=(\roman*)]
-	\item $\{H_k\}_{k \in \N}$ is an orthonormal basis of $L^2(\R)$;
-	\item $H_0(t) = \varphi(t)$ where $\varphi$ is the normalized Gaussian given by \eqref{gaussian normalized};
+	\item $\{H_k\}_{k \in \N_0}$ is an orthonormal basis of $L^2(\R)$;
+	\item $H_0(t) = \varphi(t)$, where $\varphi$ is the normalized Gaussian given by \eqref{gaussian normalized};
 	\item Setting $H_{-1} = 0$, the following recursive relation holds
 	\begin{equation}\label{Hermite functions recursion}
 		2\sqrt{\pi}t H_k = \sqrt{k+1}H_{k+1} + \sqrt{k}H_{k-1} \quad \text{for } k=0,1,\ldots;
@@ -1061,26 +1067,29 @@ where $k \in \N$ ($\N$ is supposed to contain also 0). Hermite functions have lo
 		\F H_k =(-i)^k H_k.
 	\end{equation}
 \end{enumerate}
-Hermite functions in generic dimension are given through multiplication of 1-dimensional Hermite functions. Explicitly, given a multi-index $k = (k_1,\ldots,k_d) \in \N^d$ the corresponding Hermite function is given by
+Hermite functions in generic dimension are just the tensor product of 1-dimensional Hermite functions. Explicitly, given a multi-index $k = (k_1,\ldots,k_d) \in \N_0^d$ the corresponding Hermite function is given by:
 \begin{equation}\label{Hermite function d-dimensional}
 	H_k(t) = \prod_{j=1}^d H_{k_j}(t_j).
 \end{equation}
-It is still true that $d$-dimensional Hermite functions (now ranging between all possible multi-indices) form an orthonormal basis of $L^2(\R^d)$ and using \eqref{Hermite functions are eigenfunctions of Fourier transform} it is easy to see that $d$-dimensional Hermite functions are still eigenfunction of the Fourier transform, namely
+It is still true that $d$-dimensional Hermite functions (now ranging between all possible multi-indices) form an orthonormal basis of $L^2(\R^d)$. Moreover, using \eqref{Hermite functions are eigenfunctions of Fourier transform}, it is easy to see that $d$-dimensional Hermite functions are still eigenfunction of the Fourier transform and that the following holds:
 \begin{equation}\label{d-dimensional Hermite functions are eigenfunctions of Fourier transform}
-	\F H_k = (-i)^{|k|}H_k
+	\F H_k = (-i)^{|k|}H_k,
 \end{equation}
 where $|k|=k_1 + \cdots k_d$ is the length of the multi-index.
+
+The introduction of Hermite functions is necessary, since they are exactly the eigenfunctions of $L_{\mathdutchcal{F}, \varphi}$.
 \begin{teo}\label{eigenvalues and eigenvectors localization operator spherically symmetric weight}
-	Eigenfuctions of $L_{\mathdutchcal{F},\varphi}$ are the $d$-dimensional Hermite functions $H_k$, with corresponding eigenvalues
+	Eigenfuctions of $L_{\mathdutchcal{F},\varphi}$ are the $d$-dimensional Hermite functions $H_k$, with corresponding eigenvalues:
 	\begin{equation}\label{eigenvalues of localization operators with radial weight}
-		\lambda_k = \dfrac{1}{k!}\int_0^{+\infty} {\cdots} \int_0^{+\infty} \mathdutchcal{F}\left(\frac{s_1}{\pi},\ldots,\frac{s_d}{\pi}\right) \left(\prod_{j=1}^{d} s_j^{k_j} \right) e^{-(s_1 + \cdots + s_d)} ds_1 \cdots ds_d
+		\lambda_k = \dfrac{1}{k!}\int_0^{+\infty} {\cdots} \int_0^{+\infty} \mathdutchcal{F}\left(\frac{s_1}{\pi},\ldots,\frac{s_d}{\pi}\right) \left(\prod_{j=1}^{d} s_j^{k_j} \right) e^{-(s_1 + \cdots + s_d)} ds_1 \cdots ds_d,
 	\end{equation}
+	where $k \in \N_0^d$ and $k! = k_1 ! \cdots k_d!$.
 \end{teo}
-Before proving the theorem we need the following lemma:
+Before proving the theorem we need the following lemma.
 \begin{lem}\label{integral of translated Gaussian lemma}
-	Given $z \in \C$ we have
+	Given $z \in \C$, it holds:
 	\begin{equation}\label{integral of translated Gaussian formula}
-		\int_{\R} e^{-2\pi(t^2 + zt)}dt = \dfrac{1}{2^{1/2}} e^{\pi z^2/2}
+		\int_{\R} e^{-2\pi(t^2 + zt)}dt = \dfrac{1}{2^{1/2}} e^{\pi z^2/2}.
 	\end{equation}
 \end{lem}
 \begin{proof}
@@ -1092,58 +1101,58 @@ Before proving the theorem we need the following lemma:
 		\end{align*}
 \end{proof}
 \begin{proof}[Proof of Theorem \ref{eigenvalues and eigenvectors localization operator spherically symmetric weight}]
-	Since Hermite functions are an orthonormal basis of $L^2(\R^n)$ it is sufficient to prove that $\langle  L_{\mathdutchcal{F},\varphi}H_k,H_l\rangle = \langle \mathdutchcal{F} \V_{\varphi}H_k, \V_{\varphi}H_l \rangle =  \lambda_k \prod_{j=1}^d \delta_{k_j,l_j}$, which means that the scalar product is different from zero if and only if $k=l$. We start by computing the STFT of an Hermite function
+	Since Hermite functions are an orthonormal basis of $L^2(\R^n)$ it is sufficient to prove that $\langle  L_{\mathdutchcal{F},\varphi}H_k,H_l\rangle = \langle \mathdutchcal{F} \V_{\varphi}H_k, \V_{\varphi}H_l \rangle =  \lambda_k \prod_{j=1}^d \delta_{k_j,l_j}$, which means that the scalar product is different from zero if and only if $k=l$. We start by computing the STFT of an Hermite function:
 	{\allowdisplaybreaks[1]
-	\begin{align*}
-		\V_{\varphi}H_k(x,\omega) &= \int_{\R^d} H_k(t) e^{-2\pi i \omega \cdot t}\, 2^{d/4} e^{-\pi|t-x|^2}dt = \int_{\R^d} \prod_{j=1}^d H_{k_j}(t_j) e^{-2\pi i \omega \cdot t}\, 2^{d/4} e^{-\pi|t-x|^2}dt =\\
-		&= \prod_{j=1}^{d} 2^{1/4}\int_{\R} H_{k_j}(t_j) e^{-2\pi i \omega_j t_j} e^{-\pi(t_j-x_j)^2}dt_j =\\
-		&= \prod_{j=1}^{d} 2^{1/4}\int_{\R} \dfrac{2^{1/4}}{\sqrt{k_j!}}\left(-\dfrac{1}{2\sqrt{\pi}}\right)^{k_j} e^{\pi t_j^2} \dfrac{d^{k_j}}{dt^{k_j}}\left(e^{-2\pi t_j^2}\right) e^{-2\pi i \omega_j t_j} e^{-\pi(t_j-x_j)^2}dt_j = \\
-		&= \prod_{j=1}^d \dfrac{2^{1/2}}{\sqrt{k_j!}} \left(-\dfrac{1}{2\sqrt{\pi}}\right)^{k_j} \int_{\R} \dfrac{d^{k_j}}{dt^{k_j}}\left(e^{-2\pi t_j^2}\right) e^{\pi(t_j^2 - 2i\omega_j t_j -t_j^2 + 2t_j x_j - x_j^2)}dt_j = \\
-		&= \prod_{j=1}^d \dfrac{2^{1/2}}{\sqrt{k_j!}} \left(-\dfrac{1}{2\sqrt{\pi}}\right)^{k_j} e^{-\pi x_j^2}\int_{\R} \dfrac{d^{k_j}}{dt^{k_j}}\left(e^{-2\pi t_j^2}\right) e^{2\pi(x_j - i\omega_j)t_j}dt_j \overset{\mathrm{integration\ by\  parts}}{=} \\
-		&= \prod_{j=1}^d \dfrac{2^{1/2}}{\sqrt{k_j!}} \left(-\dfrac{1}{2\sqrt{\pi}}\right)^{k_j} e^{-\pi x_j^2} [2\pi(x_j - i\omega_j)]^{k_j} (-1)^{k_j}\int_{\R}  e^{-2\pi[t_j^2 - (x_j - i \omega_j)t_j]} dt_j =\\
-		&=\prod_{j=1}^d \sqrt{\dfrac{\pi^{k_j}}{k_j!}}2^{1/2}( x_j - i\omega_j)^{k_j} e^{-\pi x_j^2} \dfrac{1}{2^{1/2}} e^{\pi (x_j - i \omega_j)^2/2} = \\
-		&= \prod_{j=1}^d \sqrt{\dfrac{\pi^{k_j}}{k_j!}} (x_j - i \omega_j)^{k_j} e^{-\pi i \omega_j x_j} e^{-\pi(x_j^2 + \omega_j^2)/2} =\\
-		&= \left(\prod_{j=1}^d \sqrt{\dfrac{\pi^{k_j}}{k_j!}} (x_j - i \omega_j)^{k_j} \right) e^{-\pi i \omega \cdot x} e^{-\pi(r_1^2 + \cdots + r_d^2)/2}
-	\end{align*}}
-	Before computing the scalar product between $L_{\mathdutchcal{F},\varphi} H_k$ and $H_l$, we introduce the angular coordinate $\theta_j$ such that $x_j + i \omega_j = r_j e^{i\theta_j}$. Therefore we have:
+	\begin{align}\label{STFT of Hermite functions}
+		\V_{\varphi}H_k(x,\omega) &= \int_{\R^d} H_k(t) e^{-2\pi i \omega \cdot t}\, 2^{d/4} e^{-\pi|t-x|^2}dt = \int_{\R^d} \prod_{j=1}^d H_{k_j}(t_j) e^{-2\pi i \omega \cdot t}\, 2^{d/4} e^{-\pi|t-x|^2}dt = \nonumber \\
+		&= \prod_{j=1}^{d} 2^{1/4}\int_{\R} H_{k_j}(t_j) e^{-2\pi i \omega_j t_j} e^{-\pi(t_j-x_j)^2}dt_j = \nonumber\\
+		&= \prod_{j=1}^{d} 2^{1/4}\int_{\R} \dfrac{2^{1/4}}{\sqrt{k_j!}}\left(-\dfrac{1}{2\sqrt{\pi}}\right)^{k_j} e^{\pi t_j^2} \dfrac{d^{k_j}}{dt^{k_j}}\left(e^{-2\pi t_j^2}\right) e^{-2\pi i \omega_j t_j} e^{-\pi(t_j-x_j)^2}dt_j = \nonumber\\
+		&= \prod_{j=1}^d \dfrac{2^{1/2}}{\sqrt{k_j!}} \left(-\dfrac{1}{2\sqrt{\pi}}\right)^{k_j} \int_{\R} \dfrac{d^{k_j}}{dt^{k_j}}\left(e^{-2\pi t_j^2}\right) e^{\pi(t_j^2 - 2i\omega_j t_j -t_j^2 + 2t_j x_j - x_j^2)}dt_j = \nonumber\\
+		&= \prod_{j=1}^d \dfrac{2^{1/2}}{\sqrt{k_j!}} \left(-\dfrac{1}{2\sqrt{\pi}}\right)^{k_j} e^{-\pi x_j^2}\int_{\R} \dfrac{d^{k_j}}{dt^{k_j}}\left(e^{-2\pi t_j^2}\right) e^{2\pi(x_j - i\omega_j)t_j}dt_j \overset{\mathrm{integration\ by\  parts}}{=} \nonumber\\
+		&= \prod_{j=1}^d \dfrac{2^{1/2}}{\sqrt{k_j!}} \left(-\dfrac{1}{2\sqrt{\pi}}\right)^{k_j} e^{-\pi x_j^2} [2\pi(x_j - i\omega_j)]^{k_j} (-1)^{k_j}\int_{\R}  e^{-2\pi[t_j^2 - (x_j - i \omega_j)t_j]} dt_j = \nonumber\\
+		&=\prod_{j=1}^d \sqrt{\dfrac{\pi^{k_j}}{k_j!}}2^{1/2}( x_j - i\omega_j)^{k_j} e^{-\pi x_j^2} \dfrac{1}{2^{1/2}} e^{\pi (x_j - i \omega_j)^2/2} = \nonumber\\
+		&= \prod_{j=1}^d \sqrt{\dfrac{\pi^{k_j}}{k_j!}} (x_j - i \omega_j)^{k_j} e^{-\pi i \omega_j x_j} e^{-\pi(x_j^2 + \omega_j^2)/2} = \nonumber\\
+		&= \left(\prod_{j=1}^d \sqrt{\dfrac{\pi^{k_j}}{k_j!}} (x_j - i \omega_j)^{k_j} \right) e^{-\pi i \omega \cdot x} e^{-\pi(r_1^2 + \cdots + r_d^2)/2}.
+	\end{align}}
+	Before computing the scalar product between $L_{\mathdutchcal{F},\varphi} H_k$ and $H_l$, we introduce the angular coordinate $\theta_j$, such that $x_j + i \omega_j = r_j e^{i\theta_j}$. Therefore we have:
 	\begin{align}
 		\langle  L_{\mathdutchcal{F},\varphi}H_k,H_l\rangle &= \int_{\R^{2d}} F(x,\omega) \left(\prod_{j=1}^d \sqrt{\dfrac{\pi^{k_j}}{k_j!}} r_j^{k_j}e^{-i k_j \theta_j}\right)e^{-\pi i \omega \cdot x} e^{-\pi(r_1^2 + \cdots + r_d^2)/2} \cdot \nonumber\\
 															&\hphantom{=\int_{\R^{2d}} F(x,\omega)} \,\overline{\left(\prod_{m=1}^d \sqrt{\dfrac{\pi^{l_m}}{l_m!}} r_m^{l_m}e^{-i l_m \theta_m}\right)e^{-\pi i \omega \cdot x} e^{-\pi(r_1^2 + \cdots + r_d^2)/2}}dxd\omega= \nonumber\\
 															&=\int_{\R^{2d}} F(x,\omega) \left(\prod_{j=1}^d \sqrt{\dfrac{\pi^{k_j + l_j}}{k_j!l_j!}} r_j^{k_j + l_j} e^{i(l_j - k_j)\theta_j} \right) e^{-\pi(r_1^2 + \cdots + r_d^2)}dxd\omega. \label{scalar product Hermite functions}
 	\end{align}
-	For every pair of coordinated $(x_j,\omega_j)$ we can switch to polar coordinates $(r_j,\theta_j)$. Since $F(x,\omega) = \mathdutchcal{F}(r^2)$ is independent of angular coordinates, only functions depending on those are $e^{i(l_j - k_j)\theta_j}$, for which:
+	For every pair of coordinates $(x_j,\omega_j)$ we can switch to polar coordinates $(r_j,\theta_j)$. Since $F(x,\omega) = \mathdutchcal{F}(r^2)$ is independent of angular coordinates, only functions depending on those are $e^{i(l_j - k_j)\theta_j}$, for which:
 	\begin{equation*}
 		\int_0^{2\pi} e^{i(l_j - k_j)\theta_j}d\theta_j = \begin{cases}
 			\displaystyle \frac{e^{i(l_j - k_j)\theta_j}}{i(l_j - k_j)} \bigg\rvert_0^{2\pi}=0 \quad & \mathrm{if\ } k_j \neq l_j\\
 			\phantom{a}\\
 			\displaystyle \int_0^{2\pi} d\theta_j = 2\pi \quad &\mathrm{if\ } k_j=l_j
-		\end{cases}
+		\end{cases}.
 	\end{equation*}
 	Therefore, if $k \neq l$, the whole integral is 0, otherwise, letting $k_j = l_j$ in \eqref{scalar product Hermite functions}:
 	\begin{align*}
 		\langle  L_{\mathdutchcal{F},\varphi}H_k,H_k\rangle &= (2\pi)^d \dfrac{\pi^{|k|}}{k!}\int_0^{+\infty} {\cdots} \int_0^{+\infty} \mathdutchcal{F}(r_1^2,\ldots,r_d^2) e^{-\pi(r_1^2 + \cdots + r_d^2)}\left(\prod_{j=1}^{d} r_j^{2k_j + 1} \right) dr_1 \cdots dr_d=\\
 															&= \dfrac{1}{k!} \int_0^{+\infty} \cdots \int_0^{+\infty} \mathdutchcal{F}(r_1^2,\ldots,r_d^2) e^{-\pi(r_1^2 + \cdots + r_d^2)} \left(\prod_{j=1}^{d} (\pi r_j^2)^{k_j} \right) \pi r_1 dr_1 \cdots \pi r_d dr_d
 	\end{align*}
-	where $k! = k_1! \cdots k_d!$. With the change of variable $s_j = \pi r_j^2$, we finally obtain:
+	With the change of variable $s_j = \pi r_j^2$, we finally obtain:
 	\begin{equation*}
 		\langle  L_{\mathdutchcal{F},\varphi}H_k,H_k\rangle = \dfrac{1}{k!} \int_0^{+\infty} \cdots \int_0^{+\infty} \mathdutchcal{F}\left(\frac{s_1}{\pi},\ldots,\frac{s_d}{\pi}\right) \left(\prod_{j=1}^{d} s_j^{k_j} \right) e^{-(s_1 + \cdots + s_d)} ds_1 \cdots ds_d
 	\end{equation*}
 	which is exactly the expression \eqref{eigenvalues of localization operators with radial weight}.
 \end{proof}
 In conclusion, we will consider two meaningful examples, namely when the weight $F$ is the characteristic function of a disk centred around the origin and when it is a Gaussian. In order to make computations easier we confine ourselves in the case $d=1$.
-\begin{es}[Localization on a disk]
+\begin{es}[Localization on a disk]\label{example localization on a disk}
 	We study arguably the most simple case, namely when $F$ is the characteristic function of the disk $\mathdutchcal{B}_R = \{(x,\omega) \in \R^2 : x^2 + \omega^2 \leq R^2\}$:
 	\begin{equation*}
 			F(x,\omega) = \mathdutchcal{F}(r^2) = \begin{cases}
 				1 \quad \mathrm{if\ } x^2 + \omega^2 = r^2 \leq R^2\\
 				0 \quad \mathrm{otherwise}
-			\end{cases} 
+			\end{cases} .
 	\end{equation*}
 	In order to highlight that $F$ is the characteristic function of $\mathdutchcal{B}_R$ we let $L_{\mathdutchcal{F},\varphi} = L_{\mathdutchcal{B}_R,\varphi}$. Noticing that $\mathdutchcal{F}(\frac{s}{\pi}) = \chi_{[0,\pi R^2]} (s)$, expression \eqref{eigenvalues of localization operators with radial weight} brings to:
 	\begin{align*}
 		\lambda_k(R) = \dfrac{1}{k!} \int_{0}^{+\infty} \chi_{[0,\pi R^2]}(s) s^k e^{-s} ds = \dfrac{1}{k!} \int_{0}^{\pi R^2} s^k e^{-s} ds = \gamma(k+1,\pi R^2)
 	\end{align*}
-	where $\gamma$ is the lower incomplete gamma function. An easy integration by part, when $k \geq 1$, leads to:
+	where $\gamma$ is the lower incomplete gamma function. An easy integration by parts, when $k \geq 1$, leads to:
 	\begin{equation*}
 		\int_{0}^{\pi R^2} s^k e^{-s} ds = -(\pi R^2)^k e^{-\pi R^2} + k \int_{0}^{\pi R^2} s^{k-1} e^{-s} ds.
 	\end{equation*}
@@ -1156,22 +1165,19 @@ In conclusion, we will consider two meaningful examples, namely when the weight 
 		\| L_{\mathdutchcal{B}_R,\varphi} \| = |\lambda_0| = 1 - e^{-\pi R^2}.
 	\end{equation*}
 	Recalling the definition of the norm for operators between Hilbert spaces \ref{dual norm}, we obtain that, for every normalized $f \in L^2(\R^d)$:
-	\begin{equation*}
-		\begin{gathered}
-			\lambda_0 = \|L_{\mathdutchcal{B}_R,\varphi} \| \geq |\langle L_{\mathdutchcal{B}_R,\varphi} f, f \rangle | = \int_{\mathdutchcal{B}_R} |\V_{\varphi} f(x,\omega) |^2 dx d\omega \implies \\
-			\implies  \int_{\mathdutchcal{B}_R} |\V_{\varphi} f(x,\omega) |^2 \leq 1 - e^{-\pi R^2}.
-		\end{gathered}
-	\end{equation*}
-	The left-hand side of the last expression represents the energy of $\V_{\varphi} f$ concentrated on the disk $\mathdutchcal{B}_R$.
-	{\color{blue} Aggiungere commento che colleghi questo risultato a quello nella sezione 6}.
+	\begin{align}\label{bound norm localization on a disk}
+			\lambda_0 = \|L_{\mathdutchcal{B}_R,\varphi} \| \geq |\langle L_{\mathdutchcal{B}_R,\varphi} f, f \rangle | = \int_{\mathdutchcal{B}_R} |\V_{\varphi} f(x,\omega) |^2 dx d\omega \implies \nonumber \\
+			\implies  \int_{\mathdutchcal{B}_R} |\V_{\varphi} f(x,\omega) |^2 dx d\omega\leq 1 - e^{-\pi R^2}.
+	\end{align}
+	We point out that the left-hand side of the last expression represents the energy of $\V_{\varphi} f$ concentrated on the disk $\mathdutchcal{B}_R$. 
 \end{es}
 
 \begin{es}[Localization with Gaussian weight]
 	Another natural choice for the weight function $F$ is a Gaussian:
 	\begin{equation*}
-		F(x,\omega) = e^{-\alpha \pi (x^2 + \omega^2)}
+		F(x,\omega) = e^{-\alpha \pi (x^2 + \omega^2)},
 	\end{equation*}
-	where $\alpha > 0$ is a dilatation parameter. In this case $\mathdutchcal{F}(\frac{s}{\pi}) = e^{-\alpha s}$, so from \eqref{eigenvalues of localization operators with radial weight} and integrating by parts $k+1$ times we obtain the eigenvalues of $L_{\mathdutchcal{F},\varphi}$:
+	where $\alpha > 0$ is a dilation parameter. In this case $\mathdutchcal{F}(\frac{s}{\pi}) = e^{-\alpha s}$, so from \eqref{eigenvalues of localization operators with radial weight} and integrating by parts $k+1$ times we obtain the eigenvalues of $L_{\mathdutchcal{F},\varphi}$:
 	\begin{align*}
 		\lambda_k = \dfrac{1}{k!} \int_0^{+\infty} s^k e^{-(1+\alpha)s}ds = (1+\alpha)^{-(k+1)}, \quad k=0,1,\ldots
 	\end{align*}
@@ -1182,20 +1188,33 @@ In conclusion, we will consider two meaningful examples, namely when the weight 
 \end{es}
 
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Uncertainty principles}\label{chapter uncertainty principles}
 
+Up to know we put some effort in constructing some tools that have the ability to concentrate a signal in the time-frequency domain. In the introduction of Section \ref{section STFT} we also pointed out that a characteristic function is not a ``good'' window for the STFT because, in light of the duality between regularity and decay, the Fourier transform of a not regular functions has a slow decay. Indeed, in Section \ref{section spherically symmetric weights}, we considered the STFT with a Gaussian window function, which has nice regularity and decay properties. However, a natural question arises: how good can we concentrate a signal? Is it possible to have a signal arbitrarily concentrated both in time and frequency? The answer to this questions is definitely no and it is given by \emph{uncertainty principles}, which are ubiquitous results in Fourier and time-frequency analysis. Uncertainty principles arise in different versions but the main underlying idea is the following:\\
+\emph{a function cannot be too concentrated both in time and frequency}.
+
+Even if not explicit, we already had a first glimpse of this phenomenon when we computed the Fourier transform of dilated Gaussian (Proposition \ref{Fourier transform of Gaussian proposition}). Indeed, given $\lambda > 0$ we recall that:
+\begin{equation*}
+	\F(e^{-\lambda \pi |\cdot|^2})(\omega) = \dfrac{1}{\lambda^{d/2}} e^{-\frac{1}{\lambda}}\pi |\omega|^2 \quad \forall\,\omega \in \R^d.
+\end{equation*}
+If we choose $\lambda$ to be very large, the Gaussian in the time domain $e^{-\lambda \pi |t|^2}$ will be strongly concentrated around the origin. However, in the corresponding Gaussian in the frequency domain the dilation parameter appears in the denominator of the exponent, so this will be poorly concentrated.
+
+In this chapter we will present some uncertainty principles, both for the Fourier transform and the STFT and we will give a quantitative description of how good we can localize a signal.
+
+\section{Heisenberg's uncertainty principle}\label{Heisenberg's uncertainty principle sections}
+Arguably, the most famous uncertainty principle is the one named after Heisenberg (\cite{heisenberg}). Despite being a fascinating topic, we will not discuss all the implications that this uncertainty principles has in quantum mechanics. Therefore, our attention is driven to the mathematical formulation of the principle.
+
+In literature there are several proofs of Heisenberg's uncertainty principle. The one that we will present was given (in the 1-dimensional case) by de Bruijn in \cite{de_bruijn} and involves, once again, Hermite functions. Before stating and proving Heisenberg's uncertainty principle we are going to need some lemmas.
 \begin{lem}\label{Heisenberg's uncertainty principle lemma}
 	Let $f \in L^2(\R)$. Then
 	\begin{equation}\label{Heisenberg's uncertainty principle lemma formula}
-		\int_{\R} t^2 |f(t)|^2dt + \int_{\R} \omega^2 |\hat{f}(\omega)|^2d\omega = \dfrac{1}{2\pi} \sum_{k=0}^{+\infty} (2k+1)|\langle f,H_k \rangle|^2
+		\int_{\R} t^2 |f(t)|^2dt + \int_{\R} \omega^2 |\hat{f}(\omega)|^2d\omega = \dfrac{1}{2\pi} \sum_{k=0}^{+\infty} (2k+1)|\langle f,H_k \rangle|^2,
 	\end{equation}
 	where $H_k$ is the $k$-th Hermite function. In particular we have
 	\begin{equation}\label{Heisenberg's uncertainty principle lemma inequality}
-		\int_{\R} t^2 |f(t)|^2dt + \int_{\R} \omega^2 |\hat{f}(\omega)|^2d\omega \geq \dfrac{\|f\|_2^2}{2\pi}
+		\int_{\R} t^2 |f(t)|^2dt + \int_{\R} \omega^2 |\hat{f}(\omega)|^2d\omega \geq \dfrac{\|f\|_2^2}{2\pi},
 	\end{equation}
 	with equality if and only if $f$ is a multiple of $H_0$.
 \end{lem}
@@ -1208,21 +1227,21 @@ In conclusion, we will consider two meaningful examples, namely when the weight 
 	\begin{align*}
 		\langle \omega \hat{f}, H_k \rangle &= \langle \hat{f}, \omega H_k \rangle = \dfrac{1}{2\sqrt{\pi}} \left( \sqrt{k+1} \langle \hat{f}, H_{k+1} \rangle + \sqrt{k}\langle \hat{f},H_{k-1}\rangle \right) \overset{\eqref{Hermite functions are eigenfunctions of Fourier transform} + \F\;\mathrm{unitary}}{=} \\
 											&= \dfrac{1}{2\sqrt{\pi}} \left( \sqrt{k+1} (-i)^{k+1}\langle f, H_{k+1} \rangle + \sqrt{k}(-i)^{k-1}\langle f,H_{k-1}\rangle \right)=\\
-											&= \dfrac{1}{2\sqrt{\pi}} (-i)^{k-1} \left( \sqrt{k}\langle f,H_{k-1}\rangle - \sqrt{k+1} \langle f, H_{k+1} \rangle  \right)
+											&= \dfrac{1}{2\sqrt{\pi}} (-i)^{k-1} \left( \sqrt{k}\langle f,H_{k-1}\rangle - \sqrt{k+1} \langle f, H_{k+1} \rangle  \right).
 	\end{align*}
-	Now, since $H_k$ form an orthonormal basis of $L^2(\R)$ we can use Parseval's identity:
+	Now, since $\{H_k\}_{k \in \N_0^d}$ is an orthonormal basis of $L^2(\R)$, we can use Parseval's identity:
 	\begin{align*}
 		\int_{\R} t^2 |f(t)|^2dt + \int_{\R} \omega^2 |\hat{f}(\omega)|^2d\omega &= \sum_{k=0}^{+\infty} \left( |\langle tf, H_k \rangle|^2 + |\langle \omega \hat{f}, H_k\rangle|^2 \right) = \\
 								 											     &= \dfrac{1}{2\pi}\sum_{k=0}^{+\infty} \left[ (k+1)|\langle f,H_{k+1}\rangle|^2 + k|\langle f,H_{k-1}\rangle| \right] = \\
 								 											     &= \dfrac{1}{2\pi}\sum_{k=0}^{+\infty} (2k+1)|\langle f,H_k\rangle|^2.
 	\end{align*}	
-	Since $(2k+1) \geq 1$ inequality \eqref{Heisenberg's uncertainty principle lemma inequality} immediately proven, and equality hold if and only if $\langle f,H_k \rangle = 0$ for every $k > 1$, which means exactly that $f$ is a multiple of $H_0$.
+	Since $(2k+1) \geq 1$, it is immediate to see that inequality \eqref{Heisenberg's uncertainty principle lemma inequality}  holds and that equality is achieved if and only if $\langle f,H_k \rangle = 0$ for every $k > 1$, which means exactly that $f$ is a multiple of $H_0$.
 \end{proof}
-Before extending the previous lemma to the multi-dimensional case we need the following result related to the Fourier transform of restrictions. Before stating the lemma we introduce the following notation:
+In order to extend previous lemma to the multi-dimensional case we need the following result related to the Fourier transform of restrictions. Before stating the lemma we introduce the following notation:
 \begin{equation*}
 	\begin{gathered}
-		t' = (t_2, \ldots, t_d) \in \R^{d-1},\quad \omega' = (\omega_2, \ldots, \omega_d) \in \R^{d-1}\\
-		(\F_1 f) (\omega_1, t') = \F(f(\cdot, t'))(\omega_1),\quad (\F' f)(t_1, \omega') = \F (f(t_1, \cdot))(\omega')
+		t' = (t_2, \ldots, t_d) \in \R^{d-1},\quad \omega' = (\omega_2, \ldots, \omega_d) \in \R^{d-1},\\
+		(\F_1 f) (\omega_1, t') = \F(f(\cdot, t'))(\omega_1),\quad (\F' f)(t_1, \omega') = \F (f(t_1, \cdot))(\omega').
 	\end{gathered}
 \end{equation*}
 \begin{lem}\label{Fourier transform for restrictions}
@@ -1249,11 +1268,11 @@ Before extending the previous lemma to the multi-dimensional case we need the fo
 \begin{lem}\label{Heisenberg's uncertainty principle lemma d dimensions}
 	Let $f \in L^2(\R^d)$. Then, for every $j = 1,\ldots,d$:
 	\begin{equation}\label{Heisenberg's uncertainty principle lemma d dimensions formula}
-		\int_{\R^d} t_j^2 |f(t)|^2 dt + \int_{\R^d} \omega_j^2 |\hat{f}(\omega)|^2d\omega = \dfrac{1}{2\pi} \sum_{k \in \N_0^d} (2k_j + 1) |\langle f, H_k \rangle|^2
+		\int_{\R^d} t_j^2 |f(t)|^2 dt + \int_{\R^d} \omega_j^2 |\hat{f}(\omega)|^2d\omega = \dfrac{1}{2\pi} \sum_{k \in \N_0^d} (2k_j + 1) |\langle f, H_k \rangle|^2.
 	\end{equation}
-	where $\N_0 = \N \cup \{0\}$ and $H_k$ is the d-dimensional Hermite functions related to the multi-index $k \in \N_0^d$. In particular we have
+	In particular we have:
 	\begin{equation}\label{Heisenberg's uncertainty principle lemma d dimensions inequality}
-		\int_{\R^d} t_j^2 |f(t)|^2dt + \int_{\R^d} \omega_j^2 |\hat{f}(\omega)|^2d\omega \geq \dfrac{\|f\|_2^2}{2\pi}
+		\int_{\R^d} t_j^2 |f(t)|^2dt + \int_{\R^d} \omega_j^2 |\hat{f}(\omega)|^2d\omega \geq \dfrac{\|f\|_2^2}{2\pi},
 	\end{equation}
 	with equality if and only if $f$ is a multiple of $H_0$.
 \end{lem}
@@ -1293,11 +1312,11 @@ Before extending the previous lemma to the multi-dimensional case we need the fo
 		The proof of the last part of the statement is exactly the same as the one in Lemma \ref{Heisenberg's uncertainty principle lemma}.
 	\end{itemize}	
 \end{proof}
-Previous lemma is sufficient in order to prove Heisenberg's uncertainty principle.
+We are now in the position to prove Heisenberg's uncertainty principle.
 \begin{teo}\label{Heisenberg's uncertainty principle theorem}
 	Let $f \in L^2(\R^d)$ and $a,b \in \R^d$. Then:
 	\begin{equation}\label{Heisenberg's uncertainty principle formula}
-		\left( \int_{\R^d} |t-a|^2 |f(t)|^2dt \right)^{1/2} \left( \int_{\R^d} |\omega - b|^2 |\hat{f}(\omega)|^2 d\omega \right)^{1/2} \geq \dfrac{d\|f\|_2^2}{4\pi}
+		\left( \int_{\R^d} |t-a|^2 |f(t)|^2dt \right)^{1/2} \left( \int_{\R^d} |\omega - b|^2 |\hat{f}(\omega)|^2 d\omega \right)^{1/2} \geq \dfrac{d\|f\|_2^2}{4\pi},
 	\end{equation}
 	where $|t-a| = \sum_{j=1}^{d}(t_j - a_j)^2$ is the Euclidean distance. Moreover, equality is achieved if and only if $f(t) = c \varphi(\lambda t)$, where $\varphi$ is the normalized Gaussian given by \eqref{gaussian normalized}, $c \in \C$ and $\lambda > 0$.
 \end{teo}
@@ -1345,29 +1364,24 @@ Previous lemma is sufficient in order to prove Heisenberg's uncertainty principl
 		&\left( \int_{\R^d} |t|^2 |f(t)|^2dt \right)^{1/2} \left( \int_{\R^d} |\omega|^2 |\hat{f}(\omega)|^2 d\omega \right)^{1/2} \geq \\
 		\geq &\sum_{j=1}^d \left( \int_{\R^d} t_j^2 |f(t)|^2dt \right)^{1/2} \left( \int_{\R^d} \omega_j^2 |\hat{f}(\omega)|^2 d\omega \right)^{1/2} \overset{\eqref{Heisenberg's uncertainty principle component formula}}{\geq} \dfrac{d \|f\|_2^2}{4 \pi}.
 	\end{align*}
-	Finally, equality is achieved if and only if both inequalities in the last expression become equalities. From the first part of the proof we know that equality in the latter inequality is achieved if and only if $f(t) = c H_0(\lambda t)$ for some $c \in \C$ and $\lambda > 0$. Moreover, always from previous computations we saw that in this case $f$ satisfies \eqref{Heisenberg's uncertainty principle lambda} for every $j=1,\ldots,d$. This means exactly that vectors $(\|t_j f\|_2)_{j=1}^d$ and $(\|\omega_j \hat{f}\|_2)_{j=1}^d$ are parallel, therefore equality is achieved also when using Cauchy-Schwartz's inequality.
+	Finally, equality is achieved if and only if both inequalities in the last expression become equalities. From the first part of the proof we know that equality in the latter inequality is achieved if and only if $f(t) = c H_0(\lambda t)$ for some $c \in \C$ and $\lambda > 0$. Moreover, always from previous computations we saw that in this case $f$ satisfies \eqref{Heisenberg's uncertainty principle lambda} for every $j=1,\ldots,d$. This means exactly that vectors $(\|t_j f\|_2)_{j=1}^d$ and $(\|\omega_j \hat{f}\|_2)_{j=1}^d$ are parallel, therefore equality is achieved also when using Cauchy-Schwarz's inequality.
 \end{proof}
 
-
-
-
-
-For a generic function $f \in L^2(\R^d)$ the left-hand side of \eqref{Heisenberg's uncertainty principle formula} may be infinite, in which case the statement is trivially satisfied. {\color{blue}We shall comment a mathematical interpretation of Heisenberg's uncertainty principle. This can be written in the following form
+{\color{blue}We shall comment a mathematical interpretation of Heisenberg's uncertainty principle. This can be written in the following form:
 \begin{equation*}
-	\left(\int_{\R^d}|t-a|^2 \dfrac{|f(t)|^2}{\|f\|_2^2} dt\right)^{1/2} \left(\int_{\R^d} |\omega-b|^2 \dfrac{|\hat{f}(\omega)|^2}{\|\hat{f}\|_2^2}d\omega\right)^{1/2} \geq \dfrac{d}{4\pi}
+	\left(\int_{\R^d}|t-a|^2 \dfrac{|f(t)|^2}{\|f\|_2^2} dt\right)^{1/2} \left(\int_{\R^d} |\omega-b|^2 \dfrac{|\hat{f}(\omega)|^2}{\|\hat{f}\|_2^2}d\omega\right)^{1/2} \geq \dfrac{d}{4\pi},
 \end{equation*}
-so we may directly assume that $f$ is normalized. In such a case $|f|^2$ can be seen as a probability distribution. If these integrals are finite for some $a$ and $b$ are always finite and their minimum is achieved when
+so we may directly assume that $f$ is normalized. In such a case, $|f|^2$ can be seen as a probability distribution. If these integrals are finite for some $a$ and $b$, through the same argument of time-frequency shift we already used, it is easy that they are always finite. Then, from a formal point of view, we can take the derivative with respect $a$ and $b$, thus obtaining that their minimum is achieved when
 \begin{equation*}
-	a = \bar{t} = \int_{\R^d} t |f(t)|^2 dt, \quad b = \bar{\omega} = \int_{\R^d} \omega |\hat{f}(\omega)|^2 d\omega
+	a = \bar{t} = \int_{\R^d} t |f(t)|^2 dt, \quad b = \bar{\omega} = \int_{\R^d} \omega |\hat{f}(\omega)|^2 d\omega,
 \end{equation*}
-which are the mean of $|f|^2$ and $|\hat{f}|^2$, respectively. In this case previous integrals represent the standard deviation of $|f|^2$ and $|\hat{f}|^2$, which we indicate with $\Delta_x f$ and $\Delta_{\omega} f$. It is fair to believe that a function $|f|^2$ is mostly concentrated around its mean and that its standard deviation is a measure of how spread it is. In light of these arguments, Heisenberg's uncertainty principle can written as
+which are the mean of $|f|^2$ and $|\hat{f}|^2$, respectively. In this case, previous integrals represent the standard deviation of $|f|^2$ and $|\hat{f}|^2$, which we indicate with $\Delta_x f$ and $\Delta_{\omega} f$. From an heuristic perspective, it is fair to believe that a function $|f|^2$ is mostly concentrated around its mean and that its standard deviation is a measure of how spread it is. In light of these arguments, Heisenberg's uncertainty principle can written as:
 \begin{equation*}
-	\Delta_x f \cdot \Delta_{\omega} f \geq \dfrac{d}{4\pi}
+	\Delta_x f \cdot \Delta_{\omega} f \geq \dfrac{d}{4\pi},
 \end{equation*}
-In this form the uncertainty principle has a heuristic yet meaningful interpretation:\\
-\emph{a function and its Fourier transform can not be simultaneously too concentrated}.\\
-\textbf{AGGIUNGERE INTERPRETAZIONI IN MECCANICA QUANTISTICA E ANALISI DEI SEGNALI}.}
+which is a quantification of the main point of an uncertainty principle, namely that a function and its Fourier cannot be simultaneously concentrated.}
 \section{Donoho-Stark's uncertainty principle}\label{section Donoho-Stark's UP}
+As we saw, Heisenberg's uncertainty principle measures the concentration of a function in terms of the variance. However, this is not the only way concentration can be stated. In this section we present an uncertainty principle about the so-called \emph{essential support} of a function which, roughly speaking, is the set where a function has most of its energy.
 \begin{defi}\label{epsilon-concetrated def}
 	A function $f \in L^2(\R^d)$ is $\mathbf{\varepsilon}$-\textbf{concetrated} on a measurable set $T \subseteq \R^d$ for some $\varepsilon \in [0,1]$ if
 	\begin{equation*}
@@ -1386,8 +1400,8 @@ If $\varepsilon \leq \frac{1}{2}$, this tells us that most of the energy of $f$ 
 	The result is trivial if $T$ or $\Omega$ have infinite measure. Hence we will suppose that they both have finite measure.\\
 	Concentration can be stated in an equivalent way through projection operators introduced in Section \ref{Localization with projections section}, indeed:
 	\begin{align*}
-		&\left( \int_{T^c} |f(t)|^2 dt\right)^{1/2} = \|f - \chi_T f\|_2  = \|f - P_T f\|_2 \leq \varepsilon_{T} \|f\|_2\\
-		&\left( \int_{\Omega^c} |\hat{f}(\omega)|^2 d\omega\right)^{1/2} = \|\hat{f} - \chi_{\Omega} \hat{f} \|_2 = \|f - \F^{-1} (\chi_{\Omega} \hat{f}) \|_2 = \|f - Q_{\Omega}f \|_2 \leq \varepsilon_{\Omega} \|f\|_2
+		&\left( \int_{T^c} |f(t)|^2 dt\right)^{1/2} = \|f - \chi_T f\|_2  = \|f - P_T f\|_2 \leq \varepsilon_{T} \|f\|_2,\\
+		&\left( \int_{\Omega^c} |\hat{f}(\omega)|^2 d\omega\right)^{1/2} = \|\hat{f} - \chi_{\Omega} \hat{f} \|_2 = \|f - \F^{-1} (\chi_{\Omega} \hat{f}) \|_2 = \|f - Q_{\Omega}f \|_2 \leq \varepsilon_{\Omega} \|f\|_2.
 	\end{align*}
 	In Section \ref{Localization with projections section} we also noticed that $\|Q_{\Omega}\| \leq 1$, hence
 	\begin{align*}
@@ -1408,15 +1422,15 @@ Taking $\varepsilon = 0$ in \eqref{Donoho-Stark's uncertainty principle formula}
 \begin{cor}
 	Let $f \in L^2(\R^d) \setminus \{0\}$, $\mathrm{supp}f \subseteq T$, $\mathrm{supp}\hat{f} \subseteq \Omega$. Then $|T| |\Omega| \geq 1$.
 \end{cor}
-Loosely speaking, this result is telling us that $f$ and $\hat{f}$ cannot be simultaneously too concentrated. So, for example, if $f$ is strongly concentrated in the time domain, i.e. $|T|$ is small, the necessarily $|\Omega|$ has to be large. {\color{blue} However, a much stronger result holds.}
+Loosely speaking, this result is telling us that $f$ and $\hat{f}$ cannot concentrate too much energy in a small subset of the phase space. {\color{blue} However, a much stronger result holds.}
 \begin{teo}
 	Suppose $f \in L^1(\R^d)$, $\mathrm{supp}f \subseteq T$ and $\mathrm{supp}\hat{f} \subseteq \Omega$. If $|T| |\Omega| < +\infty$ then $f=0$.
 \end{teo}
-{\color{blue}As pointed out in \cite{grochenig}, this results forces us not to talk about ``support of a function'' in the usual way, since in this case the only information we have is that either $f = 0$ or $|\mathrm{supp} f||\mathrm{supp} \hat{f}| = +\infty$. Therefore, a more suitable notion is the one of essential support, since for this we can give a quantitative result, namely \ref{Donoho-Stark's uncertainty principle theorem}.}
+{\color{blue}As pointed out in \cite{grochenig}, this result forces us not to talk about ``support of a function'' in the usual way, since in this case the only information we have is that either $f = 0$ or $|\mathrm{supp} f||\mathrm{supp} \hat{f}| = +\infty$. Therefore, a more suitable notion is the one of essential support, since for this we can give a quantitative result, namely \ref{Donoho-Stark's uncertainty principle theorem}.}
 \section{Lieb's uncertainty principle}\label{section Lieb's UP}
-{\color{blue} Up to now we presented two uncertainty principles related to the Fourier transform}. {\color{red}However uncertainty principles can be stated for every time of time-frequency analysis}. {\color{blue}In this and in the following section we present some uncertainty principles for the STFT.}
+ Up to now we presented two uncertainty principles related to the Fourier transform. However uncertainty principles can be stated for every time of time-frequency analysis. {\color{blue}In this and in the following section we present some uncertainty principles for the STFT.}
 
-We start considering a simple form uncertainty principle for the STFT. After this we will see how to turn Lieb's inequality \ref{Lieb's inequality} into an uncertainty principle.
+We start considering a weak form and then we will show how to turn Lieb's inequality \eqref{Lieb's inequality} into an uncertainty principle. Like for the Donoho-Stark's uncertainty principle, the notion of concentration is measured in terms of essential support. 
 \begin{prop}\label{weak uncertainty principle for STFT}
 	Let $f,\phi \in L^2(\R^d)$ normalized, $U \subseteq \R^{2d}$ and $\varepsilon \in  [0,1]$. Suppose that
 	\begin{equation*}
@@ -1448,44 +1462,57 @@ We start considering a simple form uncertainty principle for the STFT. After thi
 					  &\leq \left(\int_{\R^{2d}} |\V_{\phi}f(x,\omega)|^{2 \frac{p}{2}} dxd\omega\right)^{\frac{2}{p}} \left(\int_{\R^{2d}} \chi_U(x,\omega)^{\frac{p}{p-2}}dxd\omega\right)^{\frac{p-2}{p}} \overset{\eqref{Lieb's inequality formula}}{\leq}\\
 					  &\leq \left(\dfrac{2}{p}\right)^{\frac{2d}{p}} \| f \|_2^2\, \|g\|_2^2\, |U|^{\frac{p-2}{p}} = \left(\dfrac{2}{p}\right)^{\frac{2d}{p}} |U|^{\frac{p-2}{p}}.
 	\end{align*}
-	We point out that the use of H\"older's inequality is justified because $U$ has finite measure and, since $\V_{\phi}f \in L^q(\R^{2d})$ for every $q \geq 2$, $|\V_{\phi}f|^2 \in L^q(\R^{2d})$ for every $q \geq 1$. Since this result holds for every $p > 2$, taking the supremum over all possible $p$ leads to \eqref{Lieb's uncertainty principle formula}.
+	We point out that the use of H\"older's inequality is justified because $U$ has finite measure and, since $\V_{\phi}f \in L^q(\R^{2d})$ for every $q \geq 2$, $|\V_{\phi}f|^2 \in L^q(\R^{2d})$ for every $q \geq 1$. Because this result holds for every $p > 2$, we can take the supremum over all possible $p$, which leads to \eqref{Lieb's uncertainty principle formula}.
 \end{proof}
 
 
-\section{Nicola-Tilli's uncertainty principle or Faber-Krahn Inequality for the STFT}\label{section Faber-Krahn inequality fot STFT}
-Lieb's uncertainty principle and Lieb's inequality are general results for the STFT since they hold for every possible window $\phi \in L^2(\R^d)$. One may think that for specific choices of the window it is possible to obtain improved results. In this last section we present a recent result, due to Nicola and Tilli and presented in \cite{nicolatilli_fk}, about the STFT with Gaussian window. In this work, they considered the following variational problem, related to the maximal energy of the STFT that can be trapped into a measurable set $\Omega \subset \R^{2d}$ with prescribed measure $s > 0$:
-\begin{equation*}
+\section{Faber-Krahn Inequality for the STFT}\label{section Faber-Krahn inequality fot STFT}
+Lieb's uncertainty principle and Lieb's inequality are general results for the STFT because they hold for every possible window $\phi \in L^2(\R^d)$. One may think that for specific choices of the window it is possible to obtain improved results. In this last section we present a recent result, due to Nicola and Tilli and presented in \cite{nicolatilli_fk}, about the STFT with Gaussian window. In this work, they considered the following variational problem: 
+\begin{equation}\label{variational problem Faber-Krahn STFT}
 	\max_{f \in L^2(\R^d) \setminus \{0\}} \dfrac{\int_{\Omega} |\V_{\varphi} f(x,\omega)|^2 dx d\omega}{\| f\|_2^2}
-\end{equation*}
-We notice that the numerator can be written also in the following way:
-\begin{equation*}
-	\int_{\Omega} |\V_{\varphi} f(x,\omega)|^2 dx d\omega = \langle \chi_{\Omega} \V_{\varphi} f, \V_{\varphi} f \rangle = \langle \V_{\varphi}^* \chi_{\Omega} \V_{\varphi} f,f \rangle = \langle L_{\Omega,\varphi} f,f \rangle.
-\end{equation*}
-where $L_{\Omega,\varphi}$ is the localization operator with weight $\chi_{\Omega}$. Therefore, the maximum is the norm of $L_{\Omega,\varphi}$, so the problem can be rephrased in the following way: what is the measurable set $\Omega \subset \R^{2d}$ with measure $s$ that maximizes the norm of the corresponding localization operator $L_{U,\varphi}$? The problem is completely solved and the solution is presented in the following theorem.
+\end{equation}
+where $\Omega \subset \R^{2d}$ is a measurable set with prescribed measure $s > 0$. Therefore, we are asking for the maximal energy of the STFT that can be trapped into a set of a prescribed measure $s$ and, possibly, which functions achieve the maximum. The problem is completely solved and the solution is presented in the following theorem.
 \begin{teo}[Theorem 4.1 \cite{nicolatilli_norm}]\label{faberkrahn theorem}
 	For every $f \in L^2(\R^d)$ such that $\|f\|_{L^2} = 1$ and every measurable subset $\Omega \subset \R^{2d}$ with finite measure we have
 	\begin{equation}\label{bound STFT nicola-tilli}
-		\int_{\Omega}  |\V f(x,\omega)|^2 \dxdo \leq G(|\Omega|)
+		\int_{\Omega}  |\V_{\varphi} f(x,\omega)|^2 \dxdo \leq G(|\Omega|),
 	\end{equation}
 	where $G(s)$ is given by
 	\begin{equation}\label{G}
-		G(s) \coloneqq \int_0^s e^{\left(-d!\tau\right)^{1/d}} d\tau
+		G(s) \coloneqq \int_0^s e^{\left(-d!\tau\right)^{1/d}} d\tau.
 	\end{equation}
 	Moreover, equality occurs if and only if $f$ is a Gaussian of the kind
 	\begin{equation}\label{translated Gaussian}
-		f(x) = c e^{2 \pi i  x \cdot \omega_0} \varphi(x-x_0) = c\, \pi(x_0, \omega_0) \varphi (x) \quad x \in \R^d
+		f(x) = c e^{2 \pi i  x \cdot \omega_0} \varphi(x-x_0) = c\, \pi(x_0, \omega_0) \varphi (x), \quad x \in \R^d
 	\end{equation}
 	for some unimodular $c \in \C$ and some $(x_0,\omega_0) \in  \R^{2d}$ and $\Omega$ is equivalent, in measure, to a ball of centre $(x_0,\omega_0)$.
 \end{teo}
+The proof of this theorem is non trivial since it requires some tools from geometric measure theory, such as the coarea formula and the isoperimetric inequality. However, it is worth mentioning that the very first step of the proof is rephrasing the problem in the Fock space introduced in \ref{section Fock Space and Bargmann transform}. Indeed, recalling the relation between the STFT with Gaussian window and the Bargmann transform \eqref{connection between Bargmann transform and STFT} and that the latter is an isometry from $L^2(\R^d)$ into $\Fock^2(\C^d)$ we have:
+\begin{equation*}
+	\dfrac{\int_{\Omega} |\V_{\varphi} f(x,\omega)|^2 dx d\omega }{\|f\|_2^2} = \dfrac{\int_{\Omega'} |\Barg f (z)|^2 e^{-\pi |z|^2}dz }{\|\Barg f\|_{\Fock^2}^2},
+\end{equation*}
+where $\Omega' = \{(x, \omega) : (x, -\omega) \in \Omega\}$. Since the Bargmann transform is an unitary operator, variational problem \eqref{variational problem Faber-Krahn STFT} can be rephrased in the following way:
+\begin{equation*}
+	\max_{F \in \Fock^2(\C^d) \setminus \{0\}} \dfrac{\int_{\Omega} |F(z)|^2 e^{-\pi |z|^2}dz}{\|F\|_{\Fock^2}^2}.
+\end{equation*}
+While, at first sight, this might just seem a rewriting of the problem, actually the presence of the Bargmann transform is crucial. It is clear that, for $F \in \Fock^2(\C^d)$, the quantity $\int_{\Omega} |F(z)|^2 e^{-\pi |z|^2} dz$ is maximized when $\Omega$ is the a super-level set of $|F(z)|^2 e^{-\pi |z|^2}$. Thus, it is natural to study the integral of $|F(z)|^2 e^{-\pi |z|^2}$ over its super-level sets and this is where regularity of functions in the Fock space comes into play.
+
 For the sake of completeness, we mention that the Theorem in \cite{nicolatilli_fk} is presented in a slightly different way, namely:
 \begin{equation*}
-	\int_{\Omega}  |\V f(x,\omega)|^2 \dxdo \leq \dfrac{\gamma\left(d, \pi(|\Omega|/\omega_{2d})^{1/d}\right)}{(d-1)!},
+	\int_{\Omega}  |\V f(x,\omega)|^2 dx d\omega \leq \dfrac{\gamma\left(d, \pi(|\Omega|/\omega_{2d})^{1/d}\right)}{(d-1)!},
 \end{equation*}
 where $\omega_{2d}$ is the volume of the unit ball in $\R^{2d}$ and $\gamma$ is the lower incomplete gamma function. Recalling the definition of $\gamma$:
 \begin{equation*}
 	\gamma\left(d, \pi(|\Omega|/\omega_{2d})^{1/d}\right) = \int_0^{\pi(|\Omega|/\omega_{2d})^{1/d}} t^{d-1} e^{-t}dt 
 \end{equation*}
 and since $\omega_{2d} = \pi^d / d!$, through the change of variable $t^d = d! \tau$  one obtains \eqref{bound STFT nicola-tilli}.
+\begin{remark}
+	{\color{blue} We notice that the numerator of \eqref{variational problem Faber-Krahn STFT} can be written also in the following way:
+	\begin{equation}\label{Faber-Krahn for STFT for localization operators}
+		\int_{\Omega} |\V_{\varphi} f(x,\omega)|^2 dx d\omega = \langle \chi_{\Omega} \V_{\varphi} f, \V_{\varphi} f \rangle = \langle \V_{\varphi}^* \chi_{\Omega} \V_{\varphi} f,f \rangle = \langle L_{\Omega,\varphi} f,f \rangle,
+	\end{equation}
+	where $L_{\Omega,\varphi}$ is the localization operator with weight $\chi_{\Omega}$. Therefore, taking the maximum for all possible $f \in L^2(\R^d) \setminus\{0\}$ such that $\|f\|_2=1$ leads to a bound for the norm of $L_{\Omega,\varphi}$ (to obtain the norm we have to take the maximum of $\langle L_{\Omega, \varphi}f, g \rangle$ for all possible $f$ and $g$ normalized). However, we know \emph{a posteriori} that the maximum is attained when $\Omega$ is a ball and $f$ is a Gaussian, both with the same centre $(x_0, \omega_0) \in \R^{2d}$. We mention that results we obtain in Section \ref{section spherically symmetric weights} for localization operators with spherically symmetric weights can be obtained also under the action of a time-frequency shift. Indeed, this case is considered in \cite{daubechies} and, as expected, the eigenfunctions of these shifted localization operators are  time-frequency shifted Hermite functions. So, if $f$ is a Gaussian it is an eigenfunction of $L_{\Omega, \varphi}$ and, in the end, the maximum of \eqref{Faber-Krahn for STFT for localization operators} is not only a bound for the norm of $L_{\Omega, \varphi}$ but it is the actual norm.}
+\end{remark}
 
 Once Theorem \ref{faberkrahn theorem} has been established, arguing like previous section we immediately obtain an uncertainty principle, which is sharp.
 {\color{red}\begin{cor}\label{nicola-tilli's uncertainty principle cor}
@@ -1498,39 +1525,59 @@ Once Theorem \ref{faberkrahn theorem} has been established, arguing like previou
 		|\Omega| \geq G^{-1} (1-\varepsilon).
 	\end{equation}
 \end{cor}
-\begin{remark}
-	We point out that $G$ is invertible since it is monotonically increasing. Moreover, its image is $[0,1)$, therefore its inverse $G^{-1} : [0,1) \rightarrow [0,+\infty)$ is itself monotonically increasing. This implies that, letting $\varepsilon \rightarrow 0$ in \eqref{nicola-tilli's uncertainty principle formula}, which means that $\Omega$ contains more and more energy, we have $|\Omega| \rightarrow +\infty$. If we compare this with Lieb's uncertainty principle we immediately realise how strong this result is, since letting $\varepsilon=0$ in \eqref{Lieb's uncertainty principle formula} yields to:
-	\begin{equation*}
-		|\Omega| \geq \sup_{p > 2} \left(\dfrac{p}{2}\right)^{\frac{2d}{p-2}}.
-	\end{equation*}
-\end{remark}
+We point out that $G$ is invertible since it is monotonically increasing. Moreover, its image is $[0,1)$, therefore its inverse $G^{-1} : [0,1) \rightarrow [0,+\infty)$ is itself monotonically increasing. This implies that, letting $\varepsilon \rightarrow 0$ in \eqref{nicola-tilli's uncertainty principle formula}, which means that $\Omega$ contains more and more energy, we have $|\Omega| \rightarrow +\infty$. If we compare this with Lieb's uncertainty principle we immediately realize how strong this result is, since letting $\varepsilon=0$ in \eqref{Lieb's uncertainty principle formula} yields to:
+\begin{equation*}
+	|\Omega| \geq \sup_{p > 2} \left(\dfrac{p}{2}\right)^{\frac{2d}{p-2}},
+\end{equation*}
+which is a finite number.
+
+In conclusion, we consider the special case $d=1$, when $G^{-1}$ can be actually computed. Indeed, in this case we have:
+\begin{equation*}
+	G(s)  = 1 - e^{-s} \implies G^{-1}(s) = \log \left(\dfrac{1}{1 - G(s)}\right),
+\end{equation*}
+therefore \eqref{nicola-tilli's uncertainty principle formula} becomes
+\begin{equation*}
+	|\Omega| \geq \log\left(\dfrac{1}{\varepsilon}\right).
+\end{equation*}
+Even if we did not remark it, we already obtain this bound in the case $\Omega$ is a ball. Indeed, in \ref{example localization on a disk} we obtained the following expression \eqref{bound norm localization on a disk}:
+\begin{equation*}
+	\int_{\mathdutchcal{B}_R} |\V_{\phi} f (x,\omega)|^2 dx d\omega \leq 1 - e^{-\pi R^2}.
+\end{equation*}
+If we suppose $\int_{\mathdutchcal{B}_R} |\V_{\varphi} f(x,\omega) |^2 dx d\omega \geq 1- \varepsilon$ for some $\varepsilon \in [0,1)$, we obtain that:
+\begin{equation*}
+	1-\varepsilon \leq 1 - e^{-\pi R^2} \implies \pi R^2 \geq \log\left(\dfrac{1}{\varepsilon}\right).
+\end{equation*}
+where $\pi R^2$ is exactly the measure of $\mathdutchcal{B}_R$.
+
+
 
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Recent results}\label{chapter recent results}
-\section{Norm of localization operators: results from Nicola-Tilli}\label{section norm of localization operators}
-{\color{blue}In Section \ref{Daubechies' localization operators section} we obtained some basic results for the norm of Daubechies' localization operators, independently of the choice of the window $\phi$ for the STFT. It is reasonable to think that, for specific windows those estimates can be improved and, hopefully, find some sharp bounds. Thanks to \ref{faberkrahn theorem} Nicola and Tilli accomplished this task in the case the window of the STFT is a normalized Gaussian. As done previously, since the windows is fixed one for all we will drop the pedex $\phi$.}
 
-As for the results in Section \ref{Daubechies' localization operators section}, assumptions on the weight function $F$ are related to its integrability and boundedness. The problem we are consider is, in fact, finding an optimal estimate of the type
+Theorem \ref{faberkrahn theorem} is not only remarkable by itself, but it turns out to be a powerful tool in the study of the maximal norm of localization operator when the window of the STFT is a normalized Gaussian. We already mentioned that \ref{faberkrahn theorem} can be rephrased into a result for the norm of localization operators of the kind $L_{\Omega, \varphi}$, where $\Omega \subset \R^{2d}$ is a measurable set of prescribed measure. The latter condition can be seen as a constraint for the $L^1(\R^{2d})$ norm of $\chi_{\Omega}$. In light of this observation, we may think to consider an analogous problem where $\chi_{\Omega}$ is replaced by a generic weight function $F$ that satisfies an integrability, and possibly boundedness, condition. This last chapter is devoted to the study of this problem. We start presenting a result from Nicola and Tilli \cite{nicolatilli_norm} where $F$ is chosen under an $L^p$ and $L^{\infty}$ constraint. Then, we consider a more generic case where the $L^{\infty}$ constraint is replaced by a $L^q$ one.
+
+\section{Norm of localization operators: results from Nicola-Tilli}\label{section norm of localization operators}
+In this section we show the results in \cite{nicolatilli_norm}. The aforementioned problem can be precisely stated as follows: find the optimal constant $C > 0$ such that:
 \begin{equation}\label{sharp estimate Nicola-Tilli}
-	\|L_F\|_{L^2(\R^d) \rightarrow L^2(\R^d)} \leq C,
+	\|L_{F, \varphi}\|_{L^2(\R^d) \rightarrow L^2(\R^d)} \leq C,
 \end{equation}
 where $F$ satisfies the following constraints:
 \begin{equation}\label{constraints Nicola-Tilli}
 	\|F\|_{\infty} \leq A \quad \text{and} \quad \|F\|_p \leq B.
 \end{equation}
-Clearly the constant $C$ will depend on $p$, $A$ and $B$. In \cite{nicolatilli_norm} this problem is completely solved: the constant $C$ is computed (explicitly in some cases), weight functions $F$ which achieve this bound are explicitly found and also function $f$ and $g$ such that $|\langle L_f f, g \rangle| = \|L_F\| = C$ are found. Before reporting the main Theorem in \cite{nicolatilli_norm}, we define the following number which will appear many times in the following
+Clearly the constant $C$ will depend on $p$, $A$ and $B$. In \cite{nicolatilli_norm} this problem is completely solved: the constant $C$ is computed (explicitly in some cases), weight functions $F$ which achieve this bound are explicitly found and also function $f$ and $g$ such that $|\langle L_{F, \varphi} f, g \rangle| = \|L_{F, \varphi}\| = C$ are found. Before reporting the main Theorem of \cite{nicolatilli_norm}, we define the following number which will appear many times:
 \begin{equation}\label{kappa_p}
 	\kappa_p \coloneqq \dfrac{p-1}{p}.
 \end{equation}
-Moreover, for the sake of brevity we denote the variable $(x,\omega) \in \R^{2d}$ as $z$ and therefore $dxd\omega$ as $dz$ 
+Moreover, for the sake of brevity, we denote the variable $(x,\omega) \in \R^{2d}$ as $z$ and therefore $dxd\omega$ as $dz$.
 \begin{teo}\label{Nicola Tilli norm theorem}
 	Assume $p \in [1,\infty)$, $A \in (0, \infty]$ and $B \in (0,\infty)$ with the additional condition that $A < \infty$ when $p=1$. Let $F$ satisfy the constraints in \eqref{constraints Nicola-Tilli}.
 	\begin{enumerate}[label=(\roman*)]
 		\item If $p=1$, then
 		\begin{equation}\label{Nicola-Tilli bound p=1}
-			\|L_F\| \leq A\;G(B/A)
+			\|L_{F, \varphi}\| \leq A\;G(B/A),
 		\end{equation}
 		and equality occurs if and only if, for some $\theta \in \R$ and some $z_0 \in \R^{2d}$
 		\begin{equation}\label{Nicola-Tilli maximal function p=1}
@@ -1538,25 +1585,25 @@ Moreover, for the sake of brevity we denote the variable $(x,\omega) \in \R^{2d}
 		\end{equation}
 		where $\mathdutchcal{B} \subset \R^{2d}$ is the ball of measure $B/A$ centred at the origin.
 		
-		\item If $p>1$ and $\frac{B}{A} \leq \kappa_p^{d/p}$, then
+		\item If $p>1$ and $B/A \leq \kappa_p^{d/p}$, then
 		\begin{equation}\label{Nicola-Tilli bound p>1 first regime}
-			\|L_F\| \leq \kappa_p^{d \kappa_p}B,
+			\|L_{F, \varphi}\| \leq \kappa_p^{d \kappa_p}B,
 		\end{equation}
 		with equality if and only if, for some $\theta \in \R$ and some $z_0 \in \R^{2d}$,
 		\begin{equation}\label{Nicola-Tilli maximal function p>1 first regime}
-			F(z) = e^{i \theta} \lambda e^{\frac{\pi}{p-1}|z-z_0|^2} \quad \forall z \in \R^{2d}
+			F(z) = e^{i \theta} \lambda e^{\frac{\pi}{p-1}|z-z_0|^2} \quad \forall z \in \R^{2d},
 		\end{equation}
 		where $\lambda = \kappa_p^{-d/p}B$.\label{Nicola-Tilli norm theorem case 2}	
-		\item If $p>1$ and $\frac{B}{A} > \kappa_p^{d/p}$, then
+		\item If $p>1$ and $B/A > \kappa_p^{d/p}$, then
 		\begin{equation}\label{Nicola-Tilli bound p>1 second regime}
-			\|L_F\| \leq \int_{0}^{A} G(u_{\lambda}(t))dt,
+			\|L_{F, \varphi}\| \leq \int_{0}^{A} G(u_{\lambda}(t))dt,
 		\end{equation}
-		where $u_{\lambda}(t) = \left[-\log\left(\left(\frac{t}{\lambda}\right)^{p-1}\right) \right]^d$ and $\lambda>A$ is uniquely determined by the condition $p\int_{0}^{A} t^{p-1}u_{\lambda}(t)dt = B^p$. Equality in \eqref{Nicola-Tilli bound p>1 second regime} if and only if, for some $\theta \in \R$ and some $z_0 \in \R^{2d}$,
+		where $u_{\lambda}(t) = \left[-\log\left(\left(t/\lambda\right)^{p-1}\right) \right]^d$ and $\lambda>A$ is uniquely determined by the condition $p\int_{0}^{A} t^{p-1}u_{\lambda}(t)dt = B^p$. Equality in \eqref{Nicola-Tilli bound p>1 second regime} is achieved if and only if, for some $\theta \in \R$ and some $z_0 \in \R^{2d}$,
 		\begin{equation}\label{Nicola-Tilli maximal function p>1 second regime}
 			F(z) = e^{i\theta} \min \{ \lambda e^{-\frac{\pi}{p-1}|z-z_0|^2}, A \}
 		\end{equation}
 	\end{enumerate}
-	Finally, in all the cases, condition $|\langle L_F f,g \rangle| = \|L_F\|$ holds for some, $f,g \in L^2(\R^d)$ such that $\|f\|_2 = \|g\|_2 = 1$, if and only if both $f$ and $g$ are of the kind \eqref{translated Gaussian}, possibly with different $c$'s, but with the same $(x_0,\omega_0) \in \R^{2d}$ which coincides with the centre of $F$.
+	Finally, in all the cases, condition $|\langle L_{F, \varphi} f,g \rangle| = \|L_{F, \varphi}\|$ holds for some, $f,g \in L^2(\R^d)$ such that $\|f\|_2 = \|g\|_2 = 1$, if and only if both $f$ and $g$ are of the kind \eqref{translated Gaussian}, possibly with different $c$'s, but with the same $(x_0,\omega_0) \in \R^{2d}$ which coincides with the centre of $F$.
 \end{teo}
 We will not give the proof of these results since some of its parts are similar to the one we will see in the following section. Moreover, we point out that the case $A=
 \infty$ means we are dropping the $L^{\infty}$ constraint.
@@ -1564,17 +1611,17 @@ We will not give the proof of these results since some of its parts are similar 
 \section{Generic case}
 In this section we will deal with a generalized version of the problem considered in \cite{nicolatilli_norm}. Indeed, we want to find the optimal constant $C$ such that
 \begin{equation*}
-	\| L_F \|_{L^2(\R^d) \rightarrow L^2(\R^d)} \leq C
+	\| L_{F, \varphi} \|_{L^2(\R^d) \rightarrow L^2(\R^d)} \leq C
 \end{equation*}
 under the following constraints on $F$:
 \begin{equation}\label{constraints generic case}
-	\|F \|_p \leq A \quad \text{and} \quad \|F\|_q \leq B.
+	\|F \|_p \leq A \quad \text{and} \quad \|F\|_q \leq B,
 \end{equation}
-where $p,q \in (1,\infty)$ and $A,B \in (0,\infty)$. In this setting it is no more possible to find an explicit expression for $C$ and $F$, {\color{red} although they can be easily computed numerically.}
+where $p,q \in (1,\infty)$ and $A,B \in (0,\infty)$. In this setting it is no more possible to find an explicit expression for $C$ and $F$, although they can be computed numerically.
 
 Theorem \ref{Nicola Tilli norm theorem}\ref{Nicola-Tilli norm theorem case 2} includes the case when $F$ satisfies just an $L^p$ constraint by taking $A$ ($L^{\infty}$ constraint) equal to $\infty$. In the current setting we have an $L^p$ and an $L^q$ bound, hence, thanks to \ref{Nicola-Tilli bound p>1 first regime}, it is straightforward to see that
 \begin{equation*}
-	\| L_F\|_{L_2 \rightarrow L_2} \leq \min\{\kappa_p^{d\kappa_p}A, \, \kappa_q^{d\kappa_q}B\}.
+	\| L_{F, \varphi}\|_{L_2 \rightarrow L_2} \leq \min\{\kappa_p^{d\kappa_p}A, \, \kappa_q^{d\kappa_q}B\}.
 \end{equation*}
 Suppose that the first term is smaller than the second, which means:
 \begin{equation}\label{condition B/A first}
@@ -1599,9 +1646,9 @@ If this condition were less restrictive than the one given by \eqref{condition B
 \end{equation}
 The proof of this inequality can be found in \ref{curious inequality between conjugate exponents}.
 
-Despite this fact, at least we can say that, if $B/A \geq \kappa_p^{d\left(\frac{1}{q}-\frac{1}{p}\right)}\left(\frac{p}{q}\right)^{\frac{d}{q}}$ or $B/A \leq \kappa_q^{d\left(\frac{1}{q}-\frac{1}{p}\right)}\left(\frac{p}{q}\right)^{\frac{d}{p}}$, the problem is already solved and the solution is given by Theorem \ref{Nicola Tilli norm theorem}. Therefore, from now on, we will suppose to be in the intermediate case, that is
+Despite this fact, at least we can say that, if $B/A \geq \kappa_p^{d\left(\frac{1}{q}-\frac{1}{p}\right)}\left(\frac{p}{q}\right)^{\frac{d}{q}}$ or $B/A \leq \kappa_q^{d\left(\frac{1}{q}-\frac{1}{p}\right)}\left(\frac{p}{q}\right)^{\frac{d}{p}}$, the problem is already solved and the solution is given by Theorem \ref{Nicola Tilli norm theorem}. Therefore, from now on, we will suppose to be in the intermediate case, that is:
 \begin{equation}\label{intermediate regime}
-	\kappa_q^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{p}} < \dfrac{B}{A} < \kappa_p^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{q}}
+	\kappa_q^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{p}} < \dfrac{B}{A} < \kappa_p^{d\left(\frac{1}{q}-\frac{1}{p}\right)} \left(\dfrac{p}{q}\right)^{\frac{d}{q}}.
 \end{equation}
 We notice that the condition is well-posed, since it is actually true that
 \begin{align}\label{another inequality between conjugate exponents original}
@@ -1609,62 +1656,84 @@ We notice that the condition is well-posed, since it is actually true that
 \end{align}
 whenever $p \neq q$ (proof is in \ref{another inequality between conjugate exponents}).
 
-Before tackling the problem in this intermediate regime, we prove a Theorem from \cite{nicolatilli_norm} which gives a bound for $\| L_F \|$ in terms of the distribution function of $|F|$.
+Before tackling the problem in this intermediate regime, we prove a Theorem from \cite{nicolatilli_norm} which gives a bound for $\| L_{F, \varphi} \|$ in terms of the distribution function of $|F|$.
 \begin{teo}\label{norm limitation}
 	Assume $F \in L^p(\R^{2d})$ for some $p \in [1,+\infty)$ and let $\mu(t) = |\{|F|>t\}|$ be the distribution function of $|F|$. Then
 	\begin{equation}\label{norm limitation formula}
-		\| L_F \| \leq \int_0^{\infty} G(\mu(t))dt.
+		\| L_{F, \varphi} \| \leq \int_0^{\infty} G(\mu(t))dt.
 	\end{equation}
 	Equality occurs if and only if $F(z)=e^{i\theta}\rho(|z-z_0|)$ for some $\theta \in \R$, $z_0 \in \R^{2d}$ and some nonincreasing function $\rho : [0,+\infty) \rightarrow [0,+\infty)$
 \end{teo}
 \begin{proof}
 	Let $f,g \in L^2(\R^d)$ such that $\| f \|_2 = \| g \|_2 = 1$.
-	Since we are in a Hilbert space $\| L_F \|$ can be computed as the supremum of $|\langle L_F f,g \rangle|$ over all normalized $f$ and $g$. Therefore we are interested in estimating the previous scalar product:
+	Since we are in a Hilbert space $\| L_{F, \varphi} \|$ can be computed as the supremum of $|\langle L_{F, \varphi} f,g \rangle|$ over all normalized $f$ and $g$. Therefore we are interested in estimating the previous scalar product:
 	\begin{equation}\label{first inequality}
 	\begin{aligned}
-		| \langle L_F f, g \rangle |  &= | \L_{F}(f,g) | \leq \int_{\R^{2d}} |F(z)| \cdot |\V f(z)| \cdot | \V g(z) | dz \overset{\text{C-S}}{\leq} \\
-									  &\leq \left( \int_{\R^{2d}} |F(z)| \cdot |\V f(z)|^2 dz \right)^{1/2} \left( \int_{\R^{2d}} |F(z)| \cdot |\V g(z)|^2 dz \right)^{1/2}.
+		| \langle L_{F, \varphi} f, g \rangle |  &= | \L_{F, \varphi}(f,g) | \leq \int_{\R^{2d}} |F(z)| \cdot |\V_{\varphi} f(z)| \cdot | \V_{\varphi} g(z) | dz \overset{\text{C-S}}{\leq} \\
+									  &\leq \left( \int_{\R^{2d}} |F(z)| \cdot |\V_{\varphi} f(z)|^2 dz \right)^{1/2} \left( \int_{\R^{2d}} |F(z)| \cdot |\V_{\varphi} g(z)|^2 dz \right)^{1/2}.
 	\end{aligned}
 	\end{equation}
-	Since the result is symmetric in $f$ and $g$ we can study just one of the terms. Letting $m = \esssup |F(z)|$ and assuming $m>0$ (otherwise every result is trivial) we can use the ``layer cake'' representation \cite[][Theorem 1.13]{liebloss}:
+	Since the result is symmetric in $f$ and $g$ we can study just one of the terms. Letting $m = \esssup |F(z)|$ and assuming $m>0$ (otherwise every result is trivial) we can use the ``layer cake'' representation \cite[][Theorem 1.13]{liebloss}
 	\begin{equation*}
 		|F(z)| = \int_0^m \chi_{\{|F|>t\}}(z)dt 
 	\end{equation*}
 	in order to find
 	\begin{align*}
-		\int_{\R^{2d}} |F(z)| \cdot |\V f(z)|^2 dz &= \int_{\R^{2d}} \left( \int_0^m \chi_{\{|F|>t\}}(z)dt \right) |\V f(z)|^2 dz \overset{\text{Tonelli}}{=}\\
-											 &= \int_0^m \left( \int_{\R^{2d}} \chi_{\{|F|>t\}}(z) |\V f(z)|^2 dz \right)dt = \int_0^m \left( \int_{\{|F|>t\}} |\V f(z)|^2 dz \right)dt.
+		\int_{\R^{2d}} |F(z)| \cdot |\V_{\varphi} f(z)|^2 dz &= \int_{\R^{2d}} \left( \int_0^m \chi_{\{|F|>t\}}(z)dt \right) |\V_{\varphi} f(z)|^2 dz \overset{\text{Tonelli}}{=}\\
+											 &= \int_0^m \left( \int_{\R^{2d}} \chi_{\{|F|>t\}}(z) |\V_{\varphi} f(z)|^2 dz \right)dt =\\
+											 &= \int_0^m \left( \int_{\{|F|>t\}} |\V_{\varphi} f(z)|^2 dz \right)dt.
 	\end{align*}
 	We notice that the quantity in the inner integral is exactly the one in Theorem \ref{faberkrahn theorem}, hence
 	\begin{equation}\label{limitation with G}
-		\int_{\R^{2d}} |F(z)| \cdot |\V f(z)|^2 dz \leq \int_0^m G\left(|\{|F|>t\}|\right)dt = \int_0^m G(\mu(t)) dt
+		\int_{\R^{2d}} |F(z)| \cdot |\V_{\varphi} f(z)|^2 dz \leq \int_0^m G\left(|\{|F|>t\}|\right)dt = \int_0^m G(\mu(t)) dt
 	\end{equation}
 	We point out that since $\mu(t) = 0$ for $t > m$ and that $G(0)=0$, the previous expression is equivalent to \eqref{norm limitation formula}.
 	
-	Because $p<\infty$, from Proposition \ref{F in L^p L_F compact} we know that $L_F$ is a compact operator, therefore there exist normalized $f$ and $g$ which achieve equality in the supremum of the norm, namely $\langle L_F f, g \rangle = \| L_F \|$. Therefore equality in \eqref{norm limitation formula} occurs if and only if all the previous inequalities become equalities. Equality in \eqref{limitation with G} occurs if and only if
+	Because $p<\infty$, from Proposition \ref{F in L^p L_F compact} we know that $L_F$ is a compact operator, therefore there exist normalized $f$ and $g$ which achieve equality in the supremum of the norm, namely $\langle L_{F, \varphi} f, g \rangle = \| L_{F, \varphi} \|$. Therefore, equality in \eqref{norm limitation formula} occurs if and only if all the previous inequalities become equalities. Equality in \eqref{limitation with G} occurs if and only if
 	\begin{equation}\label{first equality}
-		\int_{\{|F|>t\}} |\V f(z)|^2 dz = G(\mu(t))
+		\int_{\{|F|>t\}} |\V_{\varphi} f(z)|^2 dz = G(\mu(t))
 	\end{equation}
-	for a.e. $t \in (0,m)$. Thanks to Theorem \ref{faberkrahn theorem}, for just one $t_0 \in (0,m)$ we can infer that $\{|F|>t_0\}$ is (equivalent to) a ball centred in $z_0 = (x_0,\omega_0)$ and that $f$ is a Gaussian of the kind \eqref{translated Gaussian} with the same centre $z_0$. Then, still by theorem \ref{faberkrahn theorem}, since \eqref{first equality} holds a.e in $(0,m)$ and that $f$ is always the same we have that also the other levels sets $\{|F|>t\}$ are equivalent to balls centred at the same $z_0$. Finally, we can extend the result to every $t \in (0,m)$ because $\{|F|>t\} = \bigcup_{s > t} \{|F|>s\}$. Since Theorem \ref{faberkrahn theorem} is a ``if and only if'', these conditions on $F$ and $f$ are also sufficient to guarantee equality in \eqref{limitation with G}. Clearly the same result holds for $g$ which has to be a Gaussian, possibly with different coefficient $c$ but the same centre.
+	for a.e. $t \in (0,m)$. Now, fix $t_0 \in (0,m)$ such that equality holds. From Theorem \ref{faberkrahn theorem} we can infer that $\{|F|>t_0\}$ is (equivalent to) a ball centred in $z_0 = (x_0,\omega_0)$ and that $f$ is a Gaussian of the kind \eqref{translated Gaussian} with the same centre $z_0$. Now that the centre of $f$ is fixed, still from Theorem \ref{faberkrahn theorem}, we obtain that equality in \eqref{first equality} a.e implies that also the other levels sets $\{|F|>t\}$ are equivalent to balls centred at the same $z_0$. Finally, we can extend the result to every $t \in (0,m)$ because $\{|F|>t\} = \bigcup_{s > t} \{|F|>s\}$. Since Theorem \ref{faberkrahn theorem} is a ``if and only if'', these conditions on $F$ and $f$ are also sufficient to guarantee equality in \eqref{limitation with G}. Clearly, the same result holds for $g$ which has to be a Gaussian, possibly with different coefficient $c$ but the same centre $z_0$.
 	
-	In the end it turns that $|F|$ is spherically symmetric and radially decreasing as claimed in theorem's statement.
+	In the end, since all the super-level sets of $|F|$ are balls we conclude that it is spherically symmetric and radially decreasing, as claimed in the theorem's statement.
 	
-	Conditions for $f$ and $g$ imply that $\V g  = e^{i \alpha} \V f$ for some $\alpha \in \R$. This provides equality in \eqref{first inequality} when using Cauchy-Schwarz inequality. Lastly we shall prove that also the first inequality in \eqref{first inequality}, that is
+	Conditions for $f$ and $g$ imply that $\V_{\varphi} g  = e^{i \alpha} \V_{\varphi} f$ for some $\alpha \in \R$. This provides equality in \eqref{first inequality} when using Cauchy-Schwarz inequality. Lastly we shall prove that also the first inequality in \eqref{first inequality}, that is
 	\begin{equation*}
-		\left\vert \int_{\R^{2d}} F(z) \V f(z) \overline{\V g(z)} dz \right\vert \leq \int_{\R^{2d}} |F(z)| \cdot | \V f(z)| \cdot |\V g(z)| dz
+		\left\vert \int_{\R^{2d}} F(z) \V_{\varphi} f(z) \overline{\V_{\varphi} g(z)} dz \right\vert \leq \int_{\R^{2d}} |F(z)| \cdot | \V_{\varphi} f(z)| \cdot |\V_{\varphi} g(z)| dz
 	\end{equation*}
-	becomes an equality, which is true if and only if
+	becomes an equality. With the additional information that $\V_{\varphi} g  = e^{i \alpha} \V_{\varphi} f$ this is equivalent to prove that:
+	\begin{equation}\label{norm limitation equality 1}
+		\left\vert \int_{\R^{2d}} F(z) |\V_{\varphi} f(z)|^2 dz \right\vert = \int_{\R^{2d}} |F(z)| \cdot | \V_{\varphi} f(z)|^2 dz.
+	\end{equation}
+	The integral on the left-hand side is just a complex number, therefore we have:
 	\begin{equation*}
-		e^{-i\theta}  \int_{\R^{2d}} F(z) \cdot |\V f(z)|^2 dz = \int_{\R^{2d}} |F(z)| \cdot | \V f(z)|^2 dz
+		\int_{\R^{2d}} F(z) |\V_{\varphi} f(z)|^2 dz = e^{i \theta} \left\vert \int_{\R^{2d}} F(z) |\V_{\varphi} f(z)|^2 dz \right\vert,
 	\end{equation*}
-	for some $\theta \in \R$. This, in turn, is equivalent to the condition
+	so \eqref{norm limitation equality 1} becomes
 	\begin{equation*}
-		e^{-i \theta}F(z) \cdot |\V f(z)|^2 = |F(z)| \cdot |\V f(z)|^2 \quad \text{for a.e. } z \in \R^{2d}
+		\int_{\R^{2d}} e^{-i \theta} F(z) |\V_{\varphi} f(z)|^2 dz = \int_{\R^{2d}} |F(z)| \cdot | \V_{\varphi} f(z)|^2 dz.
 	\end{equation*}
-	but since $|\V f(z)|^2 > 0$, equality in \ref{first inequality} with $f$ and $g$ as \eqref{translated Gaussian} occurs if and only if $F(z) = e^{i \theta} |F(z)|$.
+	The proof would be complete if $|\V_{\varphi} f(z)|^2$ was always positive, since this would imply $F(z) = e^{i \theta} |F(z)|$.
+	In the proof of Theorem \ref{eigenvalues and eigenvectors localization operator spherically symmetric weight} we computed the STFT of Hermite functions. Since $\varphi = H_0$, letting $k = 0 \in \N_0^d$ into \eqref{STFT of Hermite functions} leads to:
+	\begin{equation*}
+		\V_{\varphi} \varphi (x, \omega) = e^{- \pi i \omega \cdot x} e^{- \pi (|x|^2 + |\omega|^2)/2}. 
+	\end{equation*}
+	In order to compute the STFT of $f = c \pi(x_0, \omega_0) \varphi$, all we have to do is to understand how $\V_{\varphi}$ interacts with a time-frequency shift:
+	\begin{equation*}
+		\V_{\varphi} f (x, \omega) = \langle c \pi(x_0, \omega_0) \varphi, \pi(x, \omega) \varphi \rangle = c \langle \varphi, T_{-x_0} M_{\omega - \omega_0} T_{x} \varphi \rangle.
+	\end{equation*}
+	Then:
+	\begin{align*}
+		T_{-x_0} M_{\omega - \omega_0} T_{x} \varphi(t) = e^{2 \pi i (\omega - \omega_0) \cdot (t + x_0)} f (t + x_0 - x) = e^{2 \pi i (\omega - \omega_0) \cdot x_0} M_{\omega - \omega_0} T_{x - x_0} \varphi(t),
+	\end{align*}
+	so that we obtain
+	\begin{equation*}
+		\V_{\varphi} f (x, \omega) = c e^{2 \pi i (\omega - \omega_0) \cdot x_0 } \langle \varphi, M_{\omega-\omega_0} T_{x-x_0} \varphi \rangle = c e^{2 \pi i (\omega - \omega_0) \cdot x_0 } \V_{\varphi} \varphi(x - x_0, \omega - \omega_0).
+	\end{equation*}
+	In the end, taking the modulus of both side we conclude that $|\V_{\varphi} f (x, \omega)|^2$ is always strictly positive, which concludes the proof.
 \end{proof}
 
-In light of the previous Theorem it is natural to seek for a sharp upper bound for the right-hand side of \eqref{norm limitation formula}. Since this involves the distribution function $|F|$ we shall search this bound between all the possible distribution functions. In order to do so we need to rephrase constraints \eqref{constraints generic case} in terms of $\mu$. This can be easily done one more time thanks to a more general version of the ``layer cake'' representation (see \cite[][Theorem 1.13]{liebloss} or \cite[][Proposition 1.1.4]{grafakos}):
+In light of the previous Theorem, it is natural to seek for a sharp upper bound for the right-hand side of \eqref{norm limitation formula}. Since this involves the distribution function $|F|$, we shall search this bound between all the possible distribution functions. In order to do so, we need to rephrase constraints \eqref{constraints generic case} in terms of $\mu$. This can be easily done thanks to a more general version of the ``layer cake'' representation (see \cite[][Theorem 1.13]{liebloss} or \cite[][Proposition 1.1.4]{grafakos}):
 \begin{equation*}
 	\|F\|_p^p = p \int_0^{\infty} t^{p-1}|\{|F|>t\}|dt.
 \end{equation*}
@@ -1676,7 +1745,7 @@ and we can define the proper space of possible distribution functions
 \begin{equation}\label{distribution function space}
 	\mathcal{C} = \{u : (0,+\infty) \rightarrow [0,+\infty) \text{ such that } u \text{ is decreasing and satisfies } \eqref{constraints generic case distribution function}\}.
 \end{equation}
-Up to now we have rephrased our original question in terms of the following variational problem:
+We have reached the point where our original question is rephrased in the following variational problem:
 \begin{equation}\label{nonstandard variational problem formulation}
 	\sup_{v \in \mathcal{C}} I(v) \quad \text{where} \quad I(v) \coloneqq \int_0^{+\infty} G(v(t))dt
 \end{equation}
@@ -1687,34 +1756,34 @@ Firstly, we shall prove existence of maximizers.
 \begin{proof}
 	Considering, for example, the first constraint in \eqref{constraints generic case distribution function}, we see that
 	\begin{equation*}
-		t^p u(t) = p \int_0^t \tau^{p-1} u(t) d\tau \overset{u \text{ decreasing}}{\leq} p \int_0^t \tau^{p-1} u(\tau) d\tau \leq A^p
+		t^p u(t) = p \int_0^t \tau^{p-1} u(t) d\tau \overset{u \text{ decreasing}}{\leq} p \int_0^t \tau^{p-1} u(\tau) d\tau \leq A^p,
 	\end{equation*}
 	hence functions in $\mathcal{C}$ are pointwise bounded by $A^p/t^p$. It is straightforward to verify that $G$ in \eqref{G} is increasing, that $G(s) \leq s$ and that $G(s) \leq 1$. Using these properties we have:
 	\begin{align*}
-		I(u) &= \int_0^{+\infty} G(u(t))dt = \int_0^1 G(u(t))dt + \int_1^{+\infty} G(u(t))dt \overset{G(s) \leq 1}{\leq} 1 + \int_1^{+\infty} G(u(t))dt \overset{G \text{ increasing}}{\leq}\\ &\leq 1 + \int_1^{+\infty} G(A^p/t^p)dt \overset{G(s) \leq s}{\leq} 1 + \int_1^{+\infty} \dfrac{A^p}{t^p}dt < \infty
+		I(u) &= \int_0^{+\infty} G(u(t))dt = \int_0^1 G(u(t))dt + \int_1^{+\infty} G(u(t))dt \overset{G(s) \leq 1}{\leq} 1 + \int_1^{+\infty} G(u(t))dt \overset{G \text{ increasing}}{\leq}\\ &\leq 1 + \int_1^{+\infty} G(A^p/t^p)dt \overset{G(s) \leq s}{\leq} 1 + \int_1^{+\infty} \dfrac{A^p}{t^p}dt < \infty,
 	\end{align*}
 	therefore the supremum in \eqref{nonstandard variational problem formulation} is finite.
 	
-	Let $\{u_n\}_{n \in \N} \subset \mathcal{C}$ be a maximizing sequence. Since every $u_n$ is pointwise bounded by $A^p/t^p$, thanks to {\color{red}Helly's selection theorem} we can say that, up to a subsequence, $u_n$ converges pointwise to a decreasing function $u$, which is still in $\mathcal{C}$, indeed:
+	Let $\{u_n\}_{n \in \N} \subset \mathcal{C}$ be a maximizing sequence. Since every $u_n$ is pointwise bounded by $A^p/t^p$, thanks to Helly's selection theorem \ref{Helly's selection theorem} we can say that, up to a subsequence, $u_n$ converges pointwise to a decreasing function $u$. Moreover, $u$ is still in $\mathcal{C}$, indeed:
 	\begin{equation*}
-		\int_0^{+\infty} t^{p-1} u(t) = \int_0^{+\infty} \lim_{n \rightarrow \infty} t^{p-1} u_n(t) dt \overset{\text{Fatou's lemma}}{\leq} \liminf_{n \rightarrow \infty} \int_0^{+\infty} t^{p-1} u_n(t) dt \leq \dfrac{A^p}{p}
+		\int_0^{+\infty} t^{p-1} u(t) = \int_0^{+\infty} \lim_{n \rightarrow \infty} t^{p-1} u_n(t) dt \overset{\text{Fatou's lemma}}{\leq} \liminf_{n \rightarrow \infty} \int_0^{+\infty} t^{p-1} u_n(t) dt \leq \dfrac{A^p}{p},
 	\end{equation*}
-	and the same holds for $q$ instead of $p$.
+	and clearly the same holds for $q$ instead of $p$.
 	
 	Now we have to prove that $u$ is actually achieving the supremum. We already saw that the following holds:
 	\begin{equation*}
-		|G(u_n(t))| \leq \chi_{(0,1)}(t) + \dfrac{A^p}{t^p} \chi_{(1,+\infty)}
+		|G(u_n(t))| \leq \chi_{(0,1)}(t) + \dfrac{A^p}{t^p} \chi_{(1,+\infty)}(t)
 	\end{equation*}
 	and that the left-hand side is a function in $L^1(0,+\infty)$. This allows us to use dominated convergence theorem to conclude that 
 	\begin{equation*}
-		I(u) = \int_0^{+\infty} G(u(t)) = \lim_{n \rightarrow \infty} \int_0^{\infty} G(u_n(t))dt = \lim_{n \rightarrow \infty} I(u_n) = \sup_{v \in \mathcal{C}} I(v)
+		I(u) = \int_0^{+\infty} G(u(t)) = \lim_{n \rightarrow \infty} \int_0^{\infty} G(u_n(t))dt = \lim_{n \rightarrow \infty} I(u_n) = \sup_{v \in \mathcal{C}} I(v).
 	\end{equation*}
 
-	Lastly we need to show that $u$ achieves equality at least in one of the constraints \eqref{constraints generic case distribution function}. Suppose that this is not true. If we let $u_{\varepsilon}(t) = (1+\varepsilon) u(t)$, then for $\varepsilon > 0$ sufficiently small constraints are still satisfied and since $G$ is strictly increasing $I(u_{\varepsilon}) > I(u)$, which contradicts the hypothesis that $u$ is a maximizer.
+	Lastly, we need to show that $u$ achieves equality at least in one of the constraints \eqref{constraints generic case distribution function}. Suppose that this is not true. If we let $u_{\varepsilon}(t) = (1+\varepsilon) u(t)$, then for $\varepsilon > 0$ sufficiently small constraints are still satisfied and since $G$ is strictly increasing $I(u_{\varepsilon}) > I(u)$, which contradicts the hypothesis that $u$ is a maximizer.
 \end{proof}
-{\color{blue} In order to do some ``meaningful'' calculus of variations over $I$ we need to enlarge $\mathcal{C}$, because the monotonicity assumption is quite strict. We will show that removing this hypothesis leaves the supremum unchanged and that maximizers are indeed monotonic.}
+In order to do some ``meaningful'' calculus of variations over $I$ we need to enlarge $\mathcal{C}$, because the monotonicity assumption is quite strict. We will show that removing this hypothesis leaves the supremum unchanged and that maximizers are indeed monotonic.
 \begin{prop}\label{monotonicity of maximizer}
-	Let $\allowdisplaybreaks[1]\mathcal{C}' = \{u : (0,+\infty) \rightarrow [0,+\infty) \text{ such that } u \text{ is measurable and satisfies } \eqref{constraints generic case distribution function}$. Then
+	Let $\allowdisplaybreaks[1]\mathcal{C}' = \{u : (0,+\infty) \rightarrow [0,+\infty)$ such that  $u$ is measurable and satisfies \eqref{constraints generic case distribution function}$\}$. Then
 	\begin{equation}
 		\sup_{v \in \mathcal{C}} I(v) = \sup_{v \in \mathcal{C}'} I(v).
 	\end{equation}
@@ -1725,7 +1794,7 @@ Firstly, we shall prove existence of maximizers.
 	\begin{equation}
 		u^*(s) = \sup\{t \geq 0 : |\{u>t\}|>s\},
 	\end{equation}
-	with the convention that $\sup \emptyset = 0$. It is clear from the definition that $u^*$ is a non-increasing function. Moreover, one can see (\cite[][Section 10.12]{hardy_littlewood_polya}, \cite[][Proposition 1.4.5]{grafakos}) that $u^*$ is right-continuous and that $u$ and $u^*$ are \emph{equi-measurable}, which means that they have the same distribution function. Moreover, we already pointed out that constraints \eqref{constraints generic case distribution function} imply that $u$ is pointwise bounded by, for example, $A^p/t^p$, therefore $u^*$ takes only finite values. Our aim is to show that $u^* \in \mathcal{C}$. Letting $\nu$ be the Radon measure with density $t^{p-1}$, we start proving that $\nu(\{u>s\}) \geq \nu(\{u^* > s\})$, indeed:
+	with the convention that $\sup \emptyset = 0$. It is clear from the definition that $u^*$ is a non-increasing function. Moreover, one can see (\cite[][Section 10.12]{hardy_littlewood_polya}, \cite[][Proposition 1.4.5]{grafakos}) that $u^*$ is right-continuous and that $u$ and $u^*$ are \emph{equi-measurable}, which means that they have the same distribution function. Moreover, we already pointed out that constraints \eqref{constraints generic case distribution function} imply that $u$ is pointwise bounded by $A^p/t^p$, therefore $u^*$ takes only finite values. Our aim is to show that $u^* \in \mathcal{C}$. Letting $\nu$ be the Radon measure with density $t^{p-1}$, we start proving that $\nu(\{u>s\}) \geq \nu(\{u^* > s\})$, indeed:
 	\begin{align*}
 		\nu(\{u>s\}) &= \int_{\{u>s\}} t^{p-1} dt \overset{t^{p-1}\; \mathrm{increasing}}{\geq} \int_0^{|\{u>s\}|} t^{p-1} dt  \overset{\mathrm{equi-measurability}}{=}\\
 					 &= \int_0^{|\{u^*>s\}|} t^{p-1} dt \overset{u^*\; \mathrm{decreasing}}{\underset{\mathrm{right-continuous}}{=}} \int_{\{u^*>s\}} t^{p-1} dt = \nu(\{u^* > s\}).
@@ -1762,7 +1831,8 @@ Before stating and proving the theorem that gives the only maximal function of \
 	\end{equation*}
 \end{teo}
 \begin{proof}
-{\color{blue} We will split the proof in several parts. Firstly we will show that maximizers are given by \eqref{nonstandard variational problem solution formula}. Then we will show that multipliers $\lambda_1$ and $\lambda_2$ are both strictly positive and unique.}
+We will split the proof in several parts. Firstly we will show that maximizers are given by \eqref{nonstandard variational problem solution formula}. Then we will show that multipliers $\lambda_1$ and $\lambda_2$ are both strictly positive and unique.\\
+•\textbf{Expression of maximizers}
 
 Let $M = \sup\{t \in (0,+\infty)\ : u(t) > 0\}$. From Proposition \ref{existence of maximizer} we know that $u$ has to achieve at least one of the constraints, therefore $M>0$. Consider now a closed interval $[a,b] \subset (0,M)$ and a function $\eta \in L^{\infty}(0,M)$ supported in $[a,b]$. Without loss of generality we can suppose that $\eta$ is orthogonal, in the $L^2$ sense, to $t^{p-1}$ and $t^{q-1}$, explicitly
 \begin{equation}\label{variations are orthogonal to constraints}
@@ -1772,38 +1842,38 @@ On $[a,b]$ we have that $u(t) \geq u(b) > 0$, hence, for $|\varepsilon|$ suffici
 \begin{equation*}
 	0 = \dfrac{d}{d\varepsilon}I(u+\varepsilon\eta) \lvert_{\varepsilon=0} = \int_a^b G'(u(t))\eta(t)dt.
 \end{equation*}
-We would like to extend this result to every $\eta$ in $L^2(a,b)$ satisfying \eqref{variations are orthogonal to constraints}. {\color{blue}Since $L^{\infty}(a,b)$ is dense in $L^2(a,b)$, there exist a sequence $\{\eta_k\}_{k \in \N} \subset L^{\infty}(a,b)$ such that $\eta_k \rightarrow \eta$ in $L^2(a,b)$. We can consider the projection operator $P$ such that, given $\psi \in L^2(a,b)$, $P\psi$ is the orthogonal projection of $\psi$ onto $ X = \mathrm{span}\{t^{p-1},t^{q-1}\}^{\perp} \subset L^2(a,b)$. Since $P$ is continuous we have that $P\eta_k \rightarrow P\eta = \eta$, hence
+We would like to extend this result to every $\eta$ in $L^2(a,b)$ satisfying \eqref{variations are orthogonal to constraints}. Since $L^{\infty}(a,b)$ is dense in $L^2(a,b)$, there exist a sequence $\{\eta_k\}_{k \in \N} \subset L^{\infty}(a,b)$ such that $\eta_k \rightarrow \eta$ in $L^2(a,b)$. We can consider the projection operator $P$ such that, given $\psi \in L^2(a,b)$, $P\psi$ is the orthogonal projection of $\psi$ onto $ X = \mathrm{span}\{t^{p-1},t^{q-1}\}^{\perp} \subset L^2(a,b)$. Since $P$ is continuous we have that $P\eta_k \rightarrow P\eta = \eta$, hence
 \begin{gather}
 	0 = \int_a^b G'(u(t)) P\eta_k(t) dt = \langle G'(u), P\eta_n \rangle_{L^2(a,b)} \rightarrow \langle G'(u), \eta \rangle_{L^2(a,b)} = \int_a^b G'(u(t)) \eta(t) dt \implies \nonumber\\
 	\implies \int_a^b G'(u(t)) \eta(t) dt = 0. \label{orthogonality of G'}
-\end{gather}}
+\end{gather}
 Since \eqref{orthogonality of G'} holds for every $\eta \in X$ it must be that 
 \begin{equation*}
 	G'(u) \in X^{\perp} = \left(\mathrm{span}\{t^{p-1},t^{q-1}\}^{\perp}\right)^{\perp} = \mathrm{span}\{t^{p-1},t^{q-1}\} \quad \text{in } (a,b).
 \end{equation*}
-By letting $a \rightarrow 0^+$ and $b \rightarrow M^-$ we then obtain
+Letting $a \rightarrow 0^+$ and $b \rightarrow M^-$ we then obtain
 \begin{equation}\label{expression G'(u)}
 	G'(u(t)) = \lambda_1 t^{p-1} + \lambda_2 t^{q-1} \quad \text{for a.e. } t \in (0,M)
 \end{equation}
-for some $\lambda_1,\lambda_2 \in \R$. Since $u$ is decreasing actually \eqref{expression G'(u)} holds for every $t \in (0,M)$. {\color{red} We point out that this argument enables us to say that maximizers have to achieve equality in both constraints in \eqref{constraints generic case distribution function}. Indeed, if, for example, we had that $q \int_0^{\infty} t^{q-1}u(t)dt < B^q$, the second condition of orthogonality in \eqref{variations are orthogonal to constraints} could be removed (since, for sufficiently small $\varepsilon$, a variation non-orthogonal to $t^{q-1}$ would be admissible), providing us with the solution of the same variational problem but without the $L^q$ constraint. Since we already know that actually this solution does not satisfy the $L^q$ constraint we conclude that $u$ has to achieve equality in both constraints. With the very same thinking we can say that neither $\lambda_1$ nor $\lambda_2$ can be 0.}
-
-
- Recalling the expression of \eqref{G} we see that $G'(s) = e^{-(d!s)^{1/d}}$ and {\color{blue} easily invert \eqref{expression G'(u)}}, thus obtaining
+for some multipliers $\lambda_1,\lambda_2 \in \R$. Since $u$ is decreasing actually \eqref{expression G'(u)} holds for every $t \in (0,M)$. Finally, recalling the expression of \eqref{G} we see that $G'(s) = e^{-(d!s)^{1/d}}$. Since $u$ is monotonically decreasing we can invert \eqref{expression G'(u)} thus obtaining the explicit expression of maximizers:
 \begin{equation}\label{expression u}
 	u(t) = \begin{cases}
 		\dfrac{1}{d!} \left[-\log\left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right) \right]^d & t \in (0,M)\\
 		0 & t \in (M,+\infty)
 	\end{cases}
 \end{equation}
-We remark that a priori it was possible that $M=+\infty$, but from the explicit expression of maximizers we see that this is not possible since $u$ has to be nonnegative.
+We remark that a priori it was possible that $M=+\infty$, but from the explicit expression of maximizers we see that this is not possible since $u$ has to be nonnegative.\\
+• \textbf{Maximizers achieve equality in both constraints and multipliers are non-zero}
 
-Our main goal now is to show that multipliers $\lambda_1, \lambda_2$ are both positive and unique since this will give us uniqueness for the maximizer.
+The argument we used to determine the expression of maximizers enables us to say that these have to achieve equality in both constraints in \eqref{constraints generic case distribution function}. Indeed, if, for example, we had that $q \int_0^{\infty} t^{q-1}u(t)dt < B^q$, the second condition of orthogonality in \eqref{variations are orthogonal to constraints} could be removed, because for sufficiently small $\varepsilon$ a variation non-orthogonal to $t^{q-1}$ would be admissible. This would provide us the solution of the same variational problem but without the $L^q$ constraint. Since we already know that actually this solution does not satisfy the $L^q$ constraint, we conclude that $u$ has to achieve equality in both constraints. With the very same reasoning we can say that neither $\lambda_1$ nor $\lambda_2$ can be 0.\\
+• \textbf{Multipliers are positive}
 
-We start by proving that both multipliers are positive. Suppose that one of them, for example $\lambda_2$, is negative. Consider an interval $[a,b] \subset (0,M)$ and a variation $\eta \in L^{\infty}(0,M)$ supported in $[a,b]$. Thanks to the Gram-Schmidt process we can construct a variation orthogonal to $t^{p-1}$. Since $\eta$ is arbitrary we can also suppose that it is not orthogonal to $t^{q-1}$, in particular we can ask that $\int_{a}^{b}t^{q-1}\eta(t)dt <0$. Therefore, the directional derivative of $G$ along $\eta$ is:
+Suppose that one of the multipliers, for example $\lambda_2$, is negative. Consider an interval $[a,b] \subset (0,M)$ and a variation $\eta \in L^{\infty}(0,M)$ supported in $[a,b]$. Thanks to the Gram-Schmidt process we can construct a variation orthogonal to $t^{p-1}$. Since $\eta$ is arbitrary we can also suppose that it is not orthogonal to $t^{q-1}$, in particular we can ask that $\int_{a}^{b}t^{q-1}\eta(t)dt <0$. Therefore, the directional derivative of $G$ along $\eta$ is:
 \begin{equation*}
-	\int_{a}^{b} G'(u(t))\eta(t)dt = \int_{a}^{b} (\lambda_1 t^{p-1} + \lambda_2 t^{q-1})\eta(t)dt = \lambda_2 \int_{a}^{b} t^{q-1} \eta(t)dt > 0
+	\int_{a}^{b} G'(u(t))\eta(t)dt = \int_{a}^{b} (\lambda_1 t^{p-1} + \lambda_2 t^{q-1})\eta(t)dt = \lambda_2 \int_{a}^{b} t^{q-1} \eta(t)dt > 0,
 \end{equation*}
-which contradicts the fact that $u$ is a maximizer.
+which contradicts the fact that $u$ is a maximizer.\\
+• \textbf{$u$ is continuous}
 
 Now that we now that both multipliers are positive we can prove that $u$ is continuous, which is equivalent to say that $M=T$, where $T$ is the unique positive number such that $\lambda_1 T^{p-1} + \lambda_2 T^{q-1} = 1$ (uniqueness of $T$ follows from the positivity of multipliers).
 
@@ -1816,14 +1886,13 @@ We start supposing that $M < T$, which means that $\lim_{t \rightarrow M^-} u(t)
 		0,\quad				   & \text{otherwise}
 	\end{aligned}\right.
 \end{equation*}
-where $\delta>0$ is small enough so that $M-M\delta >0$ and $M+M\delta < T$, while $\alpha$ and $\beta$ are constants, depending on $\delta$, to be determined. Since we want this to be an admissible variation we need to impose that $\eta$ is orthogonal to $t^{p-1}$ and $t^{q-1}$. For example, the first condition is:
+where $\delta>0$ is small enough so that $M-M\delta >0$ and $M+M\delta < T$, while $\alpha$ and $\beta$ are constants, depending on $\delta$, to be determined. Since we want this to be an admissible variation, we need to impose that $\eta$ is orthogonal to $t^{p-1}$ and $t^{q-1}$. For example, the first condition is:
 \begin{align*}
 	0 &= \int_{M-M\delta}^{M+M\delta} t^{p-1} \eta(t) dt = -\int_{M-M\delta}^M t^{p-1}dt + \int_{M-M\delta}^M t^{p-1}\left(\alpha \frac{t}{M} + \beta\right) dt + \int_M^{M+M\delta} t^{p-1}dt \overset{\tau=t/M}{=}\\
 	  &= M^p \int_{1-\delta}^1 \tau^{p-1}(\alpha \tau + \beta) d\tau - M^p \int_{1-\delta}^1 \tau^{p-1} d\tau + M^p \int_1^{1+\delta} \tau^{p-1} d\tau \overset{1/\delta}{\implies}\\
-	  &\implies \fint_{1-\delta}^1 \tau^{p-1}(\alpha \tau + \beta) d\tau = \alpha \fint_{1-\delta}^1 \tau^{p} d\tau + \beta \fint_{1-\delta}^1 \tau^{p-1} d\tau = \fint_{1-\delta}^1 \tau^{p-1} d\tau - \fint_1^{1+\delta} \tau^{p-1} d\tau 
+	  &\implies \fint_{1-\delta}^1 \tau^{p-1}(\alpha \tau + \beta) d\tau = \alpha \fint_{1-\delta}^1 \tau^{p} d\tau + \beta \fint_{1-\delta}^1 \tau^{p-1} d\tau = \fint_{1-\delta}^1 \tau^{p-1} d\tau - \fint_1^{1+\delta} \tau^{p-1} d\tau.
 \end{align*}
-The equation stemming from the orthogonality with $t^{q-1}$ is analogous. Therefore we obtained a nonhomogeneous linear system for $\alpha$ and $\beta$
-\textbf{VA RESO MEGLIO}
+The equation stemming from the orthogonality with $t^{q-1}$ is analogous. Therefore, we obtained a nonhomogeneous linear system for $\alpha$ and $\beta$:
 \begin{equation}\label{system continuity}
 	\begin{pmatrix}
 		 \fint_{1-\delta}^1 \tau^{p} d\tau &   \fint_{1-\delta}^1 \tau^{p-1} d\tau\\
@@ -1838,46 +1907,39 @@ The equation stemming from the orthogonality with $t^{q-1}$ is analogous. Theref
 	\begin{pmatrix}
 		\fint_{1-\delta}^1 \tau^{p-1} d\tau - \fint_1^{1+\delta} \tau^{p-1} d\tau\\
 		\fint_{1-\delta}^1 \tau^{q-1} d\tau - \fint_1^{1+\delta} \tau^{q-1} d\tau
-	\end{pmatrix}
+	\end{pmatrix}.
 \end{equation}
-{\color{blue}This system has a unique solution if and only if the determinant of the matrix is not 0. We can show this directly:
+This system has a unique solution if and only if the determinant of the matrix is not 0. We can show this directly:
 \begin{align*}
 	& \fint_{1-\delta}^1 \tau^{p} d\tau \fint_{1-\delta}^1 \tau^{q-1} d\tau - \fint_{1-\delta}^1 \tau^{q} d\tau \fint_{1-\delta}^1 \tau^{p-1} d\tau=\\
 	&= \dfrac{1}{\delta^2} \int_{(1-\delta,1)^2} \left(\tau^p \sigma^{q-1} - \tau^{p-1}\sigma^q\right) d\tau d\sigma = \dfrac{1}{\delta^2} \int_{(1-\delta,1)^2} \tau^{p-1} \sigma^{q-1} \left( \tau - \sigma \right) d\tau d\sigma = \\
-	&= \dfrac{1}{\delta^2} \left( \int_{Q_1} \tau^{p-1} \sigma^{q-1} \left( \tau - \sigma \right) d\tau d\sigma + \int_{Q_2} \tau^{p-1} \sigma^{q-1} \left( \tau - \sigma \right) d\tau d\sigma \right)=
+	&= \dfrac{1}{\delta^2} \left( \int_{Q_1} \tau^{p-1} \sigma^{q-1} \left( \tau - \sigma \right) d\tau d\sigma + \int_{Q_2} \tau^{p-1} \sigma^{q-1} \left( \tau - \sigma \right) d\tau d\sigma \right),
 \end{align*}
-where $Q_1=(1-\delta,1)^2 \cap \{\tau > \sigma\}$ and $Q_2=(1-\delta,1)^2 \cap \{\tau < \sigma\}$. In the second integral we can consider the change of variable that swaps $\tau$ and $\sigma$. In this case the new domain is $Q_1$, hence:
+where $Q_1=(1-\delta,1)^2 \cap \{\tau > \sigma\}$ and $Q_2=(1-\delta,1)^2 \cap \{\tau < \sigma\}$. In the second integral we can consider the change of variable that swaps $\tau$ and $\sigma$. In this case, the new domain is $Q_1$, hence:
 \begin{align*}
-	= \dfrac{1}{\delta^2} \int_{Q_1} \left(\tau^{p-1}\sigma^{q-1} - \tau^{q-1}\sigma^{p-1}\right) \left(\tau - \sigma\right) d\tau d\sigma
+	&\fint_{1-\delta}^1 \tau^{p} d\tau \fint_{1-\delta}^1 \tau^{q-1} d\tau - \fint_{1-\delta}^1 \tau^{q} d\tau \fint_{1-\delta}^1 \tau^{p-1} d\tau=\\
+	&= \dfrac{1}{\delta^2} \int_{Q_1} \left(\tau^{p-1}\sigma^{q-1} - \tau^{q-1}\sigma^{p-1}\right) \left(\tau - \sigma\right) d\tau d\sigma.
 \end{align*}
-In $Q_1$ $\tau - \sigma > 0$ and the sign of $\tau^{p-1}\sigma^{q-1} - \tau^{q-1}\sigma^{p-1}$ is constant, in fact:
+In $Q_1$ we have that $\tau - \sigma > 0$ and the sign of $\tau^{p-1}\sigma^{q-1} - \tau^{q-1}\sigma^{p-1}$ is constant, indeed:
 \begin{equation*}
-	\tau^{p-1}\sigma^{q-1} - \tau^{q-1}\sigma^{p-1} > 0 \iff \left(\dfrac{\tau}{\sigma}\right)^{p-q} > 1 \overset{\tau > \sigma}{\iff} p>q
+	\tau^{p-1}\sigma^{q-1} - \tau^{q-1}\sigma^{p-1} > 0 \iff \left(\dfrac{\tau}{\sigma}\right)^{p-q} > 1 \overset{\tau > \sigma}{\iff} p>q.
 \end{equation*}
-Therefore the determinant of the matrix is always not 0.}\\
-%If we see it as a function of $\delta$ we can expand the terms in a Taylor series:
-%\begin{align*}
-%	& \fint_{1-\delta}^1 \tau^{p} d\tau \fint_{1-\delta}^1 \tau^{q-1} d\tau - \fint_{1-\delta}^1 \tau^{q} d\tau \fint_{1-\delta}^1 \tau^{p-1} d\tau=\\
-%	&=\left(1-\dfrac{p}{2}\delta + \dfrac{p(p-1)}{6}\delta^2 + o(\delta^2)\right) \left(1-\dfrac{q-1}{2}\delta + \dfrac{(q-1)(q-2)}{6}\delta^2 + o(\delta^2)\right) +\\
-%	&-\left(1-\dfrac{q}{2}\delta + \dfrac{q(q-1)}{6}\delta^2 + o(\delta^2)\right) \left(1-\dfrac{p-1}{2}\delta + \dfrac{(p-1)(p-2)}{6}\delta^2 + o(\delta^2)\right)=\\
-%	&=(1-1) + \delta \left(-\dfrac{q-1}{2} - \dfrac{p}{2} + \dfrac{p-1}{2} + \dfrac{q}{2} \right) \ldots\\
-%	&=\dfrac{p-q}{12}\delta^2 + o(\delta^2)
-%\end{align*}
-%therefore the determinant is always non 0.\\
-The derivative of $G$ along $\eta$ is nonpositive because $u$ is supposed to be a maximizer, therefore
+Therefore the determinant of the matrix is always not 0.
+
+Now that we have an admissible variation, we can compute the directional derivative of $G$ along $\eta$. Since $u$ is supposed to be a maximizer, this derivative has to be nonpositive, therefore:
 \begin{align*}
 	0 &\geq \int_{M-M\delta}^{M+M\delta} G'(u(t))\eta(t)dt = -\int_{M-M\delta}^M \left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right) dt\, +\\
 	  &+ \int_{M-M\delta}^M \left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right)\left(\alpha \dfrac{t}{M}+\beta\right) dt + \int_M^{M+M\delta}dt = \\
 	  &= -\int_{M-M\delta}^M \left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right) dt + \lambda_1 M^p \int_{1-\delta}^1 t^{p-1}(\alpha t + \beta) dt +\\
-	  &+ \lambda_2 M^q \int_{1-\delta}^1 t^{q-1}(\alpha t + \beta) dt + M\delta
+	  &+ \lambda_2 M^q \int_{1-\delta}^1 t^{q-1}(\alpha t + \beta) dt + M\delta.
 \end{align*}
 Dividing by $M\delta$ and rearranging we obtain:
 \begin{equation}\label{inequality continuity}
 	\begin{aligned}
-		\fint_{M-M\delta}^M \left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right) dt \geq  1 &+ \lambda_1 M^{p-1} \fint_{1-\delta}^1 t^{p-1}(\alpha t + \beta) dt\\ &+ \lambda_2 M^{q-1} \fint_{1-\delta}^1 t^{q-1}(\alpha t + \beta) dt
+		\fint_{M-M\delta}^M \left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right) dt \geq  1 &+ \lambda_1 M^{p-1} \fint_{1-\delta}^1 t^{p-1}(\alpha t + \beta) dt\\ &+ \lambda_2 M^{q-1} \fint_{1-\delta}^1 t^{q-1}(\alpha t + \beta) dt.
 	\end{aligned}
 \end{equation}
-We notice that the last two terms are exactly the one that appear in the orthogonality condition, therefore, to understand their behavior as $\delta$ approaches 0, we need to study the right-hand side of the system \eqref{system continuity}. If we expand the first term in its Taylor series with respect to $\delta$ we have:
+We notice that the last two terms are exactly the ones that appear in the orthogonality condition, therefore, to understand their behavior as $\delta$ approaches 0, we need to study the right-hand side of the system \eqref{system continuity}. If we expand the first term in its Taylor series with respect to $\delta$ we have:
 \begin{align*}
 	\left(1-\dfrac{p-1}{2}\delta + o(\delta) \right) - \left(1+\dfrac{p-1}{2}\delta + o(\delta) \right) = -(p-1)\delta + o(\delta)
 \end{align*}
@@ -1885,38 +1947,41 @@ and the same is for the other term. Since they both are of order $\delta$, if we
 \begin{equation*}
 	\lambda_1 M^{p-1} + \lambda_2 M^{q-1} \geq 1
 \end{equation*}
-Since the function $\lambda_1 t^{p-1}  + \lambda_2 t^{q-1}$ is strictly increasing (because $\lambda_1$ and $\lambda_2$ are both positive) $M \geq T$ which is absurd because we supposed that $M<T$. This allows us to write $u$ as in \eqref{nonstandard variational problem solution formula}.
+The function $\lambda_1 t^{p-1}  + \lambda_2 t^{q-1}$ is strictly increasing because $\lambda_1$ and $\lambda_2$ are both positive, therefore this implies that $M \geq T$, which is absurd because we supposed that $M<T$. This allows us to write $u$ as in \eqref{nonstandard variational problem solution formula}.\\
+• \textbf{Uniqueness of multipliers}
 
 Lastly we shall prove that multipliers $\lambda_1, \lambda_2$, and hence maximizer, are unique. For this proof it is convenient to express $u$ in a slightly different way:
 \begin{equation*}
-	u(t) = \dfrac{1}{d!}\left[ \Log\left((c_1t)^{p-1} + (c_2t)^{q-1}\right) \right]^d
+	u(t) = \dfrac{1}{d!}\left[ \Log\left((c_1t)^{p-1} + (c_2t)^{q-1}\right) \right]^d.
 \end{equation*} 
 To emphasize that $u$ is parametrized by $c_1, c_2$ we may write $u(t;c_1,c_2)$. Now we define
 \begin{equation*}
-	f(c_1,c_2) = p\ \int_0^T t^{p-1}u(t;c1,c2)dt, \quad g(c_1,c_2) = q\ \int_0^T t^{q-1}u(t;c1,c2)dt
+	f(c_1,c_2) = p\ \int_0^T t^{p-1}u(t;c1,c2)dt, \quad g(c_1,c_2) = q\ \int_0^T t^{q-1}u(t;c1,c2)dt.
 \end{equation*}
-We want to highlight that, even if it is not explicit, also $T$ depends on $c_1$ and $c_2$. Nevertheless these functions are differentiable since both $T$ and $u$ are differentiable with respect to $(c_1,c_2)$, functions $t^{p-1}u$ and $t^{q-1}u$ and their derivatives are bounded in $(0,T)$. 
-Our maximizer $u$ satisfies the constraints only if $f(c_1,c_2)=A^p, \, g(c_1,c_2) = B^q$. Therefore to prove uniqueness of the maximizer we need to show that level sets $\{f=A^p\}$ and $\{g=B^q\}$ intersect in only a point.\\
-First of all we are studying endpoints. For example, if $c_2=0$:
+We want to highlight that, even if it is not explicit, also $T$ depends on $c_1$ and $c_2$. Nevertheless, these functions are differentiable since both $T$ and $u$ are differentiable with respect to $(c_1,c_2)$ and $t^{p-1}u$, $t^{q-1}u$ and their derivatives are bounded in $(0,T)$. 
+Our maximizer $u$ satisfies the constraints only if $f(c_1,c_2)=A^p, \, g(c_1,c_2) = B^q$. Therefore, to prove uniqueness of the maximizer we need to show that level sets $\{f=A^p\}$ and $\{g=B^q\}$ intersect only in one point.
+
+First of all we need to study endpoints, namely when one of $c_1$ or $c_2$ is 0. For example, if $c_2=0$:
 \begin{align*}
 	f(c_1,0) &= p\int_0^{1/{c_1}} t^{p-1}\dfrac{1}{d!}\left[-\log(c_1t)^{p-1}\right]^d dt \overset{\tau = c_1t}{=} \\
-			 &= \dfrac{p(p-1)^d}{c_1^p d!}\int_0^1 \tau^{p-1}\left[-\log(\tau)\right]^d d\tau = \dfrac{\kappa_p^d}{c_1^p} = A^p \implies c_{1,f} = \dfrac{\kappa_p^{d/p}}{A}
+			 &= \dfrac{p(p-1)^d}{c_1^p d!}\int_0^1 \tau^{p-1}\left[-\log(\tau)\right]^d d\tau = \dfrac{\kappa_p^d}{c_1^p} = A^p \implies c_{1,f} = \dfrac{\kappa_p^{d/p}}{A}.
 \end{align*}
-The same can be done for $g$ and setting $c_1=0$ thus we obtain four points
+The same can be done for $g$ and setting $c_1=0$ instead of $c_2 = 0$. Thus, we obtain four points:
 \begin{equation*}
-	c_{1,f} = \dfrac{\kappa_p^{d/p}}{A},\ c_{1,g} = \left(\dfrac{p-1}{q}\right)^{d/q}\dfrac1{B},\ c_{2,f} = \left(\dfrac{q-1}{p}\right)^{d/p}\dfrac1{A},\ c_{2,g} = \dfrac{\kappa_q^{d/q}}{B}
+	c_{1,f} = \dfrac{\kappa_p^{d/p}}{A},\ c_{1,g} = \left(\dfrac{p-1}{q}\right)^{d/q}\dfrac1{B},\ c_{2,f} = \left(\dfrac{q-1}{p}\right)^{d/p}\dfrac1{A},\ c_{2,g} = \dfrac{\kappa_q^{d/q}}{B}.
 \end{equation*}
-In the regime we are considering one has that $c_{1,f} < c_{1,g}$ and $c_{2,f} > c_{2,g}$, indeed
+In the regime we are considering one has that $c_{1,f} < c_{1,g}$ and $c_{2,f} > c_{2,g}$, indeed:
 \begin{align*}
-	&c_{1,f} < c_{1,g} \iff \dfrac{\kappa_p^{d/p}}{A} < \left(\dfrac{p-1}{q}\right)^{d/q}\dfrac1{B} \iff \dfrac{B}{A} < \kappa_p^{d\left( \frac1{q}-\frac1{p}\right)}\left(\dfrac{p}{q}\right)^{d/q}\\
-	&c_{2,f} > c_{2,g} \iff \left(\dfrac{q-1}{p}\right)^{d/p}\dfrac1{A} > \dfrac{\kappa_q^{d/q}}{B} \iff \dfrac{B}{A} > \kappa_q^{d\left( \frac1{q}-\frac1{p}\right)}\left(\dfrac{p}{q}\right)^{d/p}
+	&c_{1,f} < c_{1,g} \iff \dfrac{\kappa_p^{d/p}}{A} < \left(\dfrac{p-1}{q}\right)^{d/q}\dfrac1{B} \iff \dfrac{B}{A} < \kappa_p^{d\left( \frac1{q}-\frac1{p}\right)}\left(\dfrac{p}{q}\right)^{d/q},\\
+	&c_{2,f} > c_{2,g} \iff \left(\dfrac{q-1}{p}\right)^{d/p}\dfrac1{A} > \dfrac{\kappa_q^{d/q}}{B} \iff \dfrac{B}{A} > \kappa_q^{d\left( \frac1{q}-\frac1{p}\right)}\left(\dfrac{p}{q}\right)^{d/p},
 \end{align*}
 which are exactly conditions in \eqref{intermediate regime}.
-Since there is this dispositions of these points we expect there is an intersection between level sets. Firstly we notice that, for every $c_1 \in (0,c_{1,f})$, there exist a unique value of $c_2$ for which $f(c_1,c_2) = A^p$. Indeed, from previous computations we notice that $f(c_1,0)$ is a decreasing function hence $f(c_1,0) > A^p$, while $\lim_{c_2 \rightarrow +\infty} f(c_1,c_2) = 0$. The uniqueness of this value follows from strict monotonicity of $f(c_1,\cdot)$, in fact:
+Since there is this arrangement of these points we expect there is an intersection between level sets. Firstly we notice that, for every $c_1 \in (0,c_{1,f})$, there exist a unique value of $c_2$ for which $f(c_1,c_2) = A^p$. Indeed, from previous computations we notice that $f(c_1,0)$ is a decreasing function hence $f(c_1,0) > A^p$, while $\lim_{c_2 \rightarrow +\infty} f(c_1,c_2) = 0$, therefore from the intermediate value theorem it follows that $f(c_1,c_2) = A^p$ for some $c_2$. The uniqueness of this value follows from strict monotonicity of $f(c_1,\cdot)$, indeed:
 \begin{equation}\label{df/dc1}
-	\pfrac{f}{c_1}(c_1,c_2) = -\dfrac{p(p-1)}{(d-1)!}c_1^{p-2}\ \int_0^T \dfrac{t^{2(p-1)}}{(c_1t)^{p-1}+(c_2t)^{q-1}} \left[ -\log\left((c_1t)^{p-1} + (c_2t)^{q-1}\right) \right]^{d-1}dt
+	\pfrac{f}{c_1}(c_1,c_2) = -\dfrac{p(p-1)}{(d-1)!}c_1^{p-2}\ \int_0^T \dfrac{t^{2(p-1)}}{(c_1t)^{p-1}+(c_2t)^{q-1}} \left[ -\log\left((c_1t)^{p-1} + (c_2t)^{q-1}\right) \right]^{d-1}dt.
 \end{equation}
-is always strictly negative. We point out that the term $\frac{\partial T}{\partial c_1}(c_1,c_2)u(T;c_1,c_2)$, that should appear since $T$ depends on $c_1$, is zero because $u$ is 0 in $T$. The same is true for $g$, therefore on the interval $(0,c_{1,f})$ the level sets of $f$ and $g$ can be seen as the graph of two functions $\varphi, \gamma$. Since $\frac{\partial f}{\partial c_2}, \frac{\partial g}{\partial c_2} < 0$ for every $(c_1,c_2)$, from the implicit function theorem we have that $\varphi$ and  $\gamma$ are differentiable with respect to $c_1$.\\
+is always strictly negative. We point out that the term $\frac{\partial T}{\partial c_1}(c_1,c_2)u(T;c_1,c_2)$, that should appear since $T$ depends on $c_1$, is 0 because $u$ is 0 in $T$. The same is true for $g$, therefore on the interval $(0,c_{1,f})$ the level sets of $f$ and $g$ can be seen as the graph of two functions $\varphi, \gamma$. Since $f$ and $g$ are both differentiable, from the implicit function theorem we have that $\varphi$ and  $\gamma$ are differentiable with respect to $c_1$.
+
 After defining $\varphi$ and $\gamma$ we want to prove that $(\varphi-\gamma)' < 0$. Still from the implicit function theorem we have
 \begin{equation*}
 	\begin{split}
@@ -1925,39 +1990,38 @@ After defining $\varphi$ and $\gamma$ we want to prove that $(\varphi-\gamma)' <
 		\mathcal{I}(c_1) = \pfrac{f}{c_1}(c_1,\varphi(c_1)) \pfrac{g}{c_2}(c_1,\gamma(c_1)) - \pfrac{f}{c_2}(c_1,\varphi(c_1)) \pfrac{g}{c_1}(c_1,\gamma(c_1)) > 0
 	\end{split}
 \end{equation*}
-As for \eqref{df/dc1} the other derivatives are computed. To simplify the notation we define $h(t;c_1,c_2) = \frac{1}{(d-1)!}\frac{1}{(c_1t)^{p-1}+(c_2t)^{q-1}}\left[ -\log\left((c_1t)^{p-1} + (c_2t)^{q-1}\right) \right]^{d-1}$. From Fubini's theorem we can write the product of the integrals as a double integral
+As for \eqref{df/dc1} the other derivatives are computed. To simplify the notation we define $h(t;c_1,c_2) = \frac{1}{(d-1)!}\frac{1}{(c_1t)^{p-1}+(c_2t)^{q-1}}\left[ -\log\left((c_1t)^{p-1} + (c_2t)^{q-1}\right) \right]^{d-1}$. From Fubini's theorem, we can write the product of the integrals as a double integral:
 \begin{equation*}
 	\begin{split}
-		\mathcal{I}(c_1) &=p(p-1)q(q-1)c_1^{p-2}\gamma(c_1)^{q-2} \int_{[0,T]^2} h(t;c_1,\varphi(c_2)) h(s;c_1,\gamma(c_2)) t^{2(p-1)} s^{2(q-1)} dtds +\\ &-p(q-1)q(p-1)c_1^{p-2}\varphi(c_1)^{q-2} \int_{[0,T]^2} h(t;c_1,\varphi(c_2)) h(s;c_1,\gamma(c_2)) t^{p+q-2} s^{p+q-2} dtds
+		\mathcal{I}(c_1) &=p(p-1)q(q-1)c_1^{p-2}\gamma(c_1)^{q-2} \int_{[0,T]^2} h(t;c_1,\varphi(c_2)) h(s;c_1,\gamma(c_2)) t^{2(p-1)} s^{2(q-1)} dtds +\\ &-p(q-1)q(p-1)c_1^{p-2}\varphi(c_1)^{q-2} \int_{[0,T]^2} h(t;c_1,\varphi(c_2)) h(s;c_1,\gamma(c_2)) t^{p+q-2} s^{p+q-2} dtds.
 	\end{split}
 \end{equation*}
-When level sets intersect we have $\varphi(c_1)=\gamma(c_1)$. In this situation we can factorize the terms outside the integral and notice that the sign of $\mathcal{I}$ depends on the sign of:
+When level sets intersect we have $\varphi(c_1)=\gamma(c_1)$. In this situation we can factorize the terms outside the integral and notice that the sign of $\mathcal{I}$ depends only on the sign of:
 \begin{equation*}
 	\begin{split}
 		&\int_{[0,T]^2} h(t;c_1,\varphi(c_1)) h(s;c_1,\gamma(c_1))\left( t^{2(p-1)} s^{2(q-1)} - t^{p+q-2} s^{p+q-2} \right)dtds=\\
-		=&\int_{[0,T]^2} h(t;c_1,\varphi(c_1)) h(s;c_1,\gamma(c_1)) t^{p-2}s^{q-2}\left( t^p s^q - t^q s^p \right)dtds\\
+		=&\int_{[0,T]^2} h(t;c_1,\varphi(c_1)) h(s;c_1,\gamma(c_1)) t^{p-2}s^{q-2}\left( t^p s^q - t^q s^p \right)dtds.\\
 	\end{split}
 \end{equation*}
-In order to simplify the notation once again we set $H(t,s;c_1) = h(t;c_1,\varphi(c_1)) h(s;c_1,\gamma(c_1))$. Let $T_1 = [0,T]^2 \cap \{t>s\}$ and $T_2 = [0,T]^2 \cap \{t<s\}$. We can split the above integral in two parts:
+In order to simplify the notation once again, we set $H(t,s;c_1) = h(t;c_1,\varphi(c_1)) h(s;c_1,\gamma(c_1))$. Let $T_1 = [0,T]^2 \cap \{t>s\}$ and $T_2 = [0,T]^2 \cap \{t<s\}$. We can split the above integral in two parts:
 \begin{equation*}
 	\begin{split}
-		\int_{T_1} H(t,s;c_1)t^{p-2}s^{q-2}\left( t^p s^q - t^q s^p \right)dtds + \int_{T_2} H(t,s;c_1)t^{p-2}s^{q-2}\left( t^p s^q - t^q s^p \right)dtds
+		\int_{T_1} H(t,s;c_1)t^{p-2}s^{q-2}\left( t^p s^q - t^q s^p \right)dtds + \int_{T_2} H(t,s;c_1)t^{p-2}s^{q-2}\left( t^p s^q - t^q s^p \right)dtds.
 	\end{split}
 \end{equation*}
-Then, considering the change of variables that swaps $t$ and $s$, the domain of integration becomes $T_1$ and since $H$ is symmetric in $t$ and $s$ we have that the previous quantity is equal to
+Then, considering the change of variables that swaps $t$ and $s$, the domain of integration becomes $T_1$ and since $H$ is symmetric in $t$ and $s$, we have that the previous quantity is equal to
 \begin{equation*}
 	\begin{split}
 		&\int_{T_1} H(t,s;c_1)\left( t^{p-2} s^{q-2} - t^{q-2} s^{p-2} \right) \left( t^p s^q - t^q s^p \right)dtds =\\
-		=& \int_{T_1} H(t,s;c_1)\dfrac{1}{t^2 s^2}\left( t^p s^q - t^q s^p \right)^2 dtds
+		&= \int_{T_1} H(t,s;c_1)\dfrac{1}{t^2 s^2}\left( t^p s^q - t^q s^p \right)^2 dtds,
 	\end{split}
 \end{equation*}
-which is strictly positive.
+which is strictly positive.We are now in the position to prove the uniqueness of multipliers.
 
-Now we are able to prove the uniqueness of multipliers.\\
-First of all, since $(\varphi-\gamma)'<0$ whenever $\varphi(c_1) = \gamma(c_1)$, for every point of intersection there exist $\delta>0$ such that $\varphi(t) > \gamma(t)$ for $t \in (c_1 - \delta, c_1)$ while $\varphi(t) < \gamma(t)$ for $t \in (c_1, c_1 + \delta)$.\\
-Define $c_1^* \coloneqq \sup \{c_1 \in [0,c_{1,f}] : \forall t \in [0,c_1] \ \varphi(t) \geq \gamma(t)\}$. This is an intersection point between $\varphi$ and $\gamma$ (if $\varphi(c_1^*) > \gamma(c_1^*)$ due to continuity there would be $\varepsilon > 0$ such that $\varphi(c_1^*+\varepsilon) > \gamma(c_1^*+\varepsilon)$ which contradicts the definition of $c_1^*$) and it is the first one, because we saw that after every intersection point there is an interval where $\varphi < \gamma$. Lastly, since $\varphi(0) > \gamma(0)$ and $\varphi(c_{1,f}) = 0 < \gamma(c_1,f)$ we have that $0 < c_1^* < c_{1,f}$.\\
+First of all, since $(\varphi-\gamma)'<0$ whenever $\varphi(c_1) = \gamma(c_1)$, we point out that for every point of intersection there exist $\delta>0$ such that $\varphi(t) > \gamma(t)$ for $t \in (c_1 - \delta, c_1)$ and $\varphi(t) < \gamma(t)$ for $t \in (c_1, c_1 + \delta)$.\\
+Define $c_1^* \coloneqq \sup \{c_1 \in [0,c_{1,f}] : \forall t \in [0,c_1] \ \varphi(t) \geq \gamma(t)\}$. This is an intersection point between $\varphi$ and $\gamma$ (if $\varphi(c_1^*) > \gamma(c_1^*)$ due to continuity there would be $\varepsilon > 0$ such that $\varphi(c_1^*+\varepsilon) > \gamma(c_1^*+\varepsilon)$ which contradicts the definition of $c_1^*$) and it is the first one, because we saw that after every intersection point there is an interval where $\varphi < \gamma$. Lastly, since $\varphi(0) > \gamma(0)$ and $\varphi(c_{1,f}) = 0 < \gamma(c_1,f)$, we have that $0 < c_1^* < c_{1,f}$.\\
 Suppose now that there is a second point of intersection $\tilde{c}_1$ after the first one. Since immediately after $c_1^*$ we have that $\varphi$ becomes smaller than $\gamma$, this second point of intersection is given by $\tilde{c}_1 = \sup \{c_1 \in [c_1^*,c_{1,f}] : \forall t \in [c_1^*,c_1] \ \varphi(t) \leq \gamma(t)\}$. Considering that this is an intersection point, there exist an interval before $\tilde{c}_1$ where $\varphi$ is strictly greater than $\gamma$ which is absurd, hence $c_1^*$ is the only intersection point between $\varphi$ and $\gamma$.\\
-Therefore $(c_1^*, \varphi(c_1^*) = c_2^*)$ is the unique pair of multipliers for which 
+Therefore, the pair $(c_1^*, \varphi(c_1^*) = c_2^*)$ is the unique pair of multipliers for which 
 \begin{equation*}
 	p\int_0^T t^{p-1} u(t;c_1^*,c_2^*)dt = A^p, \quad q\int_0^T t^{q-1} u(t;c_1^*,c_2^*)dt = B^q
 \end{equation*}
@@ -1976,21 +2040,6 @@ In some cases we had to deal with series over multiple indices. Formally, the po
 \end{defi}
 
 The notion of unconditional convergence is of crucial importance in cases where an exchange between an operator and a series or a certain order of summation is required. Here we present two results that are useful in such situations.
-
-\begin{prop}\label{equivalence unconditional convergence}
-	Let $\{x_j\}_{j \in \mathcal{J}}$ be a countable subset of a Banach space $X$ and $x \in X$. Then following statements are equivalent:
-	\begin{enumerate}[label=(\roman*)]
-		\item $\sum_{j \in \mathcal{J}} x_j$ converges unconditionally to $x$;
-		\item for every enumeration $\sigma : \N \rightarrow \mathcal{J}$
-		\begin{equation*}
-			\lim_{N \rightarrow +\infty} \| x - \sum_{n=1}^N f_{\sigma(n)} \| = 0. 
-		\end{equation*}
-		In particular, $x$ does not depend on the enumeration $\sigma$.
-	\end{enumerate}
-\end{prop}
-\begin{proof}
-	contenuto...
-\end{proof}
 
 \begin{prop}\label{exchange of series and operator}
 	Let $A \in \B(X,Y)$. If $\sum_{j \in \mathcal{J}} x_j$ converges unconditionally to $x$ in $X$, then $\sum_{j \in \mathcal{J}} Ax_j$ converges unconditionally to $Ax$ in $Y$.
@@ -2111,6 +2160,30 @@ whenever $p \neq q$. As for the previous section, since $\kappa_p = \frac{1}{p'}
 \end{align*}
 If $q>p$ the base is greater than 1 while the exponent is less than 1, whereas if $q<p$ the converse happens, which proves that inequality holds whenever $p \neq q$.
 
+\chapter{Helly's selection theorem}
+In this chapter we prove Helly's selection theorem, which was used in the proof of Proposition \ref{existence of maximizer}.
+\begin{teo}\label{Helly's selection theorem}
+	Let $\{f_n\}_{n \in \N}$ be a sequence of monotonically increasing functions on $\R$ and suppose that the sequence is uniformly bounded, namely that $f_n(x) \in [a, b]$ for every $n \in \N$, every $x \in \R$ and some $a<b$ in $\R$. Then, there exist a monotonically increasing function $f$ and a subsequence $\{f_{n_k}\}_{k \in \N}$ such that $f_{n_k}$ is pointwise convergent to $f$.
+\end{teo}
+\begin{proof}
+	We begin by constructing $f$ over rational numbers. Let $\{q_1, q_2, \ldots\}$ be an enumeration of $\Q$.
+	
+	Since $\{f_n(q_1)\}_{n \in \N}$ is a bounded sequence in $\R$, it follows from Bolzano-Weiestrass' theorem that there exist $S_1 \subseteq \N$ countable such that $\{f_n(q_1)\}_{n \in S_1}$ is convergent to some $y_1 \in [a,b]$. Then, if we consider the sequence $\{f_n(q_2)\}_{n \in S_1}$, we see that this is a bounded sequence in $\R$ and again, from Bolzano-Weiestrass' theorem it follows that there exist $S_2 \subseteq S_1$ countable such that $\{f_n(q_2)\}_{n \in S_2}$ converges to some $y_2 \in [a,b]$. Repeating this argument lead to a family of countable subsets of $\N$ such that $S_1 \supseteq S_2 \supseteq \cdots$ such that $\{f_n(q_i)\}_{n \in S_i}$ converges to $y_i$.\\
+	Consider now the set $S \subseteq \N$ built in the following way: the first element of $S$ is the first element of $S_1$, the second element of $S$ is the second element of $S_2$ and so on. Then, if we consider $q_i \in \Q$, we have that, up to the first $i-1$ terms, $\{f_n(q_i)\}_{n \in S}$ is a subsequence of $\{f_n(q_i)\}_{n \in S_i}$, therefore $\{f_n(q_i)\}_{n \in S}$ converges to $y_i$. Moreover, we notice that if $q_i < q_j$ then, by the monotonicity of $f_n$, we have $f_n(q_i) \leq f_n(q_j)$ for every $n \in S$. Taking the limit for $n \rightarrow +\infty$ we conclude that $y_i \leq y_j$.
+	
+	Up to now we built a subsequence of $\{f_n(q_1)\}_{n \in \N}$ that is pointwise convergent over rational numbers. Through the density of $\Q$ in $\R$ it is immediate to create a monotonically increasing function $g$ over $\R$. Indeed, if $q \in \Q$ we simply let $g(q) = y_q$, while if $r \in \R \setminus \Q$ we let $g(r) = \sup_{\substack{q \in \Q \\ q \leq r}} g(q)$. We point out that the supremum is finite because $y_q$ are bounded from above. Moreover, it is clear from the definition that $g$ is monotonically increasing.
+	
+	The proof is still not complete because, up to now, we only know that the subsequence $\{f_n\}_{n \in S}$ is pointwise converging to $g$ only over rational numbers. However, we can show that if $g$ is continuous in $r \in \R$, then $\lim_{\substack{n \rightarrow +\infty \\ n \in S}} f_n(x) = g(x)$. If $g$ is continuous in $r$, given $\varepsilon > 0$ there exist $\delta > 0$ such that $|g(y) - g(x)| < \varepsilon$ if $|y-x| < \delta$. In particular, we can pick $q_1, q_2 \in \Q$ such that $r-\delta < q_1 < r < q_2 < r+\delta$. Since $g$ is monotonically increasing this implies that $0 \leq g(r) - g(q_1) < \varepsilon$ and $0 \leq g(q_2) - g(r) < \varepsilon$. Moreover, for $n$ sufficiently large, we have that $|f_n(q_1) - g(q_1)| < \varepsilon$ and $|f_n(q_2) - g(q_2)| < \varepsilon$. These, together with the fact that $f_n$ are monotonically increasing leads to:
+	\begin{equation*}
+		\begin{gathered}
+			f_n(q_1) \leq f(x) \leq f_n(q_2) \implies \\
+			-2 \varepsilon < f_n(q_1) - g(q_1) + g(q_1) - g(x) \leq f_n(x) - g(x) \leq f_n(q_2) - g(q_2) + g(q_2) - g(x) < 2 \varepsilon,
+		\end{gathered}
+	\end{equation*}
+	which means that $f_n(x)$ converges to $g(x)$.
+	
+	In order to conclude, we have to deal with the points where $g$ is not continuous. It is well known that a monotonic function on an open interval is continuous except possibly on a countable subset $J \subset \R$ (see \cite[][Section 6.1 Theorem 1]{royden} or \cite[][Theorem 4.30]{rudin_principles}). Since $J$ is at most countable we con consider an enumeration $\{j_1, j_2, \ldots\}$. If we repeat the same argument we used at the beginning of the proof, we see that there exist a countable subset $P \subseteq S$ such that $\{f_n\}_{n \in P}$ is pointwise converging to $g$ in $\R \setminus J$ and to some values in $J$. Taking $f$ as the limit function of $\{f_n\}_{n \in P}$ the proof is complete.
+\end{proof}
 \nocite{*}
 \printbibliography
 
