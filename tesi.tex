@@ -85,20 +85,18 @@ sorting=nyt
 
 \ringraziamenti
 
-\sommario
 
 \chapter{Introduction}
-{\color{blue} Con il blu indico frasi da mettere a posto o dove manca una citazione.}\\
-{\color{red} Con il rosso indico frasi da controllare se sono corrette.}
-
+Among all problems in time-frequency analysis, arguably one of the main one is the problem of localizing a signal (which can be an audio signal, an image, etc.) in order to derive information about its energy content in a given time domain and for a given frequency window. Over time, various tools have been developed to achieve this. In the early 1960s, Landau, Slepain and Pollak investigated in a series of articles the properties of certain localization operators obtained using time and frequency projection operators. Later, in 1988, Daubechies introduced so-called \emph{time-frequency localization operators}, which give a more geometric perspective to the localization problem. These operators, also called Daubechies' localization operators, are the focus of this thesis.
+Before introducing these operators, basic concepts of functional and Fourier analysis are recalled in Chapter \ref{chapter preliminaries}. Subsequently, in Chapter \ref{chapter STFT}, a fundamental tool of time-frequency analysis is introduced, namely the \emph{short-time Fourier transform}. These two chapters provide the basis for the theory of localization operators, which is presented in Chapter \ref{chapter localization operators} in an essential way. Once these operators have been introduced, a natural question might be the following: how well can a signal be localized? Is it possible to localize a signal in an arbitrarily small subset of the time-frequency plane? The negative answer to the latter question stems from the so-called \emph{uncertainty principles}. In Chapter \ref{chapter uncertainty principles}, various uncertainty principles are presented, concerning both different transforms and different notions of concentration. Nevertheless, the central idea of each uncertainty principle is the following: a signal cannot be too concentrated in both time and frequency. This barrier forces us to change perspective and instead of asking how well a signal can be concentrated, a more appropriate question might be: how can a signal be optimally concentrated? Uncertainty principles do indeed place a lower limit on the ability to localize a signal, but in general do not tell us how to reach this limit. The last chapter of this thesis focuses precisely on the problem, between time-frequency analysis and the calculus of variations, of finding upper bounds for the norm of localization operators and determining which operators reach this limit. In the first section of Chapter \ref{chapter recent results}, a recent result by Nicola and Tilli concerning this problem is presented, while in the second section we present the solution of a generalization of the problem considered by Nicola and Tilli.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Preliminaries}\label{chapter preliminaries}
-In the first chapter we briefly recall some basic definitions and results of functional and Fourier analysis. In section \ref{section basics of functional analysis} basic concepts about operators between Banach and Hilbert spaces are presented. In addition, certain classes of operators, namely the trace class and the Hilbert-Schmidt class, are introduced with some of their most important properties. Then, in section \ref{Fourier transform and its properties section} Fourier transform is defined and some of its essential properties are given.
+This chapter is devoted to a brief recall of some basic definitions and results of functional and Fourier analysis. In Section \ref{section basics of functional analysis} elemental concepts about operators between Banach and Hilbert spaces are presented. In addition, certain classes of operators, namely the trace class and the Hilbert-Schmidt class, are introduced with some of their most important properties. Then, in Section \ref{Fourier transform and its properties section} Fourier transform is defined and some of its essential properties are given.
 \section{Basics of Functional Analysis}\label{section basics of functional analysis}
-In this section we turn our attention to linear operators between Banach spaces. Throughout the section we will refer to a generic Banach space as $X$ (or $Y$), endowed with the norm $\| \cdot \|_X$. If we are dealing with a Hilbert space, we will denote it by $H$ (or $K$) and its inner product by $\langle \cdot, \cdot \rangle_H$. {\color{red}Pedex in the norm and scalar product may be dropped in case there is no ambiguity}. {\color{red} Moreover, the whole theory is presented under the assumption that we are dealing with infinite dimensional spaces, but, unless otherwise stated, everything can be adapted almost directly for finite dimensional spaces.}
+In this section we turn our attention to linear operators between Banach spaces. Throughout the section, we will refer to a generic Banach space as $X$ (or $Y$), endowed with the norm $\| \cdot \|_X$. If we are dealing with a Hilbert space, we will denote it by $H$ (or $K$) and its inner product by $\langle \cdot, \cdot \rangle_H$. Pedex in the norm and scalar product may be dropped in case there is no ambiguity.  Moreover, the whole theory is presented under the assumption that we are dealing with infinite dimensional spaces, but, unless otherwise stated, everything can be adapted almost directly for finite dimensional spaces.
 
 A generic linear operator between two Banach spaces $X$ and $Y$ is denoted as $T : X \rightarrow Y$. As a standard notation, the image of $x \in X$ through $T$ is indicated as $T(x)$, or equivalently as $Tx$.
 \begin{defi}\label{bounded operator}
@@ -115,90 +113,86 @@ For linear operators,  boundedness is strictly related to continuity, as the fol
 		\item $T$ is bounded.
 	\end{itemize}
 \end{teo}
-For the sake of completeness we mention that actually, for linear operators, boundedness is equivalent to uniform continuity.
 We denote the set of linear bounded (continuous) operators from $X$ to $Y$ as $\B(X,Y)$, while if $X=Y$ we will just write $\B(X)$.
 
 The smallest constant for which \ref{boundedness property} holds is the \emph{norm} of $T$.
 \begin{defi}\label{norm operator}
-	Given a linear bounded operator $T$ we define its \textbf{norm} as the following number:
+	Given $T \in \B(X,Y)$ we define its \textbf{norm} as the following number:
 	\begin{equation*}
-		\|T\| \coloneqq \inf\{C>0 : \| Tx \|_Y \leq C \| x \|_X \  \forall x \in X\} = \sup \left\{ \dfrac{\| Tx \|_Y}{\| x \|_X} : x \in X \setminus \{0\}\right\}
+		\|T\| \coloneqq \inf\{C>0 : \| Tx \|_Y \leq C \| x \|_X \  \forall x \in X\} = \sup \left\{ \dfrac{\| Tx \|_Y}{\| x \|_X} : x \in X \setminus \{0\}\right\}.
 	\end{equation*}
 \end{defi}
-The proof of the equivalence between two definition is straightforward. Sometimes, in order to emphasize the spaces between which $T$ operates, we may write the norm of $T$ as $\| T \|_{X \rightarrow Y}$.
+The proof of the equivalence between two definitions is straightforward. Sometimes, in order to emphasize the spaces between which $T$ operates, we may write the norm of $T$ as $\| T \|_{X \rightarrow Y}$.
 
-In what follows we will mostly deal with $X$ and $Y$ being $L^2(\R^d)$, that is, a Hilbert space. For operators between Hilbert spaces, we can specify the norm of an operator using the dual norm:
+In what follows we will mostly deal with $X$ and $Y$ being $L^2(\R^d)$, that is a Hilbert space. For operators between Hilbert spaces, we can express the norm of an operator using the dual norm:
 \begin{equation}\label{dual norm}
 	\| T \|_H = \sup\{|\langle Tx, y \rangle_H| : x,y \in H,\,\ \|x\|_H = \|y\|_H = 1 \}.
 \end{equation}
 
 Among all operators, a rather important class is the one of \emph{compact} operators.
 \begin{defi}\label{compact operator}
-	An operator $T \in \B(X,Y)$ is \textbf{compact} if, for every bounded sequence $\{x_n\}_{n \in \N} \subset X$ the sequence of the images $\{Tx_n\}_{n \in \N} \subset Y$ has a converging subsequence.
+	An operator $T \in \B(X,Y)$ is \textbf{compact} if, for every bounded sequence $\{x_n\}_{n \in \N} \subset X$, the sequence of the images $\{Tx_n\}_{n \in \N} \subset Y$ has a converging subsequence.
 \end{defi}
+It is not difficult to prove that a linear combination of compact operators is still compact, so the set of compact operators is a subspace of $\B(X,Y)$. The following theorem states that it is also closed.
 \begin{teo}\label{space of compact operators is closed}
-	The set of compact operators is a closed subspace of $\B(X,Y)$ (with respect to the operator norm topology).
+	The set of compact operators is a closed subspace of $\B(X,Y)$ with respect to the operator norm topology.
 \end{teo}
-A first simple example of compact operators are \emph{finite-rank} operators.
+A first simple example of compact operators is given by \emph{finite-rank} operators.
 \begin{defi}\label{finite-rank operator definition}
-	An operator $T \in \B(X,Y)$ is said to be \emph{finite-rank} if $\mathrm{Im}(T)$ is finite-dimensional.
+	An operator $T \in \B(X,Y)$ is said to be \textbf{finite-rank} if $\mathrm{Im}(T)$ is finite-dimensional.
 \end{defi}
-Although this is a simple example of compact operators, finite rank operators are of some importance in the light of the following immediate corollary of Theorem \ref{space of compact operators is closed}.
+Finite rank operators are of some importance in the light of the following immediate corollary of Theorem \ref{space of compact operators is closed}.
 \begin{cor}\label{limit of finite rank operator is compact}
 	Let $\{T_n\}_{n \in \N} \subset \B(X,Y)$ be a sequence of finite-rank operators that converges to $T \in \B(X,Y)$. Then $T$ is compact.
 \end{cor}
+Therefore, if one wants to show that an operator is compact, a possible approach is to find a sequence of finite-rank operators that is converging to it.
 Another crucial property of compact operators is the following.
 \begin{teo}\label{composition of compact operators is compact}
-	Let $X,Y,Z$ be three Banach spaces and let $T \in \B(X,Y)$, $S \in \B(Y,Z)$. Then, if at least one of $T$ and $S$ is compact, then $ST \in \B(X,Z)$ is compact.
+	Let $X,Y,Z$ be three Banach spaces and let $T \in \B(X,Y)$, $S \in \B(Y,Z)$. Then, if at least one between $T$ and $S$ is compact, then $ST \in \B(X,Z)$ is compact.
 \end{teo}
-
-Now we suppose $H$ and $K$ to be Hilbert spaces. Given $T \in \B(H,K)$ there exist a unique $T^* \in \B(K,H)$ such that:
-\begin{equation*}
-	\langle Tx, y \rangle_H = \langle x, T^* y \rangle_K \quad \forall x \in H,\,y \in K
-\end{equation*}
-$T^*$ is called the \textbf{adjoint} operator of $T$. In the particular case in which $T : H \rightarrow H$, if $T=T^*$, we say that $T$ is \textbf{self-adjoint}.
 
 From now on we suppose that $X$ is over the field $\C$ and that $T \in \B(X)$.
 \begin{defi}\label{spectrum def}
 	The set $\sigma(T) = \{\lambda \in \C : T - \lambda I \text{ is not invertible}\}$ is called  the \textbf{spectrum} of $T$.
 \end{defi}
-For operators between finite-dimensional spaces (matrices), the spectrum consists of \emph{eigenvalues}, those $\lambda \in \C$ such that $T-\lambda I$ is not injective. However, this is no longer true for infinte-dimensional spaces. Eigenvalues are in the so called \emph{point spectrum}, which in general is just a part of the whole spectrum.
-
-For compact or self-adjoint operators we can state some properties about the spectrum.
+For operators between finite-dimensional spaces (matrices), the spectrum consists of \emph{eigenvalues}, those $\lambda \in \C$ such that $T-\lambda I$ is not injective. However, this is no longer true for infinte-dimensional spaces. The eigenvalues are in the so-called \emph{point spectrum}, which is generally only a part of the whole spectrum. However, the following theorem states that the spectrum of compact operators resembles the spectrum of operators on finite dimensional spaces.
 \begin{teo}[Fredholm's alternative]\label{Fredholm alternative}
-	Let $T \in \B(X)$ be a compact operator. Then for $T-I$ one and only one of the following happens:
+	Let $T \in \B(X)$ be a compact operator. Then, for $T-I$ one and only one of the following happens:
 	\begin{itemize}
-		\item $T$ is invertible
-		\item $T$ is not injective
+		\item $T$ is invertible;
+		\item $T$ is not injective.
 	\end{itemize}
 \end{teo}
-Therefore, for compact operators, all the values in the spectrum, except at most for 0, are eigenvalues.\\
-Another fundamental result arises if we add the condition that $T$ is self-adjoint.
+Therefore, for compact operators, all the values in the spectrum, except at most for 0, are eigenvalues.
+
+In conclusion, we focus our attention on operators on Hilbert spaces. Given $T \in \B(H,K)$, it can be shown that there exists a unique operator $T^* \in \B(K,H)$, called \textbf{adjoint} of $T$, such that:
+\begin{equation*}
+	\langle Tx,y \rangle_K = \langle x, T^* y \rangle_H \quad \forall\, x \in H,\, y \in K.
+\end{equation*}
+If $H=K$, then both $T$ and $T^*$ are in $\B(H)$ and if $T=T^*$ we say that $T$ is \textbf{self-adjoint}. If an operator is both compact and self-adjoint the following theorem states that it can be diagonalized in some suitable basis (\cite{brezis}).
 \begin{teo}\label{self-adjoint compact operators are diagonalizable}
-	Let $H$ be a separable Hilbert space and $T \in \B(H)$ a compact and self-adjoint operator. Then there exist an orthonormal basis $\{e_n\}_{n \in \N}$ with eigenvalues $\{\lambda_n\}_{n \in \N}$ of $H$ composed of eigenvectors of $T$. Moreover $\lim_{n \rightarrow +\infty} \lambda_n = 0$.
+	Let $H$ be a separable Hilbert space and $T \in \B(H)$ a compact and self-adjoint operator. Then, there exist an orthonormal basis of $H$ composed of eigenvectors of $T$, with corresponding eigenvalues $\{\lambda_n\}_{n \in \N}$. Moreover $\lim_{n \rightarrow +\infty} \lambda_n = 0$.
 \end{teo}
-Hence self-adjoint compact operators can always be diagonalized in some suitable basis (\cite{brezis}). 
-
-From this Theorem immediately follows the next corollary, which relates the eigenvalues of a compact self-adjoint operator with its norm.
+From this theorem follows the next corollary, which relates the eigenvalues of a compact self-adjoint operator with its norm.
 \begin{cor}\label{norm is greatest eigenvalue}
-	Let $T \in \B(H)$ be a self-adjoint compact operator on a separable Hilbert space $H$ and suppose its eigenvalues are ordered in such a way that $|\lambda_1| \geq |\lambda_2| \geq \cdots$. Then $\|T\| = |\lambda_1|$.
+	Let $T \in \B(H)$ be a self-adjoint compact operator on a separable Hilbert space $H$ and suppose its eigenvalues are ordered in such a way that $|\lambda_1| \geq |\lambda_2| \geq \ldots$. Then $\|T\| = |\lambda_1|$.
 \end{cor}
 
-In light of Theorem \ref{self-adjoint compact operators are diagonalizable}, it is clear that working with compact self-adjoint operators is of great importance. Thus, if an operator $T$ is compact but not self-adjoint, it would be nice to construct an operator associated with $T$ that is also self-adjoint. This task is easily accomplished considering $T^*T$.
+In light of Theorem \ref{self-adjoint compact operators are diagonalizable}, it is clear that working with compact self-adjoint operators is of great importance. Thus, if an operator $T$ is compact but not self-adjoint, it could be useful to construct an operator, associated with $T$, that is also self-adjoint. This task is easily accomplished considering $T^*T$. The relation between $T$ and $T^*T$ is stated by the following corollary of Theorem \ref{self-adjoint compact operators are diagonalizable}.
 \begin{cor}\label{canonical form for compact operators corollary}
-	Let $T \in \B(H)$ be a compact operator. Then there exist orthonormal sets $\{e_n\}_{n \in \N}$ and $\{y_n\}_{n \in \N}$ and non-negative real numbers $\{\mu_n\}_{n \in \N}$ with $\lim_{n \rightarrow +\infty} \mu_n = 0$ so that
+	Let $T \in \B(H)$ be a compact operator. Then, there exist orthonormal sets $\{e_n\}_{n \in \N}$ and $\{y_n\}_{n \in \N}$ and non-negative real numbers $\{\mu_n\}_{n \in \N}$, with $\lim_{n \rightarrow +\infty} \mu_n = 0$, so that
 	\begin{equation}\label{canonical form for compact operators formula}
-		T = \sum_{n=1}^{+\infty} \mu_n (\cdot , e_n)y_n,
+		T = \sum_{n=1}^{+\infty} \mu_n \langle \cdot , e_n \rangle y_n,
 	\end{equation}
-	where the series converges in norm. These $\mu_n$ are called \emph{singular values} of $T$ and are the square root of the eigenvalues of $T^*T$.
+	where the series converges in norm. These $\mu_n$ are called \textbf{singular values} of $T$ and are the square root of the eigenvalues of $T^*T$.
 \end{cor}
 
-\subsection{Trace class and Hilbert-Schmidt operators}
-In this section we are going to introduce two important classes of operators: \emph{trace-class} operators and \emph{Hilbert-Schmidt} operators.
+\subsection{Trace-class and Hilbert-Schmidt operators}
+In this section we are going to introduce two important classes of operators: the \emph{trace-class} and the \emph{Hilbert-Schmidt} class.
 
-The trace of an operator can be defined as it is for matrices. Before proceeding, however, we must define what it means for an operator to be non-negative.
+The trace of an operator can be defined as it is for matrices. However, since we are in infinite-dimensional spaces the usual definition has to be handled carefully. Before proceeding, we must define what it means for an operator to be non-negative.
 \begin{defi}\label{non-negative operator}
-	Let $H$ be an Hilbert space. An operator $T \in \B(H)$ is said \textbf{non-negative} if
+	Let $H$ be a Hilbert space. An operator $T \in \B(H)$ is said \textbf{non-negative} if
 	\begin{equation}\label{non-negative operator formula}
 		\langle T x, x \rangle \geq 0 \quad \forall x \in H.
 	\end{equation}
@@ -230,12 +224,12 @@ Condition \eqref{non-negative operator formula} is sufficient to show that, on H
 \end{proof}
 Non-negative operators are somewhat ``special'', since their behaviour resembles, in some sense, the one of complex numbers. In particular, one can define the \emph{square root} of non-negative operator. Before we do this, we need a preceding lemma.
 \begin{lem}\label{power series of square root lemma}
-	The power series of $\sqrt{1-z}$ about zero converges absolutely for all complex numbers such that $|z| \leq 1$.
+	The power series of $\sqrt{1-z}$ about 0 converges absolutely for all complex numbers such that $|z| \leq 1$.
 \end{lem}
 \begin{proof}
 	The power series of $\sqrt{1-z}$ about the origin is given by
 	\begin{equation*}
-		\sqrt{1-z} = \sum_{n=0}^{+\infty}c_n z^n = 1 + \sum_{n=1}^{+\infty} (-1)^n\binom{1/2}{n} z^n
+		\sqrt{1-z} = \sum_{n=0}^{+\infty}c_n z^n = 1 + \sum_{n=1}^{+\infty} (-1)^n\binom{1/2}{n} z^n,
 	\end{equation*}
 	where the binomial $\binom{r}{n}$ is defined by $\frac{r(r-1)\cdots(r-n+1)}{n!}$ for every $r \in \R$ and every $n \in \N$, while if $n=0$ we have $\binom{r}{0}=1$. Since $\sqrt{1-z}$ is analytic for $|z|<1$, the series here converges absolutely, so now we have to consider the case $|z|=1$. We notice that $c_n < 0$ for every $n \geq 1$ because when $n$ is even $\binom{1/2}{n}$ is negative, while if $n$ is odd $\binom{1/2}{n}$ is positive, therefore
 	\begin{align*}
@@ -249,24 +243,22 @@ Non-negative operators are somewhat ``special'', since their behaviour resembles
 	Since this holds for every $N$, taking the limit $N \rightarrow +\infty$ we obtain $\sum_{n=1}^{+\infty} |c_n| < \infty$, which means exactly that the power series is absolutely convergent.
 \end{proof}
 \begin{teo}\label{existence of square root}
-	Let $T \in \B(X)$ be a non-negative operator. Then, there exist a unique non-negative operator $S \in \B(X)$ such that $S^2 = T$. Moreover $S$ commutes with all bounded operators commuting with $T$.
-	
-	We call $S$ the \textbf{square root} of $T$ and we denote it by $S = \sqrt{T}$.
+	Let $T \in \B(H)$ be a non-negative operator. Then, there exist a unique non-negative operator $S \in \B(H)$ such that $S^2 = T$. Moreover, $S$ commutes with all bounded operators commuting with $T$.	We call $S$ the \textbf{square root} of $T$ and we denote it by $S = \sqrt{T}$.
 \end{teo}
 \begin{proof}
 	If $T=0$ we let $\sqrt{T}=0$, otherwise we define $B = I - \|T\|^{-1}T$, where $I$ is the identity operator.
-	Since $T$ is non-negative, for every $x \in X$ such that $\|x\|_X = 1$, we have
+	Since $T$ is non-negative, for every $x \in H$ such that $\|x\| = 1$, we have
 	\begin{align*}
-		\langle Bx,x \rangle = \langle (I-\|T\|^{-1}T)x, x\rangle = \|x\|_X^2 - \|T\|^{-1}\langle Tx,x \rangle \leq \|x\|_X^2 = 1
+		\langle Bx,x \rangle = \langle (I-\|T\|^{-1}T)x, x\rangle = \|x\|^2 - \|T\|^{-1}\langle Tx,x \rangle \leq \|x\|^2 = 1,
 	\end{align*}
-	which implies, using polarization identity, that $\|B\| \leq 1$. Thanks to Lemma \ref{power series of square root lemma}, this means that the series $\sum_{n=0}^{+\infty}c_n B^n$ is absolutely convergent, therefore convergent, in $\B(X)$ to an operator we indicate with $B_{1/2}$. We define
+	which implies, using polarization identity, that $\|B\| \leq 1$. Thanks to Lemma \ref{power series of square root lemma}, this means that the series $\sum_{n=0}^{+\infty}c_n B^n$ is absolutely convergent, therefore convergent, in $\B(H)$ to an operator we indicate with $B_{1/2}$. We define
 	\begin{equation}\label{square root of an operator}
 		S = \|T\|^{1/2} B_{1/2}
 	\end{equation}
-	and we want to show that $S$ is non-negative and satisfies $S^2 = T$. We start proving that $B_{1/2}$, hence $S$, is non-negative. Taking $x \in X$, we have
+	and we want to show that $S$ is non-negative and satisfies $S^2 = T$. We start proving that $B_{1/2}$, hence $S$, is non-negative. Taking $x \in H$, we have
 	\begin{align*}
-		\langle B_{1/2}x,x \rangle &= \langle (I + \sum_{n=1}^{+\infty} c_n B^n),x \rangle = \|x\|_X^2 + \sum_{n=1}^{+\infty} c_n\langle B^n x,x \rangle \geq \|x\|_X^2 + \sum_{n=1}^{+\infty} c_n \|B\|^n \|x\|_X^2 \geq\\
-								   &\geq \|x\|_X^2 + \sum_{n=1}^{+\infty} c_n \|x\|_X^2 = 0
+		\langle B_{1/2}x,x \rangle &= \langle (I + \sum_{n=1}^{+\infty} c_n B^n),x \rangle = \|x\|^2 + \sum_{n=1}^{+\infty} c_n\langle B^n x,x \rangle \geq \|x\|^2 + \sum_{n=1}^{+\infty} c_n \|B\|^n \|x\|^2 \geq\\
+								   &\geq \|x\|^2 + \sum_{n=1}^{+\infty} c_n \|x\|^2 = 0,
 	\end{align*}
 	where we used the fact that $c_n$ are negative, $\|B\| \leq 1$ and that $1 + \sum_{n=1}^{\infty}c_n = \sqrt{1-x}\rvert_{x=1} = 0$.
 	
@@ -284,7 +276,7 @@ Non-negative operators are somewhat ``special'', since their behaviour resembles
 	\end{align*}
 	Lastly, since the series that defines $B_{1/2}$, hence $S$, is absolutely convergent, it commutes with every bounded operator commuting with $T$.
 
-	Up to now we only proved the existence of a square root for $T$, in particular the one given by the expression \eqref{square root of an operator}. To prove uniqueness of the square root we start supposing $S_0$ is another non-negative operator in $\B(X)$ such that $S_0^2 = T$. We notice that $S_0$ commutes with $T$, indeed $S_0 T = S_0 S_0^2 = S_0^2 S_0 = T S_0$. Therefore $S_0$ commutes also with $S$, thus we have:
+	Up to now we only proved the existence of a square root for $T$, in particular the one given by the expression \eqref{square root of an operator}. To prove uniqueness of the square root we start supposing $S_0$ is another non-negative operator in $\B(X)$ such that $S_0^2 = T$. We notice that $S_0$ commutes with $T$, indeed $S_0 T = S_0 S_0^2 = S_0^2 S_0 = T S_0$. Therefore, $S_0$ commutes also with $S$, thus we have:
 	\begin{align*}
 		(S-S_0)^2S + (S-S_0)^2S_0 &= (S-S_0)[(S-S_0)S + (S-S_0)S_0] =\\
 								  &= (S-S_0)(S^2 - S_0S + SS_0 -S_0^2) =\\
@@ -297,16 +289,18 @@ Non-negative operators are somewhat ``special'', since their behaviour resembles
 	and with the same argument we conclude that also $S-S_0 = 0$.
 \end{proof}
 \begin{remark}
-	From expression \eqref{square root of an operator} it is clear that if $T$ is compact then also $\sqrt{T}$, since it is a limit of compact operators.
+	From expression \eqref{square root of an operator} it is clear that, if $T$ is compact then also $\sqrt{T}$, since it is a limit of compact operators.
 \end{remark}
+
+Now that we have established the notion of square root of an operator, we will show how to decompose an operator $T$ into a positive operator and a \emph{partial isometry}, which will be defined later. This decomposition is called \emph{polar decomposition} of $T$.
 \begin{defi}\label{absolute value of an operator definition}
-	Given an operator $T \in \B(X)$ we define its \textbf{absolute value} as
+	Given an operator $T \in \B(H)$ we define its \textbf{absolute value} as
 	\begin{equation}\label{absolute value of an operator formula}
 		|T| \coloneqq \sqrt{T^*T}.
 	\end{equation}
 \end{defi}
 \begin{defi}\label{partial isometry}
-	A linear operator $U \in \B(X)$ is a \textbf{partial isometry} if it is an isometry over $(\mathrm{Ker}\,U)^{\perp}$, i.e. $\|Ux\|_X = \|x\|_X$ for every $x \in (\mathrm{Ker}\,U)^{\perp}$.
+	A linear operator $U \in \B(H)$ is a \textbf{partial isometry} if it is an isometry over $(\mathrm{Ker}\,U)^{\perp}$, i.e. $\|Ux\| = \|x\|$ for every $x \in (\mathrm{Ker}\,U)^{\perp}$.
 \end{defi}
 \begin{prop}\label{U^* is a partial isometry}
 	Let $U \in \B(H)$ be a partial isometry. Then also $U^*$ is a partial isometry.
@@ -315,7 +309,7 @@ Non-negative operators are somewhat ``special'', since their behaviour resembles
 	{\color{red} Since $U$ is a partial isometry, from polarization identity it follows that $\langle Ux,Uy \rangle = \langle x,y \rangle$ for every $x,y \in (\mathrm{Ker}(U))^{\perp}$. Clearly the same equality holds if $x \in (\mathrm{Ker}(U))^{\perp}$ while $y \in \mathrm{Ker}(U)$, so $U^*U$ is the identity over $(\mathrm{Ker}(U))^{\perp}$. This implies that $U^*$ is an isometry onto $\overline{\mathrm{Im}(U)} = (\mathrm{Ker}(U^*))^{\perp}$, hence it is a partial isometry too.}
 \end{proof}
 \begin{teo}\label{polar decomposition theorem}
-	Given $T \in \B(X)$ there exist unique a partial isometry $U$ such that
+	Given $T \in \B(H)$ there exist unique a partial isometry $U$ such that
 	\begin{equation}\label{polar decomposition formula}
 		T = U|T|,
 	\end{equation}
@@ -332,7 +326,7 @@ Non-negative operators are somewhat ``special'', since their behaviour resembles
 \end{proof}
 
 \begin{defi}\label{trace def}
-	Let $X$ be a separable Hilbert space with orthonormal basis $\{e_n\}_{n \in \N}$. Given $T \in \B(X)$ a non-negative operator we define the \textbf{trace} of $T$ as
+	Let $H$ be a separable Hilbert space with orthonormal basis $\{e_n\}_{n \in \N}$. Given $T \in \B(H)$ a non-negative operator we define the \textbf{trace} of $T$ as
 	\begin{equation}\label{trace expression}
 		\mathrm{tr}(T) = \sum_{n=1}^{\infty} \langle T e_n, e_n \rangle.
 	\end{equation}
@@ -351,7 +345,7 @@ Since $T$ is non-negative, every term of the sum in \eqref{trace expression} is 
 	where we used the fact that $\sqrt{T}$ is self-adjoint, while the exchange of series is allowed because all terms are non-negative.
 \end{proof}
 \begin{defi}\label{Hilbert-Schmidt operator def}
-	An operator $T \in \B(X)$ is called \textbf{Hilbert-Schmidt} if and only if $\mathrm{tr}(T^*T) < \infty$. We define the \textbf{Hilbert-Schmidt norm} of an operator as $\|T\|_{\mathrm{HS}} = \sqrt{\mathrm{tr}(T^*T)}$.
+	An operator $T \in \B(H)$ is called \textbf{Hilbert-Schmidt} if and only if $\mathrm{tr}(T^*T) < \infty$. We define the \textbf{Hilbert-Schmidt norm} of an operator as $\|T\|_{\mathrm{HS}} = \sqrt{\mathrm{tr}(T^*T)}$.
 \end{defi}
 From the definition of the trace we can see that, given an orthonormal basis $\{e_n\}_{n=1}^{+\infty}$,
 \begin{equation}\label{Hilbert-Schmidt norm expression}
@@ -361,15 +355,15 @@ so we can say, in an equivalent way, that an operator is Hilbert-Schmidt if and 
 
 We are now going to show some properties of Hilbert-Schmidt and trace-class operators.
 \begin{prop}\label{|T| and T^* are Hilbert-Schmidt}
-	Let $T \in \B(H)$ be a Hilbert-Schmidt operator. Then also $|T|$ and $T^*$ are Hilbert-Schmidt operators and 
+	Let $T \in \B(H)$ be a Hilbert-Schmidt operator. Then, also $|T|$ and $T^*$ are Hilbert-Schmidt operators and 
 	\begin{equation}\label{Hilbert-Schmidt norm of |T| and T^*}
 		\| |T| \|_{\mathrm{HS}} = \| T^* \|_{\mathrm{HS}} = \| T \|_{\mathrm{HS}}.
 	\end{equation}
 \end{prop}
 \begin{proof}
-	We already know that, for every $x \in H$, $\|Tx\|^2 = \||T|x\|^2$, therefore from \eqref{Hilbert-Schmidt norm expression} we immediately see that $ \| |T| \|_{\mathrm{HS}} = \| T \|_{\mathrm{HS}}$.
+	We already know that, for every $x \in H$, $\|Tx\|^2 = \|\,|T| x\|^2$, therefore from \eqref{Hilbert-Schmidt norm expression} we immediately see that $ \| |T| \|_{\mathrm{HS}} = \| T \|_{\mathrm{HS}}$.
 	
-	Consider now an orthonormal basis $\{e_n\}_{n \in \N}$ of $H$. From \eqref{Hilbert-Schmidt norm expression}:
+	Consider now an orthonormal basis $\{e_n\}_{n \in \N}$ of $H$. From \eqref{Hilbert-Schmidt norm expression} we have:
 	\begin{align*}
 		\|T\|_{\mathrm{HS}}^2 &= \sum_{n=1}^{+\infty} \|Te_n\|^2 = \sum_{n=1}^{+\infty} \left(\sum_{m=1}^{+\infty} |\langle Te_n,e_m \rangle|^2\right) = \sum_{m=1}^{+\infty} \left(\sum_{n=1}^{+\infty} |\langle e_n, T^*e_m \rangle|^2\right) =\\
 							&= \sum_{m=1}^{+\infty} \|T^* e_m\|^2 = \|T^*\|_{\mathrm{HS}}^2,
@@ -377,7 +371,7 @@ We are now going to show some properties of Hilbert-Schmidt and trace-class oper
 	where exchange of series is allowed since all terms are non-negative.
 \end{proof}
 \begin{teo}\label{Hilbert-Schmidt operators are compact and bounded}
-	Let $T \in \B(H)$ be a Hilbert-Schmidt operator. Then $\|T\| \leq \|T\|_{\mathrm{HS}}$ and $T$ is compact. Moreover, a compact operator $T$ is Hilbert-Schmidt if and only if $\sum_{n=1}^{+\infty} \mu_n^2$, where $\{\mu_n\}_{n=1}^{+\infty}$ are the singular values of $T$.
+	Let $T \in \B(H)$ be a Hilbert-Schmidt operator. Then, $\|T\| \leq \|T\|_{\mathrm{HS}}$ and $T$ is compact. Moreover, a compact operator $T$ is Hilbert-Schmidt if and only if $\sum_{n=1}^{+\infty} \mu_n^2$, where $\{\mu_n\}_{n=1}^{+\infty}$ are the singular values of $T$.
 \end{teo}
 \begin{proof}
 	Let $\{e_n\}_{n \in \N}$ be an orthonormal basis of $H$ and let $x \in H$. We have:
@@ -387,13 +381,13 @@ We are now going to show some properties of Hilbert-Schmidt and trace-class oper
 	\end{align*}
 	Taking the supremum over all $x \in H$ gives us that $\|T\| \leq \|T\|_{\mathrm{HS}}$.
 	
-	To prove that $T$ is compact, consider the following sequence of operators $T_N = \sum_{n=1}^{N} \langle \cdot , e_n \rangle Te_n$. All $T_N$ are finite-rank, so they are compact. Moreover, $T_N \rightarrow T$ in $\B(H)$, indeed:
+	To prove that $T$ is compact, consider the following sequence of finite-rank operators $T_N = \sum_{n=1}^{N} \langle \cdot , e_n \rangle Te_n$. We have that $T_N \rightarrow T$ in $\B(H)$, indeed:
 	\begin{align*}
 		\|T-T_N\| \leq \|T-T_N\|_{\mathrm{HS}}^2 = \sum_{n=N+1}^{+\infty} \|T e_n\|^2 \rightarrow 0 \quad \mathrm{as\ } N \rightarrow +\infty,
 	\end{align*}
 	therefore, from Corollary \ref{limit of finite rank operator is compact}, $T$ is compact.
 	
-	Lastly, if $T$ is a compact operator also $T^*T$ is compact as well as self-adjoint, hence we can consider as orthonormal basis of $H$ the one given by its eigenvectors $\{e_n\}_{n \in \N}$. Recalling Corollary \ref{canonical form for compact operators corollary}, we know that $\mu_n^2$ are exactly the eigenvalues of $T^*T$.  For such basis we have:
+	Lastly, if $T$ is a compact operator then also $T^*T$ is compact, as well as self-adjoint, hence we can consider as orthonormal basis of $H$ the one given by its eigenvectors $\{e_n\}_{n \in \N}$. Recalling Corollary \ref{canonical form for compact operators corollary}, we know that $\mu_n^2$ are exactly the eigenvalues of $T^*T$.  For such basis we have:
 	\begin{align*}
 		\|T\|_{\mathrm{HS}}^2 &= \sum_{n=1}^{+\infty} \|Te_n\|^2 = \sum_{n=1}^{+\infty} \langle Te_n,Te_n \rangle = \sum_{n=1}^{+\infty} \langle T^*T e_n,e_n \rangle = \sum_{n=1}^{+\infty} \mu_n^2.
 	\end{align*}
@@ -415,7 +409,7 @@ We can now turn back to trace-class operator. It is evident that trace-class ope
 \begin{equation*}
 	\mathrm{tr}|T| = \sum_{n=1}^{+\infty} \langle |T|e_n, e_n \rangle = \sum_{n=1}^{+\infty} \|\sqrt{|T|}e_n\|^2 = \| T \|_{\mathrm{HS}}^2,
 \end{equation*}
-so, an operator is trace-class if and only if $\sqrt{|T|}$ is Hilbert-Schmidt. By virtue of this link, we can exploit properties of Hilbert-Schmidt operators in order to obtain information about trace-class operators. First of all, we are going to prove that expression \eqref{trace expression} is well-defined for every trace-class operator and not only for non-negative ones.
+so an operator is trace-class if and only if $\sqrt{|T|}$ is Hilbert-Schmidt. By virtue of this link, we can exploit properties of Hilbert-Schmidt operators in order to obtain information about trace-class operators. First of all, we are going to prove that expression \eqref{trace expression} is well-defined for every trace-class operator and not only for non-negative ones.
 \begin{teo}
 	Let $T \in \B(H)$ be a trace-class operator and $\{e_n\}_{n \in \N}$ an orthonormal basis of $H$. Then $\sum_{n=1}^{+\infty} \langle Te_n,e_n \rangle$ converges absolutely and the limit is independent of the basis.
 \end{teo}
@@ -437,7 +431,7 @@ Another immediate corollary of Proposition \ref{Hilbert-Schmidt operator are an 
 	Let $T \in \B(H)$ be a trace-class operator. Then $T$ is also Hilbert-Schmidt.
 \end{prop}
 \begin{proof}
-	Let $T = U |T|$ be the polar decomposition of $T$. Since $T$ is trace-class $\sqrt{|T|}$ is an Hilbert-Schmidt operator. Therefore, from Proposition \ref{Hilbert-Schmidt operator are an ideal} follows that $T = U \sqrt{|T|} \sqrt{|T|}$ is an Hilbert-Schmidt operator.
+	Let $T = U |T|$ be the polar decomposition of $T$. Since $T$ is trace-class $\sqrt{|T|}$ is a Hilbert-Schmidt operator. Therefore, from Proposition \ref{Hilbert-Schmidt operator are an ideal} follows that $T = U \sqrt{|T|} \sqrt{|T|}$ is a Hilbert-Schmidt operator.
 \end{proof}
 
 \begin{teo}\label{trace-class operators are compact and bounded}
@@ -470,17 +464,17 @@ In the special case $H = L^2(\R^d)$ we are able to give a characterization of Hi
 		\| T_K f \|_{L^2(\R^d)}^2 &= \int_{\R^{d}} |T_K f(x)|^2 dx = \int_{\R^d} \Big|\int_{\R^{d}} K(x,y) f(y) dy\Big|^2 dx \leq\\
 						&\leq \int_{\R^d} \left(\int_{\R^{d}} |K(x,y)| |f(y)| dy\right)^2 dx.
 	\end{align*}
-	From Fubini's theorem we have that $|K(x,\cdot)| \in L^2(\R^d)$ for almost every $x \in \R^d$. Therefore, we can apply Cauchy-Schwarz's inequality in the inner integral, thus obtaining:
+	From Fubini's theorem we have that $|K(x,\cdot)| \in L^2(\R^d)$ for almost every $x \in \R^d$. Therefore, we can apply Cauchy-Schwarz' inequality in the inner integral, thus obtaining:
 	\begin{equation}\label{representation of Hilbert-Schmidt integral operator bound 1}
-		\| T_K f \|_{L^2(\R^d)}^2 \leq \|f\|_{L^2(\R^d)}^2 \int_{\R^d} \int_{\R^{d}} |K(x,y)|^2 dy dx = \| K \|_{L^2(\R^{2d})}^2 \|f\|_{L^2(\R^d)}
+		\| T_K f \|_{L^2(\R^d)}^2 \leq \|f\|_{L^2(\R^d)}^2 \int_{\R^d} \int_{\R^{d}} |K(x,y)|^2 dy dx = \| K \|_{L^2(\R^{2d})}^2 \|f\|_{L^2(\R^d)},
 	\end{equation}
-	which shows that $T_K$ is a bounded operator. Moreover, $T_K$ is clearly linear, therefore $T_K \in \B(L^2(\R^d))$. Consider now an orthonormal basis $\{e_n\}_{n \in \N}$ of $L^2(\R^d)$. Moreover, always from \eqref{representation of Hilbert-Schmidt integral operator bound 1}, it follows that, for every $f \in L^2(\R^d)$, the operator $K \in L^2(\R^{2d}) \mapsto A_f(K) = T_K f \in L^2(\R^d)$ is linear and continuous.
+	which shows that $T_K$ is a bounded operator. Moreover, $T_K$ is clearly linear, therefore $T_K \in \B(L^2(\R^d))$. 
 	
-	We can now suppose to have an Hilbert-Schmidt operator $T \in \B(H)$ and an orthonormal basis $\{e_n\}_{n \in \N}$ of $L^2(\R^d)$. We want to show that \eqref{Hilbert-Schmidt integral operator} holds with the following kernel:
+	We can now suppose to have a Hilbert-Schmidt operator $T \in \B(H)$ and an orthonormal basis $\{e_n\}_{n \in \N}$ of $L^2(\R^d)$. We want to show that \eqref{Hilbert-Schmidt integral operator} holds with the following kernel:
 	\begin{equation}\label{integral kernel formula}
 		K_T(x,y) = \sum_{(m,n) \in \N^2} \langle Te_n,e_m \rangle_{L^2(\R^d)} e_m(x)\overline{e_n(y)}.
 	\end{equation}
-	Since $\{e_m \otimes \overline{e_n}\}_{(m,n) \in \N^2}$ is an orthonormal basis of $L^2(\R^{2d})$, the convergence is unconditional. Therefore, for every $f \in L^2(\R^d)$
+	We point out that $\{e_m \otimes \overline{e_n}\}_{(m,n) \in \N^2}$ is an orthonormal basis of $L^2(\R^{2d})$. Moreover, from \eqref{representation of Hilbert-Schmidt integral operator bound 1}, it follows that, for every $f \in L^2(\R^d)$, the operator $K \in L^2(\R^{2d}) \mapsto A_f(K) = T_K f \in L^2(\R^d)$ is linear and continuous. Thus, for every $f \in L^2(\R^d)$ we have:
 	\begin{align*}
 		\int_{\R^d} K_T(x,y)f(y)dy &= A_f(K_T)(x) = A_f \Big( \sum_{(m,n) \in \N^2} \langle Te_n,e_m \rangle e_m \otimes\overline{e_n} \Big)(x) \overset{\ref{exchange of series and operator}}{=}\\
 								   &= \sum_{(m,n) \in \N^2} A_f \big(\langle Te_n,e_m \rangle e_m \otimes\overline{e_n}\big)(x) \overset{\ref{exchange order double series}}{=}\\
@@ -496,12 +490,13 @@ In the special case $H = L^2(\R^d)$ we are able to give a characterization of Hi
 			&= \sum_{n=1}^{+\infty} \|T e_n\|^2_{L^2(\R^d)} = \|T\|_{\mathrm{HS}}^2.
 		\end{aligned}		
 	\end{equation}
-	Conversely, if we have $K \in L^2(\R^{2d})$ and we define $T_K$ by \eqref{Hilbert-Schmidt integral operator}, we have to show that this operator is Hilbert-Schmidt, but this is straightforward since  \eqref{equivalence norm L2 and Hilbert-Schmidt norm} still holds.
+
+	Conversely, if we have $K \in L^2(\R^{2d})$ and we define $T_K$ by \eqref{Hilbert-Schmidt integral operator}, we have to show that this is a Hilbert-Schmidt operator. We already proved that $T_K \in B(H)$. The proof that it is also Hilbert-Schmidt is straightforward since \eqref{equivalence norm L2 and Hilbert-Schmidt norm} still holds.
 \end{proof}
 In light of this theorem, operators defined by \eqref{Hilbert-Schmidt integral operator} are called \emph{Hilbert-Schmidt integral operators}.
 
 \begin{prop}\label{condition integral operator self-adjoint}
-	Let $T$ be an Hilbert-Schmidt integral operator over $L^2(\R^d)$ with integral kernel $K \in L^2(\R^{2d})$. Then its adjoin operator is given by
+	Let $T$ be a Hilbert-Schmidt integral operator over $L^2(\R^d)$ with integral kernel $K \in L^2(\R^{2d})$. Then, its adjoin operator is given by
 	\begin{equation}\label{Hilbert-Schmidt integral operator adjoint}
 		T^*f(x) = \int_{\R^d} \overline{K(y,x)} f(y)dy.
 	\end{equation}
@@ -513,10 +508,10 @@ In light of this theorem, operators defined by \eqref{Hilbert-Schmidt integral o
 		&\int_{\R^{2d}} |K(x,y)| |f(y)| |g(x)| dxdy \overset{\mathrm{Tonelli}}{=} \int_{\R^d} \left(\int_{\R^d} |K(x,y)||f(y)| dy\right) |g(x)| dx = \\
 		&= \int_{\R^d} (T_{|K|} |f|)(y) |g(y)| \overset{\mathrm{C-S}}{\leq} \|T_{|K|}\|_2 \|g\|_2 \leq \|K\|_2 \| f \|_2 \|g\|_2 < +\infty,
 	\end{align*}
-	where $T_{|K|}$ denotes the Hilbert-Schmidt integral operator with kernel $|K|$ and $\|T_{|K|}|f|\|_2 \leq \|K\|_2 \| f \|_2$ because $T_{|K|}$ is Hilbert-Schmidt, therefore $\|T_{|K|}\| \leq \|T_{|K|}\|_{\mathrm{HS}} = \| K \|_2$. We are now in the position to use Fubini's theorem:
+	where $T_{|K|}$ denotes the Hilbert-Schmidt integral operator with kernel $|K|$ and $\|T_{|K|} f\|_2 \leq \|K\|_2 \| f \|_2$ because $T_{|K|}$ is Hilbert-Schmidt, therefore $\|T_{|K|}\| \leq \|T_{|K|}\|_{\mathrm{HS}} = \| K \|_2$. We are now in the position to use Fubini's theorem:
 	\begin{align*}
 		\langle Tf,g \rangle &= \int_{\R^d} \left(\int_{\R^d} K(x,y)f(y)dy\right)\overline{g(x)}dx = \int_{\R^d} \left(\int_{\R^d} K(x,y)\overline{g(x)}dx\right) f(y)dy =\\
-							 &= \int_{\R^d} \overline{\left(\int_{\R^d} \overline{K(x,y)} g(x)dx\right)} f(y)dy = \langle f,T^*g \rangle
+							 &= \int_{\R^d} \overline{\left(\int_{\R^d} \overline{K(x,y)} g(x)dx\right)} f(y)dy = \langle f,T^*g \rangle,
 	\end{align*}
 	where the expression of $T^*$ is exactly the one in \eqref{Hilbert-Schmidt integral operator adjoint}.
 \end{proof}
@@ -525,28 +520,28 @@ In light of this theorem, operators defined by \eqref{Hilbert-Schmidt integral o
 \section{Fourier Transform and its properties}\label{Fourier transform and its properties section}
 In this section we introduce the Fourier transform with its elementary properties, its relation with some fundamental operators in time-frequency analysis and with the convolution product.
 \begin{defi}\label{Fourier transform def}
-	Let $f \in L^1(\R^d)$. We define the \textbf{Fourier transform} of $f$ the function
+	Let $f \in L^1(\R^d)$. We define the \textbf{Fourier transform} of $f$ the function as
 	\begin{equation}\label{Fourier transform formula}
-		\F f(\omega) = \hat{f}(\omega) \coloneqq \int_{\R^d} e^{-2 \pi i \omega \cdot t} f(t) dt
+		\F f(\omega) = \hat{f}(\omega) \coloneqq \int_{\R^d} e^{-2 \pi i \omega \cdot t} f(t) dt.
 	\end{equation}
 \end{defi}
-It is straightforward to see that the definition is well-posed and that $\F f \in L^{\infty}(\R^d)$ with $\|\F f\|_{\infty} \leq \| f \|_1$. Therefore $\F$ can be seen as a linear operator between $L^1(\R^d)$ and $L^{\infty}(\R^d)$ with $\| \F \| \leq 1$. Actually, taking $f \geq 0$ a.e.,  we have that $\hat{f}(0) = \| f \|_1$, which gives us the equality.
+It is straightforward to see that the definition is well-posed and that $\F f \in L^{\infty}(\R^d)$ with $\|\F f\|_{\infty} \leq \| f \|_1$. Therefore, $\F$ can be seen as a linear operator between $L^1(\R^d)$ and $L^{\infty}(\R^d)$ with $\| \F \| \leq 1$. Actually, taking $f \geq 0$ a.e.,  we have that $\hat{f}(0) = \| f \|_1$, which gives us the equality.
 
 The Fourier transform of an $L^1(\R^d)$ is not only bounded, as stated by the \emph{Riemann-Lebesgue lemma}.
 \begin{teo}[Riemann-Lebesgue lemma]\label{Riemann-Lebesgue lemma}
 	Let $f \in L^1(\R^d)$. Then $\hat{f} \in C_0(\R^d) = \{f : \R^d \rightarrow \C \text{ continuous such that } \lim_{|t| \rightarrow \infty} |f(t)|=0\}$.
 \end{teo}
 \begin{defi}\label{inverse Fourier transform def}
-	Let $f \in L^1(\R^d)$. We define the \textbf{inverse Fourier transform} of the function $f$
+	Let $f \in L^1(\R^d)$. We define the \textbf{inverse Fourier transform} of the function $f$ as
 	\begin{equation}\label{inverse Fourier transform formula}
-		\F^{-1} f(t) = \check{f}(t) \coloneqq \int_{\R^d} e^{2 \pi i \omega \cdot t} f(\omega) d\omega
+		\F^{-1} f(t) = \check{f}(t) \coloneqq \int_{\R^d} e^{2 \pi i \omega \cdot t} f(\omega) d\omega.
 	\end{equation}
 \end{defi}
 The inverse Fourier transform is denoted with $\F^{-1}$ because it is actually the inverse operator of the Fourier transform as stated by the \emph{inversion theorem}.
 \begin{teo}[Inversion theorem]\label{inversion theorem}
 	Let $f \in L^1(\R^d)$ and suppose that also $\hat{f} \in L^1(\R^d)$. Then
 	\begin{equation*}
-		f(t) = \F^{-1} \circ \F f(t) = \int_{\R^d} \hat{f}(\omega) e^{2 \pi i \omega \cdot t}d\omega
+		f(t) = \F^{-1} \circ \F f(t) = \int_{\R^d} \hat{f}(\omega) e^{2 \pi i \omega \cdot t}d\omega.
 	\end{equation*}
 \end{teo}
 If $f$ is in $L^2(\R^d)$, the integral in \eqref{Fourier transform formula} in general will not converge. Nevertheless, we can define the Fourier transform of an $L^2$ function through a density argument. For example, one can use $L^1(\R^d) \cap L^2(\R^d)$, which is a dense subspace of $L^2(\R^d)$. On this space one can show that the Fourier transform is an isometry with respect to the $L^2$ norm and therefore it extends to an isometry on the whole $L^2(\R^d)$. This is stated by the \emph{Plancherel theorem}.
@@ -559,19 +554,19 @@ Thanks to the polarization identity this implies that $\F$ preserves the inner p
 \end{equation}
 therefore the Fourier transform $\F$ is a unitary operator on $L^2(\R^d)$. Result \eqref{Parseval formula} is called \emph{Parseval formula}.
 
-So far we have seen that the Fourier transform is defined on $L^1$ and $L^2$. {\color{blue} It can be shown, through Riesz-Thorin's interpolation theorem, that it can be extended to all $L^p$ spaces for $1 < p < 2$.}
+So far we have seen that the Fourier transform is defined on $L^1$ and $L^2$. It can be shown, through Riesz-Thorin's interpolation theorem, that this is enough to extended the Fourier transform to all $L^p$ spaces for $1 < p < 2$ (see \cite[][Section 2.2.4]{grafakos}). Moreover, the following inequality holds.
 \begin{teo}[Hausdorff-Young]
-	Let $1 \leq p \leq 2$ and let $p'$ such that $\frac{1}{p} + \frac{1}{p'} = 1$. Then $\F : L^p(\R^d) \rightarrow L^{p'}(\R^d)$ and $\| \hat{f }\|_{p'} \leq \| f \|_p$.
+	Let $1 \leq p \leq 2$ and let $p'$ such that $\frac{1}{p} + \frac{1}{p'} = 1$. Then $\| \hat{f }\|_{p'} \leq \| f \|_p$.
 \end{teo}
 In what follows we will need the sharp version of the Hausdorff-Young inequality: 
 \begin{equation}\label{Hausdorff-Yound inequality}
-	\| \hat{f} \|_{p'} \leq \left(\dfrac{p^{1/p}}{p'^{1/p'}}\right)^{d/2} \|f\|_p = A_p^d \|f\|_p
+	\| \hat{f} \|_{p'} \leq \left(\dfrac{p^{1/p}}{p'^{1/p'}}\right)^{d/2} \|f\|_p = A_p^d \|f\|_p,
 \end{equation}
 where $A_p$ is the so-called Babenko-Bechner constant.
 
 Having considered the spaces over which the Fourier transform is defined, we can focus on some of its properties. In particular, we want to focus on the close relationship that arises between regularity and decay properties. This is explained by the following theorems.
 \begin{teo}\label{duality decay-regularity theorem}
-	Let $f \in L^1(\R^d)$. If $|t|^k f \in L^1(\R^d)$ for some $k \in \N$ then $\hat{f} \in C_0^k(\R^d)$ and the following holds for every $\alpha \in \N^d$ with $|\alpha| \leq k$:
+	Let $f \in L^1(\R^d)$. If $|t|^k f \in L^1(\R^d)$ for some $k \in \N$, then $\hat{f} \in C_0^k(\R^d)$ and the following holds for every $\alpha \in \N^d$ with $|\alpha| \leq k$:
 	\begin{equation}\label{derivative of transform}
 		\F \left((-2 \pi i t)^{\alpha} f \right) (\omega) = \partial^{\alpha} \F f(\omega).
 	\end{equation}
@@ -610,56 +605,39 @@ It is easy to check that all these operators are isometric isomorphisms with res
 		\item $\displaystyle \F(D_{\lambda}f)(\omega) = \hat{f}\left(\frac{\omega}{\lambda}\right)$.\label{Fourier transform of dilation}
 	\end{enumerate}
 \end{prop}
-\begin{proof}
-	\phantom{a}\\
-	\begin{enumerate}[label=(\roman*)]
-		\item $\begin{aligned}[t]
-			 \F(T_xf)(\omega) &= \int_{\R^d} f(t-x) e^{-2\pi i \omega \cdot t}dt \overset{s = t-x}{=} \int_{\R^d} f(s) e^{-2\pi i \omega \cdot (s+x)}ds = \\
-			                  &= e^{-2\pi i \omega \cdot x} \int_{\R^d} f(s) e^{-2\pi i \omega \cdot s}ds = M_{-x}\hat{f}(\omega) ;
-		\end{aligned}$
-		\item $\begin{aligned}
-			\F(M_\xi f)(\omega) = \int_{\R^d} e^{2 \pi i \xi \cdot t} f(t) e^{-2 \pi i \omega \cdot t}dt = \int_{\R^d} f(t) e^{-2\pi i (\omega - \xi) \cdot t} dt = T_{\xi}\hat{f}(\omega);
-		\end{aligned}$
-	\item $\begin{aligned}
-		\F(D_{\lambda}f)(\omega) = \int_{\R^d} \lambda^d f(\lambda t) e^{-2\pi i \omega \cdot t}dt \overset{s=\lambda t}{=} \int_{\R^d} f(s) e^{-2 \pi i \omega \cdot \frac{s}{\lambda}}ds = \hat{f}\left(\frac{\omega}{\lambda}\right).
-	\end{aligned}$
-	\end{enumerate}	
-\end{proof}
+
 We point out that the second property, namely that $\F(M_{\xi}f) = T_{\xi}\hat{f}$, is shedding light on the role of modulation operator: while $T_x$ acts as a translation in the time domain, $M_{\xi}$ is a translation in the frequency domain. Therefore the time-frequency shift operator $\pi(x,\xi)$ is indeed a shift operator because it acts as a translation in the joint time-frequency domain.
 
-Thanks to these properties and Theorems \ref{duality decay-regularity theorem} and \ref{duality regularity-decay theorem} we can compute the Fourier transform of Gaussians.
-\begin{prop}\label{Fourier transform of Gaussian proposition}
-	The Fourier transform maps Gaussian into Gaussians. More precisely, for $\lambda > 0$, we have:
+Thanks to these properties, Theorems \ref{duality decay-regularity theorem} and \ref{duality regularity-decay theorem} we can compute, as a useful example, the Fourier transform of Gaussians.
+\begin{es}\label{Fourier transform of Gaussian proposition}
+	We want to compute the Fourier transform of Guassians of the kind $e^{-\lambda \pi |t|^2}$, where $\lambda > 0$ and $|t|^2$ is the Euclidean norm of $t \in \R^d$. We point out that the Fourier transform of a Gaussian is well-defined because it is a function in the Schwartz class, which is a subspace of $L^1(\R^d)$. We will show that the Fourier transform maps Gaussian into Gaussians. More precisely, the following formula holds:
 	\begin{equation}\label{Fourier transform of Gaussian formula}
 		\F(e^{-\lambda \pi |\cdot|^2})(\omega) = \dfrac{1}{\lambda^{d/2}} e^{-\frac{1}{\lambda}}\pi |\omega|^2 \quad \forall\,\omega \in \R^d.
 	\end{equation}
-\end{prop}
-\begin{proof}
-	We start considering the 1-dimensional case and for the ease of notation we let $\varphi_{\lambda}(t) = e^{-\lambda \pi t^2}$ for $t \in \R$.
-	
-	First of all we consider $\varphi = \varphi_1$, for which we have:
+
+	We start considering the 1-dimensional case and for the ease of notation we let $\varphi_{\lambda}(t) = e^{-\lambda \pi t^2}$ for $t \in \R$.	First of all we consider $\varphi = \varphi_1$, for which we have:
 	\begin{equation*}
-		\frac{d \varphi}{dt}(t) = -2 \pi t \varphi(t)
+		\frac{d \varphi}{dt}(t) = -2 \pi t \varphi(t).
 	\end{equation*}
 	If we take the Fourier transform of both members, using \eqref{transform of derivative} in the former and \eqref{derivative of transform} in the latter we obtain:
 	\begin{equation*}
-		2 \pi i \omega \hat{\varphi}(\omega) = -i \dfrac{d\hat{\varphi}}{d\omega}(\omega) \implies \dfrac{d\hat{\varphi}}{d\omega}(\omega) = - 2 \pi \omega \hat{\varphi}(\omega)
+		2 \pi i \omega \hat{\varphi}(\omega) = -i \dfrac{d\hat{\varphi}}{d\omega}(\omega) \implies \dfrac{d\hat{\varphi}}{d\omega}(\omega) = - 2 \pi \omega \hat{\varphi}(\omega),
 	\end{equation*}
-	which is exactly the same equation satisfied by $\varphi$, therefore $\hat{\varphi}(\omega) = C e^{-\pi \omega^2}$ for some $C \in \R$. Since $\hat{\varphi}(0) = \int_\R \varphi(t)dt = \|\varphi\|_1=1$ we obtain that $C=1$.
+	which is exactly the same equation satisfied by $\varphi$, therefore $\hat{\varphi}(\omega) = C e^{-\pi \omega^2}$ for some $C \in \R$. Since $\hat{\varphi}(0) = \int_\R \varphi(t)dt = \|\varphi\|_1=1$, we obtain that $C=1$.
 	
-	The general case can be proved using the dilatation operator:
+	The general case can be proved using the dilation operator:
 	\begin{align*}
 		&\varphi_{\lambda}(t) = e^{-\lambda \pi t^2} = e^{-\pi \left(\sqrt{\lambda} t\right)^2} = \dfrac{1}{\sqrt{\lambda}} D_{\sqrt{\lambda}}\varphi(t) \implies\\
-		                     &\implies \hat{\varphi}_{\lambda}(\omega) = \dfrac{1}{\sqrt{\lambda}} \F ( D_{\sqrt{\lambda}}\varphi )(\omega) = \dfrac{1}{\sqrt{\lambda}} \hat{\varphi}\left(\frac{\omega}{\sqrt{\lambda}}\right) = \dfrac{1}{\sqrt{\lambda}} e^{-\frac{1}{\lambda}\pi\omega^2}
+		                     &\implies \hat{\varphi}_{\lambda}(\omega) = \dfrac{1}{\sqrt{\lambda}} \F ( D_{\sqrt{\lambda}}\varphi )(\omega) \overset{\ref{properties of translation modulation and dilation operators}\ref{Fourier transform of dilation}}{=} \dfrac{1}{\sqrt{\lambda}} \hat{\varphi}\left(\frac{\omega}{\sqrt{\lambda}}\right) = \dfrac{1}{\sqrt{\lambda}} e^{-\frac{1}{\lambda}\pi\omega^2}.
 	\end{align*}
 	The passage to the multidimensional case is almost straightforward since $e^{-\lambda|t|^2} = \prod_{j=1}^d e^{-\lambda t_j^2}$, therefore:
 	\begin{align*}
 		\F(e^{-\lambda\pi|\cdot|^2})(\omega) &= \int_{\R^d} e^{-\lambda \pi |t|^2} e^{-2\pi i \omega \cdot t}dt = \prod_{j=1}^d \int_{\R} e^{-\lambda \pi t_j^2} e^{-2\pi i \omega_j t_j} dt_j = \\
 										  &= \prod_{j=1}^d \dfrac{1}{\sqrt{\lambda}}e^{-\frac{1}{\lambda}\pi \omega_j^2} = \dfrac{1}{\lambda^{d/2}} e^{-\frac{1}{\lambda}\pi|\omega|^2}.
 	\end{align*}
-\end{proof}
+\end{es}
 
-We conclude this section by considering what a convolution is and how this product relates to the Fourier transform. Given two functions $f,g : \R^d \rightarrow \R$, their convolution is given by:
+We conclude this section by considering how convolution product relates to the Fourier transform. Given two functions $f,g : \R^d \rightarrow \R^d$, we recall that their convolution is given by:
 \begin{equation*}\label{convolution formula}
 	(f * g) (x) = \int_{\R^d} f(y) g(x - y)dy.
 \end{equation*}
@@ -681,24 +659,24 @@ Just like as Young's inequality, in what follows we will need the sharp version 
 
 \chapter{Short-Time Fourier Transform}\label{chapter STFT}
 
-The Fourier transform is a widely used tool in both theoretical and applied settings. In particular, from an applied point of view, the importance of the Fourier transform lies primarily in the possibility of examining a signal in the frequency domain, and thus obtaining information that would otherwise be difficult to derive from the time domain. However, the distinction between these domains is rigid, whereas it is of great importance to have a tool with which time and frequency characteristics can be examined simultaneously. There are many representations that can accomplish this task, such as the Wigner distribution, the ambiguity function and so on. The basic time-frequency representation of a signal is probably the \emph{short-time Fourier transform} or \emph{STFT}. In this chapter we will define the STFT and describe some of its properties.
-\section{STFT}\label{section STFT}
-The \emph{short-time Fourier transform} or \emph{STFT} is a powerful tool used in signal processing and time-frequency analysis to study the properties of a signal locally in both time and frequency. The main idea behind STFT is the following: if we want some information about the spectrum of a signal $f$ at a certain time, say $T$, we could choose an interval $(T-\Delta T, T + \Delta T)$ and take the Fourier transform of $f \chi_{(T-\Delta T, T + \Delta T)}$. Normally, multiplication by a characteristic function will not yield a regular function (not even continuous) and, in light of the duality between regularity and decay, the Fourier transform of $f \chi_{(T-\Delta T, T + \Delta T)}$ will not decay quickly. The problem with this not quick decay is that in this case the energy in the frequency domain will be spread all over the domain. Therefore, a sharp cutoff in the time domain leads to a ``poor'' localization in the frequency domain. In order to avoid this kind of problem, we could think to multiply the signal $f$ by a smooth function.
+The Fourier transform is a widely used tool in both theoretical and applied settings. In particular, from an applied point of view, the importance of the Fourier transform lies primarily in the possibility of examining a signal in the frequency domain, and thus obtaining information that would otherwise be difficult to derive from the time domain. However, the distinction between these domains is rigid, whereas it is of great importance to have a tool with which time and frequency characteristics can be examined simultaneously. There are many representations that can accomplish this task, such as the Wigner distribution, the ambiguity function and so on. The basic time-frequency representation of a signal is probably the \emph{short-time Fourier transform} or \emph{STFT}. In this chapter we will define the STFT and describe some of its properties. The reference for this chapter is the book by Gr\"ochening \cite{grochenig}.
+\section{STFT: definition and properties}\label{section STFT}
+The \emph{short-time Fourier transform} or \emph{STFT} is a powerful tool used in signal processing and time-frequency analysis to study the properties of a signal locally in both time and frequency. The main idea behind STFT is the following: if we want some information about the spectrum (i.e. frequencies) of a signal $f$ at a certain time, say $T$, we could choose an interval $(T-\Delta T, T + \Delta T)$ and take the Fourier transform of $f \chi_{(T-\Delta T, T + \Delta T)}$. Normally, multiplication by a characteristic function will not yield a regular function (not even continuous) and, in light of the duality between regularity and decay, the Fourier transform of $f \chi_{(T-\Delta T, T + \Delta T)}$ will not decay quickly. The problem with this not quick decay is that in this case the energy in the frequency domain will be spread all over the domain. Therefore, a sharp cutoff in the time domain leads to a ``poor'' localization in the frequency domain. In order to avoid this kind of problem, we could think to multiply the signal $f$ by a smooth function.
 \begin{defi}\label{STFT def}
 	Fix a function $y \neq 0$, called \emph{window function}. The \textbf{short-time Fourier transform} of a function $f$ with window $\phi$ is defined as
 	\begin{equation}\label{STFT formula}
-		\V_{\phi}f(x,\omega) = \int_{\R^d} f(t)\overline{\phi(t-x)}e^{-2 \pi i \omega \cdot t} dt, \quad (x,\omega) \in \R^{2d}
+		\V_{\phi}f(x,\omega) = \int_{\R^d} f(t)\overline{\phi(t-x)}e^{-2 \pi i \omega \cdot t} dt, \quad (x,\omega) \in \R^{2d}.
 	\end{equation}
 \end{defi}
-In the above definition we did not specify where $f$ and $\phi$ are chosen. We notice that \eqref{STFT formula} can be seen in an alternative way:
+In the above definition we did not specify where $f$ and $\phi$ are chosen. The reason is that various combinations of $f$ and $\phi$ can lead to a ``good'' definition. We notice that \eqref{STFT formula} can be seen in an alternative way:
 \begin{equation}\label{STFT formula as Fourier transform}
 	\V_{\phi} f(x, \omega) = \F(f T_x \overline{\phi})(\omega),
 \end{equation}
-therefore STFT is well-defined whenever the Fourier transform of this function is. For example, if both $f$ and $\phi$ are in $L^2(\R^d)$ then $f T_x\overline{\phi}$ is in $L^1(\R^d)$ for every $x \in \R^d$ and so the integral in \eqref{STFT formula} is defined. In this special case the STFT can be written as a scalar product in $L^2(\R^d)$:
+therefore STFT is well-defined whenever the Fourier transform of this function is. For example, if both $f$ and $\phi$ are in $L^2(\R^d)$ then $f T_x\overline{\phi}$, is in $L^1(\R^d)$ for every $x \in \R^d$ and so the integral in \eqref{STFT formula} is defined. In this special case the STFT can be written as a scalar product in $L^2(\R^d)$:
 \begin{equation*}
 	\V_{\phi}f(x,\omega) = \langle f, M_{\omega} T_x \phi \rangle = \langle f, \pi(x,\omega) \phi \rangle.
 \end{equation*}
-In general, the STFT of $f$ with respect to $\phi$ will be defined whenever  $\langle f, M_{\omega} T_x \phi \rangle$ is an expression of some sort of duality. For example, if $f \in \mathcal{S}'(\R^d)$ and $\phi \in \mathcal{S}(\R^d)$, then $M_{\omega} T_x \phi \in \mathcal{S}(\R^d)$, therefore $\langle f, M_{\omega} T_x \phi \rangle$ can be seen as the usual duality between tempered distributions and functions in the Schwartz space. Despite this remark, we will mainly focus on the case in which both the window and the signal are in $L^2(\R^d)$.
+In general, the STFT of $f$ with respect to $\phi$ will be defined whenever  $\langle f, M_{\omega} T_x \phi \rangle$ is an expression of some sort of duality. For example, if $f \in \mathcal{S}'(\R^d)$ and $\phi \in \mathcal{S}(\R^d)$, then $M_{\omega} T_x \phi \in \mathcal{S}(\R^d)$, therefore $\langle f, M_{\omega} T_x \phi \rangle$ can be seen as the usual duality between tempered distributions and functions in the Schwartz space. Despite this remark, we will mainly focus on the case in which both the window and the signal are in some Lebesgue space $L^p(\R^d)$.
 
 \subsection{Properties of STFT}\label{properties of STFT subsection}
 In this section we will introduce and prove some basic properties of STFT. In particular, as we did for the Fourier transform, we want to know to which spaces $\V_{\phi} f$ belongs.
@@ -774,7 +752,7 @@ This result is improved by the following theorem due to Lieb \cite{lieb_integral
 	However $\| \,|f|^{p'} \|_{2/p'} = (\int_{\R^d} (|f(x)|^{p'})^{2/p'}dx)^{p'/2} = \|f\|_2^{p'}$ and from a direct calculation (which can be found in \ref{constant in Lieb's inequality calculation}) one can see that $A_{p'}^d A_{2/p'}^{2d/p'}A_{(p/p')'}^{d/p'}=(2/p)^{d/p}$, which corresponds to the desired result.
 \end{proof}
 
-From a direct computation one can see that the adjoint operator of the STFT operator $\V_{\phi}$ is given by the following expression:
+In light of Theorem \ref{orthogonality relation theorem}, the STFT with window $\phi$ in $L^2(\R^d)$ can be seen as a unitary operator from $L^2(\R^d)$ into $L^2(\R^{2d})$. Therefore, we can find its adjoint operator. From a direct computation it can be seen that this is given by:
 \begin{equation}\label{STFT adjoint}
 	\V_{\phi}^* g(t) = \int_{\R^{2d}} g(x,\omega) \phi(t-x) e^{2 \pi i \omega \cdot t} dxd\omega = \int_{\R^{2d}} g(x,\omega) M_{\omega}T_x \phi (t) dxd\omega\quad \forall g \in L^2(\R^{2d}).
 \end{equation}
@@ -805,27 +783,34 @@ This adjoint operator appears in the following nice property, named \emph{invers
 \end{proof}
 Therefore, the adjoint operator $\V_{\gamma}^*$ acts, in some sense, as an inverse operator. This will be of paramount importance afterwards.
 \section{Bargmann Transform and Fock Space}\label{section Fock Space and Bargmann transform}
-{\color{blue} Throughout this section we will consider the STFT with Gaussian window.} We choose
+In the introduction of the chapter we justified the multiplication of a function $f$ by a window $\phi$ in the definition of the STFT through the relation between decay and regularity under the action of Fourier transform. Hence, it seems reasonable to make furhter consideration on the STFT when the window function is a regular and rapidly-decaying one. In this section, we will consider the specific case in which the window is a Gaussian. In particular, we choose a Gaussian of the following form:
 \begin{equation}\label{gaussian normalized}
-	\varphi(x) = 2^{d/4} e^{-\pi |x|^2}
+	\varphi(t) = 2^{d/4} e^{-\pi |t|^2}.
 \end{equation}
-where $|x|^2 = \sum_{k=1}^d x_k^2$ is the Euclidean norm of $x$ in $\R^d$. The factor $2^{d/4}$ is chosen so that $\|\varphi\|_2=1$. The STFT with Gaussian window becomes
+The factor $2^{d/4}$ is chosen so that $\|\varphi\|_2=1$. The STFT with Gaussian window becomes
 \begin{equation}
-	\V_{\varphi}f(x,\omega) = 2^{d/4} \int_{\R^d} f(t) e^{-\pi |t-x|^2} e^{-2 \pi i \omega \cdot t} dt
+	\V_{\varphi}f(x,\omega) = 2^{d/4} \int_{\R^d} f(t) e^{-\pi |t-x|^2} e^{-2 \pi i \omega \cdot t} dt.
 \end{equation}
-Our aim now is to rearrange the terms in the above expression in order to make $z=x+i\omega \in \C^d$ appear. We want to highlight the fact that when talking about complex quantities $|z|^2 = z \overline{z} = |x|^2 + |\omega|^2$. {\color{blue}  Aggiungere remark sulla notazione usata}.
+Our goal is to rearrange the terms in the above expression in order to make $z=x+i\omega \in \C^d$ appear. We want to highlight the fact that, when talking about complex quantities, $|z|^2 = z \overline{z} = |x|^2 + |\omega|^2$.
 \begin{align*}
-	\V_{\varphi}f(x,\omega) &= 2^{d/4} \int_{\R^d} f(t) e^{-\pi |t|^2 + 2 \pi x \cdot t - \pi |\omega|^2} e^{ - 2 \pi i \omega \cdot t} dt\\
-							&= 2^{d/4} \int_{\R^d} f(t) e^{-\pi |t|^2} e^{2 \pi (x - i \omega) \cdot t} e^{-\frac{\pi}{2}\left(|x|^2 - 2 i x \cdot \omega - |\omega|^2\right)} e^{-\frac{\pi}{2}\left(|x|^2 + |\omega|^2 + 2 i x \cdot \omega\right)}dt\\
+	\V_{\varphi}f(x,\omega) &= 2^{d/4} \int_{\R^d} f(t) e^{-\pi |t|^2 + 2 \pi x \cdot t - \pi |\omega|^2} e^{ - 2 \pi i \omega \cdot t} dt=\\
+							&= 2^{d/4} \int_{\R^d} f(t) e^{-\pi |t|^2} e^{2 \pi (x - i \omega) \cdot t} e^{-\frac{\pi}{2}\left(|x|^2 - 2 i x \cdot \omega - |\omega|^2\right)} e^{-\frac{\pi}{2}\left(|x|^2 + |\omega|^2 + 2 i x \cdot \omega\right)}dt=\\
 							&= 2^{d/4} e^{-\pi i x \cdot \omega} e^{-\frac{\pi}{2}\left(|x|^2 + |\omega|^2\right)} \int_{\R^d} f(t) e^{-\pi |t|^2} e^{2 \pi (x-i\omega) \cdot t}e^{-\frac{\pi}{2}(x-i\omega)^2}dt.
 \end{align*}
-The rearrangement may seem arbitrary, but actually it is done in such a way that inside the integral $x$ and $\omega$ enter only via $\overline{z}$.
+The rearrangement may seem arbitrary, but actually it is done in such a way that inside the integral $x$ and $\omega$ enter only via $\overline{z}$. This leads to the following definition.
 \begin{defi}\label{Bargmann transform}
 	The \textbf{Bargmann transform} of a function $f$ on $\R^d$ is the function $\Barg f$ on $\C^d$ given by
 	\begin{equation}\label{Bargmann transform formula}
 		\Barg f(z) = 2^{d/4} \int_{\R^d} f(t) e^{2 \pi t \cdot z - \pi |t|^2 - \frac{\pi}{2}z^2}dt.
 	\end{equation}
 \end{defi}
+The existence of a connection between the STFT with Gaussian windows and the Bargmann transform is clear and it is formally stated in the following proposition.
+\begin{prop}\label{connection between Bargmann tranform and STFT proposition}
+	If $f$ is a function on $\R^d$ with polynomial growth then its Bargmann transform $\Barg f$ is an entire function on $\C^d$. Moreover, letting $z = x + i\omega$, the Bargmann transform of $f$ is related to its STFT through the following
+	\begin{equation}\label{connection between Bargmann transform and STFT}
+		\V_{\varphi} f(x,-\omega) = e^{\pi i x \cdot \omega} \Barg f(z) e^{-\pi |z|^2/2}
+	\end{equation}
+\end{prop}
 We recall that a function defined over $\C^d$ is \emph{entire} if it is holomorphic over all $\C^d$.
 \begin{defi}\label{Fock space}
 	The \textbf{Fock space} $\Fock^2(\C^d)$ is the Hilbert space of all entire functions $F$ on $\C^d$ for which the norm
@@ -838,15 +823,7 @@ Clearly the norm of the Fock space is induced by the following scalar product
 \begin{equation}\label{Fock space scalar product}
 	\langle F,G \rangle_{\Fock^2} \int_{\C^d} F(z) \overline{G(z)} e^{-\pi |z|^2}dz
 \end{equation}
-\begin{prop}\label{connection between Bargmann tranform and STFT proposition}
-	If $f$ is a function on $\R^d$ with polynomial growth then its Bargmann transform $\Barg f$ is an entire function on $\C^d$. Moreover, letting $z = x + i\omega$, the Bargmann transform of $f$ is related to its STFT through the following
-	\begin{equation}\label{connection between Bargmann transform and STFT}
-		\V_{\varphi} f(x,-\omega) = e^{\pi i x \cdot \omega} \Barg f(z) e^{-\pi |z|^2/2}
-	\end{equation}
-\end{prop}
-\begin{proof}
-	contenuto...
-\end{proof}
+
 \begin{prop}\label{Bargmann transform is an isometry}
 	If $f \in L^2(\R^d)$ then
 	\begin{equation}
@@ -857,13 +834,13 @@ Clearly the norm of the Fock space is induced by the following scalar product
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Localization Operators}\label{chapter localization operators}
-In the previous chapter we defined the STFT, which, roughly speaking, gives us a 'time-frequency picture' of a signal. Once we have our joint representation, we might be interested in highlighting some of its features, for example, to understand where most of the energy is in phase-space.
+In the previous chapter we defined the STFT, which, roughly speaking, gives us a ``time-frequency picture'' of a signal. Once we have our joint representation, we might be interested in highlighting some of its features. For example, we might be interested in understanding where most of the energy is in phase-space.
 
 In this chapter we will look at two ways in which we can solve the problem of creating operators able to localize a signal.
 \section{Localization with projections}\label{Localization with projections section}
 Our first attempt to localize a signal is arguably the most straightforward one, namely using a sharp cutoff. If we suppose to have a signal $f \in L^2(\R^d)$ and we want to localize it in a measurable subset $T \subseteq \R^d$ of the time domain we can consider the natural projection operator:
 \begin{equation}\label{time projection operator}
-	P_T : L^2(\R^d) \rightarrow L^2(\R^d) \quad P_T f(t) = \chi_T(t) f(t).
+	P_T : L^2(\R^d) \rightarrow L^2(\R^d), \quad P_T f(t) = \chi_T(t) f(t).
 \end{equation}
 This is clearly a projection operator, which means that $P_T^2 = P_T = P_T^*$.
 
@@ -873,13 +850,13 @@ In the same fashion we can define an operator able to localize on a measurable s
 \end{equation}
 It is also quite simple to show that this is a projection operator:
 \begin{align*}
-	&Q_{\Omega}^2 = \F^{-1} \chi_{\Omega} \F \F^{-1} \chi_{\Omega} \F = \F^{-1} \chi_{\Omega} \chi_{\Omega} \F = \F^{-1} \chi_{\Omega} \F = Q_{\Omega};\\
+	&Q_{\Omega}^2 = \F^{-1} \chi_{\Omega} \F \F^{-1} \chi_{\Omega} \F = \F^{-1} \chi_{\Omega} \chi_{\Omega} \F = \F^{-1} \chi_{\Omega} \F = Q_{\Omega},\\
 	&Q_{\Omega}^* = \left( \F^{-1} \chi_{\Omega} \F\right)^* = \F^* \chi_{\Omega}^* \left(\F^{-1}\right)^* = \F^{-1} \chi_{\Omega} \F = Q_{\Omega},
 \end{align*}
 where we used the fact that the Fourier transform is a unitary operator on $L^2(\R^d)$, namely that $\F^* = \F^{-1}$.\\
 Since both operators are projections, their norm is less or equal than 1, independently of $T$ and $\Omega$, indeed:
 \begin{align*}
-	&\| P_T f \|_{L^2(\R^d)} = \| f \|_{L^2(T)} \leq \| f \|_{L^2(\R^d)};\\
+	&\| P_T f \|_{L^2(\R^d)} = \| f \|_{L^2(T)} \leq \| f \|_{L^2(\R^d)},\\
 	&\| Q_{\Omega} f \|_{L^2(\R^d)} = \| \F^{-1} \chi_{\Omega} \F f\|_{L^2(\R^d)} \overset{\text{Plancherel}}{=} \| \F f\|_{L^2(\Omega)} \leq \| \F f \|_{L^2(\R^d)} \overset{\text{Plancherel}}{=} \| f \|_{L^2(\R^d)}.
 \end{align*}
 
@@ -887,7 +864,7 @@ Clearly, those operators do not answer our original question about localization 
 \begin{equation*}\label{composition of projections}
 	Q_{\Omega} P_T, \; P_T Q_{\Omega} : L^2(\R^d) \rightarrow L^2(\R^d),
 \end{equation*}
-which hopefully are able to localize a signal both in time and frequency ``near'' to the set $T \times \Omega$.
+which hopefully is able to localize a signal both in time and frequency ``near'' to the set $T \times \Omega$.
 
 It is clear that these operators are linear and bounded, in particular their norms are less or equal than 1. Moreover, they are one the adjoint of the other, indeed:
 \begin{equation}\label{projection operators adjoint}
@@ -898,7 +875,7 @@ Up to now the only (essential) hypothesis on $T$ and $\Omega$ is that they are m
 \begin{prop}\label{projection operators are Hilbert-Schmidt}
 	Let $T,\Omega \subset \R^d$ with finite measure. Then $Q_{\Omega} P_T$ and $P_T Q_{\Omega}$ are Hilbert-Schmidt integral operators of the form
 	\begin{align}
-		Q_{\Omega} P_T f(x) &= \int_{\R^d} K(x,t) f(t) dt; \\
+		Q_{\Omega} P_T f(x) &= \int_{\R^d} K(x,t) f(t) dt, \\
 		P_T Q_{\Omega} f(x) &= \int_{\R^d} \overline{K(t,x)}f(t)dt,
 	\end{align}
 	where
@@ -946,12 +923,12 @@ Related to this localization operator is the sesquilinear form $\L_{F,\phi} : L^
 \end{equation}
 Indeed, assuming $\L_{F,\phi}$ is bounded, we could define $ L_{F,\phi} f$ through Riesz' representation theorem as the only element of $L^2(\R^d)$ such that:
 \begin{equation}\label{L_F through duality}
-	\L_{F,\phi}(f,g) = \langle L_{F,\phi}f,g \rangle  = \int_{\R^d} L_{F,\phi}f(t) \overline{g(t)}\quad \forall g \in L^2(\R^d).
+	\L_{F,\phi}(f,g) = \langle L_{F,\phi}f,g \rangle  = \int_{\R^d} L_{F,\phi}f(t) \overline{g(t)}\quad \forall g \in L^2(\R^d),
 \end{equation}
-and therefore $L_{F,\phi}$ as the function which maps $f$ into its representation.
+and therefore $L_{F,\phi}$ as the operator which maps $f$ into its representation.
 
 
-Now that we have defined time-frequency localization operators our goal is to study their properties, starting from boundedness, compactness and the {\color{blue} appartenenza} to trace class or Hilbert-Schmidt class. We recall that the window function $\phi \in L^2(\R^d)$ is fixed, so it is clear that the properties of $L_{F,\phi}$ will depend upon $F$.
+Now that we have defined time-frequency localization operators our goal is to study their properties, starting from boundedness, compactness and the belonging to trace class or Hilbert-Schmidt class. We recall that the window function $\phi \in L^2(\R^d)$ is fixed, so it is clear that the properties of $L_{F,\phi}$ will depend upon $F$.
 \begin{prop}\label{F in L^p L_F bounded}
 	Let $F \in L^p(\R^{2d})$ for $p \in [1,+\infty]$. Then $L_{F,\phi}$ is bounded and $\|L_{F,\phi}\| \leq \|F\|_p$.
 \end{prop}
@@ -973,7 +950,7 @@ Now that we have defined time-frequency localization operators our goal is to st
 
 In previous section we managed to prove that projection operators $Q_{\Omega}P_T$ and $P_T Q_{\Omega}$ are Hilbert-Schmidt operators, provided both $T$ and $\Omega$ have finite measure, which is equivalent to asking that $\chi_T$ and $\chi_{\Omega}$ are in $L^1(\R^d)$. An analogous result holds for Daubechies' localization operators.
 \begin{teo}\label{F integrable L_F Hilbert-Schmidt}
-	Let $F \in L^1(\R^{2d})$. Then $L_{F,\phi}$ is an Hilbert-Schmidt integral operator with kernel
+	Let $F \in L^1(\R^{2d})$. Then $L_{F,\phi}$ is a Hilbert-Schmidt integral operator with kernel
 	\begin{equation}\label{integral kernel localization operator}
 		K_F(s,t) = \int_{\R^{2d}} F(x,\omega) M_{\omega} T_x \phi(s) \overline{M_{\omega} T_x \phi(t)} dx d\omega.
 	\end{equation}
@@ -992,7 +969,7 @@ In previous section we managed to prove that projection operators $Q_{\Omega}P_T
 									  &= \int_{\R^d} \left[\int_{\R^d}\left( \int_{\R^{2d}} F(x,\omega) M_{\omega}T_x \phi(s) \overline{M_{\omega} T_x \phi(t)} dx d\omega \right) f(t) dt\right] \overline{g(s)}ds = \\
 									  &= \int_{\R^d} \left(\int_{\R^d} K_F(s,t) f(t)dt\right) \overline{g(s)} ds.
 	\end{align*}
-	Since this holds for every $f$ and $g$ we can conclude that $L_{F,\phi} f = \int_{\R^d} K_F(\cdot,t) f(t)dt $. Thanks to Proposition \ref{Hilbert-Schmidt integral operator}, we know that such integral operator is an Hilbert-Schmidt operator if and only if $K_F \in L^2(\R^{2d})$, so all we have to do is to compute its norm.
+	Since this holds for every $f$ and $g$ we can conclude that $L_{F,\phi} f = \int_{\R^d} K_F(\cdot,t) f(t)dt $. Thanks to Proposition \ref{Hilbert-Schmidt integral operator}, we know that such integral operator is a Hilbert-Schmidt operator if and only if $K_F \in L^2(\R^{2d})$, so all we have to do is to compute its norm.
 	\begin{align*}
 		\|K_F\|_2^2 &= | \langle K_F, K_F \rangle |\leq \int_{\R^{2d}} \left( \int_{\R^{2d}} |F(x,\omega)| |M_{\omega}T_x \phi(s)| |M_{\omega} T_x \phi(t)| dx d\omega\right)\\
 					&\phantom{=| \langle K_F, K_F \rangle |\leq \int_{\R^{2d}}} \! {\cdot} \left(\int_{\R^{2d}} |F(y,\xi)| |M_{\xi}T_y \phi(s)| |M_{\xi} T_y \phi(t)| dy d\xi\right) ds dt \overset{\mathrm{Fubini}}{=} \\
@@ -1005,11 +982,11 @@ Reminding  that Hilbert-Schmidt operators are compact (Theorem \ref{Hilbert-Schm
 \begin{prop}\label{condition localization operator self-adjoint}
 	If $F \in L^1(\R^{2d})$ is a real-valued function then $L_{F,\phi}$ is self-adjoint.
 \end{prop}
-We will now prove that localization operators with integrable weight function are trace-class operators. We want to emphasize that, in light of Proposition \ref{trace-class operators are Hilbert-Schmidt}, this is a stronger condition than just being an Hilbert-Schmidt operator.
+We will now prove that localization operators with integrable weight function are trace-class operators. We want to emphasize that, in light of Proposition \ref{trace-class operators are Hilbert-Schmidt}, this is a stronger condition than just being a Hilbert-Schmidt operator.
 \begin{teo}\label{F integrable L_F trace-class}
 	Let $F \in L^1(\R^{2d})$. Then $L_{F,\phi}$ is a trace-class operator. Moreover, given an orthonormal basis $\{e_n\}_{n \in \N}$ of $L^2(\R^d)$, the following holds:
 	\begin{equation}\label{trace of localization operators}
-		\sum_{n=1}^{+\infty} |\langle L_{F,\phi}e_n,e_n \rangle| \leq \|F\|_1 \quad \mathrm{tr}L_{F,\phi} = \int_{\R^{2d}} F(x,\omega) dx d\omega.
+		\sum_{n=1}^{+\infty} |\langle L_{F,\phi}e_n,e_n \rangle| \leq \|F\|_1, \quad \mathrm{tr}L_{F,\phi} = \int_{\R^{2d}} F(x,\omega) dx d\omega.
 	\end{equation}
 \end{teo}
 \begin{proof}
@@ -1043,14 +1020,14 @@ So far, except for \ref{F in L^p L_F bounded}, we considered only the case $F \i
 \end{proof}
 
 \subsection{Spherically Symmetric Weights}\label{section spherically symmetric weights}
-In previous section we managed to prove that, if the weight function $F$ is in $L^p(\R^{2d})$ for some $p < +\infty$ and it is real-valued then the corresponding localization operator $L_{F,\phi}$ is compact and self-adjoint. Thus, it is a natural to ask which are its eigenfuctions with corresponding eigenvalues. However, this in general is not feasible. Hence, we shall consider some specific class of weight and window functions. In particular, in this section we will consider the special case in which the window for the STFT is a Gaussian \eqref{gaussian normalized} and the weight $F$ is spherically symmetric. Letting $r_j^2 = x_j^2 + \omega_j^2$ for $j=1,\ldots,d$ and $r^2=(r_1^2\ldots,r_d^2) \in \R^d$, the hypothesis about $F$ can be rephrased in the following way
+In previous section we managed to prove that, if the weight function $F$ is in $L^p(\R^{2d})$ for some $p < +\infty$ and it is real-valued then the corresponding localization operator $L_{F,\phi}$ is compact and self-adjoint. Thus, it is natural to ask which are its eigenfuctions with corresponding eigenvalues. However, this in general is not feasible. Hence, we shall consider some specific class of weight and window functions. In particular, in this section we will consider the special case in which the window for the STFT is a Gaussian \eqref{gaussian normalized} and the weight $F$ is spherically symmetric. Letting $r_j^2 = x_j^2 + \omega_j^2$ for $j=1,\ldots,d$ and $r^2=(r_1^2\ldots,r_d^2) \in \R^d$, the hypothesis about $F$ can be rephrased in the following way
 \begin{equation}\label{spherically symmetric weight}
 	F(x,\omega) = \mathdutchcal{F}(r^2).
 \end{equation}
-In order to highlight the dependence of $F$ through $\mathdutchcal{F}$ the corresponding localization operator will be denoted as $L_{\mathdutchcal{F},\varphi}$.
+In order to highlight the dependence of $F$ through $\mathdutchcal{F}$, the corresponding localization operator will be denoted as $L_{\mathdutchcal{F},\varphi}$.
 For this operators a complete characterization of the spectrum and eigenspaces is given in the already cited paper of Daubechies \cite{daubechies}. 
 
-Before stating we need to introduce some special function, namely \emph{Hermite functions}. In dimension $d=1$, Hermite functions are given by
+Before stating we need to introduce some special function, namely \emph{Hermite functions}. In dimension $d=1$, Hermite functions are given by:
 \begin{equation}\label{Hermite function 1-dimensional}
 	H_k(t) = \dfrac{2^{1/4}}{\sqrt{k!}}\left(-\dfrac{1}{2\sqrt{\pi}}\right)^k e^{\pi t^2} \dfrac{d^k}{dt^k}\left(e^{-2\pi t^2}\right),
 \end{equation}
@@ -1067,7 +1044,7 @@ where $k \in \N \cup \{0\} \coloneqq \N_0$. Hermite functions have lots of inter
 		\F H_k =(-i)^k H_k.
 	\end{equation}
 \end{enumerate}
-Hermite functions in generic dimension are just the tensor product of 1-dimensional Hermite functions. Explicitly, given a multi-index $k = (k_1,\ldots,k_d) \in \N_0^d$ the corresponding Hermite function is given by:
+Hermite functions in generic dimension are just the tensor product of 1-dimensional Hermite functions. Explicitly, given a multi-index $k = (k_1,\ldots,k_d) \in \N_0^d$, the corresponding Hermite function is given by:
 \begin{equation}\label{Hermite function d-dimensional}
 	H_k(t) = \prod_{j=1}^d H_{k_j}(t_j).
 \end{equation}
@@ -1101,7 +1078,7 @@ Before proving the theorem we need the following lemma.
 		\end{align*}
 \end{proof}
 \begin{proof}[Proof of Theorem \ref{eigenvalues and eigenvectors localization operator spherically symmetric weight}]
-	Since Hermite functions are an orthonormal basis of $L^2(\R^n)$ it is sufficient to prove that $\langle  L_{\mathdutchcal{F},\varphi}H_k,H_l\rangle = \langle \mathdutchcal{F} \V_{\varphi}H_k, \V_{\varphi}H_l \rangle =  \lambda_k \prod_{j=1}^d \delta_{k_j,l_j}$, which means that the scalar product is different from zero if and only if $k=l$. We start by computing the STFT of an Hermite function:
+	Since Hermite functions are an orthonormal basis of $L^2(\R^n)$ it is sufficient to prove that $\langle  L_{\mathdutchcal{F},\varphi}H_k,H_l\rangle = \langle \mathdutchcal{F} \V_{\varphi}H_k, \V_{\varphi}H_l \rangle =  \lambda_k \prod_{j=1}^d \delta_{k_j,l_j}$, which means that the scalar product is different from zero if and only if $k=l$. We start by computing the STFT of a Hermite function:
 	{\allowdisplaybreaks[1]
 	\begin{align}\label{STFT of Hermite functions}
 		\V_{\varphi}H_k(x,\omega) &= \int_{\R^d} H_k(t) e^{-2\pi i \omega \cdot t}\, 2^{d/4} e^{-\pi|t-x|^2}dt = \int_{\R^d} \prod_{j=1}^d H_{k_j}(t_j) e^{-2\pi i \omega \cdot t}\, 2^{d/4} e^{-\pi|t-x|^2}dt = \nonumber \\
@@ -1195,7 +1172,7 @@ In conclusion, we will consider two meaningful examples, namely when the weight 
 Up to know we put some effort in constructing some tools that have the ability to concentrate a signal in the time-frequency domain. In the introduction of Section \ref{section STFT} we also pointed out that a characteristic function is not a ``good'' window for the STFT because, in light of the duality between regularity and decay, the Fourier transform of a not regular functions has a slow decay. Indeed, in Section \ref{section spherically symmetric weights}, we considered the STFT with a Gaussian window function, which has nice regularity and decay properties. However, a natural question arises: how good can we concentrate a signal? Is it possible to have a signal arbitrarily concentrated both in time and frequency? The answer to this questions is definitely no and it is given by \emph{uncertainty principles}, which are ubiquitous results in Fourier and time-frequency analysis. Uncertainty principles arise in different versions but the main underlying idea is the following:\\
 \emph{a function cannot be too concentrated both in time and frequency}.
 
-Even if not explicit, we already had a first glimpse of this phenomenon when we computed the Fourier transform of dilated Gaussian (Proposition \ref{Fourier transform of Gaussian proposition}). Indeed, given $\lambda > 0$ we recall that:
+Even if not explicit, we already had a first glimpse of this phenomenon when we computed the Fourier transform of dilated Gaussian (Example \ref{Fourier transform of Gaussian proposition}). Indeed, given $\lambda > 0$ we recall that:
 \begin{equation*}
 	\F(e^{-\lambda \pi |\cdot|^2})(\omega) = \dfrac{1}{\lambda^{d/2}} e^{-\frac{1}{\lambda}}\pi |\omega|^2 \quad \forall\,\omega \in \R^d.
 \end{equation*}
@@ -1279,12 +1256,12 @@ In order to extend previous lemma to the multi-dimensional case we need the foll
 \begin{proof}
 	Without loss of generality we consider the case $j=1$. Moreover, we introduce the following notation:
 	\begin{equation*}
-		\langle f, g \rangle_1 = \langle f(\cdot, t'), g(\cdot,t') \rangle \quad \langle f, g \rangle' = \langle f(t_1, \cdot), g(t_1, \cdot) \rangle
+		\langle f, g \rangle_1 = \langle f(\cdot, t'), g(\cdot,t') \rangle, \quad \langle f, g \rangle' = \langle f(t_1, \cdot), g(t_1, \cdot) \rangle,
 	\end{equation*}
 	
 	From Lemma \ref{Heisenberg's uncertainty principle lemma}, since $f (\cdot, t') \in L^2(\R)$ for a.e. $t' \in \R^{d-1}$, we have:
 	\begin{equation*}
-		\int_{\R} t_1^2 |f(t_1, t')|^2 dt_1 + \int_{\R} \omega_1^2 |\F_1 f(\omega_1, t')|^2 d\omega_1 = \dfrac{1}{2\pi} \sum_{k_1=0}^{+\infty} (2k_1 + 1) |\langle f, H_{k_1} \rangle_1|^2
+		\int_{\R} t_1^2 |f(t_1, t')|^2 dt_1 + \int_{\R} \omega_1^2 |\F_1 f(\omega_1, t')|^2 d\omega_1 = \dfrac{1}{2\pi} \sum_{k_1=0}^{+\infty} (2k_1 + 1) |\langle f, H_{k_1} \rangle_1|^2,
 	\end{equation*}
 	which holds for almost every $t' \in \R^{d-1}$. We can now integrate with respect to $t'$ every member:
 	\begin{itemize}
@@ -1300,7 +1277,7 @@ In order to extend previous lemma to the multi-dimensional case we need the foll
 		\begin{align*}
 			\int_{\R^{d-1}} |\langle f, H_{k_1} \rangle_{t_1}|^2 dt' &= \sum_{k' \in \N_0^{d-1}} |\langle \langle f, H_{k_1} \rangle_{t_1}, H_{k'} \rangle_{t'}|^2 = \\
 											 &= \sum_{k' \in \N_0^{d-1}} \Big| \int_{\R^{d-1}} \left(\int_{\R} f(t_1,t') \overline{H_{k_1}(t_1)} dt_1 \right) \overline{H_{k'}(t')} dt' \Big|^2 \overset{\mathrm{Fubini}}{=} \\
-											 &= \sum_{k' \in \N_0^{d-1}} \Big| \int_{\R^{d}} f(t) \overline{H_{(k,k')}(t)} dt \Big|^2 = \sum_{k' \in \N_0^{d-1}} |\langle f, H_{(k,k')} \rangle|^2.
+											 &= \sum_{k' \in \N_0^{d-1}} \Big| \int_{\R^{d}} f(t) \overline{H_{(k,k')}(t)} dt \Big|^2 = \sum_{k' \in \N_0^{d-1}} |\langle f, H_{(k,k')} \rangle|^2,
 		\end{align*}
 		where we used the fact that multi-dimensional Hermite functions are just the tensor product of 1-dimensional ones. Plugging this result in the series leads to:
 		\begin{align*}
@@ -1318,7 +1295,7 @@ We are now in the position to prove Heisenberg's uncertainty principle.
 	\begin{equation}\label{Heisenberg's uncertainty principle formula}
 		\left( \int_{\R^d} |t-a|^2 |f(t)|^2dt \right)^{1/2} \left( \int_{\R^d} |\omega - b|^2 |\hat{f}(\omega)|^2 d\omega \right)^{1/2} \geq \dfrac{d\|f\|_2^2}{4\pi},
 	\end{equation}
-	where $|t-a| = \sum_{j=1}^{d}(t_j - a_j)^2$ is the Euclidean distance. Moreover, equality is achieved if and only if $f(t) = c \varphi(\lambda t)$, where $\varphi$ is the normalized Gaussian given by \eqref{gaussian normalized}, $c \in \C$ and $\lambda > 0$.
+	Moreover, equality is achieved if and only if $f(t) = c \varphi(\lambda t)$, where $\varphi$ is the normalized Gaussian given by \eqref{gaussian normalized}, $c \in \C$ and $\lambda > 0$.
 \end{teo}
 
 \begin{proof}
@@ -1332,7 +1309,7 @@ We are now in the position to prove Heisenberg's uncertainty principle.
 	We start proving that, for every component, the following holds:
 	\begin{equation}\label{Heisenberg's uncertainty principle component formula}
 		\left( \int_{\R^d} t_j^2\, |f(t)|^2dt \right)^{1/2} \left( \int_{\R^d} \omega_j^2\, |\hat{f}(\omega)|^2 d\omega \right)^{1/2} \geq \dfrac{\|f\|_2^2}{4\pi}.
-	\end{equation} We observe that in the left-hand side of \eqref{Heisenberg's uncertainty principle component formula}, apart from a square root, we have the product of two integrals, while in \eqref{Heisenberg's uncertainty principle lemma d dimensions inequality} we have an estimate for the sum of these. The transition from the latter to the former estimate can be done through a dilation argument. Precisely, given $f \in L^2(\R^d)$, we consider the following dilation:
+	\end{equation} We observe that in the left-hand side of \eqref{Heisenberg's uncertainty principle component formula}, apart from a square root, we have the product of two integrals, while in \eqref{Heisenberg's uncertainty principle lemma d dimensions inequality} we had an estimate for the sum of these. The transition from the latter to the former estimate can be done through a dilation argument. Precisely, given $f \in L^2(\R^d)$, we consider the following dilation:
 	\begin{equation*}
 		g(t) = \lambda^{-d/2}f(t/\lambda) \implies \hat{g}(\omega) = \lambda^{d/2} \F(D_{1/\lambda}g) \overset{\ref{properties of translation modulation and dilation operators}\ref{Fourier transform of dilation}}{=} \lambda^{d/2} \hat{f}(\lambda \omega).
 	\end{equation*}
@@ -1364,10 +1341,10 @@ We are now in the position to prove Heisenberg's uncertainty principle.
 		&\left( \int_{\R^d} |t|^2 |f(t)|^2dt \right)^{1/2} \left( \int_{\R^d} |\omega|^2 |\hat{f}(\omega)|^2 d\omega \right)^{1/2} \geq \\
 		\geq &\sum_{j=1}^d \left( \int_{\R^d} t_j^2 |f(t)|^2dt \right)^{1/2} \left( \int_{\R^d} \omega_j^2 |\hat{f}(\omega)|^2 d\omega \right)^{1/2} \overset{\eqref{Heisenberg's uncertainty principle component formula}}{\geq} \dfrac{d \|f\|_2^2}{4 \pi}.
 	\end{align*}
-	Finally, equality is achieved if and only if both inequalities in the last expression become equalities. From the first part of the proof we know that equality in the latter inequality is achieved if and only if $f(t) = c H_0(\lambda t)$ for some $c \in \C$ and $\lambda > 0$. Moreover, always from previous computations we saw that in this case $f$ satisfies \eqref{Heisenberg's uncertainty principle lambda} for every $j=1,\ldots,d$. This means exactly that vectors $(\|t_j f\|_2)_{j=1}^d$ and $(\|\omega_j \hat{f}\|_2)_{j=1}^d$ are parallel, therefore equality is achieved also when using Cauchy-Schwarz's inequality.
+	Finally, equality is achieved if and only if both inequalities in the last expression become equalities. From the first part of the proof we know that equality in the latter inequality is achieved if and only if $f(t) = c H_0(\lambda t)$ for some $c \in \C$ and $\lambda > 0$. Moreover, always from previous computations we saw that in this case $f$ satisfies \eqref{Heisenberg's uncertainty principle lambda} for every $j=1,\ldots,d$. This means exactly that vectors $(\|t_j f\|_2)_{j=1}^d$ and $(\|\omega_j \hat{f}\|_2)_{j=1}^d$ are parallel, therefore equality is achieved also when using Cauchy-Schwarz' inequality.
 \end{proof}
 
-{\color{blue}We shall comment a mathematical interpretation of Heisenberg's uncertainty principle. This can be written in the following form:
+We shall comment a mathematical interpretation of Heisenberg's uncertainty principle. This can be written in the following form:
 \begin{equation*}
 	\left(\int_{\R^d}|t-a|^2 \dfrac{|f(t)|^2}{\|f\|_2^2} dt\right)^{1/2} \left(\int_{\R^d} |\omega-b|^2 \dfrac{|\hat{f}(\omega)|^2}{\|\hat{f}\|_2^2}d\omega\right)^{1/2} \geq \dfrac{d}{4\pi},
 \end{equation*}
@@ -1379,7 +1356,7 @@ which are the mean of $|f|^2$ and $|\hat{f}|^2$, respectively. In this case, pre
 \begin{equation*}
 	\Delta_x f \cdot \Delta_{\omega} f \geq \dfrac{d}{4\pi},
 \end{equation*}
-which is a quantification of the main point of an uncertainty principle, namely that a function and its Fourier cannot be simultaneously concentrated.}
+which is a quantification of the main point of an uncertainty principle, namely that a function and its Fourier cannot be simultaneously concentrated.
 \section{Donoho-Stark's uncertainty principle}\label{section Donoho-Stark's UP}
 As we saw, Heisenberg's uncertainty principle measures the concentration of a function in terms of the variance. However, this is not the only way concentration can be stated. In this section we present an uncertainty principle about the so-called \emph{essential support} of a function which, roughly speaking, is the set where a function has most of its energy.
 \begin{defi}\label{epsilon-concetrated def}
@@ -1406,12 +1383,12 @@ If $\varepsilon \leq \frac{1}{2}$, this tells us that most of the energy of $f$ 
 	In Section \ref{Localization with projections section} we also noticed that $\|Q_{\Omega}\| \leq 1$, hence
 	\begin{align*}
 		\|f - Q_{\Omega}P_Tf \|_2 &= \|f - Q_{\Omega}f + Q_{\Omega}f - Q_{\Omega}P_T f \|_2 \leq \|f-Q_{\Omega}f \|_2 + \|Q_{\Omega}(f - P_T f) \|_2 \leq \\
-								  &\leq \|f-Q_{\Omega}f \|_2 + \|f - P_T f \|_2 \leq (\varepsilon_{\Omega} + \varepsilon_T)\|f\|_2.
+								  &\leq \|f-Q_{\Omega}f \|_2 + \|f - P_T f \|_2 \leq (\varepsilon_{\Omega} + \varepsilon_T)\|f\|_2,
 	\end{align*}
 	and consequently
 	\begin{align*}
 		&\|f\|_2 = \|f - Q_{\Omega}P_T f + Q_{\Omega}P_T f \|_2 \leq \|f - Q_{\Omega}P_T f\|_2 + \| Q_{\Omega}P_T f  \|_2 \implies\\
-		\implies &\|Q_{\Omega}P_T f \|_2 \geq \|f\|_2 - \|f - Q_{\Omega}P_T f\|_2 \geq (1-\varepsilon_{\Omega} - \varepsilon_T)\|f\|_2
+		\implies &\|Q_{\Omega}P_T f \|_2 \geq \|f\|_2 - \|f - Q_{\Omega}P_T f\|_2 \geq (1-\varepsilon_{\Omega} - \varepsilon_T)\|f\|_2.
 	\end{align*}
 	Thanks to Proposition \ref{projection operators are Hilbert-Schmidt} we know that $\| Q_{\Omega}P_T\|_{\mathrm{HS}} = \sqrt{|T| \, |\Omega|}$ and from Theorem \ref{Hilbert-Schmidt operators are compact and bounded} we know that $\|Q_{\Omega}P_T\| \leq \| Q_{\Omega}P_T\|_{\mathrm{HS}}$, therefore
 	\begin{equation*}
@@ -1422,54 +1399,50 @@ Taking $\varepsilon = 0$ in \eqref{Donoho-Stark's uncertainty principle formula}
 \begin{cor}
 	Let $f \in L^2(\R^d) \setminus \{0\}$, $\mathrm{supp}f \subseteq T$, $\mathrm{supp}\hat{f} \subseteq \Omega$. Then $|T| |\Omega| \geq 1$.
 \end{cor}
-Loosely speaking, this result is telling us that $f$ and $\hat{f}$ cannot concentrate too much energy in a small subset of the phase space. {\color{blue} However, a much stronger result holds.}
-\begin{teo}
-	Suppose $f \in L^1(\R^d)$, $\mathrm{supp}f \subseteq T$ and $\mathrm{supp}\hat{f} \subseteq \Omega$. If $|T| |\Omega| < +\infty$ then $f=0$.
-\end{teo}
-{\color{blue}As pointed out in \cite{grochenig}, this result forces us not to talk about ``support of a function'' in the usual way, since in this case the only information we have is that either $f = 0$ or $|\mathrm{supp} f||\mathrm{supp} \hat{f}| = +\infty$. Therefore, a more suitable notion is the one of essential support, since for this we can give a quantitative result, namely \ref{Donoho-Stark's uncertainty principle theorem}.}
+Loosely speaking, this result is telling us that $f$ and $\hat{f}$ cannot concentrate too much energy in a small subset of the phase space.
 \section{Lieb's uncertainty principle}\label{section Lieb's UP}
- Up to now we presented two uncertainty principles related to the Fourier transform. However uncertainty principles can be stated for every time of time-frequency analysis. {\color{blue}In this and in the following section we present some uncertainty principles for the STFT.}
+ Up to now we presented two uncertainty principles related to the Fourier transform. However, uncertainty principles can be stated for every time of time-frequency analysis. In this and in the following section we present some uncertainty principles for the STFT.
 
 We start considering a weak form and then we will show how to turn Lieb's inequality \eqref{Lieb's inequality} into an uncertainty principle. Like for the Donoho-Stark's uncertainty principle, the notion of concentration is measured in terms of essential support. 
 \begin{prop}\label{weak uncertainty principle for STFT}
-	Let $f,\phi \in L^2(\R^d)$ normalized, $U \subseteq \R^{2d}$ and $\varepsilon \in  [0,1]$. Suppose that
+	Let $f,\phi \in L^2(\R^d)$ normalized, $\Omega \subseteq \R^{2d}$ and $\varepsilon \in  [0,1]$. Suppose that
 	\begin{equation*}
-		\int_U |\V_{\phi}f(x,\omega)|^2 dxd\omega \geq 1- \varepsilon.
+		\int_\Omega |\V_{\phi}f(x,\omega)|^2 dxd\omega \geq 1- \varepsilon.
 	\end{equation*}
-	Then $|U| \geq 1- \varepsilon$.
+	Then $|\Omega| \geq 1- \varepsilon$.
 \end{prop}
 \begin{proof}
 	From \eqref{STFT is bounded} we see that $|\V_{\phi}f(x,\omega)| \leq 1$ for all $(x,\omega) \in \R^{2d}$, therefore
 	\begin{equation}\label{weak uncertainty principle for STFT formula}
-		1-\varepsilon \leq \int_U |\V_{\phi}f(x,\omega)|^2 dxd\omega \leq \|\V_{\phi}f\|_{\infty}^2 |U| \leq |U|.
+		1-\varepsilon \leq \int_\Omega |\V_{\phi}f(x,\omega)|^2 dxd\omega \leq \|\V_{\phi}f\|_{\infty}^2 |\Omega| \leq |\Omega|.
 	\end{equation}
 \end{proof}
 
 \begin{teo}[Lieb's uncertainty principle]\label{Lieb's uncertainty principle}
-	Suppose that $\|f\|_2 = \|\phi\|_2 = 1$. If $U \subseteq \R^{2d}$ and $\varepsilon \in [0,1]$ are such that
+	Suppose that $\|f\|_2 = \|\phi\|_2 = 1$. If $\Omega \subseteq \R^{2d}$ and $\varepsilon \in [0,1]$ are such that
 	\begin{equation*}
-		\int_U |\V_{\phi}f(x,\omega)|^2 dxd\omega \geq 1- \varepsilon.
+		\int_\Omega |\V_{\phi}f(x,\omega)|^2 dxd\omega \geq 1- \varepsilon.
 	\end{equation*}
 	Then
 	\begin{equation*}\label{Lieb's uncertainty principle formula}
-		|U| \geq \sup_{p>2} (1-\varepsilon)^{\frac{p}{p-2}} \left(\dfrac{p}{2}\right)^{\frac{2d}{p-2}}.
+		|\Omega| \geq \sup_{p>2} (1-\varepsilon)^{\frac{p}{p-2}} \left(\dfrac{p}{2}\right)^{\frac{2d}{p-2}}.
 	\end{equation*}
 \end{teo}
 \begin{proof}
-	If $|U| = \infty$ the result is trivial hence we can suppose that $U$ has finite measure. It is sufficient to use H\"older's inequality with exponents $p/2$ and $(p/2)' = p/(p-2)$:
+	If $|\Omega| = \infty$ the result is trivial hence we can suppose that $\Omega$ has finite measure. It is sufficient to use H\"older's inequality with exponents $p/2$ and $(p/2)' = p/(p-2)$:
 	\begin{align*}
-		1-\varepsilon &\leq \int_U |\V_{\phi}f(x,\omega)|^2 dxd\omega= \int_{\R^{2d}} |\V_{\phi}f(x,\omega)|^2 \chi_U(x,\omega)dxd\omega \overset{\mathrm{H\"older}}{\leq} \\
-					  &\leq \left(\int_{\R^{2d}} |\V_{\phi}f(x,\omega)|^{2 \frac{p}{2}} dxd\omega\right)^{\frac{2}{p}} \left(\int_{\R^{2d}} \chi_U(x,\omega)^{\frac{p}{p-2}}dxd\omega\right)^{\frac{p-2}{p}} \overset{\eqref{Lieb's inequality formula}}{\leq}\\
-					  &\leq \left(\dfrac{2}{p}\right)^{\frac{2d}{p}} \| f \|_2^2\, \|g\|_2^2\, |U|^{\frac{p-2}{p}} = \left(\dfrac{2}{p}\right)^{\frac{2d}{p}} |U|^{\frac{p-2}{p}}.
+		1-\varepsilon &\leq \int_\Omega |\V_{\phi}f(x,\omega)|^2 dxd\omega= \int_{\R^{2d}} |\V_{\phi}f(x,\omega)|^2 \chi_\Omega(x,\omega)dxd\omega \overset{\mathrm{H\"older}}{\leq} \\
+					  &\leq \left(\int_{\R^{2d}} |\V_{\phi}f(x,\omega)|^{2 \frac{p}{2}} dxd\omega\right)^{\frac{2}{p}} \left(\int_{\R^{2d}} \chi_\Omega(x,\omega)^{\frac{p}{p-2}}dxd\omega\right)^{\frac{p-2}{p}} \overset{\eqref{Lieb's inequality formula}}{\leq}\\
+					  &\leq \left(\dfrac{2}{p}\right)^{\frac{2d}{p}} \| f \|_2^2\, \|g\|_2^2\, |\Omega|^{\frac{p-2}{p}} = \left(\dfrac{2}{p}\right)^{\frac{2d}{p}} |\Omega|^{\frac{p-2}{p}}.
 	\end{align*}
-	We point out that the use of H\"older's inequality is justified because $U$ has finite measure and, since $\V_{\phi}f \in L^q(\R^{2d})$ for every $q \geq 2$, $|\V_{\phi}f|^2 \in L^q(\R^{2d})$ for every $q \geq 1$. Because this result holds for every $p > 2$, we can take the supremum over all possible $p$, which leads to \eqref{Lieb's uncertainty principle formula}.
+	We point out that the use of H\"older's inequality is justified because $\Omega$ has finite measure and, since $\V_{\phi}f \in L^q(\R^{2d})$ for every $q \geq 2$, $|\V_{\phi}f|^2 \in L^q(\R^{2d})$ for every $q \geq 1$. Because this result holds for every $p > 2$, we can take the supremum over all possible $p$, which leads to \eqref{Lieb's uncertainty principle formula}.
 \end{proof}
 
 
 \section{Faber-Krahn Inequality for the STFT}\label{section Faber-Krahn inequality fot STFT}
 Lieb's uncertainty principle and Lieb's inequality are general results for the STFT because they hold for every possible window $\phi \in L^2(\R^d)$. One may think that for specific choices of the window it is possible to obtain improved results. In this last section we present a recent result, due to Nicola and Tilli and presented in \cite{nicolatilli_fk}, about the STFT with Gaussian window. In this work, they considered the following variational problem: 
 \begin{equation}\label{variational problem Faber-Krahn STFT}
-	\max_{f \in L^2(\R^d) \setminus \{0\}} \dfrac{\int_{\Omega} |\V_{\varphi} f(x,\omega)|^2 dx d\omega}{\| f\|_2^2}
+	\max_{f \in L^2(\R^d) \setminus \{0\}} \dfrac{\int_{\Omega} |\V_{\varphi} f(x,\omega)|^2 dx d\omega}{\| f\|_2^2},
 \end{equation}
 where $\Omega \subset \R^{2d}$ is a measurable set with prescribed measure $s > 0$. Therefore, we are asking for the maximal energy of the STFT that can be trapped into a set of a prescribed measure $s$ and, possibly, which functions achieve the maximum. The problem is completely solved and the solution is presented in the following theorem.
 \begin{teo}[Theorem 4.1 \cite{nicolatilli_norm}]\label{faberkrahn theorem}
@@ -1507,15 +1480,15 @@ where $\omega_{2d}$ is the volume of the unit ball in $\R^{2d}$ and $\gamma$ is 
 \end{equation*}
 and since $\omega_{2d} = \pi^d / d!$, through the change of variable $t^d = d! \tau$  one obtains \eqref{bound STFT nicola-tilli}.
 \begin{remark}
-	{\color{blue} We notice that the numerator of \eqref{variational problem Faber-Krahn STFT} can be written also in the following way:
+	We notice that the numerator of \eqref{variational problem Faber-Krahn STFT} can be written also in the following way:
 	\begin{equation}\label{Faber-Krahn for STFT for localization operators}
 		\int_{\Omega} |\V_{\varphi} f(x,\omega)|^2 dx d\omega = \langle \chi_{\Omega} \V_{\varphi} f, \V_{\varphi} f \rangle = \langle \V_{\varphi}^* \chi_{\Omega} \V_{\varphi} f,f \rangle = \langle L_{\Omega,\varphi} f,f \rangle,
 	\end{equation}
-	where $L_{\Omega,\varphi}$ is the localization operator with weight $\chi_{\Omega}$. Therefore, taking the maximum for all possible $f \in L^2(\R^d) \setminus\{0\}$ such that $\|f\|_2=1$ leads to a bound for the norm of $L_{\Omega,\varphi}$ (to obtain the norm we have to take the maximum of $\langle L_{\Omega, \varphi}f, g \rangle$ for all possible $f$ and $g$ normalized). However, we know \emph{a posteriori} that the maximum is attained when $\Omega$ is a ball and $f$ is a Gaussian, both with the same centre $(x_0, \omega_0) \in \R^{2d}$. We mention that results we obtain in Section \ref{section spherically symmetric weights} for localization operators with spherically symmetric weights can be obtained also under the action of a time-frequency shift. Indeed, this case is considered in \cite{daubechies} and, as expected, the eigenfunctions of these shifted localization operators are  time-frequency shifted Hermite functions. So, if $f$ is a Gaussian it is an eigenfunction of $L_{\Omega, \varphi}$ and, in the end, the maximum of \eqref{Faber-Krahn for STFT for localization operators} is not only a bound for the norm of $L_{\Omega, \varphi}$ but it is the actual norm.}
+	where $L_{\Omega,\varphi}$ is the localization operator with weight $\chi_{\Omega}$. Therefore, taking the maximum for all possible $f \in L^2(\R^d) \setminus\{0\}$ such that $\|f\|_2=1$ leads to a bound for the norm of $L_{\Omega,\varphi}$ (to obtain the norm we have to take the maximum of $\langle L_{\Omega, \varphi}f, g \rangle$ for all possible $f$ and $g$ normalized). However, we know \emph{a posteriori} that the maximum is attained when $\Omega$ is a ball and $f$ is a Gaussian, both with the same centre $(x_0, \omega_0) \in \R^{2d}$. We mention that results we obtain in Section \ref{section spherically symmetric weights} for localization operators with spherically symmetric weights can be obtained also under the action of a time-frequency shift. Indeed, this case is considered in \cite{daubechies} and, as expected, the eigenfunctions of these shifted localization operators are  time-frequency shifted Hermite functions. So, if $f$ is a Gaussian it is an eigenfunction of $L_{\Omega, \varphi}$ and, in the end, the maximum of \eqref{Faber-Krahn for STFT for localization operators} is not only a bound for the norm of $L_{\Omega, \varphi}$ but it is the actual norm.
 \end{remark}
 
 Once Theorem \ref{faberkrahn theorem} has been established, arguing like previous section we immediately obtain an uncertainty principle, which is sharp.
-{\color{red}\begin{cor}\label{nicola-tilli's uncertainty principle cor}
+\begin{cor}\label{nicola-tilli's uncertainty principle cor}
 	Let $f \in L^2(\R^d)$ with $\|f\|_2 = 1$, $\Omega \subset \R^{2d}$ measurable, $\varepsilon \in [0,1)$ and suppose that
 	\begin{equation*}
 		\int_{\Omega} |\V_{\varphi}(x,\omega)|^2 dx d\omega \geq 1 - \varepsilon.
@@ -1549,16 +1522,12 @@ If we suppose $\int_{\mathdutchcal{B}_R} |\V_{\varphi} f(x,\omega) |^2 dx d\omeg
 \end{equation*}
 where $\pi R^2$ is exactly the measure of $\mathdutchcal{B}_R$.
 
-
-
-}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Recent results}\label{chapter recent results}
+\chapter{Maximal norm of localization operators: recent results}\label{chapter recent results}
 
 Theorem \ref{faberkrahn theorem} is not only remarkable by itself, but it turns out to be a powerful tool in the study of the maximal norm of localization operator when the window of the STFT is a normalized Gaussian. We already mentioned that \ref{faberkrahn theorem} can be rephrased into a result for the norm of localization operators of the kind $L_{\Omega, \varphi}$, where $\Omega \subset \R^{2d}$ is a measurable set of prescribed measure. The latter condition can be seen as a constraint for the $L^1(\R^{2d})$ norm of $\chi_{\Omega}$. In light of this observation, we may think to consider an analogous problem where $\chi_{\Omega}$ is replaced by a generic weight function $F$ that satisfies an integrability, and possibly boundedness, condition. This last chapter is devoted to the study of this problem. We start presenting a result from Nicola and Tilli \cite{nicolatilli_norm} where $F$ is chosen under an $L^p$ and $L^{\infty}$ constraint. Then, we consider a more generic case where the $L^{\infty}$ constraint is replaced by a $L^q$ one.
 
-\section{Norm of localization operators: results from Nicola-Tilli}\label{section norm of localization operators}
+\section{Results from Nicola-Tilli}\label{section norm of localization operators}
 In this section we show the results in \cite{nicolatilli_norm}. The aforementioned problem can be precisely stated as follows: find the optimal constant $C > 0$ such that:
 \begin{equation}\label{sharp estimate Nicola-Tilli}
 	\|L_{F, \varphi}\|_{L^2(\R^d) \rightarrow L^2(\R^d)} \leq C,
@@ -1591,7 +1560,7 @@ Moreover, for the sake of brevity, we denote the variable $(x,\omega) \in \R^{2d
 		\end{equation}
 		with equality if and only if, for some $\theta \in \R$ and some $z_0 \in \R^{2d}$,
 		\begin{equation}\label{Nicola-Tilli maximal function p>1 first regime}
-			F(z) = e^{i \theta} \lambda e^{\frac{\pi}{p-1}|z-z_0|^2} \quad \forall z \in \R^{2d},
+			F(z) = e^{i \theta} \lambda e^{-\frac{\pi}{p-1}|z-z_0|^2} \quad \forall z \in \R^{2d},
 		\end{equation}
 		where $\lambda = \kappa_p^{-d/p}B$.\label{Nicola-Tilli norm theorem case 2}	
 		\item If $p>1$ and $B/A > \kappa_p^{d/p}$, then
@@ -1606,9 +1575,11 @@ Moreover, for the sake of brevity, we denote the variable $(x,\omega) \in \R^{2d
 	Finally, in all the cases, condition $|\langle L_{F, \varphi} f,g \rangle| = \|L_{F, \varphi}\|$ holds for some, $f,g \in L^2(\R^d)$ such that $\|f\|_2 = \|g\|_2 = 1$, if and only if both $f$ and $g$ are of the kind \eqref{translated Gaussian}, possibly with different $c$'s, but with the same $(x_0,\omega_0) \in \R^{2d}$ which coincides with the centre of $F$.
 \end{teo}
 We will not give the proof of these results since some of its parts are similar to the one we will see in the following section. Moreover, we point out that the case $A=
-\infty$ means we are dropping the $L^{\infty}$ constraint.
+\infty$ means we are dropping the $L^{\infty}$ constraint. 
 
-\section{Generic case}
+We shall briefly comment this theorem. Except for the case $p=1$, when maximal weight functions are just characteristic functions of a ball, we see that two regime arise. In the first one, when $B/A \leq \kappa_p^{d/p}$ (which means that $A$ is ``sufficiently'' big), maximal weight functions are Gaussians. We already saw that Gaussian arise naturally has minimizers of uncertainty principles, so this result is not unexpected. However, in the second regime, when $B/A > \kappa_p^{d/p}$, maximal weight functions are not Gaussian but \emph{truncated} Gaussians. As pointed out in \cite{nicolatilli_norm}, this seems to be a new phenomenon in time-frequency analysis.
+
+\section{New result for the generic case}
 In this section we will deal with a generalized version of the problem considered in \cite{nicolatilli_norm}. Indeed, we want to find the optimal constant $C$ such that
 \begin{equation*}
 	\| L_{F, \varphi} \|_{L^2(\R^d) \rightarrow L^2(\R^d)} \leq C
@@ -1697,7 +1668,7 @@ Before tackling the problem in this intermediate regime, we prove a Theorem from
 	
 	In the end, since all the super-level sets of $|F|$ are balls we conclude that it is spherically symmetric and radially decreasing, as claimed in the theorem's statement.
 	
-	Conditions for $f$ and $g$ imply that $\V_{\varphi} g  = e^{i \alpha} \V_{\varphi} f$ for some $\alpha \in \R$. This provides equality in \eqref{first inequality} when using Cauchy-Schwarz inequality. Lastly we shall prove that also the first inequality in \eqref{first inequality}, that is
+	Conditions for $f$ and $g$ imply that $\V_{\varphi} g  = e^{i \alpha} \V_{\varphi} f$ for some $\alpha \in \R$. This provides equality in \eqref{first inequality} when using Cauchy-Schwarz' inequality. Lastly we shall prove that also the first inequality in \eqref{first inequality}, that is
 	\begin{equation*}
 		\left\vert \int_{\R^{2d}} F(z) \V_{\varphi} f(z) \overline{\V_{\varphi} g(z)} dz \right\vert \leq \int_{\R^{2d}} |F(z)| \cdot | \V_{\varphi} f(z)| \cdot |\V_{\varphi} g(z)| dz
 	\end{equation*}
@@ -2027,7 +1998,52 @@ Therefore, the pair $(c_1^*, \varphi(c_1^*) = c_2^*)$ is the unique pair of mult
 \end{equation*}
 and, in the end, $u(t;c_1^*,c_2^*)$ is the unique maximizer for \eqref{nonstandard variational problem formulation}.
 \end{proof}
-
+We are now in the position to state and prove the main theorem of this section, that is the analogous of Theorem \ref{Nicola Tilli norm theorem}.
+\begin{teo}
+	Assume $p,q \in (1,+\infty)$, $A,B \in (0, +\infty)$ suppose that $F$ satisfies constraints \eqref{constraints generic case}. Then
+	\begin{enumerate}[label=(\roman*)]
+		\item If $B/A \geq \kappa_p^{d(\frac{1}{q}-\frac{1}{p})} \left(\dfrac{p}{q}\right)^{\frac{d}{q}}$ $\left(\text{respectively\ } B/A \leq \kappa_q^{d(\frac{1}{q}-\frac{1}{p})} \left(\dfrac{p}{q}\right)^{\frac{d}{p}}\right)$, then Theorem \ref{Nicola Tilli norm theorem} applies with just the $L^p$ (resp. $L^q$), therefore:
+		\begin{equation*}
+			\|L_{F,\varphi}\| \leq \kappa_p^{d \kappa_p} A \quad (\text{resp.\ } \|L_{F,\varphi}\| \leq \kappa_q^{d \kappa_q} B),
+		\end{equation*}
+		with equality if and only if, for some $\theta \in \R$ and some $z_0 \in \R^{2d}$,
+		\begin{equation*}
+			F(z) = e^{i \theta} \lambda e^{-\frac{\pi}{p-1}|z-z_0|^2} \quad (\text{resp.\ } F(z) = e^{i \theta} \lambda e^{-\frac{\pi}{q-1}|z-z_0|^2}),
+		\end{equation*}
+	where $\lambda = \kappa_p^{-d/p}A$ (resp. $\lambda = \kappa_q^{-d/q}B$).
+	\item If $\kappa_q^{d(\frac{1}{q}-\frac{1}{p})} \left(\dfrac{p}{q}\right)^{\frac{d}{p}} < B/A < \kappa_p^{d(\frac{1}{q}-\frac{1}{p})} \left(\dfrac{p}{q}\right)^{\frac{d}{q}}$, then
+	\begin{equation}\label{norm estimate generic case}
+		\|L_{F,\varphi}\| \leq \int_0^{+\infty} G(u(t)) dt,
+	\end{equation}
+	where $u(t) = \frac{1}{d!} \left[ \Log (\lambda_1 t^{p-1} + \lambda_2 t^{q-1})\right]^d$ and $\lambda_1, \lambda_2 > 0$ are uniquely determined by
+	\begin{equation*}
+		p \int_0^{+\infty} t^{p-1} u(t) dt = A^p, \quad q \int_0^{+\infty} t^{q-1} u(t) dt = B^q.
+	\end{equation*}
+	Moreover, letting $T > 0$ the unique value such that $\lambda_1 T^{p-1} + \lambda_2 T^{q-1} = 1$, the function $t \mapsto -\log(\lambda_1 t^{p-1} + \lambda_2 t^{q-1})$ defined on $(0,T]$ is invertible and we denote by $\psi : [0, +\infty) \rightarrow (0,T]$ its inverse. Then, equality in \eqref{norm estimate generic case} is achieved if and only if, for some $\theta \in \R$ and some $z_0 \in \R^{2d}$, $F(z) = e^{i \theta} \psi(\pi |z-z_0|^2)$.
+	\end{enumerate}
+	Finally, in every case, equality in $|\langle L_{F, \varphi} f, g \rangle| = \|L_{F. \varphi}\|$ is achieved if and only if $f$ and $g$ are both of the kind \eqref{translated Gaussian}, possibly with different $c$'s but same $(x_0, \omega_0) \in \R^{2d}$.
+\end{teo}
+\begin{proof}
+	The first part of the theorem was already proven at the beginning of the section.
+	
+	For the second part, we recall that from Theorem \ref{norm limitation} we have
+	\begin{equation*}
+		\|L_{F, \varphi} \| \leq \int_{0}^{+\infty} G(\mu(t))dt,
+	\end{equation*}
+	where $\mu(t) = |\{|F|>t\}|$ is the distribution function of $F$ and equality is achieved if and only if $F(z) = e^{i \theta} \rho(|z-z_0|)$ for some $\theta \in \R$, some $z_0 \in \R^{2d}$ and some non-increasing function $\rho : [0, +\infty) \rightarrow [0, +\infty)$. Then, Theorem \ref{nonstandard variational problem solution theorem} gives us a bound on the right-hand side, namely that:
+	\begin{equation*}
+		\int_0^{+\infty} G(\mu(t))dt \leq \int_0^{+\infty} G(u(t)) dt,
+	\end{equation*}
+	where $u$ is given by \eqref{nonstandard variational problem solution formula}. This is sufficient to prove \eqref{norm estimate generic case}. To prove the last part of the theorem, all we have to do is reconstruct $\rho$ from $u$. If $F(z) = e^{i \theta} \rho (|z-z_0|)$, then its super-level sets are balls with centre $z_0$. If $u$ is the distribution function of $F$, for $t \in (0,T)$ and some radius $r>0$ we have:
+	\begin{equation*}
+		\dfrac{\pi^d r^{2d}}{d!} = u(t) = \dfrac{1}{d!}\left[ - \log(\lambda_1 t^{p-1} + \lambda_2 t^{q-1})\right]^d,
+	\end{equation*}
+	where the left-hand side is the measure of a 2$d$-dimensional ball of radius $r$. If we simplify this expression we obtain:
+	\begin{equation*}
+		\pi r^2 = -\log(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}) \implies t = \psi(\pi r^2).
+	\end{equation*}
+	However, it is clear that $\rho(r) = t$, therefore $\rho(r) = \psi(\pi r^2)$.
+\end{proof}
 \appendix
 \chapter{Unconditional convergence}
 In some cases we had to deal with series over multiple indices. Formally, the possibility of manipulating these series is related to the property of \emph{unconditional convergence}.
