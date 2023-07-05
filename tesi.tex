@@ -46,6 +46,15 @@ sorting=nyt
 ]{biblatex}
 \addbibresource{bibliografia.bib}
 
+\usepackage{afterpage}
+\newcommand\myemptypage{
+	\null
+	\thispagestyle{empty}
+	\addtocounter{page}{-1}
+	\newpage
+}
+
+
 
 \numberwithin{equation}{chapter}
 \newtheorem{teo}{Theorem}[chapter] %in questo modo la numerazione ricomincia da capo ad ogni nuovo capitolo
@@ -81,31 +90,35 @@ sorting=nyt
 	
 \input{./title.tex}
 
-\tableofcontents
-
 \ringraziamenti
 Sono una persona che non ama festeggiare i traguardi perché, per quanto banale possa sembrare, questi sono solo il risultato del percorso. In particolare, questo percorso che mi ha portato a scoprire la mia vera passione accompagnato da persone stupende è per me una gioia e una felicità superiore ad ogni festeggiamento.
-Mi sembra quindi opportuno, a costo di sembrare sentimentale, ringraziare chi mi è stato accanto e chi invece mi ha aiutato a trovare la ''giusta`` direzione.
-Ringrazio quindi i miei genitori, che mi hanno sempre amorevolmente incoraggiato a seguire i miei interessi e me ne hanno sempre dato la possibilità.
-Ringrazio la professoressa Mara Massarucci che, nell'asettico ambiente scolastico, ha trasmesso a me e (spero) a generazioni di studenti la passione per la matematica.
-Ringrazio i professori Marco Morandotti e Luca Lussardi, per aver introdotto me e i miei compagni nel mondo dell'analisi ''per bambini grandi`` con infinita dedizione e pazienza, portandoci persino a Marsiglia.
-Ringrazio il professor Paolo Tilli  per i preziosi consigli e per l'immancabile disponibilità.
-Ringrazio il professor Fabio Nicola, per avermi dato l'opportunità di fare esperienze stupende a Padova e a Trondheim, per avermi introdotto alla ricerca e per avermi guidato con sapienti suggerimenti e stimolanti conversazioni, fino alla conclusione di questa tesi.
-Ringrazio poi i miei coinquilini, i miei amici e i miei colleghi (ormai amici anche loro) che hanno condiviso con me questi cinque anni di università, sia nei momenti più piacevoli che in quelli più duri.
+Mi sembra quindi opportuno, a costo di sembrare sentimentale, ringraziare chi mi è stato accanto e chi invece mi ha aiutato a trovare la ``giusta'' direzione.\\
+Ringrazio quindi i miei genitori, che mi hanno sempre amorevolmente incoraggiato a seguire i miei interessi e me ne hanno sempre dato la possibilità.\\
+Ringrazio la professoressa Mara Massarucci che, nell'asettico ambiente scolastico, ha trasmesso a me e (spero) a generazioni di studenti la passione per la matematica.\\
+Ringrazio i Professori Marco Morandotti e Luca Lussardi, per aver introdotto me e i miei compagni nel mondo dell'analisi ``per bambini grandi'' con infinita dedizione e pazienza, portandoci persino a Marsiglia.\\
+Ringrazio il professor Paolo Tilli  per i preziosi consigli e per l'immancabile disponibilità.\\
+Ringrazio il Professor Fabio Nicola per la fiducia che ha riposto in me affidandomi questa tesi e permettendomi allo stesso tempo di sperimentare in prima persona la ricerca, per avermi guidato con sapienti consigli e stimolanti conversazioni, per avermi dato l'opportunità di fare esperienze stupende a Padova e Trondheim, per essere stato, in sintesi, un relatore eccezionale.\\
+%Ringrazio il professor Fabio Nicola, per avermi dato l'opportunità di fare esperienze stupende a Padova e a Trondheim, per avermi introdotto alla ricerca e per avermi guidato con sapienti suggerimenti e stimolanti conversazioni, fino alla conclusione di questa tesi.\\
+Ringrazio poi i miei coinquilini, i miei amici e i miei colleghi (ormai amici anche loro) che hanno condiviso con me questi cinque anni di università, sia nei momenti più piacevoli che in quelli più duri.\\
 Ultima, ma di sicuro non per importanza, ringrazio la mia ragazza, Debora, perché mi ha sempre stimolato a migliorarmi e con il suo affetto, la sua intelligenza, la sua simpatia e il suo supporto, è stata in questo percorso compagna, amica, collega e insegnante, oltre che fidanzata.
 
 \english
 
 \ringraziamenti
 I am a person who does not like to celebrate milestones because, as trivial as it may seem, these are only the result of the path. In particular, this path that led me to discover my true passion accompanied by wonderful people is for me a joy and happiness greater than any celebration.
-It therefore seems appropriate, at the risk of sounding sentimental, to thank those who have stood by me and those who have helped me find the ''right'' direction.
-So I thank my parents, who have always lovingly encouraged me to follow my interests and have always given me the opportunity.
+It therefore seems appropriate, at the risk of sounding sentimental, to thank those who have stood by me and those who have helped me find the ``right'' direction.\\
+So I thank my parents, who have always lovingly encouraged me to follow my interests and have always given me the opportunity.\\
 I thank Professor Mara Massarucci who, in the aseptic school environment, has passed on to me and (I hope) to generations of students a passion for mathematics.
-I thank professors Marco Morandotti and Luca Lussardi, for introducing me and my mates to the world of analysis ''for grown children'' with infinite dedication and patience, even taking us to Marseille.
-I thank Professor Paolo Tilli for his valuable advice and unfailing helpfulness.
-I thank Professor Fabio Nicola, for giving me the opportunity to have wonderful experiences in Padua and Trondheim, for introducing me to research, and for guiding me with wise suggestions and stimulating conversations, until the conclusion of this thesis.
-I would then like to thank my roommates, friends, and colleagues (now friends as well) who have shared these five years of university with me, both in the most pleasant and the hardest moments.
+I thank professors Marco Morandotti and Luca Lussardi, for introducing me and my mates to the world of analysis ``for grown children'' with infinite dedication and patience, even taking us to Marseille.\\
+I thank Professor Paolo Tilli for his valuable advice and unfailing helpfulness.\\
+I thank Professor Fabio Nicola for the trust he placed in me by entrusting me with this thesis and at the same time allowing me to experience the research firsthand, for guiding me with wise advice and stimulating conversations, for giving me the opportunity to have wonderful experiences in Padua and Trondheim, for being, in short, an outstanding supervisor.\\
+I would then like to thank my roommates, friends, and colleagues (now friends as well) who have shared these five years of university with me, both in the most pleasant and the hardest moments.\\
 Last, but certainly not least, I thank my girlfriend, Debora, because she has always stimulated me to improve myself and with her affection, intelligence, sympathy and support, she has been in this journey a companion, friend, colleague and teacher, as well as a girlfriend.
+
+\sommario
+Time-frequency localization operators $L_{F, \phi} : L^2(\R^d) \rightarrow L^2(\R^d)$ were firstly introduced by Ingrid Daubechies in 1988 and led to a new geometric approach to localization in the phase-space. In this thesis, after giving the necessary background, we consider the problem of maximizing the norm of $L_{F,\phi}$ under the assumption that the window function $\phi$ is a normalized Gaussian and two integrability constraints are given for $F$. More precisely, we consider the problem of finding the optimal constant $C$ such that $\|L_{F,\phi}\| \leq C$, given that $\|F\|_p \leq A$, $\|F\|_q \leq B$, where $p,q \in (1,+\infty)$ and $A,B>0$. With the help of some recent results by Nicola and Tilli on a similar problem, we can find both the optimal constant and weight functions that achieve $\|L_{F,\phi}\| = C$. Depending on the ratio $B/A$ different regimes arise: when this ratio is sufficiently large or sufficiently small one of the constraints is unnecessary and those $F$ that achieve optimality are time-frequency translated Gaussians, while if the ratio is in an intermediate regime the solution changes drastically and optimal weight functions are not Gaussians any more and can be given only in a implicit way.
+
+\tableofcontents
 
 
 \chapter{Introduction}
