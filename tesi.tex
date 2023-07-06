@@ -559,7 +559,7 @@ In this section we introduce the Fourier transform with its elementary propertie
 		\F f(\omega) = \hat{f}(\omega) \coloneqq \int_{\R^d} e^{-2 \pi i \omega \cdot t} f(t) \,dt.
 	\end{equation}
 \end{defi}
-It is straightforward to see that the definition is well-posed and that $\F f \in L^{\infty}(\R^d)$ with $\|\F f\|_{\infty} \leq \| f \|_1$. Therefore, $\F$ can be seen as a linear operator between $L^1(\R^d)$ and $L^{\infty}(\R^d)$ with $\| \F \| \leq 1$. Actually, taking $f \geq 0$ a.e.,  we have that $\hat{f}(0) = \| f \|_1$, which gives us the equality.
+It is straightforward to see that the definition is makes sense and that $\F f \in L^{\infty}(\R^d)$ with $\|\F f\|_{\infty} \leq \| f \|_1$. Therefore, $\F$ can be seen as a linear operator between $L^1(\R^d)$ and $L^{\infty}(\R^d)$ with $\| \F \| \leq 1$. Actually, taking $f \geq 0$ a.e.,  we have that $\hat{f}(0) = \| f \|_1$, which gives us the equality.
 
 The Fourier transform of an $L^1(\R^d)$ is not only bounded, as stated by the \emph{Riemann-Lebesgue lemma}.
 \begin{teo}[Riemann-Lebesgue lemma]\label{Riemann-Lebesgue lemma}
@@ -1912,7 +1912,23 @@ We remark that a priori it was possible that $M=+\infty$, but from the explicit 
 The argument we used to determine the expression of maximizers enables us to say that these have to achieve equality in both constraints in \eqref{constraints generic case distribution function}. Indeed, if, for example, we had that $q \int_0^{+\infty} t^{q-1}u(t)\,dt < B^q$, the second condition of orthogonality in \eqref{variations are orthogonal to constraints} could be removed, because for sufficiently small $\varepsilon$ a variation non-orthogonal to $t^{q-1}$ would be admissible. This would provide us the solution of the same variational problem but without the $L^q$ constraint. Since we are working in the intermediate case, we know that actually this solution does not satisfy the $L^q$ constraint, hence we conclude that $u$ has to achieve equality in both constraints. With the very same reasoning we can say that neither $\lambda_1$ nor $\lambda_2$ can be 0.\\
 • \textbf{Multipliers are positive}
 
-Suppose that one of the multipliers, for example $\lambda_2$, is negative. Consider an interval $[a,b] \subset (0,M)$ and a variation $\eta \in L^2(0,M)$ supported in $[a,b]$ and such that $\int_{a}^{b}t^{q-1}\eta(t)\,dt <0$. Then, $\eta$ is admissible and the directional derivative of $G$ at $u$ along $\eta$ is:
+Suppose that one of the multipliers, for example $\lambda_2$, is negative. Consider an interval $[a,b] \subset (0,M)$ and an admissible variation $\eta \in L^{\infty}(0,M)$ supported in $[a,b]$ and such that $\int_{a}^{b}t^{q-1}\eta(t)\,dt <0$. An example of such variation can be
+\begin{equation*}
+	\eta(t) = \left\{
+	\begin{aligned}
+		-t^{1-p},\quad & t \in [a, (a+b)/2)\\
+		t^{1-p},\quad					   & t \in [(a+b)/2, b]
+	\end{aligned}\right.
+\end{equation*}
+if $q < p$ or
+\begin{equation*}
+	\eta(t) = \left\{
+	\begin{aligned}
+		t^{1-p},\quad & t \in [a, (a+b)/2)\\
+		-t^{1-p},\quad					   & t \in [(a+b)/2, b]
+	\end{aligned}\right.
+\end{equation*}
+if $q>p$. Then the directional derivative of $G$ at $u$ along $\eta$ is:
 \begin{equation*}
 	\int_{a}^{b} G'(u(t))\eta(t)\,dt = \int_{a}^{b} (\lambda_1 t^{p-1} + \lambda_2 t^{q-1})\eta(t)\,dt = \lambda_2 \int_{a}^{b} t^{q-1} \eta(t)\,dt > 0,
 \end{equation*}
