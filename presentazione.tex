@@ -8,6 +8,7 @@
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{amsmath, amssymb, amsthm}
+\usepackage{bbm}
 \usepackage{mathrsfs}
 \DeclareMathAlphabet{\mathdutchcal}{U}{dutchcal}{m}{n}
 \SetMathAlphabet{\mathdutchcal}{bold}{U}{dutchcal}{b}{n}
@@ -20,6 +21,13 @@
 %\useoutertheme{miniframes}
 %\setbeamercolor{section in head/foot}{bg=blue, fg=white}
 %\setbeamercolor{subsection in head/foot}{bg=blue!50, fg=white}
+\usepackage[
+backend=bibtex,
+style=numeric,
+sorting=nyt
+]{biblatex}
+\addbibresource{bibliografiapresentazione.bib}
+\newcommand\setItemnumber[1]{\setcounter{enumi}{\numexpr#1-1\relax}}
 
 \newcommand{\R}{\mathbb{R}} %scorciatoia per R reali
 \newcommand{\N}{\mathbb{N}} %scorciatoia per N naturali
@@ -62,22 +70,21 @@
 	
 	\begin{frame}
 		\frametitle{Introduzione}
-		\textbf{Problema}: trattare un segnale, ad esempio una traccia audio, un'immagine, una misurazione di un sensore, ecc.;\\
-		\pause
-		\emptyline
-		\textbf{Motivazioni}: analizzare il segnale ed estrarne informazioni rilevanti, filtrare componenti non desiderate, rilevare frequenze più energetiche;\\
-		\pause
-		\emptyline
-		\textbf{Obiettivo}: localizzare il segnale in modo da concentrare il più possibile le informazioni;\\
-		\pause
-		\emptyline
-		\textbf{Come fare}: trasformate, ad esempio la trasformata di Fourier $\F$, trasformate tempo-frequenza, come la short-time Fourier transform, operatori di localizzazione.
+		\begin{itemize}
+			\item \textbf{Problema}: trattare un segnale, ad esempio una traccia audio, un'immagine, una misurazione di un sensore, ecc.;\\
+			\pause
+			\emptyline
+			\item \textbf{Motivazioni}: analizzare il segnale ed estrarne informazioni rilevanti, filtrare componenti non desiderate;\\
+			\pause
+			\emptyline
+			\item \textbf{Come fare}: trasformate, ad esempio la trasformata di Fourier $\F$, trasformate tempo-frequenza, come la short-time Fourier transform, operatori di localizzazione.
+		\end{itemize}
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{Introduzione}
 		\framesubtitle{Principi di indeterminazione}
-		L'obiettivo di localizzare un segnale si scontra con un limite fondamentale, ovvero i \emph{principi di indeterminazione}, il cui messaggio principale è:
+		L'obiettivo di localizzare un segnale si scontra con un limite fondamentale, ovvero i \emph{principi di indeterminazione}. Esistono numerosi principi di indeterminazione, ognuno espressione del seguente concetto:
 		\begin{center}
 			\emph{una funzione non può essere troppo concentrata sia in tempo che in frequenza}.
 		\end{center}
@@ -110,14 +117,13 @@
 	\begin{frame}
 		\frametitle{Introduzione}
 		\framesubtitle{Esempio: principio di indeterminazione di Heisenberg}
-		\begin{theorem}
+		\begin{myblock}[Principio di indeterminazione di Heisenberg]
 			Sia $f \in L^2(\R)$ con $\|f\|_2 = 1$ e siano $a,b \in \R$. Allora:
 			\begin{equation*}
 				\left(\int_{\R} (t-a)^2 |f(t)|^2 \, dt\right)^{1/2} \left(\int_{\R} (\omega-b)^2 |\F f(\omega)|^2 \, d\omega	\right)^{1/2} \geq \dfrac{1}{4 \pi}.
 			\end{equation*}
 			Le funzioni che raggiungono l'uguaglianza sono solo le gaussiane.
-		\end{theorem}
-		\pause
+		\end{myblock}
 		\textbf{Interpretazione}: i due integrali si possono vedere come misure della concentrazione di $f$ e $\F f$ vicino ai punti $a$ e $b$, rispettivamente. Se una delle concentrazioni è ``piccola'', l'altra deve essere ``grande''.\\
 	\end{frame}
 	
@@ -126,59 +132,288 @@
 \begin{section}{Short-time Fourier transform}
 	\begin{frame}
 		\frametitle{Short-time Fourier transform}
-		La \emph{short-time Fourier transform}, in breve \emph{STFT}, è una trasformata tempo frequenza. Prima di definirla, dobbiamo introdurre gli operatori di traslazione e modulazione. Dati $x, \omega \in \R$ abbiamo:
+		\framesubtitle{Definizione}
+		La \emph{short-time Fourier transform}, in breve \emph{STFT}, è una trasformata tempo-frequenza. Prima di definirla, dobbiamo introdurre gli operatori di traslazione e modulazione. Dati $x, \omega \in \R$ abbiamo:
 		\begin{equation*}
 			T_x f(t) = f(t-x), \quad M_{\omega} f(t) = e^{2 \pi i \omega t} f(t).
 		\end{equation*}
 		\pause
-		La short-time Fourier transform di una funzione $f \in L^2(\R)$ rispetto alla finestra $\phi \in L^2(\R)$ è data da:
-		\begin{equation*}
-			\V_{\phi} f(x, \omega) = \langle f, M_{\omega} T_x \phi \rangle = \int_{\R} f(t) \overline{\phi(t-x)} e^{-2 \pi i \omega t} \, dt
-		\end{equation*}
-		\pause
-		Per avere una buona risoluzione, bisogna scegliere una finestra ben concentrata sia in tempo che in frequenza. Per questo, ci concentriamo sulla STFT con finestra gaussiana normalizzata $\varphi(t) = 2^{1/4} e^{-\pi t^2}$.
+		\begin{myblock}[Short-time Fourier transfrom]
+			La short-time Fourier transform di una funzione $f \in L^2(\R)$ rispetto alla finestra $\phi \in L^2(\R)$ è data da:
+			\begin{equation*}
+				\V_{\phi} f(x, \omega) = \langle f, M_{\omega} T_x \phi \rangle = \int_{\R} f(t) \overline{\phi(t-x)} e^{-2 \pi i \omega t} \, dt
+			\end{equation*}
+		\end{myblock}
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{Short-time Fourier transform}
+		\framesubtitle{Finestra gaussiana}
+		\begin{center}
+			\begin{figure}
+				\begin{tikzpicture}
+					\coordinate (T) at (-3,0);
+					\coordinate (S) at (2,0);
+					\draw[->, shift={(T)}] (0,-1.3) -- (0,2);
+					\draw[->] (-6, 0) -- (6, 0) node[right]{$t$};
+					%\draw (-6,-2) grid (6,2);
+					\draw[thick, blue, shift={(T)}] plot[domain=-2:2, samples=100] (\x, {1.19*exp(-3.14*(\x)^2)});
+					\draw[shift={(T)}] (0,1.19) node[above left]{$\varphi$};
+					\draw[dashed, blue, shift={(S)}] plot[domain=-2:2, samples=100] (\x, {1.19*exp(-3.14*(\x)^2)});
+					\draw[shift={(S)}] (0,1.19) node[above left]{$\mathrm{Re}(M_{\omega} T_x\varphi)$};
+					\draw[thick, blue, shift={(S)}] plot[domain=-2:2, samples=100] (\x, {1.19*exp(-3.14*(\x)^2)*cos(4*3.14*deg(\x))});					
+				\end{tikzpicture}
+			\end{figure}
+		\end{center}
+		Per avere una buona risoluzione è necessario scegliere una finestra ben localizzata sia in tempo che in frequenza. Una scelta ottimale è quindi una finestra gaussiana normalizzata
+		\begin{equation*}
+			\varphi(t) = 2^{1/4} e^{-\pi t^2}.
+		\end{equation*}
 		
 	\end{frame}
 \end{section}
 
-\begin{section}{Preliminari}
-
+\begin{section}{Operatori di localizzazione in tempo-frequenza}
+	
 	\begin{frame}
-		\begin{figure}
-			\centering
-			\begin{tikzpicture}
-				%\draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
-				
-				%\draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
-				\draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
-				
-				%\draw[color=red]    plot (\x,\x)             node[right] {$f(x) =x$};
-				% \x r means to convert '\x' from degrees to _r_adians:
-				%\draw[color=blue]   plot (\x,{sin(\x r)})    node[right] {$f(x) = \sin x$};
-				\draw[dashed] plot[blue, domain=-2:2] (\x,{1.19*exp(-(\x)^2)}) node[right] {$f(x) = \frac{1}{20} \mathrm e^x$};
-			\end{tikzpicture}
-		\end{figure}
+		\frametitle{Operatori di localizzazione in tempo-frequenza}
+		\framesubtitle{Definizione}
+		Con la particolare scelta di finestra gaussiana normalizzata l'operatore $\V_{\varphi} : L^2(\R) \rightarrow L^2(\R^2)$ diventa unitario:
+		\begin{equation*}
+			\V_{\varphi}^* \V_{\varphi} = I_{L^2(\R)}.
+		\end{equation*}
+		\pause
+		Questo suggerisce come definire un operatore di localizzazione:
+		\begin{equation*}
+			f \in L^2(\R) \pause \mapsto \V_{\varphi} f \in L^2(\R^2) \pause \mapsto F \V_{\varphi} f \in L^2(\R^2) \pause \mapsto \V_{\varphi}^* F \V_{\varphi} f \in L^2(\R)
+		\end{equation*}
+		\onslide<5-> \begin{myblock}[Operatore di localizzazione in tempo-frequenza - Daubechies 1988 \cite{daubechies}]
+			Data una finestra $F: \R^2 \rightarrow \C$, l'operatore di localizzazione in tempo-frequenza con finestra $\varphi$ e peso $F$ è definito da
+			\begin{equation*}
+				L_{F,\varphi} \coloneqq \V_{\varphi}^* F \V_{\varphi} : L^2(\R) \rightarrow L^2(\R).
+			\end{equation*}
+		\end{myblock}
 	\end{frame}
 
 	\begin{frame}
-		contenuto...
+		\frametitle{Operatori di localizzazione in tempo-frequenza}
+		\framesubtitle{Proprietà}
+		A seconda del peso scelto, il corrispondente operatore $L_{F,\varphi}$ avrà alcune proprietà:
+		\begin{itemize}
+			\item se $F \in L^p (\R^2)$ con $p \in [1,+\infty]$ allora $L_{F,\varphi}$ è limitato e $\|L_{F,\varphi}\| \leq \|F\|_p$; \pause
+			\item se $F \in L^p (\R^2)$ con $p \in [1,+\infty)$ allora $L_{F,\varphi}$ è compatto;\pause
+			\item se $F \in L^1(\R^2)$ allora $L_{F,\varphi}$ è un operatore integrale di Hilbert-Schmidt e la sua norma di Hilbert-Schmidt è minore o uguale di $\|F\|_1$;\pause
+			\item se $F \in L^1(\R^2)$ è un operatore di classe traccia;\pause
+			\item se $F$ è radialmente simmetrica, ovvero $F(x,\omega) = \mathdutchcal{F}(r^2)$ con $r^2 = x^2 + \omega^2$, le autofunzioni di $L_{F,\varphi}$ sono le funzioni di Hermite e i corrispondenti autovalori sono dati da
+			\begin{equation*}
+				\lambda_k = \dfrac{1}{k!} \int_0^{+\infty} \mathdutchcal{F}\left(\dfrac{s}{\pi}\right) s^k e^{-s} \, ds.
+			\end{equation*}
+		\end{itemize}
 	\end{frame}
 \end{section}
-\begin{frame}
-	contenuto...
-\end{frame}
 
-\begin{section}{Fine}
+\begin{section}{Risultati recenti}
+	
 	\begin{frame}
-		contenuto...
+		\frametitle{Risultati recenti}
+		\framesubtitle{Disuguaglianza di Faber-Krahn per la STFT}
+		Recentemente, il seguente risultato è stato ottenuto in \cite{nicolatilli_fk}.
+		\begin{myblock}[Disuguaglianza di Faber-Krahn per la STFT]
+			Dato $\Omega \subset \R^2$ misurabile di misura finita si ha
+			\begin{equation}\label{faber-krahn stft}
+				\int_{\Omega} |\V_{\varphi} f (x, \omega)|^2 \, dx \, d\omega \leq ( 1 - e^{-|\Omega|}) \int_{\R^2} |\V_{\varphi} f (x, \omega)|^2,
+			\end{equation}
+			con uguaglianza se e solo se $\Omega$ è una palla di centro $(x_0, \omega_0) \in \R^2$ e $f$ è una gaussiana traslata e modulata, ovvero $f = c M_{\omega_0} T_{x_0} \varphi$ con $c \in \C \setminus \{0\}$.
+		\end{myblock}
 	\end{frame}
 
+	\begin{frame}
+		\frametitle{Risultati recenti}
+		\framesubtitle{Disuguaglianza di Faber-Krahn per la STFT}
+		Questo risultato può essere riformulato in termini di norma di  operatori di localizzazione con funzione indicatrice come peso. Infatti:
+		\begin{equation*}
+			\int_{\Omega} |\V_{\varphi} f (x, \omega)|^2 \, dx \, d\omega = \langle \chi_{\Omega} \V_{\varphi} f, \V_{\varphi} f \rangle = \langle \V_{\varphi}^* \chi_{\Omega} \V_{\varphi} f, f \rangle = \langle L_{\Omega, \varphi} f, f \rangle.
+		\end{equation*}
+		\pause
+		Poiché $\V_{\varphi}$ è un'isometria, da \eqref{faber-krahn stft} otteniamo:
+		\begin{equation*}
+			\langle L_{\Omega, \varphi} f, f \rangle \leq (1-e^{-|\Omega|}) \|f\|_2^2.
+		\end{equation*}
+		Prendendo l'estremo superiore fra tutte le $f \in L^2(\R)$ normalizzate si ottiene
+		\begin{equation*}
+			\|L_{\Omega, \varphi} \| \leq 1 - e^{|\Omega|},
+		\end{equation*}
+		con uguaglianza se e solo se $\Omega$ è una palla.
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Risultati recenti}
+		\framesubtitle{Stime ottimali sulla norma di $L_{F,\varphi}$: vincoli $L^p$ e $L^{\infty}$}
+		Se immaginiamo quindi di fissare un limite $s$ alla misura di $\Omega$, quanto ottenuto ci dice che se $|\Omega| \leq s$ allora $\|L_{\Omega, \varphi}\| \leq 1 - e^{-s}$.\\
+		\pause
+		Anziché considerare solo funzioni indicatrici, si potrebbero prendere funzioni peso generiche $F$ e tradurre il vincolo $|\Omega| \leq s$ in un vincolo sulla norma di $F$ in qualche spazio di Lebesgue.
+		\pause
+		In \cite{nicolatilli_norm} è stato considerato il seguente problema:
+		\begin{center}
+			trovare $C>0$ tale che $\|L_{F,\varphi}\| \leq C$ per ogni $F$ che soddisfa\\
+			$\|F\|_{\infty} \leq A$ e $\|F\|_{p} \leq B$,			
+		\end{center}
+		dove $p \in [1,+\infty)$, $A \in (0, +\infty]$ e $B \in (0, +\infty)$.
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Risultati recenti}
+		\framesubtitle{Stime ottimali sulla norma di $L_{F,\varphi}$: vincoli $L^p$ e $L^q$}
+		Nella mia tesi ho considerato l'analogo problema con due vincoli di tipo $L^p$:
+		\begin{center}
+			trovare $C>0$ tale che $\|L_{F,\varphi}\| \leq C$ per ogni $F$ che soddisfa\\
+			$\|F\|_{p} \leq A$ e $\|F\|_{q} \leq B$,			
+		\end{center}
+		dove $p, q \in (1,+\infty)$, $A,B \in (0, +\infty)$.
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Risultati recenti}
+		\framesubtitle{Stime ottimali sulla norma di $L_{F,\varphi}$: vincoli $L^p$ e $L^q$}
+		\begin{myblock}[Teorema]
+			Esistono due costanti $c_1 < c_2$, che dipendono solo da $p$ e $q$, tali per cui:
+			\begin{enumerate}
+				\item<1> se $B/A \leq c_1$ o se $B/A \geq c_2$, rispettivamente il vincolo $L^q$ e $L^p$ sono superflui, quindi la costante $C$ e le funzioni peso che raggiungono il massimo sono date dal caso con un solo vincolo. In particolare, queste sono gaussiane traslate.
+			\end{enumerate}
+		\end{myblock}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Risultati recenti}
+		\framesubtitle{Stime ottimali sulla norma di $L_{F,\varphi}$: vincoli $L^p$ e $L^q$}
+		\begin{myblock}[Teorema]
+			Esistono due costanti $c_1 < c_2$, che dipendono solo da $p$ e $q$, tali per cui:
+			\begin{enumerate}
+				\setItemnumber{2}
+				\item se $c_1 < B/A < c_2$ allora
+				\begin{equation}\label{norm limitation generic case}
+					\|L_{F,\varphi}\| \leq \int_{0}^{+\infty} (1 - e^{-u(t)})\, dt,
+				\end{equation}
+				dove $u(t) = \max\{-\log(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}), 0\}$ e $\lambda_1, \lambda_2 > 0$ sono univocamente determinati da
+				\begin{equation*}
+					p \int_{0}^{+\infty} t^{p-1} u(t) \, dt = A^p, \quad q \int_{0}^{+\infty} t^{q-1} u(t) \, dt = B^q.
+				\end{equation*}
+				Infine, l'uguaglianza in \eqref{norm limitation generic case} si ha se e solo se $F$ è (a meno di traslazioni) radialmente simmetrica e ha $u$ come funzione di distribuzione.
+			\end{enumerate}
+		\end{myblock}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Risultati recenti}
+		\framesubtitle{Idea della dimostrazione nel secondo regime}
+		\begin{itemize}
+			\item Il primo passo viene suggerito da un Teorema presente in \cite{nicolatilli_norm}.
+			\begin{myblock}[Teorema]
+				Data $F \in L^p(\R^2)$ con $p \in [1,+\infty)$ e indicando con $\mu(t) = |\{|F|>t\}|$ la funzione di distribuzione di $|F|$, si ha
+				\begin{equation*}
+					\|L_{F,\varphi}\| \leq \int_{0}^{+\infty} (1-e^{-\mu(t)}) \, dt,
+				\end{equation*}
+				con uguaglianza se e solo se $F$ è (a meno di traslazioni) radialmente simmetrica.
+			\end{myblock}
+			Questo ci indica infatti che è necessario trovare stime sharp per il membro destro.
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Risultati recenti}
+		\framesubtitle{Idea della dimostrazione nel secondo regime}
+		\begin{itemize}
+			\item Il problema variazionale per la funzione di distribuzione, dopo un'opportuna traduzione dei vincoli di integrabilità, è il seguente:
+			\begin{equation*}
+				\sup_{v \in \mathcal{C}} \int_0^{+\infty} (1-e^{-v(t)}) \, dt
+			\end{equation*}
+			dove $\mathcal{C}$ è l'insieme dell funzioni  $v : (0, +\infty) \rightarrow [0, +\infty)$ decrescenti e che soddisfano i vincoli
+			\begin{equation*}
+				p\int_{0}^{+\infty} t^{p-1} v(t) \, dt \leq A^p,\quad q\int_{0}^{+\infty} t^{q-1} v(t) \, dt \leq B^q .
+			\end{equation*} 
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Risultati recenti}
+		\framesubtitle{Idea della dimostrazione nel secondo regime}
+		\begin{itemize}
+			\item Una volta dimostrata l'esistenza di soluzioni per il problema variazionale, si dimostra che le funzioni estremali sono della forma
+			\begin{equation*}\label{expression u}
+				u(t) = \begin{cases}
+					-\log\left(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}\right) & t \in (0,M)\\
+					0 & t \in (M,+\infty)
+				\end{cases}
+			\end{equation*}
+			per qualche $M>0$ e dei moltiplicatori $\lambda_1, \lambda_2 \in \R$.
+		\end{itemize}
+		\begin{columns}[onlytextwidth,T]
+			\begin{column}{.45\linewidth}
+				\begin{figure}
+					\begin{tikzpicture}
+						\coordinate (T) at (-3,0);
+						\draw[->, shift={(T)}] (0,-0.1) -- (0,3) node[right]{$u(t)$};
+						\draw[->, shift={(T)}] (-0.1, 0) -- (3, 0) node[right]{$t$};
+						\draw[densely dashed, blue, shift={(T)}] (1, 0.41369, 0) -- (1, 0);
+						\draw[thick, blue, shift={(T)}] plot[domain=0.02:1, samples=100] (\x, {-ln(0.5144*(\x)^0.5 + 0.1468*(\x)^19)});
+						\draw[thick, blue, shift={(T)}] (1,0) -- (2.9,0);
+						\draw[shift={(T)}] (1,0) + (0,2pt) -- (1,0) + (0, -2pt) -- (1,0) + (0, -2pt) node[below] {\small $M$};
+					\end{tikzpicture}
+				\end{figure}
+			\end{column}
+			\begin{column}{.45\linewidth}
+				\emptyline
+				\emptyline
+				\emptyline
+				\emptyline
+				\begin{flushleft}
+					\hspace{-1cm}Esempio di funzione estremale.
+				\end{flushleft}				
+			\end{column}
+		\end{columns}
+		\begin{center}
+			
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Risultati recenti}
+		\framesubtitle{Idea della dimostrazione nel secondo regime}
+		\begin{itemize}
+			\item Gli ultimi step prevedono di dimostrare che gli estremali sono continui e che $\lambda_1, \lambda_2$ sono entrambi positivi e univocamente determinati dall'uguaglianza nei vincoli.
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Risultati recenti}
+		\framesubtitle{Esempio di funzione ottimale nel secondo regime}
+		\begin{columns}[onlytextwidth,T]
+			\begin{column}{.45\linewidth}
+				\begin{figure}
+					\includegraphics[scale=0.26]{./Pictures/funzione_distribuzione.jpg}
+				\end{figure}				
+			\end{column}
+			\begin{column}{.45\linewidth}
+				\begin{figure}
+					\includegraphics[scale=0.26]{./Pictures/funzione_ottimale.jpg}
+				\end{figure}	
+			\end{column}
+		\end{columns}
+		Esempio di funzione ottimale con $A=B=1$, $p=1.5$, $q = 20$. I corrispondenti moltiplicatori sono, approssimativamente, $\lambda_1 = 0.5144$ e $\lambda_2 = 0.1468$.
+	\end{frame}
 	
 \end{section}
+
+\begin{frame}[allowframebreaks]
+	\frametitle{Bibliografia}
+	%\vspace{-0.8cm}
+	{\tiny
+	%\setbeamertemplate{bibliography item}{[\theenumiv]}
+	%\bibliographystyle{plain}
+	%\bibliographystyle{amsalpha}
+	\nocite{*}
+	\printbibliography}
+\end{frame}
 
 \usebeamertemplate{endpage}
 
