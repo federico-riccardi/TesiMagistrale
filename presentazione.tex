@@ -1,4 +1,4 @@
-% \documentclass{beamer}
+%\documentclass{beamer}
 \documentclass[aspectratio=141]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -8,6 +8,7 @@
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{amsmath, amssymb, amsthm}
+\usepackage{multimedia}
 \usepackage{bbm}
 \usepackage{mathrsfs}
 \DeclareMathAlphabet{\mathdutchcal}{U}{dutchcal}{m}{n}
@@ -15,6 +16,8 @@
 \DeclareMathAlphabet{\mathdutchbcal}{U}{dutchcal}{b}{n}
 \usepackage{aligned-overset}
 \usepackage{color}
+\usepackage{comment}
+
 %\usepackage[backend=bibtex,style=numeric,sorting=nyt]{biblatex}
 %\addbibresource{bibliografia.bib}
 \captionsetup{labelformat=empty,labelsep=none}
@@ -23,7 +26,7 @@
 %\setbeamercolor{subsection in head/foot}{bg=blue!50, fg=white}
 \usepackage[
 backend=bibtex,
-style=numeric,
+style=draft,
 sorting=nyt
 ]{biblatex}
 \addbibresource{bibliografiapresentazione.bib}
@@ -71,13 +74,13 @@ sorting=nyt
 	\begin{frame}
 		\frametitle{Introduzione}
 		\begin{itemize}
-			\item \textbf{Problema}: trattare un segnale, ad esempio una traccia audio, un'immagine, una misurazione di un sensore, ecc.;\\
+			\item \textbf{Problema}: elaborare un segnale, ad esempio una traccia audio, un'immagine, una misurazione di un sensore, ecc.;\\
 			\pause
 			\emptyline
-			\item \textbf{Motivazioni}: analizzare il segnale ed estrarne informazioni rilevanti, filtrare componenti non desiderate;\\
+			\item \textbf{Motivazioni}: analizzare il segnale ed estrarne informazioni rilevanti, separare delle componenti, filtrare elementi non desiderati;\\
 			\pause
 			\emptyline
-			\item \textbf{Come fare}: trasformate, ad esempio la trasformata di Fourier $\F$, trasformate tempo-frequenza, come la short-time Fourier transform, operatori di localizzazione.
+			\item \textbf{Come fare}: trasformate, ad esempio la trasformata di Fourier $\F$, trasformate tempo-frequenza, come la short-time Fourier transform, filtri, operatori di localizzazione.
 		\end{itemize}
 	\end{frame}
 
@@ -119,9 +122,9 @@ sorting=nyt
 		\framesubtitle{Esempio: principio di indeterminazione di Heisenberg}
 		\begin{myblock}[Principio di indeterminazione di Heisenberg]
 			Sia $f \in L^2(\R)$ con $\|f\|_2 = 1$ e siano $a,b \in \R$. Allora:
-			\begin{equation*}
+			\begin{equation}
 				\left(\int_{\R} (t-a)^2 |f(t)|^2 \, dt\right)^{1/2} \left(\int_{\R} (\omega-b)^2 |\F f(\omega)|^2 \, d\omega	\right)^{1/2} \geq \dfrac{1}{4 \pi}.
-			\end{equation*}
+			\end{equation}
 			Le funzioni che raggiungono l'uguaglianza sono solo le gaussiane.
 		\end{myblock}
 		\textbf{Interpretazione}: i due integrali si possono vedere come misure della concentrazione di $f$ e $\F f$ vicino ai punti $a$ e $b$, rispettivamente. Se una delle concentrazioni è ``piccola'', l'altra deve essere ``grande''.\\
@@ -141,7 +144,7 @@ sorting=nyt
 		\begin{myblock}[Short-time Fourier transfrom]
 			La short-time Fourier transform di una funzione $f \in L^2(\R)$ rispetto alla finestra $\phi \in L^2(\R)$ è data da:
 			\begin{equation*}
-				\V_{\phi} f(x, \omega) = \langle f, M_{\omega} T_x \phi \rangle = \int_{\R} f(t) \overline{\phi(t-x)} e^{-2 \pi i \omega t} \, dt
+				\V_{\phi} f(x, \omega) = \langle f, M_{\omega} T_x \phi \rangle = \int_{\R} f(t) \overline{\phi(t-x)} e^{-2 \pi i \omega t} \, dt.
 			\end{equation*}
 		\end{myblock}
 	\end{frame}
@@ -155,17 +158,17 @@ sorting=nyt
 					\coordinate (T) at (-3,0);
 					\coordinate (S) at (2,0);
 					\draw[->, shift={(T)}] (0,-1.3) -- (0,2);
-					\draw[->] (-6, 0) -- (6, 0) node[right]{$t$};
+					\draw[->] (-6, 0) -- (5, 0) node[right]{$t$};
 					%\draw (-6,-2) grid (6,2);
 					\draw[thick, blue, shift={(T)}] plot[domain=-2:2, samples=100] (\x, {1.19*exp(-3.14*(\x)^2)});
 					\draw[shift={(T)}] (0,1.19) node[above left]{$\varphi$};
 					\draw[dashed, blue, shift={(S)}] plot[domain=-2:2, samples=100] (\x, {1.19*exp(-3.14*(\x)^2)});
 					\draw[shift={(S)}] (0,1.19) node[above left]{$\mathrm{Re}(M_{\omega} T_x\varphi)$};
-					\draw[thick, blue, shift={(S)}] plot[domain=-2:2, samples=100] (\x, {1.19*exp(-3.14*(\x)^2)*cos(4*3.14*deg(\x))});					
+					\draw[thick, blue, shift={(S)}] plot[domain=-2:2, samples=300] (\x, {1.19*exp(-3.14*(\x)^2)*cos(4*3.14*deg(\x))});					
 				\end{tikzpicture}
 			\end{figure}
 		\end{center}
-		Per avere una buona risoluzione è necessario scegliere una finestra ben localizzata sia in tempo che in frequenza. Una scelta ottimale è quindi una finestra gaussiana normalizzata
+		Per avere una buona risoluzione è necessario scegliere una finestra ben localizzata sia in tempo che in frequenza. Una scelta ottimale è quindi una finestra gaussiana normalizzata in $L^2$
 		\begin{equation*}
 			\varphi(t) = 2^{1/4} e^{-\pi t^2}.
 		\end{equation*}
@@ -178,7 +181,7 @@ sorting=nyt
 	\begin{frame}
 		\frametitle{Operatori di localizzazione in tempo-frequenza}
 		\framesubtitle{Definizione}
-		Con la particolare scelta di finestra gaussiana normalizzata l'operatore $\V_{\varphi} : L^2(\R) \rightarrow L^2(\R^2)$ diventa unitario:
+		Con la particolare scelta di finestra gaussiana normalizzata l'operatore $\V_{\varphi} : L^2(\R) \rightarrow L^2(\R^2)$ diventa un'isometria e vale la seguente formula di inversione:
 		\begin{equation*}
 			\V_{\varphi}^* \V_{\varphi} = I_{L^2(\R)}.
 		\end{equation*}
@@ -187,7 +190,7 @@ sorting=nyt
 		\begin{equation*}
 			f \in L^2(\R) \pause \mapsto \V_{\varphi} f \in L^2(\R^2) \pause \mapsto F \V_{\varphi} f \in L^2(\R^2) \pause \mapsto \V_{\varphi}^* F \V_{\varphi} f \in L^2(\R)
 		\end{equation*}
-		\onslide<5-> \begin{myblock}[Operatore di localizzazione in tempo-frequenza - Daubechies 1988 \cite{daubechies}]
+		\onslide<5-> \begin{myblock}[Operatore di localizzazione in tempo-frequenza - Daubechies 1988]
 			Data una finestra $F: \R^2 \rightarrow \C$, l'operatore di localizzazione in tempo-frequenza con finestra $\varphi$ e peso $F$ è definito da
 			\begin{equation*}
 				L_{F,\varphi} \coloneqq \V_{\varphi}^* F \V_{\varphi} : L^2(\R) \rightarrow L^2(\R).
@@ -198,11 +201,11 @@ sorting=nyt
 	\begin{frame}
 		\frametitle{Operatori di localizzazione in tempo-frequenza}
 		\framesubtitle{Proprietà}
-		A seconda del peso scelto, il corrispondente operatore $L_{F,\varphi}$ avrà alcune proprietà:
+		Le proprietà di $L_{F,\varphi}$ dipendono dalle caratteristiche della funzione peso $F$:
 		\begin{itemize}
 			\item se $F \in L^p (\R^2)$ con $p \in [1,+\infty]$ allora $L_{F,\varphi}$ è limitato e $\|L_{F,\varphi}\| \leq \|F\|_p$; \pause
 			\item se $F \in L^p (\R^2)$ con $p \in [1,+\infty)$ allora $L_{F,\varphi}$ è compatto;\pause
-			\item se $F \in L^1(\R^2)$ allora $L_{F,\varphi}$ è un operatore integrale di Hilbert-Schmidt e la sua norma di Hilbert-Schmidt è minore o uguale di $\|F\|_1$;\pause
+			\item se $F \in L^2(\R^2)$ allora $L_{F,\varphi}$ è un operatore integrale di Hilbert-Schmidt e la sua norma di Hilbert-Schmidt è minore o uguale di $\|F\|_1$;\pause
 			\item se $F \in L^1(\R^2)$ è un operatore di classe traccia;\pause
 			\item se $F$ è radialmente simmetrica, ovvero $F(x,\omega) = \mathdutchcal{F}(r^2)$ con $r^2 = x^2 + \omega^2$, le autofunzioni di $L_{F,\varphi}$ sono le funzioni di Hermite e i corrispondenti autovalori sono dati da
 			\begin{equation*}
@@ -212,21 +215,50 @@ sorting=nyt
 	\end{frame}
 \end{section}
 
-\begin{section}{Risultati recenti}
+\begin{section}{Stime norma operatori di localizzazione}
 	
 	\begin{frame}
-		\frametitle{Risultati recenti}
+		\frametitle{Stime sulla norma di operatori di localizzazione}
+		\framesubtitle{Disuguaglianza di Lieb}
+		Oltre alle proprietà appena elencate, è interessante studiare il problema di trovare delle stime sharp per la norma degli operatori di localizzazione.
+		\pause
+		\begin{myblock}[Disuguaglianza di Lieb - Lieb 1978]
+			Sia $p \in (1,+\infty)$. Allora, per ogni $F \in L^p(\R^2)$ vale
+			\begin{equation}\label{stima Lieb}
+				\|L_{F,\varphi}\| \leq \left(\dfrac{p-1}{p}\right)^{\frac{p-1}{p}} \|F\|_p,
+			\end{equation}
+			con uguaglianza se e solo se $F$ è una gaussiana, eventualmente traslata e modulata.
+		\end{myblock}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Stime sulla norma di operatori di localizzazione}
 		\framesubtitle{Disuguaglianza di Faber-Krahn per la STFT}
-		Recentemente, il seguente risultato è stato ottenuto in \cite{nicolatilli_fk}.
+		Alcuni risultati su questo problema sono stati ottenuti solo recentemente.
+		\begin{myblock}[Disuguaglianza di Faber-Krahn per la STFT - Nicola e Tilli 2022]
+			Sia $\Omega \subset \R^2$ un insieme misurabile di misura finita. Allora, indicando con $L_{\Omega, \varphi}$ l'operatore di localizzazione con peso pari alla funzione indicatrice di $\Omega$, si ha:
+			\begin{equation*}
+				\|L_{\Omega, \varphi}\| \leq 1 - e^{- |\Omega|},
+			\end{equation*}
+			con uguaglianza se e solo se $\Omega$ è una palla.
+		\end{myblock}
+	\end{frame}
+	
+	\begin{comment}
+	\begin{frame}
+		\frametitle{Stime sulla norma di operatori di localizzazione}
+		\framesubtitle{Disuguaglianza di Faber-Krahn per la STFT}
+		Recentemente, il seguente risultato è stato ottenuto in [Nicola e Tilli 2022].
 		\begin{myblock}[Disuguaglianza di Faber-Krahn per la STFT]
 			Dato $\Omega \subset \R^2$ misurabile di misura finita si ha
 			\begin{equation}\label{faber-krahn stft}
-				\int_{\Omega} |\V_{\varphi} f (x, \omega)|^2 \, dx \, d\omega \leq ( 1 - e^{-|\Omega|}) \int_{\R^2} |\V_{\varphi} f (x, \omega)|^2,
+				\int_{\Omega} |\V_{\varphi} f (x, \omega)|^2 \, dx \, d\omega \leq ( 1 - e^{-|\Omega|}) \int_{\R^2} |\V_{\varphi} f (x, \omega)|^2\,dx\,d\omega,
 			\end{equation}
 			con uguaglianza se e solo se $\Omega$ è una palla di centro $(x_0, \omega_0) \in \R^2$ e $f$ è una gaussiana traslata e modulata, ovvero $f = c M_{\omega_0} T_{x_0} \varphi$ con $c \in \C \setminus \{0\}$.
 		\end{myblock}
 	\end{frame}
 
+	
 	\begin{frame}
 		\frametitle{Risultati recenti}
 		\framesubtitle{Disuguaglianza di Faber-Krahn per la STFT}
@@ -239,9 +271,9 @@ sorting=nyt
 		\begin{equation*}
 			\langle L_{\Omega, \varphi} f, f \rangle \leq (1-e^{-|\Omega|}) \|f\|_2^2.
 		\end{equation*}
-		Prendendo l'estremo superiore fra tutte le $f \in L^2(\R)$ normalizzate si ottiene
+		Prendendo l'estremo superiore fra tutte le $f \in L^2(\R)$ normalizzate, poiché $L_{\Omega, \varphi}$ è compatto e autoaggiunto, si ottiene
 		\begin{equation*}
-			\|L_{\Omega, \varphi} \| \leq 1 - e^{|\Omega|},
+			\|L_{\Omega, \varphi} \| \leq 1 - e^{-|\Omega|},
 		\end{equation*}
 		con uguaglianza se e solo se $\Omega$ è una palla.
 	\end{frame}
@@ -253,17 +285,51 @@ sorting=nyt
 		\pause
 		Anziché considerare solo funzioni indicatrici, si potrebbero prendere funzioni peso generiche $F$ e tradurre il vincolo $|\Omega| \leq s$ in un vincolo sulla norma di $F$ in qualche spazio di Lebesgue.
 		\pause
-		In \cite{nicolatilli_norm} è stato considerato il seguente problema:
+		In [Nicola e Tilli 2023] è stato considerato il seguente problema:
 		\begin{center}
 			trovare $C>0$ tale che $\|L_{F,\varphi}\| \leq C$ per ogni $F$ che soddisfa\\
 			$\|F\|_{\infty} \leq A$ e $\|F\|_{p} \leq B$,			
 		\end{center}
 		dove $p \in [1,+\infty)$, $A \in (0, +\infty]$ e $B \in (0, +\infty)$.
 	\end{frame}
+	\end{comment}
 
 	\begin{frame}
-		\frametitle{Risultati recenti}
-		\framesubtitle{Stime ottimali sulla norma di $L_{F,\varphi}$: vincoli $L^p$ e $L^q$}
+		\frametitle{Stime sulla norma di operatori di localizzazione}
+		\framesubtitle{Risultati recenti: $F \in L^p \cap L^{\infty}$}
+		Grazie al risultato precedente è possibile trattare il caso in cui il peso $F$ sia generico e non solo una funzione indicatrice. In questa direzione, in [Nicola e Tilli 2023] è stato studiato il seguente problema:
+		\begin{center}
+			trovare $C>0$ tale che $\|L_{F,\varphi}\| \leq C$ per ogni $F$ che soddisfa\\
+			$\|F\|_{\infty} \leq A$ e $\|F\|_{p} \leq B$,			
+		\end{center}
+		dove $p \in [1,+\infty)$, $A \in (0, +\infty]$ e $B \in (0, +\infty)$ (con la condizione aggiuntiva $A<+\infty$ se $p=1$). Presentiamo il risultato nel caso $p>1$.
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Stime sulla norma di operatori di localizzazione}
+		\framesubtitle{Risultati recenti: $F \in L^p \cap L^{\infty}$}
+		\begin{myblock}[Teorema - Nicola e Tilli 2023]
+			Sia $p \in (1, +\infty)$ e sia $F \in L^p(\R^2) \cap L^{\infty}(\R^2)$. Allora:
+			\begin{enumerate}
+				\item se $\|F\|_p / \|F\|_{\infty}  \leq (p-1)/p$ la stima \eqref{stima Lieb} resta ottimale;
+				\pause
+				\item se $\|F\|_p / \|F\|_{\infty} > (p-1)/p$ allora
+				\begin{equation*}
+					\|L_{F,\varphi}\| \leq \|F\|_{\infty} \left(1 - \dfrac{e^{(p-1)/p - (\|F\|_p / \|F\|_{\infty})^p}}{p}\right),
+				\end{equation*}
+				con uguaglianza se e solo se $F$ è (a meno di traslazioni e modulazioni) una \emph{gaussiana troncata in alto}, ovvero della forma
+				\begin{equation*}
+					F(x,\omega) = \min \{\lambda e^{-\frac{\pi}{p-1}(x^2 + \omega^2)}, A\}.
+				\end{equation*}
+				per qualche $\lambda > A$.
+			\end{enumerate}
+		\end{myblock}
+	\end{frame}
+
+
+	\begin{frame}
+		\frametitle{Stime sulla norma di operatori di localizzazione}
+		\framesubtitle{Risultati recenti: $F \in L^p \cap L^q$}
 		Nella mia tesi ho considerato l'analogo problema con due vincoli di tipo $L^p$:
 		\begin{center}
 			trovare $C>0$ tale che $\|L_{F,\varphi}\| \leq C$ per ogni $F$ che soddisfa\\
@@ -273,41 +339,41 @@ sorting=nyt
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Risultati recenti}
-		\framesubtitle{Stime ottimali sulla norma di $L_{F,\varphi}$: vincoli $L^p$ e $L^q$}
+		\frametitle{Stime sulla norma di operatori di localizzazione}
+		\framesubtitle{Risultati recenti: $F \in L^p \cap L^q$}
 		\begin{myblock}[Teorema]
-			Esistono due costanti $c_1 < c_2$, che dipendono solo da $p$ e $q$, tali per cui:
+			Siano $p,q \in (1,+\infty)$ e sia $F \in L^p(\R^2) \cap L^q(\R^2)$. Allora esistono due costanti $c_1 < c_2$, che dipendono solo da $p$ e $q$, tali che:
 			\begin{enumerate}
-				\item<1> se $B/A \leq c_1$ o se $B/A \geq c_2$, rispettivamente il vincolo $L^q$ e $L^p$ sono superflui, quindi la costante $C$ e le funzioni peso che raggiungono il massimo sono date dal caso con un solo vincolo. In particolare, queste sono gaussiane traslate.
+				\item se $\|F\|_q / \|F\|_p \leq c_1$ o se $\|F\|_q / \|F\|_p \geq c_2$, la stima \eqref{stima Lieb} resta ottimale, con $p$ e $q$ rispettivamente.
 			\end{enumerate}
 		\end{myblock}
 	\end{frame}
 	
 	\begin{frame}
-		\frametitle{Risultati recenti}
-		\framesubtitle{Stime ottimali sulla norma di $L_{F,\varphi}$: vincoli $L^p$ e $L^q$}
+		\frametitle{Stime sulla norma di operatori di localizzazione}
+		\framesubtitle{Risultati recenti: $F \in L^p \cap L^q$}
 		\begin{myblock}[Teorema]
-			Esistono due costanti $c_1 < c_2$, che dipendono solo da $p$ e $q$, tali per cui:
+			{\small Siano $p,q \in (1,+\infty)$ e sia $F \in L^p(\R^2) \cap L^q(\R^2)$. Allora esistono due costanti $c_1 < c_2$, che dipendono solo da $p$ e $q$, tali che:
 			\begin{enumerate}
 				\setItemnumber{2}
-				\item se $c_1 < B/A < c_2$ allora
+				\item se $c_1 < \|F\|_q / \|F\|_p < c_2$ allora
 				\begin{equation}\label{norm limitation generic case}
-					\|L_{F,\varphi}\| \leq \int_{0}^{+\infty} (1 - e^{-u(t)})\, dt,
+					\|L_{F,\varphi}\| \leq T - \lambda_1 T^p/p - \lambda_2 T^q/q,
 				\end{equation}
-				dove $u(t) = \max\{-\log(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}), 0\}$ e $\lambda_1, \lambda_2 > 0$ sono univocamente determinati da
+				dove $\lambda_1, \lambda_2 > 0$ sono univocamente determinati da
 				\begin{equation*}
-					p \int_{0}^{+\infty} t^{p-1} u(t) \, dt = A^p, \quad q \int_{0}^{+\infty} t^{q-1} u(t) \, dt = B^q.
+					p \int_{0}^{+\infty} t^{p-1} u(t) \, dt = A^p, \quad q \int_{0}^{+\infty} t^{q-1} u(t) \, dt = B^q,
 				\end{equation*}
-				Infine, l'uguaglianza in \eqref{norm limitation generic case} si ha se e solo se $F$ è (a meno di traslazioni) radialmente simmetrica e ha $u$ come funzione di distribuzione.
-			\end{enumerate}
+				con $u(t) = \max\{-\log(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}), 0\}$ e $T>0$ tale che $\lambda_1 T^{p-1} + \lambda_2 T^{q-1}=1$. Infine, l'uguaglianza in \eqref{norm limitation generic case} si ha se e solo se $F$ è (a meno di traslazioni e modulazioni) radialmente simmetrica e ha $u$ come funzione di distribuzione.
+			\end{enumerate}}
 		\end{myblock}
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Risultati recenti}
+		\frametitle{Stime sulla norma di operatori di localizzazione}
 		\framesubtitle{Idea della dimostrazione nel secondo regime}
 		\begin{itemize}
-			\item Il primo passo viene suggerito da un Teorema presente in \cite{nicolatilli_norm}.
+			\item Il primo passo viene suggerito da un teorema presente in [Nicola e Tilli 2023].
 			\begin{myblock}[Teorema]
 				Data $F \in L^p(\R^2)$ con $p \in [1,+\infty)$ e indicando con $\mu(t) = |\{|F|>t\}|$ la funzione di distribuzione di $|F|$, si ha
 				\begin{equation*}
@@ -315,12 +381,12 @@ sorting=nyt
 				\end{equation*}
 				con uguaglianza se e solo se $F$ è (a meno di traslazioni) radialmente simmetrica.
 			\end{myblock}
-			Questo ci indica infatti che è necessario trovare stime sharp per il membro destro.
+			Questo ci indica che è necessario trovare stime sharp per il membro destro.
 		\end{itemize}
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Risultati recenti}
+		\frametitle{Stime sulla norma di operatori di localizzazione}
 		\framesubtitle{Idea della dimostrazione nel secondo regime}
 		\begin{itemize}
 			\item Il problema variazionale per la funzione di distribuzione, dopo un'opportuna traduzione dei vincoli di integrabilità, è il seguente:
@@ -335,7 +401,7 @@ sorting=nyt
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Risultati recenti}
+		\frametitle{Stime sulla norma di operatori di localizzazione}
 		\framesubtitle{Idea della dimostrazione nel secondo regime}
 		\begin{itemize}
 			\item Una volta dimostrata l'esistenza di soluzioni per il problema variazionale, si dimostra che le funzioni estremali sono della forma
@@ -345,7 +411,7 @@ sorting=nyt
 					0 & t \in (M,+\infty)
 				\end{cases}
 			\end{equation*}
-			per qualche $M>0$ e dei moltiplicatori $\lambda_1, \lambda_2 \in \R$.
+			per qualche $M>0$ e $\lambda_1, \lambda_2 \in \R$.
 		\end{itemize}
 		\begin{columns}[onlytextwidth,T]
 			\begin{column}{.45\linewidth}
@@ -377,15 +443,18 @@ sorting=nyt
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Risultati recenti}
+		\frametitle{Stime sulla norma di operatori di localizzazione}
 		\framesubtitle{Idea della dimostrazione nel secondo regime}
 		\begin{itemize}
-			\item Gli ultimi step prevedono di dimostrare che gli estremali sono continui e che $\lambda_1, \lambda_2$ sono entrambi positivi e univocamente determinati dall'uguaglianza nei vincoli.
+			\item Gli ultimi step prevedono di dimostrare che gli estremali sono continui e che devono raggiungere l'uguaglianza nei vincoli. Questo permette poi di dimostrare che $\lambda_1, \lambda_2$ sono entrambi positivi e univocamente determinati.
+			\pause
+			\item Una volta determinata la funzione di distribuzione $u$ ottimale, è semplice ricostruire $F$ tramite riarrangiamento.
 		\end{itemize}
 	\end{frame}
 
+	\begin{comment}
 	\begin{frame}
-		\frametitle{Risultati recenti}
+		\frametitle{Stime sulla norma di operatori di localizzazione}
 		\framesubtitle{Esempio di funzione ottimale nel secondo regime}
 		\begin{columns}[onlytextwidth,T]
 			\begin{column}{.45\linewidth}
@@ -400,6 +469,17 @@ sorting=nyt
 			\end{column}
 		\end{columns}
 		Esempio di funzione ottimale con $A=B=1$, $p=1.5$, $q = 20$. I corrispondenti moltiplicatori sono, approssimativamente, $\lambda_1 = 0.5144$ e $\lambda_2 = 0.1468$.
+	\end{frame}
+	\end{comment}
+
+	\begin{frame}
+		\frametitle{Stime sulla norma di operatori di localizzazione}
+		\framesubtitle{Funzioni peso ottimali nel caso $A=B=1$, $p=1.5$, $q$ variabile}
+		\vspace{-1.1cm}
+		\begin{center}
+			\vspace{1cm}
+			\movie[duration=20s, loop, width=249pt, height=198pt]{}{animation_2} %\includegraphics[scale=0.4]{funzione_ottimale.jpg}
+		\end{center}
 	\end{frame}
 	
 \end{section}

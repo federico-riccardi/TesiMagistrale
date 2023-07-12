@@ -1,8 +1,10 @@
 \documentclass[corpo=11pt, stile=classica, tipotesi=custom,
-greek, evenboxes, english]{toptesi} %twoside
+greek, evenboxes, english, twoside, cucitura]{toptesi} %twoside
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage{emptypage}
+
 
 \usepackage{hyperref}
 \hypersetup{%
@@ -94,7 +96,11 @@ sorting=nyt
 	
 \input{./title.tex}
 
+\myemptypage
+
+\setcounter{page}{1}
 \ringraziamenti
+
 Sono una persona che non ama festeggiare i traguardi perché, per quanto banale possa sembrare, questi sono solo il risultato del percorso. In particolare, questo percorso che mi ha portato a scoprire la mia vera passione accompagnato da persone stupende è per me una gioia e una felicità superiore ad ogni festeggiamento.
 Mi sembra quindi opportuno, a costo di sembrare sentimentale, ringraziare chi mi è stato accanto e chi invece mi ha aiutato a trovare la ``giusta'' direzione.\\
 Ringrazio quindi i miei genitori, che mi hanno sempre amorevolmente incoraggiato a seguire i miei interessi e me ne hanno sempre dato la possibilità.\\
@@ -119,12 +125,13 @@ I thank Professor Fabio Nicola for the trust he placed in me by entrusting me wi
 Then, I would like to thank my roommates, friends, and colleagues (now friends as well) who have shared these five years of university with me, both in the most pleasant and the hardest moments.\\
 Last, but certainly not least, I thank my girlfriend, Debora, because she has always stimulated me to improve myself and with her affection, intelligence, sympathy and support, she has been, in this journey, a companion, friend, colleague and teacher, as well as a girlfriend.
 
+
 \sommario
 Time-frequency localization operators $L_{F, \phi} : L^2(\R^d) \rightarrow L^2(\R^d)$ were firstly introduced by Ingrid Daubechies in 1988 and led to a new geometric approach to localization in the phase-space. In this thesis, after giving the necessary background, we consider the problem of maximizing the norm of $L_{F,\phi}$ under the assumption that the window function $\phi$ is a normalized Gaussian and two integrability constraints are given for $F$. More precisely, we consider the problem of finding the optimal constant $C$ such that $\|L_{F,\phi}\| \leq C$, given that $\|F\|_p \leq A$, $\|F\|_q \leq B$, where $p,q \in (1,+\infty)$ and $A,B>0$. With the help of some recent results by Nicola and Tilli on a similar problem, we can find both the optimal constant and weight functions that achieve $\|L_{F,\phi}\| = C$. Depending on the ratio $B/A$ different regimes arise: when this ratio is sufficiently large or sufficiently small one of the constraints is unnecessary and those $F$ that achieve optimality are time-frequency translated Gaussians, while if the ratio is in an intermediate regime the solution changes drastically and optimal weight functions are not Gaussians any more and can be given only in a implicit way.
 
 \tableofcontents
 
-
+\clearpage{\thispagestyle{empty}\cleardoublepage}
 \chapter{Introduction}
 Among all problems in time-frequency analysis, arguably one of the main one is the problem of localizing a signal (which can be an audio signal, an image, etc.) in order to derive information about its energy content in a given time domain and for a given frequency window. Over time, various tools have been developed to achieve this. In the early 1960s, Landau, Slepain and Pollak investigated in a series of articles the properties of certain localization operators obtained using time and frequency projection operators. Later, in 1988, Daubechies introduced so-called \emph{time-frequency localization operators}, which give a more geometric perspective to the localization problem. These operators, also called Daubechies' localization operators, are the focus of this thesis.
 Before introducing these operators, basic concepts of functional and Fourier analysis are recalled in Chapter \ref{chapter preliminaries}. Subsequently, in Chapter \ref{chapter STFT}, a fundamental tool of time-frequency analysis is introduced, namely the \emph{short-time Fourier transform}. These two chapters provide the basis for the theory of localization operators, which is presented in Chapter \ref{chapter localization operators} in an essential way. Once these operators have been introduced, a natural question might be the following: how well can a signal be localized? Is it possible to localize a signal in an arbitrarily small subset of the time-frequency plane? The negative answer to the latter question stems from the so-called \emph{uncertainty principles}. In Chapter \ref{chapter uncertainty principles}, various uncertainty principles are presented, concerning both different transforms and different notions of concentration. Nevertheless, the central idea of each uncertainty principle is the following: a signal cannot be too concentrated in both time and frequency. This barrier forces us to change perspective and instead of asking how well a signal can be concentrated, a more appropriate question might be: how can a signal be optimally concentrated? Uncertainty principles do indeed place a lower limit on the ability to localize a signal, but in general do not tell us how to reach this limit. The last chapter of this thesis focuses precisely on the problem, between time-frequency analysis and the calculus of variations, of finding upper bounds for the norm of localization operators and determining which operators reach this limit. In the first section of Chapter \ref{chapter recent results}, a recent result by Nicola and Tilli concerning this problem is presented, while in the second section we show the solution of a generalized version of their problem.
@@ -766,7 +773,7 @@ This result is improved by the following theorem due to Lieb \cite{lieb_integral
 \begin{teo}\label{Lieb's inequality}
 	If $f,\phi \in L^2(\R^d)$ and $2 \leq p < +\infty$, then:
 	\begin{equation}\label{Lieb's inequality formula}
-		\| \V_{\phi} \|_p^p = \int_{\R^{2d}} |\V_{\phi}(x,\omega)|^p \,dx\,d\omega \leq \left(\dfrac{2}{p}\right)^d \|f\|_2^p \cdot \|g\|_2^p.
+		\| \V_{\phi} f \|_p^p = \int_{\R^{2d}} |\V_{\phi}(x,\omega)f|^p \,dx\,d\omega \leq \left(\dfrac{2}{p}\right)^d \|f\|_2^p \cdot \|\phi\|_2^p.
 	\end{equation}
 \end{teo}
 \begin{proof}
