@@ -152,28 +152,68 @@ sorting=nyt
 	\begin{frame}
 		\frametitle{Short-time Fourier transform}
 		\framesubtitle{Finestra gaussiana}
+		%\begin{center}
+		%	\begin{figure}
+		%		\begin{tikzpicture}
+		%			\coordinate (T) at (-3,0);
+		%			\coordinate (S) at (2,0);
+		%			\draw[->, shift={(T)}] (0,-1.3) -- (0,2);
+		%			\draw[->] (-6, 0) -- (5, 0) node[right]{$t$};
+		%			%\draw (-6,-2) grid (6,2);
+		%			\draw[thick, blue, shift={(T)}] plot[domain=-2:2, samples=100] (\x, {1.19*exp(-3.14*(\x)^2)});
+		%			\draw[shift={(T)}] (0,1.19) node[above left]{$\varphi$};
+		%			\draw[dashed, blue, shift={(S)}] plot[domain=-2:2, samples=100] (\x, {1.19*exp(-3.14*(\x)^2)});
+		%			\draw[shift={(S)}] (0,1.19) node[above left]{$\mathrm{Re}(M_{\omega} T_x\varphi)$};
+		%			\draw[thick, blue, shift={(S)}] plot[domain=-2:2, samples=300] (\x, {1.19*exp(-3.14*(\x)^2)*cos(4*3.14*deg(\x))});					
+		%		\end{tikzpicture}
+		%	\end{figure}
+		%\end{center}
 		\begin{center}
 			\begin{figure}
 				\begin{tikzpicture}
 					\coordinate (T) at (-3,0);
 					\coordinate (S) at (2,0);
-					\draw[->, shift={(T)}] (0,-1.3) -- (0,2);
-					\draw[->] (-6, 0) -- (5, 0) node[right]{$t$};
-					%\draw (-6,-2) grid (6,2);
-					\draw[thick, blue, shift={(T)}] plot[domain=-2:2, samples=100] (\x, {1.19*exp(-3.14*(\x)^2)});
-					\draw[shift={(T)}] (0,1.19) node[above left]{$\varphi$};
-					\draw[dashed, blue, shift={(S)}] plot[domain=-2:2, samples=100] (\x, {1.19*exp(-3.14*(\x)^2)});
-					\draw[shift={(S)}] (0,1.19) node[above left]{$\mathrm{Re}(M_{\omega} T_x\varphi)$};
-					\draw[thick, blue, shift={(S)}] plot[domain=-2:2, samples=300] (\x, {1.19*exp(-3.14*(\x)^2)*cos(4*3.14*deg(\x))});					
+					\coordinate (D) at (1, 0);
+					\draw[->, shift={(T)}] (0,-0.3) -- (0,2.7);
+					\draw[->] (-6, 0) -- (4, 0) node[right]{$t$};
+					\draw[thick, shift=(T)] (-0.05,1) -- (0.05, 1);
+					\draw[shift=(T)] (0,1) node[above right]{\small 1};
+					
+					\draw[blue, shift={(T)}] plot[domain=-2:6, samples=100] (\x, {0.1*(\x + sin(4*deg(\x)) + 1.5*cos(2*deg(\x))) + 1.5});
+					\draw[shift=(T)] (6.5,2) node{\small $f(t)$};
+					
+					\draw[dashed, shift=(T)] (-1.5,0) -- (-1,0);
+					\draw[dashed, shift=(T)] plot[domain=-1:-0.5, samples=100] (\x, {2*((-\x-0.5)/0.5)^3 - 3*((-\x-0.5)/0.5)^2 + 1});
+					\draw[dashed, shift=(T)] (-0.5,1) -- (0.5,1);
+					\draw[dashed, shift=(T)] plot[domain=0.5:1, samples=100] (\x, {2*((\x-0.5)/0.5)^3 - 3*((\x-0.5)/0.5)^2 + 1});
+					\draw[dashed, shift=(T)] (1,0) -- (1.5,0);
+					\draw[shift=(T)] (-0.6,0.8) node[left]{\small $\phi(t)$};
+					
+					\draw[shift=(D)] (-1.5,0) -- (-1,0);
+					\draw[shift=(D)] plot[domain=-1:-0.5, samples=100] (\x, {2*((-\x-0.5)/0.5)^3 - 3*((-\x-0.5)/0.5)^2 + 1});
+					\draw[shift=(D)] (-0.5,1) -- (0.5,1);
+					\draw[shift=(D)] plot[domain=0.5:1, samples=100] (\x, {2*((\x-0.5)/0.5)^3 - 3*((\x-0.5)/0.5)^2 + 1});
+					\draw[shift=(D)] (1,0) -- (1.5,0);
+					\draw[shift=(D)] (0,0.9) node[below]{\small $\phi(t-x)$};
+					\draw[thick, shift=(D)] (0,0.05) -- (0, -0.05) node[below] {\small $x$};
+					
+					\draw[line width=1pt, blue, shift=(T)] (2.5,0) -- (3,0);
+					\draw[line width=1pt, blue, shift={(T)}] plot[domain=3:3.5, samples=100] (\x, { (2*((-\x+3.5)/0.5)^3 - 3*((-\x+3.5)/0.5)^2 + 1)*(0.1*(\x + sin(4*deg(\x)) + 1.5*cos(2*deg(\x))) + 1.5)});
+					\draw[line width=1pt, blue, shift={(T)}] plot[domain=3.5:4.5, samples=100] (\x, {0.1*(\x + sin(4*deg(\x)) + 1.5*cos(2*deg(\x))) + 1.5});
+					\draw[line width=1pt, blue, shift={(T)}] plot[domain=4.5:5, samples=100] (\x, { (2*((\x-4.5)/0.5)^3 - 3*((\x-4.5)/0.5)^2 + 1)*(0.1*(\x + sin(4*deg(\x)) + 1.5*cos(2*deg(\x))) + 1.5)});
+					\draw[line width=1pt, blue, shift=(T)] (5,0) -- (5.5,0);
+					\draw[shift=(T)] (4,2.1) node[above]{\small $f(t) \phi(t-x)$};
+					
 				\end{tikzpicture}
 			\end{figure}
 		\end{center}
+		\pause
 		Per avere una buona risoluzione è necessario scegliere una finestra ben localizzata sia in tempo che in frequenza. Una scelta ottimale è quindi una finestra gaussiana normalizzata in $L^2$
 		\begin{equation*}
 			\varphi(t) = 2^{1/4} e^{-\pi t^2}.
 		\end{equation*}
-		
 	\end{frame}
+
 \end{section}
 
 \begin{section}{Operatori di localizzazione in tempo-frequenza}
@@ -478,7 +518,7 @@ sorting=nyt
 		\vspace{-1.1cm}
 		\begin{center}
 			\vspace{1cm}
-			\movie[duration=20s, loop, width=249pt, height=198pt]{}{animation_2} %\includegraphics[scale=0.4]{funzione_ottimale.jpg}
+			\movie[autostart, loop, width=249pt, height=198pt]{\includegraphics[scale=0.36]{gaussiana.jpg}}{animation_2.avi} 
 		\end{center}
 	\end{frame}
 	
