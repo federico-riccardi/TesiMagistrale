@@ -17,6 +17,11 @@
 \usepackage{aligned-overset}
 \usepackage{color}
 \usepackage{comment}
+%\usepackage{cmbright}
+%\fontencoding{OT1}\fontfamily{cmbr}\selectfont
+%\DeclareFontShape{OT1}{cmbr}{bx}{n}{cmbrbx10}[]
+%\normalfont
+
 
 %\usepackage[backend=bibtex,style=numeric,sorting=nyt]{biblatex}
 %\addbibresource{bibliografia.bib}
@@ -112,7 +117,7 @@ sorting=nyt
 					\draw[->, shift={(R)}] (0, -0.5) -- (0, 1.5) node[right]{$\F(f)$};
 					\draw[thick, blue, shift={(R)}] plot[domain=-3.2:3.2, samples=100] (\x, {sin(3.14*deg(\x))/(3.14*\x)});
 				\end{tikzpicture}}
-			\caption{Esempio di funzione ben concentrata in tempo con trasformata poco concentrata in frequenza.}
+			\caption{ {\footnotesize \textit{Esempio di funzione ben concentrata in tempo con trasformata poco concentrata in frequenza}}.}
 			\end{figure}
 		\end{center}
 	\end{frame}
@@ -125,8 +130,9 @@ sorting=nyt
 			\begin{equation}
 				\left(\int_{\R} (t-a)^2 |f(t)|^2 \, dt\right)^{1/2} \left(\int_{\R} (\omega-b)^2 |\F f(\omega)|^2 \, d\omega	\right)^{1/2} \geq \dfrac{1}{4 \pi}.
 			\end{equation}
-			Le funzioni che raggiungono l'uguaglianza sono solo le gaussiane.
+			Le funzioni che raggiungono l'uguaglianza sono solo le gaussiane del tipo $f(t)=~c e^{2 \pi i b t} e^{-\alpha (t-a)^2}$ con $c \in \C$ e $\alpha > 0$.
 		\end{myblock}
+		\emptyline
 		\textbf{Interpretazione}: i due integrali si possono vedere come misure della concentrazione di $f$ e $\F f$ vicino ai punti $a$ e $b$, rispettivamente. Se una delle concentrazioni è ``piccola'', l'altra deve essere ``grande''.\\
 	\end{frame}
 	
@@ -230,6 +236,7 @@ sorting=nyt
 		\begin{equation*}
 			f \in L^2(\R) \pause \mapsto \V_{\varphi} f \in L^2(\R^2) \pause \mapsto F \V_{\varphi} f \in L^2(\R^2) \pause \mapsto \V_{\varphi}^* F \V_{\varphi} f \in L^2(\R)
 		\end{equation*}
+		\vspace{-0.5cm}
 		\onslide<5-> \begin{myblock}[Operatore di localizzazione in tempo-frequenza - Daubechies 1988]
 			Data una finestra $F: \R^2 \rightarrow \C$, l'operatore di localizzazione in tempo-frequenza con finestra $\varphi$ e peso $F$ è definito da
 			\begin{equation*}
@@ -245,8 +252,8 @@ sorting=nyt
 		\begin{itemize}
 			\item se $F \in L^p (\R^2)$ con $p \in [1,+\infty]$ allora $L_{F,\varphi}$ è limitato e $\|L_{F,\varphi}\| \leq \|F\|_p$; \pause
 			\item se $F \in L^p (\R^2)$ con $p \in [1,+\infty)$ allora $L_{F,\varphi}$ è compatto;\pause
-			\item se $F \in L^2(\R^2)$ allora $L_{F,\varphi}$ è un operatore integrale di Hilbert-Schmidt e la sua norma di Hilbert-Schmidt è minore o uguale di $\|F\|_1$;\pause
-			\item se $F \in L^1(\R^2)$ è un operatore di classe traccia;\pause
+			\item se $F \in L^2(\R^2)$ allora $L_{F,\varphi}$ è un operatore integrale di Hilbert-Schmidt e la sua norma di Hilbert-Schmidt è minore o uguale di $\|F\|_2$;\pause
+			\item se $F \in L^1(\R^2)$ allora $L_{F,\varphi}$ è un operatore di classe traccia;\pause
 			\item se $F$ è radialmente simmetrica, ovvero $F(x,\omega) = \mathdutchcal{F}(r^2)$ con $r^2 = x^2 + \omega^2$, le autofunzioni di $L_{F,\varphi}$ sono le funzioni di Hermite e i corrispondenti autovalori sono dati da
 			\begin{equation*}
 				\lambda_k = \dfrac{1}{k!} \int_0^{+\infty} \mathdutchcal{F}\left(\dfrac{s}{\pi}\right) s^k e^{-s} \, ds.
@@ -267,7 +274,7 @@ sorting=nyt
 			\begin{equation}\label{stima Lieb}
 				\|L_{F,\varphi}\| \leq \left(\dfrac{p-1}{p}\right)^{\frac{p-1}{p}} \|F\|_p,
 			\end{equation}
-			con uguaglianza se e solo se $F$ è una gaussiana, eventualmente traslata e modulata.
+			con uguaglianza se e solo se $F$ è una gaussiana (eventualmente traslata) del tipo $F(x,\omega) = c e^{-\frac{\pi}{p-1}(x^2+\omega^2)}$ con $c \in \C$.
 		\end{myblock}
 	\end{frame}
 
@@ -348,6 +355,7 @@ sorting=nyt
 	\begin{frame}
 		\frametitle{Stime sulla norma di operatori di localizzazione}
 		\framesubtitle{Risultati recenti: $F \in L^p \cap L^{\infty}$}
+		\vspace{-3mm}
 		\begin{myblock}[Teorema - Nicola e Tilli 2023]
 			Sia $p \in (1, +\infty)$ e sia $F \in L^p(\R^2) \cap L^{\infty}(\R^2)$. Allora:
 			\begin{enumerate}
@@ -357,11 +365,11 @@ sorting=nyt
 				\begin{equation*}
 					\|L_{F,\varphi}\| \leq \|F\|_{\infty} \left(1 - \dfrac{e^{(p-1)/p - (\|F\|_p / \|F\|_{\infty})^p}}{p}\right),
 				\end{equation*}
-				con uguaglianza se e solo se $F$ è (a meno di traslazioni e modulazioni) una \emph{gaussiana troncata in alto}, ovvero della forma
+				con uguaglianza se e solo se $F$ è (a meno di traslazioni) una \emph{gaussiana troncata dall'alto}, ovvero della forma
 				\begin{equation*}
-					F(x,\omega) = \min \{\lambda e^{-\frac{\pi}{p-1}(x^2 + \omega^2)}, A\}.
+					F(x,\omega) = e^{i\theta} \min \{\lambda e^{-\frac{\pi}{p-1}(x^2 + \omega^2)}, A\}.
 				\end{equation*}
-				per qualche $\lambda > A$.
+				per qualche $\lambda > A$ e $\theta \in \R$.
 			\end{enumerate}
 		\end{myblock}
 	\end{frame}
@@ -382,7 +390,12 @@ sorting=nyt
 		\frametitle{Stime sulla norma di operatori di localizzazione}
 		\framesubtitle{Risultati recenti: $F \in L^p \cap L^q$}
 		\begin{myblock}[Teorema]
-			Siano $p,q \in (1,+\infty)$ e sia $F \in L^p(\R^2) \cap L^q(\R^2)$. Allora esistono due costanti $c_1 < c_2$, che dipendono solo da $p$ e $q$, tali che:
+			Siano $p,q \in (1,+\infty)$ e sia $F \in L^p(\R^2) \cap L^q(\R^2)$. Allora esistono due costanti
+			\begin{equation*}
+				c_1 = \left(\dfrac{q-1}{q}\right)^{\frac{1}{q}-\frac{1}{p}}\left(\dfrac{p}{q}\right)^{\frac{1}{p}}, \quad 
+				c_2 = \left(\dfrac{p-1}{p}\right)^{\frac{1}{q}-\frac{1}{p}}\left(\dfrac{p}{q}\right)^{\frac{1}{q}},
+			\end{equation*}
+			con $c_1 < c_2$, tali che:
 			\begin{enumerate}
 				\item se $\|F\|_q / \|F\|_p \leq c_1$ o se $\|F\|_q / \|F\|_p \geq c_2$, la stima \eqref{stima Lieb} resta ottimale, con $p$ e $q$ rispettivamente.
 			\end{enumerate}
@@ -393,7 +406,7 @@ sorting=nyt
 		\frametitle{Stime sulla norma di operatori di localizzazione}
 		\framesubtitle{Risultati recenti: $F \in L^p \cap L^q$}
 		\begin{myblock}[Teorema]
-			{\small Siano $p,q \in (1,+\infty)$ e sia $F \in L^p(\R^2) \cap L^q(\R^2)$. Allora esistono due costanti $c_1 < c_2$, che dipendono solo da $p$ e $q$, tali che:
+			{
 			\begin{enumerate}
 				\setItemnumber{2}
 				\item se $c_1 < \|F\|_q / \|F\|_p < c_2$ allora
@@ -404,7 +417,7 @@ sorting=nyt
 				\begin{equation*}
 					p \int_{0}^{+\infty} t^{p-1} u(t) \, dt = A^p, \quad q \int_{0}^{+\infty} t^{q-1} u(t) \, dt = B^q,
 				\end{equation*}
-				con $u(t) = \max\{-\log(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}), 0\}$ e $T>0$ tale che $\lambda_1 T^{p-1} + \lambda_2 T^{q-1}=1$. Infine, l'uguaglianza in \eqref{norm limitation generic case} si ha se e solo se $F$ è (a meno di traslazioni e modulazioni) radialmente simmetrica e ha $u$ come funzione di distribuzione.
+				con $u(t) = \max\{-\log(\lambda_1 t^{p-1} + \lambda_2 t^{q-1}), 0\}$ e $T>0$ tale che $\lambda_1 T^{p-1} + \lambda_2 T^{q-1}=1$. Infine, l'uguaglianza in \eqref{norm limitation generic case} si ha se e solo se $F$ è (a meno di traslazioni e moltiplicazione per un numero complesso di modulo 1) radialmente simmetrica e ha $u$ come funzione di distribuzione.
 			\end{enumerate}}
 		\end{myblock}
 	\end{frame}
@@ -473,7 +486,7 @@ sorting=nyt
 				\emptyline
 				\emptyline
 				\begin{flushleft}
-					\hspace{-1cm}Esempio di funzione estremale.
+					\hspace{-1cm}{\footnotesize \textit{Esempio di funzione estremale}}
 				\end{flushleft}				
 			\end{column}
 		\end{columns}
@@ -518,15 +531,15 @@ sorting=nyt
 		\vspace{-1.1cm}
 		\begin{center}
 			\vspace{1cm}
-			\movie[autostart, loop, width=249pt, height=198pt]{\includegraphics[scale=0.36]{gaussiana.jpg}}{animation_2.avi} 
+			\movie[width=249pt, height=198pt, open]{\includegraphics[scale=0.36]{gaussiana.jpg}}{animation_3} %
 		\end{center}
 	\end{frame}
 	
 \end{section}
 
-\begin{frame}[allowframebreaks]
+\begin{frame}
 	\frametitle{Bibliografia}
-	%\vspace{-0.8cm}
+	\vspace{-0.8cm}
 	{\tiny
 	%\setbeamertemplate{bibliography item}{[\theenumiv]}
 	%\bibliographystyle{plain}
